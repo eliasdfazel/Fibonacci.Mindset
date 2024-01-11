@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "512712938017",
+    "project_id": "fibonacci-mindset",
+    "storage_bucket": "fibonacci-mindset.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512712938017:android:c1d60e29e59137f2c84960",
+        "android_client_info": {
+          "package_name": "co.geeksempire.fibonacci.mindset"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC94BqgYIhKva-rGHq3X7ynzMUQ7u8I5uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
