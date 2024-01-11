@@ -142,7 +142,6 @@ flutter:
   uses-material-design: true
 
   assets:
-
     - assets/cyborg_girl.jpg
 
     - assets/decoration.png
