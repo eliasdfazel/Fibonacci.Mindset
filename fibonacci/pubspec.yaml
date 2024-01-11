@@ -199,7 +199,7 @@ flutter_icons:
   android: true
   ios: true
   adaptive_icon_background: "assets/logo_background.png"
-  adaptive_icon_foreground: "assets/logo.png" #
+  adaptive_icon_foreground: "assets/logo.png"
   background_color_ios: "#000000"
 
 

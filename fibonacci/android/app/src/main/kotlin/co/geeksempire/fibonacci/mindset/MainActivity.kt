@@ -1,4 +1,4 @@
-package co.geeksempire.fibonacci.mindset.fibonacci
+package co.geeksempire.fibonacci.mindset
 
 import io.flutter.embedding.android.FlutterActivity
 
