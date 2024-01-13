@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/11/24, 10:48 AM
+ * Last modified 1/13/24, 8:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,12 +16,12 @@ class ColorsResources {
   static const primaryColorLighter = Color.fromARGB(255, 180, 255, 255);
   static const primaryColorDarker = Color.fromARGB(255, 0, 158, 158);
   
-  static const greenDark = Color.fromARGB(255, 34, 72, 63);
-  static const redDark = Color.fromARGB(255, 72, 34, 34);
-  static const yellowDark = Color.fromARGB(255, 72, 69, 34);
-  static const purpleDark = Color.fromARGB(255, 55, 34, 72);
-  static const blueDark = Color.fromARGB(255, 34, 49, 72);
-  static const pinkDark = Color.fromARGB(255, 71, 34, 72);
+  static const orangePastel = Color.fromARGB(255, 255, 223, 186);
+  static const yellowPastel = Color.fromARGB(255, 255, 255, 186);
+  static const greenPastel = Color.fromARGB(255, 186, 255, 201);
+  static const bluePastel = Color.fromARGB(255, 186, 225, 255);
+  static const redPastel = Color.fromARGB(255, 255, 179, 186);
+  static const purplePastel = Color.fromARGB(255, 222, 202, 255);
 
   static const Color blue = Color.fromARGB(255, 0, 161, 255);
   static const Color lightBlue = Color.fromARGB(255, 128, 208, 255);
