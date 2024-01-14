@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:45 AM
+ * Last modified 1/14/24, 9:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,12 @@
 
 import 'dart:io';
 
+import 'package:fibonacci/dashboard/ui/Dashboard.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
+import 'package:fibonacci/utils/authentication/AuthenticationProcess.dart';
 import 'package:fibonacci/utils/modifications/numbers.dart';
+import 'package:fibonacci/utils/navigations/navigation_commands.dart';
 import 'package:fibonacci/utils/ui/display.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -27,7 +30,9 @@ class EntryConfigurations extends StatefulWidget {
   @override
   State<EntryConfigurations> createState() => _EntryConfigurationState();
 }
-class _EntryConfigurationState extends State<EntryConfigurations> {
+class _EntryConfigurationState extends State<EntryConfigurations> implements AuthenticationsCallback {
+
+  AuthenticationsProcess authenticationsProcess = AuthenticationsProcess();
 
   @override
   void initState() {
@@ -35,7 +40,7 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
-    authenticationProcess();
+    authenticationsProcess.startGoogleAuthentication();
 
     requestNotificationPermission();
 
@@ -105,17 +110,12 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
     );
   }
 
-  /*
-   * Start - Login
-   */
-  void authenticationProcess() {
+  @override
+  void authenticationWithGoogleCompleted() {
 
-
+    navigateToWithPop(context, DashboardInterface(internetConnection: widget.internetConnection));
 
   }
-  /*
-   * end - Login
-   */
 
   /*
    * Start - Request Notification Permission for iOS

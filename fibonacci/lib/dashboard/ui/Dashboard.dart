@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:49 AM
+ * Last modified 1/14/24, 9:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,12 +34,6 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
-
-    authenticationProcess();
-
-    requestNotificationPermission();
-
-    setupInteractedMessage();
 
   }
 
@@ -104,18 +98,6 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         )
     );
   }
-
-  /*
-   * Start - Login
-   */
-  void authenticationProcess() {
-
-
-
-  }
-  /*
-   * end - Login
-   */
 
   /*
    * Start - Request Notification Permission for iOS
