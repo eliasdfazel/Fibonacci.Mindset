@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:17 AM
+ * Last modified 1/14/24, 8:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -69,12 +69,22 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
             home: Scaffold(
                 resizeToAvoidBottomInset: false,
                 backgroundColor: ColorsResources.premiumDark,
-                body: Stack(
-                    children: [
+                body: ClipRRect(
+                  borderRadius: BorderRadius.circular(19),
+                  child: Stack(
+                      children: [
 
+                        Container(
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage("assets/decoration.png"),
+                                    fit: BoxFit.cover
+                                )
+                            )
+                        )
 
-
-                    ]
+                      ]
+                  )
                 )
             )
         )
@@ -85,6 +95,8 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
    * Start - Login
    */
   void authenticationProcess() {
+
+
 
   }
   /*
