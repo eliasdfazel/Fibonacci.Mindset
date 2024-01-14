@@ -3,7 +3,7 @@
   ~ Copyright © 2024 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 1/14/24, 7:51 AM
+  ~ Last modified 1/14/24, 7:58 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -18,7 +18,5 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="android:windowFullscreen">false</item>
-
-        <item name="windowSplashScreenBackground">#3C434D</item>
     </style>
 </resources>
