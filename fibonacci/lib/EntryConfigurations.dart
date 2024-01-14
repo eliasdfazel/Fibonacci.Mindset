@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:08 AM
+ * Last modified 1/14/24, 8:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,6 @@ import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class EntryConfigurations extends StatefulWidget {
 
@@ -47,12 +46,10 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
 
     if (widget.internetConnection) {
 
-      FlutterNativeSplash.remove();
 
 
     } else {
 
-      FlutterNativeSplash.remove();
 
     }
 

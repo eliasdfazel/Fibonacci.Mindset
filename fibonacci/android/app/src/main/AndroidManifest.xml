@@ -2,7 +2,7 @@
   ~ Copyright © 2024 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 1/14/24, 8:05 AM
+  ~ Last modified 1/14/24, 8:20 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@
             android:name=".MainActivity"
             android:label="Fibonacci Mindset"
             android:icon="@mipmap/ic_launcher"
+            android:theme="@style/LaunchTheme"
             android:exported="true"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -28,7 +29,7 @@
 
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/LaunchTheme"/>
+              android:resource="@style/NormalTheme"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
