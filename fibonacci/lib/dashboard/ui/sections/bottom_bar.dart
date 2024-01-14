@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:39 AM
+ * Last modified 1/14/24, 10:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,7 +34,10 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
       child: Stack(
         children: [
 
-          Align(
+          /*
+           * Start - Background
+           */
+          const Align(
             alignment: Alignment.centerRight,
             child: SizedBox(
                 height: 73,
@@ -44,7 +47,13 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                 )
             ),
           ),
+          /*
+           * End - Background
+           */
 
+          /*
+           * Start - Profile
+           */
           Align(
             alignment: Alignment.centerLeft,
             child: SizedBox(
@@ -74,8 +83,14 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                 )
             )
           ),
+          /*
+           * End - Profile
+           */
 
-          Align(
+          /*
+           * Start - Add
+           */
+          const Align(
               alignment: Alignment.center,
               child: SizedBox(
                   height: 111,
@@ -85,8 +100,14 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                   )
               )
           ),
+          /*
+           * End - Add
+           */
 
-          Align(
+          /*
+           * Start - Menu
+           */
+          const Align(
               alignment: Alignment.centerRight,
               child: SizedBox(
                   height: 73,
@@ -96,12 +117,13 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                   )
               )
           ),
+          /*
+           * End - Menu
+           */
 
         ]
       ),
     );
   }
-
-
 
 }
