@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:28 AM
+ * Last modified 1/14/24, 10:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,6 +98,9 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                          * End - Decoration
                          */
 
+                        /*
+                         * Start - Bottom Bar
+                         */
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Padding(
@@ -105,6 +108,9 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                               child: BottomBarInterface()
                           )
                         )
+                        /*
+                         * End - Bottom Bar
+                         */
 
                       ]
                   )
