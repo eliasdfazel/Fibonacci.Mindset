@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:16 AM
+ * Last modified 1/14/24, 8:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fibonacci/EntryConfigurations.dart';
+import 'package:fibonacci/dashboard/ui/Dashboard.dart';
 import 'package:fibonacci/firebase_options.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
@@ -59,6 +60,18 @@ void main() async {
 
       await FirebaseAuth.instance.currentUser?.reload();
 
+      Widget entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
+
+      if (FirebaseAuth.instance.currentUser == null) {
+
+        entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
+
+      } else {
+
+        entryPlaceholder = DashboardInterface(internetConnection: connectionResult);
+
+      }
+
       runApp(
           Phoenix(
               child: MaterialApp(
@@ -73,7 +86,7 @@ void main() async {
                       TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
                     }),
                   ),
-                  home: EntryConfigurations(internetConnection: connectionResult)
+                  home: entryPlaceholder
               )
           )
       );

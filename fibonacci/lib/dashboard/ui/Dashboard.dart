@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:45 AM
+ * Last modified 1/14/24, 8:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,16 +18,16 @@ import 'package:fibonacci/utils/ui/system_bars.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-class EntryConfigurations extends StatefulWidget {
+class DashboardInterface extends StatefulWidget {
 
   bool internetConnection = false;
 
-  EntryConfigurations({Key? key, required this.internetConnection}) : super(key: key);
+  DashboardInterface({Key? key, required this.internetConnection}) : super(key: key);
 
   @override
-  State<EntryConfigurations> createState() => _EntryConfigurationState();
+  State<DashboardInterface> createState() => _DashboardInterfaceState();
 }
-class _EntryConfigurationState extends State<EntryConfigurations> {
+class _DashboardInterfaceState extends State<DashboardInterface> {
 
   @override
   void initState() {
