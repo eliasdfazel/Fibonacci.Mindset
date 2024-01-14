@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 7:04 AM
+ * Last modified 1/14/24, 7:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,7 +32,7 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
   void initState() {
     super.initState();
 
-    changeColor(ColorsResources.black, ColorsResources.black);
+    changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
     authenticationProcess();
 
