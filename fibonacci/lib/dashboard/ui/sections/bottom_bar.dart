@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:45 AM
+ * Last modified 1/14/24, 10:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -66,18 +66,23 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(3),
-                      child: WidgetMask(
-                          blendMode: BlendMode.srcATop,
-                          childSaveLayer: true,
-                          mask: Image(
-                            image: AssetImage("assets/cyborg_girl.jpg"),
-                            fit: BoxFit.cover,
-                          ),
-                          child: Image(
-                              image: AssetImage("assets/squircle_shape.png")
-                          )
+                    child: Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: InkWell(
+                        onTap: () async {
+
+                        },
+                        child: const WidgetMask(
+                            blendMode: BlendMode.srcATop,
+                            childSaveLayer: true,
+                            mask: Image(
+                              image: AssetImage("assets/cyborg_girl.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                            child: Image(
+                                image: AssetImage("assets/squircle_shape.png")
+                            )
+                        )
                       )
                     )
                 )
@@ -90,13 +95,18 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
           /*
            * Start - Add
            */
-          const Align(
+          Align(
               alignment: Alignment.center,
               child: SizedBox(
                   height: 111,
                   width: 111,
-                  child: Image(
-                    image: AssetImage("assets/add.png"),
+                  child: InkWell(
+                    onTap: () async {
+
+                    },
+                    child: const Image(
+                      image: AssetImage("assets/add.png"),
+                    )
                   )
               )
           ),
@@ -107,13 +117,18 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
           /*
            * Start - Menu
            */
-          const Align(
+          Align(
               alignment: Alignment.centerRight,
               child: SizedBox(
                   height: 73,
                   width: 73,
-                  child: Image(
-                    image: AssetImage("assets/menu.png"),
+                  child: InkWell(
+                    onTap: () async {
+
+                    },
+                    child: const Image(
+                      image: AssetImage("assets/menu.png"),
+                    )
                   )
               )
           ),
