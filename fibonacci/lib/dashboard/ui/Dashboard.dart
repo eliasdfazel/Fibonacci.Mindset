@@ -2,20 +2,15 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 9:09 AM
+ * Last modified 1/14/24, 10:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'dart:io';
-
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
-import 'package:fibonacci/utils/modifications/numbers.dart';
-import 'package:fibonacci/utils/ui/display.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class DashboardInterface extends StatefulWidget {
@@ -79,17 +74,20 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                             )
                         ),
 
-                        Align(
-                            alignment: Alignment.center,
-                            child: SizedBox(
-                              height: calculatePercentage(93, displayLogicalWidth(context)),
-                              width: calculatePercentage(93, displayLogicalWidth(context)),
-                              child: const Image(
-                                image: AssetImage("assets/logo.png"),
-                                fit: BoxFit.cover,
-                              )
-                            )
-                        ),
+                        // Align(
+                        //     alignment: Alignment.center,
+                        //     child: Padding(
+                        //       padding: EdgeInsets.only(left: 10),
+                        //       child: Transform.scale(
+                        //         alignment: Alignment.center,
+                        //         child: const Image(
+                        //           image: AssetImage("assets/logo.png"),
+                        //           fit: BoxFit.cover,
+                        //         ),
+                        //         scale: 3.1,
+                        //       ),
+                        //     )
+                        // ),
 
                       ]
                   )
@@ -98,63 +96,5 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         )
     );
   }
-
-  /*
-   * Start - Request Notification Permission for iOS
-   */
-  void requestNotificationPermission() async {
-
-    if (Platform.isIOS) {
-
-      FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-
-      NotificationSettings notificationSettings = await firebaseMessaging.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
-
-      debugPrint("Notification Permission: ${notificationSettings.authorizationStatus}");
-
-    }
-
-  }
-  /*
-   * End - Request Notification Permission for iOS
-   */
-
-  /*
-   * Start - Firebase Message Interaction
-   */
-  Future<void> setupInteractedMessage() async {
-
-    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-
-    if (initialMessage != null) {
-
-      _handleMessage(initialMessage);
-
-    }
-
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
-
-  }
-
-  void _handleMessage(RemoteMessage remoteMessage) {
-
-    if (remoteMessage.data['messageUrl'] == 'candlestickHistory') {
-
-
-
-    }
-
-  }
-  /*
-   * End - Firebase Message Interaction
-   */
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:50 AM
+ * Last modified 1/14/24, 10:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,10 +63,12 @@ void main() async {
       Widget entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
 
       if (FirebaseAuth.instance.currentUser == null) {
+        debugPrint("Entry Configurations");
 
         entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
 
       } else {
+        debugPrint("Dashboard");
 
         entryPlaceholder = DashboardInterface(internetConnection: connectionResult);
 
