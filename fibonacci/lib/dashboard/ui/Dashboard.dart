@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 11:09 AM
+ * Last modified 1/14/24, 11:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -102,11 +102,25 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                           alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 57),
-                            child: Container(
-                              color: Colors.green,
-                              width: 356,
-                            ),
-                          ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(19),
+                              child: Container(
+                                color: Colors.green,
+                                width: 356,
+                                child: ListView(
+                                  padding: const EdgeInsets.only(top: 53),
+                                  children: [
+
+                                    Container(
+                                      color: Colors.red,
+                                      height: 134,
+                                      width: 135,
+                                    )
+                                  ],
+                                ),
+                              )
+                            )
+                          )
                         ),
 
                         /*
