@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 7:43 AM
+ * Last modified 1/14/24, 8:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,10 +60,10 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: StringsResources.applicationName(),
-            color: ColorsResources.primaryColor,
+            color: ColorsResources.premiumDark,
             theme: ThemeData(
               fontFamily: 'Ubuntu',
-              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsResources.primaryColor),
+              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsResources.premiumDark),
               pageTransitionsTheme: const PageTransitionsTheme(builders: {
                 TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
                 TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
@@ -71,7 +71,7 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
             ),
             home: Scaffold(
                 resizeToAvoidBottomInset: false,
-                backgroundColor: ColorsResources.black,
+                backgroundColor: ColorsResources.premiumDark,
                 body: Stack(
                     children: [
 

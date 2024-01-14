@@ -2,7 +2,7 @@
   ~ Copyright © 2024 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 1/14/24, 7:51 AM
+  ~ Last modified 1/14/24, 8:05 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -22,7 +22,6 @@
             android:icon="@mipmap/ic_launcher"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
