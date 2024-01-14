@@ -2,12 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:02 AM
+ * Last modified 1/14/24, 10:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:blur/blur.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
@@ -65,6 +66,9 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                   child: Stack(
                       children: [
 
+                        /*
+                         * Start - Decoration
+                         */
                         Container(
                             decoration: const BoxDecoration(
                                 image: DecorationImage(
@@ -74,20 +78,26 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                             )
                         ),
 
-                        // Align(
-                        //     alignment: Alignment.center,
-                        //     child: Padding(
-                        //       padding: EdgeInsets.only(left: 10),
-                        //       child: Transform.scale(
-                        //         alignment: Alignment.center,
-                        //         child: const Image(
-                        //           image: AssetImage("assets/logo.png"),
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //         scale: 3.1,
-                        //       ),
-                        //     )
-                        // ),
+                        const Blur(
+                          blur: 13.0,
+                          colorOpacity: 0,
+                          blurColor: Colors.transparent,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Opacity(
+                              opacity: 0.73,
+                              child: Image(
+                                image: AssetImage("assets/decoration_end.png"),
+                                fit: BoxFit.cover,
+                              )
+                            )
+                          )
+                        )
+                        /*
+                         * End - Decoration
+                         */
+
+
 
                       ]
                   )
@@ -96,5 +106,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         )
     );
   }
+
+
 
 }
