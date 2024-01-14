@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 6:43 AM
+ * Last modified 1/14/24, 7:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -47,6 +47,7 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
 
     if (widget.internetConnection) {
 
+      FlutterNativeSplash.remove();
 
 
     } else {

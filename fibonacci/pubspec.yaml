@@ -108,7 +108,7 @@ dependencies:
 
   ####### ####### #######
   screenshot: ^2.1.0
-  share_plus: ^4.0.10
+  share_plus: ^7.2.1
   status_bar_control: ^3.2.1
   ####### ####### #######
 
@@ -140,24 +140,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/cyborg_girl.jpg
-
-    - assets/decoration.png
-
-    - assets/logo.png
-    - assets/logo_background.png
-    - assets/logo_android.png
-    - assets/logo_ios.png
-
-    - assets/privacy.png
-    -
-    - assets/rectircle_shape.png
-
-    - assets/squircle_shape.png
-
-    - assets/threads_icon.png
-    - assets/tos.png
-    - assets/twitter_icon.png
+    - assets/
 
 
 
