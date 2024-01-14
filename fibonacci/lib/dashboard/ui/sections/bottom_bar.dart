@@ -2,12 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:54 AM
+ * Last modified 1/14/24, 11:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
@@ -76,8 +77,8 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                         child: WidgetMask(
                             blendMode: BlendMode.srcATop,
                             childSaveLayer: true,
-                            mask: Image(
-                              image: AssetImage(FirebaseAuth.instance.currentUser!.photoURL ?? "https://geeksempire.co/wp-content/uploads/2024/01/Geeks-Empire-Logo.png"),
+                            mask: Image.network(
+                              FirebaseAuth.instance.currentUser!.photoURL ?? "https://geeksempire.co/wp-content/uploads/2024/01/Geeks-Empire-Logo.png",
                               fit: BoxFit.cover,
                             ),
                             child: const Image(
@@ -96,19 +97,32 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
           /*
            * Start - Add
            */
+
           Align(
               alignment: Alignment.center,
-              child: SizedBox(
-                  height: 111,
-                  width: 111,
-                  child: InkWell(
-                    onTap: () async {
-
-                    },
-                    child: const Image(
-                      image: AssetImage("assets/add.png"),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(17),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorsResources.black.withOpacity(0.13),
+                      blurRadius: 13,
+                      offset: const Offset(0.0, 0.0)
                     )
-                  )
+                  ]
+                ),
+                child: SizedBox(
+                    height: 111,
+                    width: 111,
+                    child: InkWell(
+                        onTap: () async {
+
+                        },
+                        child: const Image(
+                          image: AssetImage("assets/add.png"),
+                        )
+                    )
+                )
               )
           ),
           /*

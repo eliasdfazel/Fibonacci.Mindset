@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:41 AM
+ * Last modified 1/14/24, 11:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,6 +98,17 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                          * End - Decoration
                          */
 
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 57),
+                            child: Container(
+                              color: Colors.green,
+                              width: 356,
+                            ),
+                          ),
+                        ),
+
                         /*
                          * Start - Bottom Bar
                          */
@@ -119,7 +130,5 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         )
     );
   }
-
-
 
 }
