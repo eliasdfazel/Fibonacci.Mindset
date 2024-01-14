@@ -2,12 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:49 AM
+ * Last modified 1/14/24, 10:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 
@@ -72,14 +73,14 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                         onTap: () async {
 
                         },
-                        child: const WidgetMask(
+                        child: WidgetMask(
                             blendMode: BlendMode.srcATop,
                             childSaveLayer: true,
                             mask: Image(
-                              image: AssetImage("assets/cyborg_girl.jpg"),
+                              image: AssetImage(FirebaseAuth.instance.currentUser!.photoURL ?? "https://geeksempire.co/wp-content/uploads/2024/01/Geeks-Empire-Logo.png"),
                               fit: BoxFit.cover,
                             ),
-                            child: Image(
+                            child: const Image(
                                 image: AssetImage("assets/squircle_shape.png")
                             )
                         )
