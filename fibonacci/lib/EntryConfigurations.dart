@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 9:00 AM
+ * Last modified 1/14/24, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import 'package:fibonacci/utils/modifications/numbers.dart';
 import 'package:fibonacci/utils/navigations/navigation_commands.dart';
 import 'package:fibonacci/utils/ui/display.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -112,6 +113,8 @@ class _EntryConfigurationState extends State<EntryConfigurations> implements Aut
 
   @override
   void authenticationWithGoogleCompleted() {
+
+    authenticationsProcess.createProfiles(FirebaseAuth.instance.currentUser!.email!);
 
     navigateToWithPop(context, DashboardInterface(internetConnection: widget.internetConnection));
 

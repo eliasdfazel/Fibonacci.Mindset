@@ -12,7 +12,28 @@
           "package_name": "co.geeksempire.fibonacci.mindset"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "512712938017-9jih9u2vcdftuqlaf6amisra08qbb82r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.geeksempire.fibonacci.mindset",
+            "certificate_hash": "6fa2d23f54167ebdfcb1ce7cb183c0f709f8934e"
+          }
+        },
+        {
+          "client_id": "512712938017-l99peu8nr4tjeeibnto1ccrntp5alm8o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.geeksempire.fibonacci.mindset",
+            "certificate_hash": "fc0c26771dd06089ad565ae640f0e81c0e14aeb4"
+          }
+        },
+        {
+          "client_id": "512712938017-rstkeme239ncegeia05v48midob7gmnl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC94BqgYIhKva-rGHq3X7ynzMUQ7u8I5uo"
@@ -20,7 +41,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512712938017-rstkeme239ncegeia05v48midob7gmnl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "512712938017-ebirgdlihd6fibvc3vg606m2bo1uvpp5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.geeksempire.fibonacci.mindset.fibonacci"
+              }
+            }
+          ]
         }
       }
     }
