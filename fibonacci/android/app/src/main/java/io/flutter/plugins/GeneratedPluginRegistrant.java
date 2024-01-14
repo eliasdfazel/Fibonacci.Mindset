@@ -1,3 +1,13 @@
+/*
+ * Copyright © 2024 By Geeks Empire.
+ *
+ * Created by Elias Fazel
+ * Last modified 1/14/24, 8:22 AM
+ *
+ * Licensed Under MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 package io.flutter.plugins;
 
 import androidx.annotation.Keep;
