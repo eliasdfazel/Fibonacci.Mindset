@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/11/24, 10:48 AM
+ * Last modified 1/14/24, 6:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,6 +33,12 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
     super.initState();
 
     changeColor(ColorsResources.black, ColorsResources.black);
+
+    authenticationProcess();
+
+    requestNotificationPermission();
+
+    setupInteractedMessage();
 
   }
 
@@ -76,6 +82,16 @@ class _EntryConfigurationState extends State<EntryConfigurations> {
         )
     );
   }
+
+  /*
+   * Start - Login
+   */
+  void authenticationProcess() {
+
+  }
+  /*
+   * end - Login
+   */
 
   /*
    * Start - Request Notification Permission for iOS
