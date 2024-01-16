@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 12:45 PM
+ * Last modified 1/16/24, 12:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -157,9 +157,11 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
   void retrieveTasks() async {
 
+    int categoryPreferences = await preferencesIO.retrieveCategorizedBy();
+
     String categorizedBy = RhythmDataStructure.taskCategoryName;
 
-    switch (await preferencesIO.retrieveCategorizedBy()) {
+    switch (categoryPreferences) {
       case CategorizedBy.categories: {
 
         categorizedBy = RhythmDataStructure.taskCategoryName;
@@ -187,7 +189,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
         if (querySnapshot.size > 0) {
 
-          categorizeTasks(querySnapshot)
+          categorizeTasks(querySnapshot, categoryPreferences)
 
         }
 
@@ -195,7 +197,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
   }
 
-  void categorizeTasks(QuerySnapshot querySnapshot) async {
+  void categorizeTasks(QuerySnapshot querySnapshot, int categorizedBy) async {
 
     Map<String, List<RhythmDataStructure>> allRhythmsWidget = <String, List<RhythmDataStructure>>{};
 
@@ -204,18 +206,37 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
       RhythmDataStructure rhythmDataStructure = RhythmDataStructure(querySnapshot.docs[i]);
       debugPrint("$i ${rhythmDataStructure.rhythmDocumentData}");
 
-      (allRhythmsWidget[rhythmDataStructure.taskCategory()] ??= []).add(rhythmDataStructure);
 
+      switch (categorizedBy) {
+        case CategorizedBy.categories: {
+
+          (allRhythmsWidget[rhythmDataStructure.taskCategory()] ??= []).add(rhythmDataStructure);
+
+          break;
+        }
+        case CategorizedBy.locations: {
+
+          (allRhythmsWidget[rhythmDataStructure.taskLocation()] ??= []).add(rhythmDataStructure);
+
+          break;
+        }
+        case CategorizedBy.colorsTags: {
+
+          (allRhythmsWidget[rhythmDataStructure.taskColorTag()] ??= []).add(rhythmDataStructure);
+
+          break;
+        }
+      }
     }
 
     List<Widget> categorizedRhythms = [];
 
-    allRhythmsWidget.keys.forEach((element) {
-      debugPrint("$element");
+    for (var element in allRhythmsWidget.keys) {
+      debugPrint(element);
 
       categorizedRhythms.add(CategoryInterface(rhythmDataStructure: allRhythmsWidget[element]!));
 
-    });
+    }
 
     setState(() {
 

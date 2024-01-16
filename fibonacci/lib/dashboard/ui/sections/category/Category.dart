@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 12:44 PM
+ * Last modified 1/16/24, 12:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,6 +37,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
     processTasks();
 
+    debugPrint("Rhythms: ${widget.rhythmDataStructure.length}");
   }
 
   @override
@@ -45,7 +46,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 37),
       child: SizedBox(
-          height: 189,
+          height: 193,
           width: double.infinity,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +57,6 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 * Start - Title
                 */
                 Container(
-                    height: 27,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
                         gradient: LinearGradient(
@@ -68,7 +68,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                     ),
                     child: Text(
                         categoryName,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: ColorsResources.premiumLight,
                             fontSize: 23,
                             letterSpacing: 1.7
