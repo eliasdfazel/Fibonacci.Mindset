@@ -2,14 +2,14 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 11:11 AM
+ * Last modified 1/16/24, 6:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:blur/blur.dart';
-import 'package:fibonacci/dashboard/ui/sections/bottom_bar.dart';
+import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
@@ -113,11 +113,12 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
                                     Container(
                                       color: Colors.red,
-                                      height: 134,
+                                      height: 674,
                                       width: 135,
                                     )
-                                  ],
-                                ),
+
+                                  ]
+                                )
                               )
                             )
                           )
