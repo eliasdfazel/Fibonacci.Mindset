@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 7:09 AM
+ * Last modified 1/16/24, 8:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 import 'package:blur/blur.dart';
 import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
+import 'package:fibonacci/dashboard/ui/sections/category/Category.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
@@ -101,21 +102,17 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                         Align(
                           alignment: Alignment.center,
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 57),
+                            padding: const EdgeInsets.only(left: 31, right: 31, bottom: 57),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(31),
                               child: Container(
+                                width: double.infinity,
                                 color: Colors.green,
-                                width: 356,
                                 child: ListView(
                                   padding: const EdgeInsets.only(top: 53, bottom: 137),
                                   children: [
 
-                                    Container(
-                                      color: Colors.deepPurple,
-                                      height: 774,
-                                      width: 135,
-                                    )
+                                    CategoryInterface()
 
                                   ]
                                 )
