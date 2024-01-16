@@ -2,14 +2,14 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 8:54 AM
+ * Last modified 1/16/24, 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fibonacci/profile/database/directory.dart';
+import 'package:fibonacci/profile/database/Directory.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';

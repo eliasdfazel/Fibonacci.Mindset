@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:25 AM
+ * Last modified 1/16/24, 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@ import 'package:blur/blur.dart';
 import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
-import 'package:fibonacci/utils/ui/system_bars.dart';
+import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
 class DashboardInterface extends StatefulWidget {

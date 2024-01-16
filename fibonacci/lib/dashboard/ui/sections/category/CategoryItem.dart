@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:53 AM
+ * Last modified 1/16/24, 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,7 @@
 
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
-import 'package:fibonacci/utils/modifications/colors.dart';
+import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 

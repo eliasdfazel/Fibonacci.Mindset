@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 9:08 AM
+ * Last modified 1/16/24, 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,10 +14,10 @@ import 'package:fibonacci/dashboard/ui/Dashboard.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/authentication/AuthenticationProcess.dart';
-import 'package:fibonacci/utils/modifications/numbers.dart';
-import 'package:fibonacci/utils/navigations/navigation_commands.dart';
-import 'package:fibonacci/utils/ui/display.dart';
-import 'package:fibonacci/utils/ui/system_bars.dart';
+import 'package:fibonacci/utils/modifications/Numbers.dart';
+import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
+import 'package:fibonacci/utils/ui/Display.dart';
+import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

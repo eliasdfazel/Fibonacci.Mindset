@@ -2,13 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/11/24, 10:48 AM
+ * Last modified 1/16/24, 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:fibonacci/utils/widgets/gradient_text/constants.dart';
+import 'package:fibonacci/utils/widgets/gradient_text/GradientConstants.dart';
 import 'package:flutter/material.dart';
 
 /// A gradient text.
