@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 6:55 AM
+ * Last modified 1/16/24, 7:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,12 +108,12 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                                 color: Colors.green,
                                 width: 356,
                                 child: ListView(
-                                  padding: const EdgeInsets.only(top: 53),
+                                  padding: const EdgeInsets.only(top: 53, bottom: 137),
                                   children: [
 
                                     Container(
                                       color: Colors.deepPurple,
-                                      height: 674,
+                                      height: 774,
                                       width: 135,
                                     )
 
