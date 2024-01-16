@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:24 AM
+ * Last modified 1/16/24, 9:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 
 class CategoryInterface extends StatefulWidget {
 
-  RhythmDataStructure rhythmDataStructure;
+  List<RhythmDataStructure> rhythmDataStructure;
 
   CategoryInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
@@ -30,20 +30,20 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
   @override
   Widget build(BuildContext context) {
 
-    String title = widget.rhythmDataStructure.taskTitle();
+    String categoryName = widget.rhythmDataStructure[0].taskCategory();
     Color colorTag = Colors.transparent;
 
     // if (1 == 1) {
     //
-    //   title = widget.rhythmDataStructure.taskTitle();
+    //   title = widget.rhythmDataStructure[0].taskCategory();
     //
     // } else {
     //
-    //   title = widget.rhythmDataStructure.taskLocation();
+    //   title = widget.rhythmDataStructure[0].taskLocation();
     //
     // } else {
     //   title = "";
-    //   colorTag = convertToColor(widget.rhythmDataStructure.taskColorTag());
+    //   colorTag = convertToColor(widget.rhythmDataStructure[0].taskColorTag());
     //
     // }
 
@@ -67,7 +67,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 )
               ),
               child: Text(
-                  title
+                  categoryName
               )
             ),
             /*
@@ -98,7 +98,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     );
   }
 
-  void processAlarmsConfigurations() async {
+  void processTasks() async {
 
   }
 
