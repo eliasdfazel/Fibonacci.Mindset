@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 6:32 AM
+ * Last modified 1/16/24, 6:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -103,7 +103,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 57),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(19),
+                              borderRadius: BorderRadius.circular(31),
                               child: Container(
                                 color: Colors.green,
                                 width: 356,
@@ -112,7 +112,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                                   children: [
 
                                     Container(
-                                      color: Colors.red,
+                                      color: Colors.deepPurple,
                                       height: 674,
                                       width: 135,
                                     )

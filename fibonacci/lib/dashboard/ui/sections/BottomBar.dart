@@ -2,12 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 11:08 AM
+ * Last modified 1/16/24, 7:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:blur/blur.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,16 +40,35 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
           /*
            * Start - Background
            */
-          const Align(
-            alignment: Alignment.centerRight,
-            child: SizedBox(
-                height: 73,
-                width: 356,
-                child: Image(
-                  image: AssetImage("assets/bar_background.png"),
-                )
-            ),
+          Align(
+              alignment: Alignment.centerRight,
+              child: Stack(
+                  children: [
+
+
+                    Blur(
+                      blur: 3,
+                      blurColor: ColorsResources.premiumDark,
+                      colorOpacity: 0.37,
+                      borderRadius: BorderRadius.circular(31),
+                      child: SizedBox(
+                        height: 73,
+                        width: 356,
+                      ),
+                    ),
+
+
+                    SizedBox(
+                        height: 73,
+                        width: 356,
+                        child: Image(
+                          image: AssetImage("assets/bar_background.png"),
+                        )
+                    )
+                  ]
+              ),
           ),
+
           /*
            * End - Background
            */
@@ -97,7 +117,6 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
           /*
            * Start - Add
            */
-
           Align(
               alignment: Alignment.center,
               child: Container(
@@ -105,7 +124,7 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                   borderRadius: BorderRadius.circular(17),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorsResources.black.withOpacity(0.13),
+                      color: ColorsResources.black.withOpacity(0.19),
                       blurRadius: 13,
                       offset: const Offset(0.0, 0.0)
                     )
