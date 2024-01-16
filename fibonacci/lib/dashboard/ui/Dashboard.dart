@@ -2,18 +2,22 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:58 AM
+ * Last modified 1/16/24, 10:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:blur/blur.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
+import 'package:fibonacci/rhythms/database/RhythmsDirectory.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class DashboardInterface extends StatefulWidget {
 
@@ -26,25 +30,31 @@ class DashboardInterface extends StatefulWidget {
 }
 class _DashboardInterfaceState extends State<DashboardInterface> {
 
+
+  Widget tasksPlaceholder = Container();
+
   @override
   void initState() {
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
+    if (widget.internetConnection) {
+
+      retrieveTasks();
+
+      tasksPlaceholder = waiting();
+
+    } else {
+
+      tasksPlaceholder = waiting(StringsResources.noInternetConnection());
+
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
-
-    if (widget.internetConnection) {
-
-
-
-    } else {
-
-
-    }
 
     return SafeArea(
         child: MaterialApp(
@@ -98,15 +108,17 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                          * End - Decoration
                          */
 
+                        /*
+                         * Start - Task
+                         */
                         Align(
                           alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 31, right: 31, bottom: 57),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(31),
-                              child: Container(
+                              child: SizedBox(
                                 width: double.infinity,
-                                color: Colors.green,
                                 child: ListView(
                                   padding: const EdgeInsets.only(top: 53, bottom: 137),
                                   scrollDirection: Axis.vertical,
@@ -121,6 +133,9 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                             )
                           )
                         ),
+                        /*
+                         * End - Task
+                         */
 
                         /*
                          * Start - Bottom Bar
@@ -144,8 +159,54 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
     );
   }
 
-  void retrieveCategorizedTasks() async {
+  void retrieveTasks() {
 
+    FirebaseFirestore.instance
+        .collection(rhythmsCollectionsPath(FirebaseAuth.instance.currentUser!.email!))
+        .get().then((QuerySnapshot querySnapshot) => {
+
+          querySnapshot.docs
+
+        });
+
+  }
+
+  void categorizeTasks() async {
+
+
+
+  }
+
+  Widget waiting([String waitingNotice = "Click On ADD \nTo Configure A Task"]) {
+
+    return Container(
+        alignment: Alignment.center,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              LoadingAnimationWidget.threeRotatingDots(
+                color: ColorsResources.premiumLight,
+                size: 73,
+              ),
+
+              Center(
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 19, right: 19, top: 19),
+                      child: Text(
+                        waitingNotice,
+                        style: const TextStyle(
+                            fontSize: 19,
+                            color: ColorsResources.premiumLightTransparent
+                        ),
+                      )
+                  )
+              )
+
+            ]
+        )
+    );
   }
 
 }

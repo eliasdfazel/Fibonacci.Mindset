@@ -106,8 +106,10 @@ dependencies:
 
 
   ####### ####### #######
-  screenshot: ^2.1.0
   share_plus: ^7.2.1
+
+  shared_preferences: ^2.0.15
+
   status_bar_control: ^3.2.1
   ####### ####### #######
 

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/11/24, 10:48 AM
+ * Last modified 1/16/24, 10:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,12 +13,6 @@ class StringsResources {
   static String applicationName() {
 
     return "Fibonacci Mindset";
-  }
-
-
-  static String sachielsAI() {
-
-    return "Sachiels AI";
   }
 
   /*
@@ -67,6 +61,11 @@ class StringsResources {
   /*
    * Start - Notice
    */
+  static String addTask() {
+
+    return "Click On ADD \nTo Configure A Task";
+  }
+
   static String ok() {
 
     return "OK";

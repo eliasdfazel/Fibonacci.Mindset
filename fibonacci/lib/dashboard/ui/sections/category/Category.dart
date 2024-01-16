@@ -2,12 +2,14 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:31 AM
+ * Last modified 1/16/24, 10:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,11 @@ class CategoryInterface extends StatefulWidget {
 }
 class _CategoryInterfaceState extends State<CategoryInterface> {
 
+  PreferencesIO preferencesIO = PreferencesIO();
+
+  String categoryName = "...";
+  Color colorTag = Colors.transparent;
+
   @override
   void initState() {
     super.initState();
@@ -29,23 +36,6 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
   @override
   Widget build(BuildContext context) {
-
-    String categoryName = widget.rhythmDataStructure[0].taskCategory();
-    Color colorTag = Colors.transparent;
-
-    // if (1 == 1) {
-    //
-    //   title = widget.rhythmDataStructure[0].taskCategory();
-    //
-    // } else {
-    //
-    //   title = widget.rhythmDataStructure[0].taskLocation();
-    //
-    // } else {
-    //   title = "";
-    //   colorTag = convertToColor(widget.rhythmDataStructure[0].taskColorTag());
-    //
-    // }
 
     return SizedBox(
         height: 189,
@@ -99,6 +89,26 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
   }
 
   void processTasks() async {
+
+    String categoryName = widget.rhythmDataStructure[0].taskCategory();
+    Color colorTag = Colors.transparent;
+
+    int categorizedBy = await preferencesIO.retrieveCategorizedBy();
+
+    switch (categorizedBy) {
+      case CategorizedBy.categories: {
+
+        break;
+      }
+      case CategorizedBy.colorsTags: {
+
+        break;
+      }
+      case CategorizedBy.locations: {
+
+        break;
+      }
+    }
 
   }
 
