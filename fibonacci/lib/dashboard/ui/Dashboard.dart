@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 10:38 AM
+ * Last modified 1/16/24, 11:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,8 +11,11 @@
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
+import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
+import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDirectory.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +33,7 @@ class DashboardInterface extends StatefulWidget {
 }
 class _DashboardInterfaceState extends State<DashboardInterface> {
 
+  PreferencesIO preferencesIO = PreferencesIO();
 
   Widget tasksPlaceholder = Container();
 
@@ -159,21 +163,54 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
     );
   }
 
-  void retrieveTasks() {
+  void retrieveTasks() async {
 
+    String categorizedBy = RhythmDataStructure.taskCategoryName;
+
+    switch (await preferencesIO.retrieveCategorizedBy()) {
+      case CategorizedBy.categories: {
+
+        categorizedBy = RhythmDataStructure.taskCategoryName;
+
+        break;
+      }
+      case CategorizedBy.locations: {
+
+        categorizedBy = RhythmDataStructure.taskLocationName;
+
+        break;
+      }
+      case CategorizedBy.colorsTags: {
+
+        categorizedBy = RhythmDataStructure.taskColorTagName;
+
+        break;
+      }
+    }
     FirebaseFirestore.instance
-        .collection(rhythmsCollectionsPath(FirebaseAuth.instance.currentUser!.email!))
-        .get().then((QuerySnapshot querySnapshot) => {
+      .collection(rhythmsCollectionsPath(FirebaseAuth.instance.currentUser!.email!))
+      .orderBy(categorizedBy)
+      .get().then((QuerySnapshot querySnapshot) => {
 
-          querySnapshot.docs
+        if (querySnapshot.size > 0) {
 
-        });
+          categorizeTasks(querySnapshot)
+
+        }
+
+      });
 
   }
 
-  void categorizeTasks() async {
+  void categorizeTasks(QuerySnapshot querySnapshot) async {
+
+    for (DocumentSnapshot documentSnapshot in querySnapshot.docs) {
+
+      RhythmDataStructure rhythmDataStructure = RhythmDataStructure(documentSnapshot);
 
 
+
+    }
 
   }
 

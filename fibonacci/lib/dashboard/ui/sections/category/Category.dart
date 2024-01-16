@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 10:40 AM
+ * Last modified 1/16/24, 11:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 class CategoryInterface extends StatefulWidget {
 
-  List<RhythmDataStructure> rhythmDataStructure;
+  List<List<RhythmDataStructure>> rhythmDataStructure;
 
   CategoryInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
@@ -53,6 +53,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
             Container(
               height: 27,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(11),
                 gradient: LinearGradient(
                   colors: [
                     colorTag,
