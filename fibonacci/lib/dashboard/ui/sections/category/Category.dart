@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:06 AM
+ * Last modified 1/16/24, 11:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -102,7 +102,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
         setState(() {
 
-          categoryName = widget.rhythmDataStructure[0].taskCategory();
+          categoryName = widget.rhythmDataStructure.first.first.taskCategory();
 
         });
 
@@ -112,7 +112,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
         setState(() {
 
-          categoryName = widget.rhythmDataStructure[0].taskLocation();
+          categoryName = widget.rhythmDataStructure.first.first.taskLocation();
 
         });
 
@@ -123,7 +123,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
         setState(() {
 
           categoryName = "";
-          colorTag = convertToColor(widget.rhythmDataStructure[0].taskColorTag());
+          colorTag = convertToColor(widget.rhythmDataStructure.first.first.taskColorTag());
 
         });
 
