@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 7:07 AM
+ * Last modified 1/16/24, 7:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,14 +51,14 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                       blurColor: ColorsResources.premiumDark,
                       colorOpacity: 0.37,
                       borderRadius: BorderRadius.circular(31),
-                      child: SizedBox(
+                      child: const SizedBox(
                         height: 73,
                         width: 356,
                       ),
                     ),
 
 
-                    SizedBox(
+                    const SizedBox(
                         height: 73,
                         width: 356,
                         child: Image(
