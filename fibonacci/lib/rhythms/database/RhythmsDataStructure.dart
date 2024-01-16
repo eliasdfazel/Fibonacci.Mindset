@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:14 AM
+ * Last modified 1/16/24, 11:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,4 +62,16 @@ class RhythmDataStructure {
     return rhythmDocumentData[RhythmDataStructure.taskAlarmsConfigurationsName];
   }
 
+}
+
+Map<String, dynamic> rhythmDocument(String taskTitle, String taskDescription, String taskLocation, String taskCategory, String taskColorTag, String taskAlarmsConfigurations) {
+
+  return {
+    "taskTitle": taskTitle,
+    "taskDescription": taskDescription,
+    "taskLocation": taskLocation,
+    "taskCategory": taskCategory,
+    "taskColorTag": taskColorTag,
+    "taskAlarmsConfigurations": taskAlarmsConfigurations,
+  };
 }
