@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 12:47 PM
+ * Last modified 1/16/24, 12:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,8 +18,9 @@ import 'package:flutter/material.dart';
 class CategoryInterface extends StatefulWidget {
 
   List<RhythmDataStructure> rhythmDataStructure = [];
+  int categorizedBy = 0;
 
-  CategoryInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
+  CategoryInterface({Key? key, required this.rhythmDataStructure, required this.categorizedBy}) : super(key: key);
 
   @override
   State<CategoryInterface> createState() => _CategoryInterfaceState();
@@ -43,6 +44,28 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
   @override
   Widget build(BuildContext context) {
 
+    switch (widget.categorizedBy) {
+      case CategorizedBy.categories: {
+
+        categoryName = widget.rhythmDataStructure.first.taskCategory();
+
+        break;
+      }
+      case CategorizedBy.locations: {
+
+        categoryName = widget.rhythmDataStructure.first.taskLocation();
+
+        break;
+      }
+      case CategorizedBy.colorsTags: {
+
+        categoryName = "";
+        colorTag = convertToColor(widget.rhythmDataStructure.first.taskColorTag());
+
+        break;
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 37),
       child: SizedBox(
@@ -57,6 +80,8 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 * Start - Title
                 */
                 Container(
+                    height: 31,
+                    width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
                         gradient: LinearGradient(
@@ -106,41 +131,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
   void processTasks() async {
 
-    int categorizedBy = await preferencesIO.retrieveCategorizedBy();
 
-    switch (categorizedBy) {
-      case CategorizedBy.categories: {
-
-        setState(() {
-
-          categoryName = widget.rhythmDataStructure.first.taskCategory();
-
-        });
-
-        break;
-      }
-      case CategorizedBy.locations: {
-
-        setState(() {
-
-          categoryName = widget.rhythmDataStructure.first.taskLocation();
-
-        });
-
-        break;
-      }
-      case CategorizedBy.colorsTags: {
-
-        setState(() {
-
-          categoryName = "";
-          colorTag = convertToColor(widget.rhythmDataStructure.first.taskColorTag());
-
-        });
-
-        break;
-      }
-    }
 
   }
 

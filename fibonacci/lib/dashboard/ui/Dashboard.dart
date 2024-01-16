@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 12:54 PM
+ * Last modified 1/16/24, 12:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -234,7 +234,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
     for (var element in allRhythmsWidget.keys) {
       debugPrint(element);
 
-      categorizedRhythms.add(CategoryInterface(rhythmDataStructure: allRhythmsWidget[element]!));
+      categorizedRhythms.add(CategoryInterface(rhythmDataStructure: allRhythmsWidget[element]!, categorizedBy: categorizedBy));
 
     }
 
