@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:41 AM
+ * Last modified 1/16/24, 12:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -197,29 +197,25 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
   void categorizeTasks(QuerySnapshot querySnapshot) async {
 
-    List<Widget> allRhythmsWidget = [];
-
-    List<RhythmDataStructure> similarRhythms = [];
+    Map<String, List<RhythmDataStructure>> allRhythmsWidget = <String, List<RhythmDataStructure>>{};
 
     for (int i = 0; i < querySnapshot.docs.length; i++) {
 
       RhythmDataStructure rhythmDataStructure = RhythmDataStructure(querySnapshot.docs[i]);
+      debugPrint("$i ${rhythmDataStructure.rhythmDocumentData}");
 
-      if (i > 0) {
-
-        if (rhythmDataStructure.taskCategory() == RhythmDataStructure(querySnapshot.docs[i - 1]).taskCategory()) {
-
-          similarRhythms.add(rhythmDataStructure);
-
-        } else {
-
-          allRhythmsWidget.add(CategoryInterface(rhythmDataStructure: similarRhythms));
-
-        }
-
-      }
+      (allRhythmsWidget[rhythmDataStructure.taskCategory()] ??= []).add(rhythmDataStructure);
 
     }
+
+    List<Widget> categorizedRhythms = [];
+
+    allRhythmsWidget.keys.forEach((element) {
+      debugPrint("$element");
+
+      categorizedRhythms.add(CategoryInterface(rhythmDataStructure: allRhythmsWidget[element]!));
+
+    });
 
     setState(() {
 
@@ -227,7 +223,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
           padding: const EdgeInsets.only(top: 53, bottom: 137),
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
-          children: allRhythmsWidget
+          children: categorizedRhythms
       );
 
     });
@@ -265,7 +261,5 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         )
     );
   }
-
-
 
 }

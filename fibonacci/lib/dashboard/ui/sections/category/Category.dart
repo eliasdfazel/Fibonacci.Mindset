@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:30 AM
+ * Last modified 1/16/24, 12:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,13 +10,14 @@
 
 import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
+import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:flutter/material.dart';
 
 class CategoryInterface extends StatefulWidget {
 
-  List<RhythmDataStructure> rhythmDataStructure;
+  List<RhythmDataStructure> rhythmDataStructure = [];
 
   CategoryInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
@@ -41,55 +42,65 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
   @override
   Widget build(BuildContext context) {
 
-    return SizedBox(
-        height: 189,
-        width: double.infinity,
-        child: Column(
-          children: [
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 37),
+      child: SizedBox(
+          height: 189,
+          width: double.infinity,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-            /*
-             * Start - Title
-             */
-            Container(
-              height: 27,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(11),
-                gradient: LinearGradient(
-                  colors: [
-                    colorTag,
-                    Colors.transparent
-                  ]
-                )
-              ),
-              child: Text(
-                  categoryName
-              )
-            ),
-            /*
+                /*
+                * Start - Title
+                */
+                Container(
+                    height: 27,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(11),
+                        gradient: LinearGradient(
+                            colors: [
+                              colorTag,
+                              Colors.transparent
+                            ]
+                        )
+                    ),
+                    child: Text(
+                        categoryName,
+                        style: TextStyle(
+                            color: ColorsResources.premiumLight,
+                            fontSize: 23,
+                            letterSpacing: 1.7
+                        )
+                    )
+                ),
+                /*
              * End - Title
              */
 
-            const Divider(
-              height: 23,
-              color: Colors.transparent,
-            ),
+                const Divider(
+                  height: 23,
+                  color: Colors.transparent,
+                ),
 
-            SizedBox(
-                height: 137,
-                child: ListView(
-                  padding: const EdgeInsets.only(right: 301),
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  children: [
+                SizedBox(
+                    height: 137,
+                    child: ListView(
+                        padding: const EdgeInsets.only(right: 301),
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        children: [
 
 
 
-                  ]
-                )
-            ),
+                        ]
+                    )
+                ),
 
-          ]
-        )
+              ]
+          )
+      )
     );
   }
 
