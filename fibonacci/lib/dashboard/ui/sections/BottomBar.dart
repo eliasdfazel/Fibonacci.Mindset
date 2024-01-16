@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:56 AM
+ * Last modified 1/16/24, 12:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,6 @@
 
 import 'package:blur/blur.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
-import 'package:fibonacci/utils/test/Prototype.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
@@ -138,8 +137,6 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                             width: 111,
                             child: InkWell(
                                 onTap: () async {
-
-                                  generatePrototypes();
 
                                 },
                                 child: const Image(
