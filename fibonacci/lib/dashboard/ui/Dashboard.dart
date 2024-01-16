@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 8:49 AM
+ * Last modified 1/16/24, 9:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,6 @@
 
 import 'package:blur/blur.dart';
 import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
-import 'package:fibonacci/dashboard/ui/sections/category/Category.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/system_bars.dart';
@@ -110,9 +109,11 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                                 color: Colors.green,
                                 child: ListView(
                                   padding: const EdgeInsets.only(top: 53, bottom: 137),
+                                  scrollDirection: Axis.vertical,
+                                  physics: const BouncingScrollPhysics(),
                                   children: [
 
-                                    CategoryInterface()
+
 
                                   ]
                                 )
@@ -141,6 +142,10 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
             )
         )
     );
+  }
+
+  void retrieveCategorizedTasks() async {
+
   }
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 7:59 AM
+ * Last modified 1/16/24, 9:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,9 @@ import 'package:flutter/material.dart';
 
 class CategoryItemInterface extends StatefulWidget {
 
-  CategoryItemInterface({Key? key}) : super(key: key);
+  String jsonObjectAlarm;
+
+  CategoryItemInterface({Key? key, required this.jsonObjectAlarm}) : super(key: key);
 
   @override
   State<CategoryItemInterface> createState() => _CategoryItemInterfaceState();
