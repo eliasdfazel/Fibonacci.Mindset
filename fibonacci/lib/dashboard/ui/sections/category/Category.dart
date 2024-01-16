@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:10 AM
+ * Last modified 1/16/24, 11:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 class CategoryInterface extends StatefulWidget {
 
-  List<List<RhythmDataStructure>> rhythmDataStructure;
+  List<RhythmDataStructure> rhythmDataStructure;
 
   CategoryInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
@@ -78,7 +78,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 height: 137,
                 child: ListView(
                   padding: const EdgeInsets.only(right: 301),
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   children: [
 
@@ -102,7 +102,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
         setState(() {
 
-          categoryName = widget.rhythmDataStructure.first.first.taskCategory();
+          categoryName = widget.rhythmDataStructure.first.taskCategory();
 
         });
 
@@ -112,7 +112,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
         setState(() {
 
-          categoryName = widget.rhythmDataStructure.first.first.taskLocation();
+          categoryName = widget.rhythmDataStructure.first.taskLocation();
 
         });
 
@@ -123,7 +123,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
         setState(() {
 
           categoryName = "";
-          colorTag = convertToColor(widget.rhythmDataStructure.first.first.taskColorTag());
+          colorTag = convertToColor(widget.rhythmDataStructure.first.taskColorTag());
 
         });
 

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:09 AM
+ * Last modified 1/16/24, 11:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
+import 'package:fibonacci/dashboard/ui/sections/category/Category.dart';
 import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
@@ -123,16 +124,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                               borderRadius: BorderRadius.circular(31),
                               child: SizedBox(
                                 width: double.infinity,
-                                child: ListView(
-                                  padding: const EdgeInsets.only(top: 53, bottom: 137),
-                                  scrollDirection: Axis.vertical,
-                                  physics: const BouncingScrollPhysics(),
-                                  children: [
-
-
-
-                                  ]
-                                )
+                                child: tasksPlaceholder
                               )
                             )
                           )
@@ -187,6 +179,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         break;
       }
     }
+
     FirebaseFirestore.instance
       .collection(rhythmsCollectionsPath(FirebaseAuth.instance.currentUser!.email!))
       .orderBy(categorizedBy)
@@ -204,13 +197,40 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
   void categorizeTasks(QuerySnapshot querySnapshot) async {
 
-    for (DocumentSnapshot documentSnapshot in querySnapshot.docs) {
+    List<Widget> allRhythmsWidget = [];
 
-      RhythmDataStructure rhythmDataStructure = RhythmDataStructure(documentSnapshot);
+    List<RhythmDataStructure> similarRhythms = [];
 
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
 
+      RhythmDataStructure rhythmDataStructure = RhythmDataStructure(querySnapshot.docs[i]);
+
+      if (i > 0) {
+
+        if (rhythmDataStructure.taskCategory() == RhythmDataStructure(querySnapshot.docs[i - 1]).taskCategory()) {
+
+          similarRhythms.add(rhythmDataStructure);
+
+        } else {
+
+          allRhythmsWidget.add(CategoryInterface(rhythmDataStructure: similarRhythms));
+
+        }
+
+      }
 
     }
+
+    setState(() {
+
+      tasksPlaceholder = ListView(
+          padding: const EdgeInsets.only(top: 53, bottom: 137),
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          children: allRhythmsWidget
+      );
+
+    });
 
   }
 
@@ -245,5 +265,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         )
     );
   }
+
+
 
 }
