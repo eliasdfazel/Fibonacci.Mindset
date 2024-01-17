@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:43 AM
+ * Last modified 1/17/24, 8:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 import 'package:blur/blur.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/preferences/ui/Preferences.dart';
+import 'package:fibonacci/profile/ui/Profile.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -97,6 +98,8 @@ class _BottomBarInterfaceState extends State<BottomBarInterface> {
                                 padding: const EdgeInsets.all(3),
                                 child: InkWell(
                                     onTap: () async {
+
+                                      navigateTo(context, ProfileInterface());
 
                                     },
                                     child: WidgetMask(
