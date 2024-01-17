@@ -2,13 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 1:00 PM
+ * Last modified 1/17/24, 8:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:fibonacci/preferences/keys/PreferencesKeys.dart';
+import 'package:fibonacci/preferences/io/keys/PreferencesKeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesIO {
