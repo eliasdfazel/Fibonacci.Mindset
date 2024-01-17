@@ -2,12 +2,13 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 12:59 PM
+ * Last modified 1/17/24, 7:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/dashboard/ui/sections/category/CategoryItem.dart';
 import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
@@ -17,15 +18,17 @@ import 'package:flutter/material.dart';
 
 class CategoryInterface extends StatefulWidget {
 
-  List<RhythmDataStructure> rhythmDataStructure = [];
+  List<RhythmDataStructure> rhythmsDataStructures = [];
   int categorizedBy = 0;
 
-  CategoryInterface({Key? key, required this.rhythmDataStructure, required this.categorizedBy}) : super(key: key);
+  CategoryInterface({Key? key, required this.rhythmsDataStructures, required this.categorizedBy}) : super(key: key);
 
   @override
   State<CategoryInterface> createState() => _CategoryInterfaceState();
 }
 class _CategoryInterfaceState extends State<CategoryInterface> {
+
+  Widget rhythmsPlaceholder = Container();
 
   PreferencesIO preferencesIO = PreferencesIO();
 
@@ -36,9 +39,9 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
   void initState() {
     super.initState();
 
-    processTasks();
+    processTasks(widget.rhythmsDataStructures);
 
-    debugPrint("Rhythms: ${widget.rhythmDataStructure.length}");
+    debugPrint("Rhythms: ${widget.rhythmsDataStructures.length}");
   }
 
   @override
@@ -47,29 +50,29 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     switch (widget.categorizedBy) {
       case CategorizedBy.categories: {
 
-        categoryName = widget.rhythmDataStructure.first.taskCategory();
+        categoryName = widget.rhythmsDataStructures.first.taskCategory();
 
         break;
       }
       case CategorizedBy.locations: {
 
-        categoryName = widget.rhythmDataStructure.first.taskLocation();
+        categoryName = widget.rhythmsDataStructures.first.taskLocation();
 
         break;
       }
       case CategorizedBy.colorsTags: {
 
         categoryName = "";
-        colorTag = convertToColor(widget.rhythmDataStructure.first.taskColorTag());
+        colorTag = convertToColor(widget.rhythmsDataStructures.first.taskColorTag());
 
         break;
       }
     }
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 37),
+      padding: const EdgeInsets.only(bottom: 51),
       child: SizedBox(
-          height: 193,
+          height: 199,
           width: double.infinity,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +83,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 * Start - Title
                 */
                 Container(
-                    height: 31,
+                    height: 37,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
@@ -95,14 +98,14 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                         categoryName,
                         style: const TextStyle(
                             color: ColorsResources.premiumLight,
-                            fontSize: 23,
+                            fontSize: 25,
                             letterSpacing: 1.7
                         )
                     )
                 ),
                 /*
-             * End - Title
-             */
+                * End - Title
+                */
 
                 const Divider(
                   height: 23,
@@ -111,16 +114,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
                 SizedBox(
                     height: 137,
-                    child: ListView(
-                        padding: const EdgeInsets.only(right: 301),
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        children: [
-
-
-
-                        ]
-                    )
+                    child: rhythmsPlaceholder
                 ),
 
               ]
@@ -129,9 +123,26 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     );
   }
 
-  void processTasks() async {
+  void processTasks(List<RhythmDataStructure> rhythmDataStructures) async {
 
+    List<Widget> allRhythms = [];
 
+    for (RhythmDataStructure rhythmDataStructure in rhythmDataStructures) {
+
+      allRhythms.add(CategoryItemInterface(rhythmDataStructure: rhythmDataStructure));
+
+    }
+
+    setState(() {
+
+      rhythmsPlaceholder = ListView(
+          padding: const EdgeInsets.only(right: 183),
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          children: allRhythms
+      );
+
+    });
 
   }
 

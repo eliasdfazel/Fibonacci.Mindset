@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:58 AM
+ * Last modified 1/17/24, 7:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,89 +33,108 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
   @override
   Widget build(BuildContext context) {
 
-    return SizedBox(
-        height: 137,
-        width: 137,
-        child: Stack(
-          children: [
+    return Padding(
+      padding: const EdgeInsets.only(right: 19),
+      child: SizedBox(
+          height: 137,
+          width: 137,
+          child: Stack(
+              children: [
 
-            /*
-             * Start - Background
-             */
-            WidgetMask(
-              blendMode: BlendMode.srcATop,
-              childSaveLayer: true,
-              mask: ColoredBox(
-                color: convertToColor(widget.rhythmDataStructure.taskColorTag()),
-              ),
-              child: const Image(
-                image: AssetImage("assets/squircle_shape.png"),
-              ),
-            ),
+                /*
+                 * Start - Background
+                 */
+                Center(
+                  child: SizedBox(
+                      height: 136,
+                      width: 136,
+                      child: WidgetMask(
+                          blendMode: BlendMode.srcATop,
+                          childSaveLayer: true,
+                          mask: ColoredBox(
+                            color: convertToColor(widget.rhythmDataStructure.taskColorTag()),
+                          ),
+                          child: const Image(
+                            image: AssetImage("assets/squircle_shape.png"),
+                            fit: BoxFit.cover,
+                          )
+                      )
+                  )
+                ),
 
-            const Image(
-              image: AssetImage("assets/squircle_adjustment_gradient.png"),
-            ),
-            /*
-             * End - Background
-             */
-
-            /*
-             * Start - Title
-             */
-            Positioned(
-              left: 19,
-              right: 19,
-              top: 19,
-              child: SizedBox(
-                height: 35,
-                child: Text(
-                  widget.rhythmDataStructure.taskTitle(),
-                  style: const TextStyle(
-                    color: ColorsResources.premiumLight,
-                    fontSize: 15,
-                    letterSpacing: 1.7
+                const SizedBox(
+                  height: 137,
+                  width: 137,
+                  child: Image(
+                    image: AssetImage("assets/squircle_adjustment_gradient.png"),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              )
-            ),
-            /*
-             * End - Title
-             */
+                /*
+                 * End - Background
+                 */
 
-            /*
-             * Start - Run
-             */
-            Positioned(
-                left: 19,
-                right: 19,
-                bottom: 19,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(7),
-                  child: Material(
-                      shadowColor: Colors.transparent,
-                      color: Colors.transparent,
-                      child: InkWell(
-                          splashColor: convertToColor(widget.rhythmDataStructure.taskColorTag()).withOpacity(0.73),
-                          splashFactory: InkRipple.splashFactory,
-                      onTap: () async {
-
-
-
-                      },
-                      child: const Image(
-                        image: AssetImage("assets/run_item.png"),
-                      )
+                /*
+                 * Start - Title
+                 */
+                Positioned(
+                    left: 19,
+                    right: 19,
+                    top: 19,
+                    child: SizedBox(
+                      height: 35,
+                      child: Text(
+                        widget.rhythmDataStructure.taskTitle(),
+                        style: const TextStyle(
+                            color: ColorsResources.premiumLight,
+                            fontSize: 15,
+                            letterSpacing: 1.7
+                        ),
+                      ),
                     )
-                  )
-                )
-            )
-            /*
-             * End - Run
-             */
+                ),
+                /*
+                 * End - Title
+                 */
 
-          ]
-        )
+                /*
+                 * Start - Run
+                 */
+                Positioned(
+                    left: 19,
+                    right: 19,
+                    bottom: 19,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(7),
+                        child: Material(
+                            shadowColor: Colors.transparent,
+                            color: Colors.transparent,
+                            child: InkWell(
+                                splashColor: convertToColor(widget.rhythmDataStructure.taskColorTag()).withOpacity(0.73),
+                                splashFactory: InkRipple.splashFactory,
+                                onTap: () {
+
+                                  Future.delayed(const Duration(microseconds: 333), () async {
+
+
+
+                                  });
+
+                                },
+                                child: const Image(
+                                  image: AssetImage("assets/run_item.png"),
+                                )
+                            )
+                        )
+                    )
+                )
+                /*
+                 * End - Run
+                 */
+
+              ]
+          )
+      )
     );
   }
 
