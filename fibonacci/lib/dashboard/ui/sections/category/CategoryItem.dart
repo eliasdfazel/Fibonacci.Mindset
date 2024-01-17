@@ -2,15 +2,17 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 7:52 AM
+ * Last modified 1/17/24, 8:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
+import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 
@@ -62,17 +64,17 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                       )
                   ),
 
-                const SizedBox(
-                  height: 137,
-                  width: 137,
-                  child: Image(
-                    image: AssetImage("assets/squircle_adjustment_gradient.png"),
-                    fit: BoxFit.cover,
+                  const SizedBox(
+                    height: 137,
+                    width: 137,
+                    child: Image(
+                      image: AssetImage("assets/squircle_adjustment_gradient.png"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                /*
-                 * End - Background
-                 */
+                  /*
+                   * End - Background
+                   */
 
                   /*
                    * Start - Title
@@ -115,6 +117,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                 splashFactory: InkRipple.splashFactory,
                                 onTap: () async {
 
+                                  navigateTo(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
                                 },
                                 child: Container()
                             )

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:45 AM
+ * Last modified 1/17/24, 8:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,12 +11,13 @@
 import 'package:blur/blur.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
+import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
 class ConfigurationsInterface extends StatefulWidget {
 
-  ConfigurationsInterface({Key? key}) : super(key: key);
+  ConfigurationsInterface({Key? key, RhythmDataStructure? rhythmDataStructure}) : super(key: key);
 
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
