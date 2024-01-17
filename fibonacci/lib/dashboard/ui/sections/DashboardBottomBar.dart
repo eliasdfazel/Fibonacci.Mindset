@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 9:08 AM
+ * Last modified 1/17/24, 9:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -142,7 +142,7 @@ class _DashboardBottomBarInterfaceState extends State<DashboardBottomBarInterfac
                             height: 111,
                             width: 111,
                             child: InkWell(
-                                onTap: () async {
+                                onTap: () {
 
                                   navigateTo(context, ConfigurationsInterface());
 

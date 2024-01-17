@@ -2,21 +2,19 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 9:08 AM
+ * Last modified 1/17/24, 9:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:blur/blur.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/preferences/ui/Preferences.dart';
-import 'package:fibonacci/profile/ui/Profile.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:widget_mask/widget_mask.dart';
 
 class ConfigurationsBottomBarInterface extends StatefulWidget {
 
@@ -27,9 +25,30 @@ class ConfigurationsBottomBarInterface extends StatefulWidget {
 }
 class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomBarInterface> {
 
+  bool rhythmUpdated = false;
+
+  bool aInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+
+    navigatePopWithResult(context, rhythmUpdated);
+
+
+    return true;
+  }
+
+  @override
+  void dispose() {
+
+    BackButtonInterceptor.remove(aInterceptor);
+
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
+
+    BackButtonInterceptor.add(aInterceptor);
+
   }
 
   @override
@@ -87,33 +106,14 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                     child: SizedBox(
                         height: 73,
                         width: 73,
-                        child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/squircle_background_gradient.png"),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Padding(
-                                padding: const EdgeInsets.all(3),
-                                child: InkWell(
-                                    onTap: () async {
+                        child: InkWell(
+                            onTap: () async {
 
-                                      navigateTo(context, ProfileInterface());
+                              navigatePopWithResult(context, rhythmUpdated);
 
-                                    },
-                                    child: WidgetMask(
-                                        blendMode: BlendMode.srcATop,
-                                        childSaveLayer: true,
-                                        mask: Image.network(
-                                          FirebaseAuth.instance.currentUser!.photoURL ?? "https://geeksempire.co/wp-content/uploads/2024/01/Geeks-Empire-Logo.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                        child: const Image(
-                                            image: AssetImage("assets/squircle_shape.png")
-                                        )
-                                    )
-                                )
+                            },
+                            child: const Image(
+                                image: AssetImage("assets/back.png")
                             )
                         )
                     )
