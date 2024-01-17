@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 9:58 AM
+ * Last modified 1/17/24, 9:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,6 @@ import 'dart:io';
 
 import 'package:fibonacci/dashboard/ui/Dashboard.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
-import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/authentication/AuthenticationProcess.dart';
 import 'package:fibonacci/utils/modifications/Numbers.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
@@ -62,49 +61,36 @@ class _EntryConfigurationState extends State<EntryConfigurations> implements Aut
     }
 
     return SafeArea(
-        child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: StringsResources.applicationName(),
-            color: ColorsResources.premiumDark,
-            theme: ThemeData(
-              fontFamily: 'Ubuntu',
-              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsResources.premiumDark),
-              pageTransitionsTheme: const PageTransitionsTheme(builders: {
-                TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-                TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
-              }),
-            ),
-            home: Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: ColorsResources.premiumDark,
-                body: ClipRRect(
-                  borderRadius: BorderRadius.circular(19),
-                  child: Stack(
-                      children: [
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: ColorsResources.premiumDark,
+            body: ClipRRect(
+                borderRadius: BorderRadius.circular(19),
+                child: Stack(
+                    children: [
 
-                        Container(
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage("assets/decoration.png"),
-                                    fit: BoxFit.cover
-                                )
-                            )
-                        ),
+                      Container(
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage("assets/decoration.png"),
+                                  fit: BoxFit.cover
+                              )
+                          )
+                      ),
 
-                        Align(
-                            alignment: Alignment.center,
-                            child: SizedBox(
+                      Align(
+                          alignment: Alignment.center,
+                          child: SizedBox(
                               height: calculatePercentage(93, displayLogicalWidth(context)),
                               width: calculatePercentage(93, displayLogicalWidth(context)),
                               child: const Image(
                                 image: AssetImage("assets/logo.png"),
                                 fit: BoxFit.cover,
                               )
-                            )
-                        ),
+                          )
+                      ),
 
-                      ]
-                  )
+                    ]
                 )
             )
         )

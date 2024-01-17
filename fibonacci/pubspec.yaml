@@ -23,7 +23,7 @@ dependencies:
 
 
   ####### ####### #######
-  back_button_interceptor: ^6.0.1
+  back_button_interceptor: ^7.0.0
 
   blur: ^3.0.0
   ####### ####### #######
