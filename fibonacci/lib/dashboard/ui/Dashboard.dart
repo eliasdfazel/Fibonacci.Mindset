@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 7:31 AM
+ * Last modified 1/17/24, 8:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -241,7 +241,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
     setState(() {
 
       tasksPlaceholder = ListView(
-          padding: const EdgeInsets.only(top: 53, bottom: 137),
+          padding: const EdgeInsets.only(top: 53, bottom: 73),
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
           children: categorizedRhythms
