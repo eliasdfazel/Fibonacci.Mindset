@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:58 AM
+ * Last modified 1/17/24, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,7 @@
 
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fibonacci/dashboard/ui/sections/BottomBar.dart';
+import 'package:fibonacci/dashboard/ui/sections/DashboardBottomBar.dart';
 import 'package:fibonacci/dashboard/ui/sections/category/Category.dart';
 import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
@@ -140,7 +140,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                           alignment: Alignment.bottomCenter,
                           child: Padding(
                               padding: const EdgeInsets.only(bottom: 37),
-                              child: BottomBarInterface()
+                              child: DashboardBottomBarInterface()
                           )
                         )
                         /*

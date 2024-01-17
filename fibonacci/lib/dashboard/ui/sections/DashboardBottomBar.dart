@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:48 AM
+ * Last modified 1/17/24, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,14 +18,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 
-class BottomBarInterface extends StatefulWidget {
+class DashboardBottomBarInterface extends StatefulWidget {
 
-  BottomBarInterface({Key? key}) : super(key: key);
+  DashboardBottomBarInterface({Key? key}) : super(key: key);
 
   @override
-  State<BottomBarInterface> createState() => _BottomBarInterfaceState();
+  State<DashboardBottomBarInterface> createState() => _DashboardBottomBarInterfaceState();
 }
-class _BottomBarInterfaceState extends State<BottomBarInterface> {
+class _DashboardBottomBarInterfaceState extends State<DashboardBottomBarInterface> {
 
   @override
   void initState() {

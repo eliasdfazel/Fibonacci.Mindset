@@ -2,13 +2,14 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:56 AM
+ * Last modified 1/17/24, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:blur/blur.dart';
+import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
@@ -90,6 +91,19 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                            */
 
 
+                          /*
+                           * Start - Bottom Bar
+                           */
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 37),
+                                  child: ConfigurationsBottomBarInterface()
+                              )
+                          )
+                          /*
+                           * End - Bottom Bar
+                           */
 
                         ]
                     )
