@@ -2,29 +2,25 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:43 AM
+ * Last modified 1/17/24, 8:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:blur/blur.dart';
-import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
-class PreferencesInterface extends StatefulWidget {
+class ConfigurationsInterface extends StatefulWidget {
 
-  PreferencesInterface({Key? key}) : super(key: key);
+  ConfigurationsInterface({Key? key}) : super(key: key);
 
   @override
-  State<PreferencesInterface> createState() => _PreferencesInterfaceState();
+  State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _PreferencesInterfaceState extends State<PreferencesInterface> {
-
-  PreferencesIO preferencesIO = PreferencesIO();
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
   Widget tasksPlaceholder = Container();
 
@@ -61,8 +57,8 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
                         children: [
 
                           /*
-                         * Start - Decoration
-                         */
+                           * Start - Decoration
+                           */
                           Container(
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
@@ -72,24 +68,19 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
                               )
                           ),
 
-                          const Blur(
-                              blur: 13.0,
-                              colorOpacity: 0,
-                              blurColor: Colors.transparent,
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Opacity(
-                                      opacity: 0.73,
-                                      child: Image(
-                                        image: AssetImage("assets/decoration_start.png"),
-                                        fit: BoxFit.cover,
-                                      )
+                          const Align(
+                              alignment: Alignment.centerRight,
+                              child: Opacity(
+                                  opacity: 0.73,
+                                  child: Image(
+                                    image: AssetImage("assets/logo.png"),
+                                    fit: BoxFit.cover,
                                   )
                               )
                           ),
                           /*
-                         * End - Decoration
-                         */
+                           * End - Decoration
+                           */
 
 
 
