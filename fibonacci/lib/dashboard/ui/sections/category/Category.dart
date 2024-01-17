@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 7:20 AM
+ * Last modified 1/17/24, 7:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -85,6 +85,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 Container(
                     height: 37,
                     width: double.infinity,
+                    padding: const EdgeInsets.only(left: 31, right: 31),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
                         gradient: LinearGradient(
@@ -136,7 +137,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     setState(() {
 
       rhythmsPlaceholder = ListView(
-          padding: const EdgeInsets.only(right: 183),
+          padding: const EdgeInsets.only(left: 31, right: 31),
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           children: allRhythms

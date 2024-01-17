@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 6:49 AM
+ * Last modified 1/17/24, 7:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -119,7 +119,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                         Align(
                           alignment: Alignment.center,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 31, right: 31, bottom: 57),
+                            padding: const EdgeInsets.only(bottom: 57),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(31),
                               child: SizedBox(

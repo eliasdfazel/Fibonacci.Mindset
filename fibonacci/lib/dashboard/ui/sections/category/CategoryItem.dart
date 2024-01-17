@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 7:15 AM
+ * Last modified 1/17/24, 7:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,9 +82,10 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                     right: 19,
                     top: 19,
                     child: SizedBox(
-                      height: 35,
+                      height: 73,
                       child: Text(
                         widget.rhythmDataStructure.taskTitle(),
+                        maxLines: 3,
                         style: const TextStyle(
                             color: ColorsResources.premiumLight,
                             fontSize: 15,
