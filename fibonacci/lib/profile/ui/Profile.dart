@@ -2,28 +2,25 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:45 AM
+ * Last modified 1/17/24, 8:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:blur/blur.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
-class ConfigurationsInterface extends StatefulWidget {
+class ProfileInterface extends StatefulWidget {
 
-  ConfigurationsInterface({Key? key}) : super(key: key);
+  ProfileInterface({Key? key}) : super(key: key);
 
   @override
-  State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
+  State<ProfileInterface> createState() => _ProfileInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
-
-  Widget tasksPlaceholder = Container();
+class _ProfileInterfaceState extends State<ProfileInterface> {
 
   @override
   void initState() {
@@ -58,8 +55,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                         children: [
 
                           /*
-                           * Start - Decoration
-                           */
+                         * Start - Decoration
+                         */
                           Container(
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
@@ -69,24 +66,19 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               )
                           ),
 
-                          const Blur(
-                              blur: 13.0,
-                              colorOpacity: 0,
-                              blurColor: Colors.transparent,
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Opacity(
-                                      opacity: 0.73,
-                                      child: Image(
-                                        image: AssetImage("assets/decoration_start.png"),
-                                        fit: BoxFit.cover,
-                                      )
+                          const Align(
+                              alignment: Alignment.centerRight,
+                              child: Opacity(
+                                  opacity: 0.73,
+                                  child: Image(
+                                    image: AssetImage("assets/logo.png"),
+                                    fit: BoxFit.cover,
                                   )
                               )
                           ),
                           /*
-                           * End - Decoration
-                           */
+                         * End - Decoration
+                         */
 
 
 

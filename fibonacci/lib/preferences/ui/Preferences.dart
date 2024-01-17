@@ -2,14 +2,12 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:43 AM
+ * Last modified 1/17/24, 8:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:blur/blur.dart';
-import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -23,10 +21,6 @@ class PreferencesInterface extends StatefulWidget {
   State<PreferencesInterface> createState() => _PreferencesInterfaceState();
 }
 class _PreferencesInterfaceState extends State<PreferencesInterface> {
-
-  PreferencesIO preferencesIO = PreferencesIO();
-
-  Widget tasksPlaceholder = Container();
 
   @override
   void initState() {
@@ -72,18 +66,13 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
                               )
                           ),
 
-                          const Blur(
-                              blur: 13.0,
-                              colorOpacity: 0,
-                              blurColor: Colors.transparent,
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Opacity(
-                                      opacity: 0.73,
-                                      child: Image(
-                                        image: AssetImage("assets/decoration_start.png"),
-                                        fit: BoxFit.cover,
-                                      )
+                          const Align(
+                              alignment: Alignment.centerRight,
+                              child: Opacity(
+                                  opacity: 0.73,
+                                  child: Image(
+                                    image: AssetImage("assets/logo.png"),
+                                    fit: BoxFit.cover,
                                   )
                               )
                           ),
