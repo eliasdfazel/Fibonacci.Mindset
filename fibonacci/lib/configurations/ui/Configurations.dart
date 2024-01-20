@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/20/24, 11:34 AM
+ * Last modified 1/20/24, 11:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -101,9 +101,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
 
-                                    optionsWidget(StringsResources.titleTitle(), titleController),
+                                    optionsWidget(StringsResources.titleTitle(), StringsResources.titleHint(), titleController),
 
-                                    optionsWidget(StringsResources.descriptionTitle(), descriptionController),
+                                    optionsWidget(StringsResources.descriptionTitle(), StringsResources.descriptionHint(), descriptionController),
 
                                   ],
                                 )
