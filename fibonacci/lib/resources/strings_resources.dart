@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 10:12 AM
+ * Last modified 1/20/24, 11:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,24 @@ class StringsResources {
   static String previewTitle() {
 
     return "Previews";
+  }
+
+  static String titleTitle() {
+
+    return "Title";
+  }
+  static String titleHint() {
+
+    return "Title Of Task";
+  }
+
+  static String descriptionTitle() {
+
+    return "Description";
+  }
+  static String descriptionHint() {
+
+    return "Description Of Task";
   }
   /*
    * End - Titles

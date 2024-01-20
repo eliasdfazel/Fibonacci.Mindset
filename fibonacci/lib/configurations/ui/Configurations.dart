@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/20/24, 11:02 AM
+ * Last modified 1/20/24, 11:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 import 'package:blur/blur.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
+import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Numbers.dart';
 import 'package:fibonacci/utils/ui/Display.dart';
@@ -27,6 +28,9 @@ class ConfigurationsInterface extends StatefulWidget {
 class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
   Widget tasksPlaceholder = Container();
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   void initState() {
@@ -94,41 +98,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                 height: 103,
                                 padding: const EdgeInsets.only(left: 37, right: 37),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
 
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 17),
-                                      child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Container(
-                                              height: 29,
-                                              width: calculatePercentage(37, displayLogicalWidth(context)),
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(7),
-                                                  border: const Border.symmetric(
-                                                    horizontal: BorderSide(color: ColorsResources.premiumLight, width: 1),
-                                                    vertical: BorderSide(color: ColorsResources.premiumLight, width: 3),
-                                                  )
-                                              )
-                                          )
-                                      )
-                                    ),
+                                    optionsWidget(StringsResources.titleTitle(), titleController),
 
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Container(
-                                          height: 73,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(19),
-                                              border: const Border.symmetric(
-                                                horizontal: BorderSide(color: ColorsResources.premiumLight, width: 1),
-                                                vertical: BorderSide(color: ColorsResources.premiumLight, width: 3),
-                                              )
-                                          )
-                                      )
-                                    )
+                                    optionsWidget(StringsResources.descriptionTitle(), descriptionController),
 
-                                  ]
+                                  ],
                                 )
                               )
 
@@ -157,6 +134,65 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                 )
             )
         )
+    );
+  }
+
+  Widget optionsWidget(String title, String hint, TextEditingController titleController) {
+
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+
+          Padding(
+              padding: const EdgeInsets.only(left: 17),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 29,
+                      width: calculatePercentage(37, displayLogicalWidth(context)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          border: const Border.symmetric(
+                            horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                            vertical: BorderSide(color: ColorsResources.premiumDark, width: 3),
+                          )
+                      ),
+                      child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 13),
+                          child: Text(
+                              title,
+                              style: const TextStyle(
+                                  color: ColorsResources.premiumLight,
+                                  fontSize: 13
+                              )
+                          )
+                      )
+                  )
+              )
+          ),
+
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                  height: 73,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      border: const Border.symmetric(
+                        horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                        vertical: BorderSide(color: ColorsResources.premiumDark, width: 3),
+                      )
+                  ),
+                  child: TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      hintText: hint
+                    ),
+                  )
+              )
+          )
+
+        ]
     );
   }
 
