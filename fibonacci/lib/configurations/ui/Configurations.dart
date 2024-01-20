@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 9:29 AM
+ * Last modified 1/20/24, 11:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,8 @@ import 'package:blur/blur.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
+import 'package:fibonacci/utils/modifications/Numbers.dart';
+import 'package:fibonacci/utils/ui/Display.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +82,59 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       /*
                        * Start - Options
                        */
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 73),
+                        child: ListView(
+                            padding: const EdgeInsets.only(top: 73),
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            children: [
 
+                              Container(
+                                height: 103,
+                                padding: const EdgeInsets.only(left: 37, right: 37),
+                                child: Column(
+                                  children: [
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 17),
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Container(
+                                              height: 29,
+                                              width: calculatePercentage(37, displayLogicalWidth(context)),
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(7),
+                                                  border: const Border.symmetric(
+                                                    horizontal: BorderSide(color: ColorsResources.premiumLight, width: 1),
+                                                    vertical: BorderSide(color: ColorsResources.premiumLight, width: 3),
+                                                  )
+                                              )
+                                          )
+                                      )
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Container(
+                                          height: 73,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(19),
+                                              border: const Border.symmetric(
+                                                horizontal: BorderSide(color: ColorsResources.premiumLight, width: 1),
+                                                vertical: BorderSide(color: ColorsResources.premiumLight, width: 3),
+                                              )
+                                          )
+                                      )
+                                    )
+
+                                  ]
+                                )
+                              )
+
+                            ]
+                        ),
+                      ),
                       /*
                        * End - Options
                        */
