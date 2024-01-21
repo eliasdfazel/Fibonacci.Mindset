@@ -2,21 +2,23 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 11:03 AM
+ * Last modified 1/21/24, 12:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
+import 'dart:convert';
+
 import 'package:blur/blur.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/configurations/ui/sections/elements/Choices.dart';
 import 'package:fibonacci/configurations/utils/query_helper.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
-import 'package:fibonacci/utils/modifications/Numbers.dart';
-import 'package:fibonacci/utils/ui/Display.dart';
+import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +31,8 @@ class ConfigurationsInterface extends StatefulWidget {
 }
 class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
-  Widget tasksPlaceholder = Container();
+  Widget categoriesPlaceholder = Container();
+  Widget colorsTagsPlaceholder = Container();
 
   TextEditingController titleController = TextEditingController();
   Color titleWarning = ColorsResources.premiumLight;
@@ -43,11 +46,16 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   String tagsSelected = "";
   Color tagsWarning = ColorsResources.premiumLight;
 
+  String colorsSelected = "";
+  Color colorsWarning = ColorsResources.premiumLight;
+
   @override
   void initState() {
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
+
+    retrieveAssets();
 
   }
 
@@ -108,7 +116,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               textOptionsWidget(StringsResources.titleTitle(),
                                   StringsResources.titleHint(),
                                   titleController,
-                                  warningColor: titleWarning),
+                                  titleWarning),
 
                               const Divider(
                                 height: 13,
@@ -118,7 +126,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               textOptionsWidget(StringsResources.descriptionTitle(),
                                   StringsResources.descriptionHint(),
                                   descriptionController,
-                                  warningColor: descriptionWarning),
+                                  descriptionWarning),
 
                               const Divider(
                                   height: 13,
@@ -128,48 +136,21 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               textOptionsWidget(StringsResources.locationTitle(),
                                   StringsResources.locationHint(),
                                   locationController,
-                                  warningColor: locationWarning),
+                                  locationWarning),
 
                               const Divider(
                                   height: 37,
                                   color: Colors.transparent
                               ),
 
-                              pickerOptionsWidget(StringsResources.categoriesTitle(),
-                                  [
-                                    {"One": ColorsResources.premiumDark},
-                                    {"Two": ColorsResources.premiumDark},
-                                    {"Three": ColorsResources.premiumDark},
-                                    {"Four": ColorsResources.premiumDark},
-                                    {"Five": ColorsResources.premiumDark},
-                                    {"Six": ColorsResources.premiumDark}
-                                  ],
-                                  [
-                                    {"Two": ColorsResources.premiumDark},
-                                    {"Five": ColorsResources.premiumDark},
-                                  ]
-                              ),
+                              categoriesPlaceholder,
 
                               const Divider(
                                   height: 13,
                                   color: Colors.transparent
                               ),
 
-                              pickerOptionsWidget(StringsResources.colorsTagsTitle(),
-                                  [
-                                    {"Orange": ColorsResources.orangePastel},
-                                    {"Green": ColorsResources.greenPastel},
-                                    {"Blue": ColorsResources.bluePastel},
-                                    {"Red": ColorsResources.redPastel},
-                                    {"Yellow": ColorsResources.yellowPastel},
-                                    {"Purple": ColorsResources.purplePastel}
-                                  ],
-                                  [
-                                    {"Orange": ColorsResources.orangePastel},
-                                    {"Green": ColorsResources.greenPastel},
-                                    {"Purple": ColorsResources.purplePastel}
-                                  ]
-                              ),
+                              colorsTagsPlaceholder,
 
                             ]
                         ),
@@ -200,7 +181,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   }
 
   Widget textOptionsWidget(String title, String hint,
-      TextEditingController titleController, {Color warningColor = ColorsResources.premiumLight}) {
+      TextEditingController titleController, Color warningColor) {
 
     return Container(
         height: 103,
@@ -215,7 +196,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       alignment: Alignment.centerLeft,
                       child: Container(
                           height: 29,
-                          width: calculatePercentage(37, displayLogicalWidth(context)),
+                          width: 173,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
                               border: const Border.symmetric(
@@ -293,8 +274,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   }
 
   /// selectedChoice: CSV
-  Widget pickerOptionsWidget(String title, List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
-      {Color warningColor = ColorsResources.premiumLight}) {
+  Widget pickerOptionsWidget(String title,
+      List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
+      Color warningColor) {
 
     List<Widget> allChoices = [];
 
@@ -317,7 +299,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       alignment: Alignment.centerLeft,
                       child: Container(
                           height: 29,
-                          width: calculatePercentage(37, displayLogicalWidth(context)),
+                          width: 173,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
                               border: const Border.symmetric(
@@ -368,6 +350,58 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
             ]
         )
     );
+  }
+
+  void retrieveAssets() {
+
+    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Colors")
+        .get().then((DocumentSnapshot documentSnapshot) {
+
+          List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
+
+          List<Map<String, Color>> allTagsColors = [];
+          List<Map<String, Color>> selectedTagsColors = [];
+
+          for (var element in colorsTagsList) {
+
+            var colorTag = element as Map<String, dynamic>;
+
+            allTagsColors.add({colorTag.keys.first: convertToColor(colorTag.values.first)});
+
+          }
+
+          setState(() {
+
+            colorsTagsPlaceholder = pickerOptionsWidget(StringsResources.colorsTagsTitle(), allTagsColors, selectedTagsColors, colorsWarning);
+
+          });
+
+    });
+
+    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
+        .get().then((DocumentSnapshot documentSnapshot) {
+
+      List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
+
+      List<Map<String, Color>> allCategories = [];
+      List<Map<String, Color>> selectedCategories = [];
+
+      for (var element in colorsTagsList) {
+
+        var category = element as Map<String, dynamic>;
+
+        allCategories.add({category.keys.first: ColorsResources.premiumDark});
+
+      }
+
+      setState(() {
+
+        categoriesPlaceholder = pickerOptionsWidget(StringsResources.categoriesTitle(), allCategories, selectedCategories, tagsWarning);
+
+      });
+
+    });
+
   }
 
 }
