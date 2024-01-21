@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/14/24, 10:00 AM
+ * Last modified 1/21/24, 10:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@ void main() async {
 
       bool connectionResult = (internetLookup.isNotEmpty && internetLookup[0].rawAddress.isNotEmpty);
 
-      await FirebaseAuth.instance.currentUser?.reload();
+      FirebaseAuth.instance.currentUser?.reload();
 
       Widget entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
 
