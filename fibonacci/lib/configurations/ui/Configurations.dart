@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 12:39 PM
+ * Last modified 1/21/24, 12:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,6 +49,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   String colorsSelected = "";
   Color colorsWarning = ColorsResources.premiumLight;
 
+  Widget alarmsPlaceholder = Container();
+  Color alarmsWarning = ColorsResources.premiumLight;
+  
   @override
   void initState() {
     super.initState();
@@ -56,6 +59,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
     retrieveAssets();
+
+    alarmsPlaceholder = alarmsInitial(StringsResources.alarmsTitle(), alarmsWarning);
 
   }
 
@@ -108,7 +113,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 73),
                         child: ListView(
-                            padding: const EdgeInsets.only(top: 73),
+                            padding: const EdgeInsets.only(top: 73, bottom: 103),
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             children: [
@@ -152,6 +157,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
                               colorsTagsPlaceholder,
 
+                              const Divider(
+                                  height: 37,
+                                  color: Colors.transparent
+                              ),
+
+                              alarmsPlaceholder
+
                             ]
                         ),
                       ),
@@ -178,6 +190,61 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
             )
         )
     );
+  }
+
+  /*
+   * Start - Assets
+   */
+  void retrieveAssets() {
+
+    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Colors")
+        .get().then((DocumentSnapshot documentSnapshot) {
+
+      List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
+
+      List<Map<String, Color>> allTagsColors = [];
+      List<Map<String, Color>> selectedTagsColors = [];
+
+      for (var element in colorsTagsList) {
+
+        var colorTag = element as Map<String, dynamic>;
+
+        allTagsColors.add({colorTag.keys.first: convertToColor(colorTag.values.first)});
+
+      }
+
+      setState(() {
+
+        colorsTagsPlaceholder = pickerOptionsWidget(StringsResources.colorsTagsTitle(), allTagsColors, selectedTagsColors, colorsWarning);
+
+      });
+
+    });
+
+    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
+        .get().then((DocumentSnapshot documentSnapshot) {
+
+      List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
+
+      List<Map<String, Color>> allCategories = [];
+      List<Map<String, Color>> selectedCategories = [];
+
+      for (var element in colorsTagsList) {
+
+        var category = element as Map<String, dynamic>;
+
+        allCategories.add({category.keys.first: ColorsResources.premiumDark});
+
+      }
+
+      setState(() {
+
+        categoriesPlaceholder = pickerOptionsWidget(StringsResources.categoriesTitle(), allCategories, selectedCategories, tagsWarning);
+
+      });
+
+    });
+
   }
 
   Widget textOptionsWidget(String title, String hint,
@@ -351,57 +418,82 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
         )
     );
   }
+  /*
+   * End - Assets
+   */
 
-  void retrieveAssets() {
+  Widget alarmsInitial(String title, Color warningColor) {
 
-    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Colors")
-        .get().then((DocumentSnapshot documentSnapshot) {
+    return Container(
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
 
-          List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: 173,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  title,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: warningColor,
+                                      fontSize: 13,
+                                      letterSpacing: 1.7
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
 
-          List<Map<String, Color>> allTagsColors = [];
-          List<Map<String, Color>> selectedTagsColors = [];
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 173,
+                      padding: const EdgeInsets.only(left: 13, right: 13),
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: const Border(
+                            bottom: BorderSide(
+                              color: ColorsResources.premiumDark,
+                              width: 1,
+                            ),
+                            top: BorderSide(
+                                color: ColorsResources.premiumDark,
+                                width: 1
+                            ),
+                            left: BorderSide(
+                                color: ColorsResources.premiumDark,
+                                width: 5
+                            ),
+                            right: BorderSide(
+                                color: ColorsResources.premiumDark,
+                                width: 5
+                            ),
+                          )
+                      ),
+                      child: Container()
+                  )
+              )
 
-          for (var element in colorsTagsList) {
-
-            var colorTag = element as Map<String, dynamic>;
-
-            allTagsColors.add({colorTag.keys.first: convertToColor(colorTag.values.first)});
-
-          }
-
-          setState(() {
-
-            colorsTagsPlaceholder = pickerOptionsWidget(StringsResources.colorsTagsTitle(), allTagsColors, selectedTagsColors, colorsWarning);
-
-          });
-
-    });
-
-    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
-        .get().then((DocumentSnapshot documentSnapshot) {
-
-      List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
-
-      List<Map<String, Color>> allCategories = [];
-      List<Map<String, Color>> selectedCategories = [];
-
-      for (var element in colorsTagsList) {
-
-        var category = element as Map<String, dynamic>;
-
-        allCategories.add({category.keys.first: ColorsResources.premiumDark});
-
-      }
-
-      setState(() {
-
-        categoriesPlaceholder = pickerOptionsWidget(StringsResources.categoriesTitle(), allCategories, selectedCategories, tagsWarning);
-
-      });
-
-    });
-
+            ]
+        )
+    );
   }
-
 }
