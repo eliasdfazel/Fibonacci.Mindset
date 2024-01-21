@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 10:36 AM
+ * Last modified 1/21/24, 11:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 import 'package:blur/blur.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/configurations/ui/sections/elements/Choices.dart';
+import 'package:fibonacci/configurations/utils/query_helper.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
@@ -166,7 +167,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   [
                                     {"Orange": ColorsResources.orangePastel},
                                     {"Green": ColorsResources.greenPastel},
-                                    {"Blue": ColorsResources.bluePastel},
                                     {"Purple": ColorsResources.purplePastel}
                                   ]
                               ),
@@ -300,7 +300,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
     for (var element in inputChoices) {
 
-      allChoices.add(Choices(choiceInformation: element, choiceSelected: selectedChoices.contains(element)));
+      allChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 
     }
 
