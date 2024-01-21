@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 8:59 AM
+ * Last modified 1/21/24, 9:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -112,6 +112,21 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   descriptionController,
                                   warningColor: descriptionWarning),
 
+                              const Divider(
+                                  height: 13,
+                                  color: Colors.transparent
+                              ),
+
+                              optionsWidget(StringsResources.descriptionTitle(),
+                                  StringsResources.descriptionHint(),
+                                  descriptionController,
+                                  warningColor: descriptionWarning),
+
+                              const Divider(
+                                  height: 37,
+                                  color: Colors.transparent
+                              ),
+
                             ]
                         ),
                       ),
@@ -139,10 +154,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
         )
     );
   }
-  void test_param(n1,{s1 = 12}) {
-    print(n1);
-    print(s1);
-  }
+
   Widget optionsWidget(String title, String hint,
       TextEditingController titleController, {Color warningColor = ColorsResources.premiumLight}) {
 
@@ -214,14 +226,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           style: const TextStyle(
                               color: ColorsResources.premiumLight,
                               fontSize: 19,
-                              letterSpacing: 1.7,
-                              height: 1
+                              letterSpacing: 1.7
                           ),
                           decoration: InputDecoration.collapsed(
                             hintText: hint,
-                            hintStyle: const TextStyle(
-                                color: ColorsResources.premiumLight,
-                                fontSize: 21
+                            hintStyle: TextStyle(
+                                color: ColorsResources.premiumLight.withOpacity(0.51),
+                                fontSize: 19,
+                                letterSpacing: 1.7
                             ),
                             border: InputBorder.none
                           )
