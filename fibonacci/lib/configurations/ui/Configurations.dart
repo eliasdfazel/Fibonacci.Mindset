@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/20/24, 11:35 AM
+ * Last modified 1/21/24, 7:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -94,20 +94,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                             scrollDirection: Axis.vertical,
                             children: [
 
-                              Container(
-                                height: 103,
-                                padding: const EdgeInsets.only(left: 37, right: 37),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                              optionsWidget(StringsResources.titleTitle(), StringsResources.titleHint(), titleController),
 
-                                    optionsWidget(StringsResources.titleTitle(), StringsResources.titleHint(), titleController),
+                              const Divider(
+                                height: 13,
+                                color: Colors.transparent
+                              ),
 
-                                    optionsWidget(StringsResources.descriptionTitle(), StringsResources.descriptionHint(), descriptionController),
-
-                                  ],
-                                )
-                              )
+                              optionsWidget(StringsResources.descriptionTitle(), StringsResources.descriptionHint(), descriptionController),
 
                             ]
                         ),
@@ -139,60 +133,64 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
   Widget optionsWidget(String title, String hint, TextEditingController titleController) {
 
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
+    return Container(
+        height: 103,
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
 
-          Padding(
-              padding: const EdgeInsets.only(left: 17),
-              child: Align(
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: calculatePercentage(37, displayLogicalWidth(context)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 3),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  title,
+                                  style: const TextStyle(
+                                      color: ColorsResources.premiumLight,
+                                      fontSize: 13
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
+
+              Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      height: 29,
-                      width: calculatePercentage(37, displayLogicalWidth(context)),
+                      height: 73,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
+                          borderRadius: BorderRadius.circular(19),
                           border: const Border.symmetric(
                             horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
                             vertical: BorderSide(color: ColorsResources.premiumDark, width: 3),
                           )
                       ),
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.only(left: 13),
-                          child: Text(
-                              title,
-                              style: const TextStyle(
-                                  color: ColorsResources.premiumLight,
-                                  fontSize: 13
-                              )
-                          )
+                      child: TextField(
+                        controller: titleController,
+                        decoration: InputDecoration(
+                            hintText: hint
+                        ),
                       )
                   )
               )
-          ),
 
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                  height: 73,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      border: const Border.symmetric(
-                        horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                        vertical: BorderSide(color: ColorsResources.premiumDark, width: 3),
-                      )
-                  ),
-                  child: TextField(
-                    controller: titleController,
-                    decoration: InputDecoration(
-                      hintText: hint
-                    ),
-                  )
-              )
-          )
-
-        ]
+            ]
+        )
     );
   }
 
