@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 10:13 AM
+ * Last modified 1/21/24, 10:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,6 +26,10 @@ class Choices extends StatefulWidget {
 }
 class _ChoicesState extends State<Choices> {
 
+  Color backgroundColor = Colors.transparent;
+
+  Color textColor = ColorsResources.premiumLight;
+
   @override
   void initState() {
     super.initState();
@@ -34,11 +38,19 @@ class _ChoicesState extends State<Choices> {
   @override
   Widget build(BuildContext context) {
 
-    Color backgroundColor = Colors.transparent;
-
     if (widget.choiceSelected) {
 
       backgroundColor = ColorsResources.black.withOpacity(0.37);
+
+    }
+
+    if (widget.choiceInformation.values.first != ColorsResources.premiumLight) {
+
+      textColor = widget.choiceInformation.values.first;
+
+    } else {
+
+      textColor = ColorsResources.premiumLight;
 
     }
 
@@ -48,10 +60,10 @@ class _ChoicesState extends State<Choices> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Container(
-            decoration: BoxDecoration(
+          decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(19),
                 color: backgroundColor
-            ),
+          ),
           child: WidgetMask(
             blendMode: BlendMode.srcIn,
             childSaveLayer: true,
@@ -60,7 +72,13 @@ class _ChoicesState extends State<Choices> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(19),
                     border: GradientBoxBorder(
-                        gradient: LinearGradient(colors: [widget.choiceInformation.values.first, ColorsResources.blackTransparent, widget.choiceInformation.values.first]),
+                        gradient: LinearGradient(
+                            colors: [
+                              widget.choiceInformation.values.first,
+                              ColorsResources.black,
+                              widget.choiceInformation.values.first
+                            ]
+                        ),
                         width: 5
                     )
                 ),
@@ -71,8 +89,8 @@ class _ChoicesState extends State<Choices> {
                       child: Text(
                         widget.choiceInformation.keys.first.toUpperCase(),
                         maxLines: 1,
-                        style: const TextStyle(
-                            color: ColorsResources.premiumLight,
+                        style: TextStyle(
+                            color: textColor,
                             fontSize: 15
                         ),
                       )
@@ -95,14 +113,14 @@ class _ChoicesState extends State<Choices> {
                       child: Text(
                         widget.choiceInformation.keys.first.toUpperCase(),
                         maxLines: 1,
-                        style: const TextStyle(
-                            color: ColorsResources.premiumLight,
+                        style: TextStyle(
+                            color: textColor,
                             fontSize: 15
-                        ),
+                        )
                       )
-                  ),
+                  )
                 )
-            ),
+            )
           )
         )
       ),

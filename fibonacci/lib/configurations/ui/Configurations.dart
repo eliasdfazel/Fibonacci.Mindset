@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 10:12 AM
+ * Last modified 1/21/24, 10:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -134,18 +134,18 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   color: Colors.transparent
                               ),
 
-                              pickerOptionsWidget(StringsResources.colorsTagsTitle(),
+                              pickerOptionsWidget(StringsResources.categoriesTitle(),
                                   [
-                                    {"One": Colors.transparent},
-                                    {"Two": Colors.transparent},
-                                    {"Three": Colors.transparent},
-                                    {"Four": Colors.transparent},
-                                    {"Five": Colors.transparent},
-                                    {"Six": Colors.transparent}
+                                    {"One": ColorsResources.premiumDark},
+                                    {"Two": ColorsResources.premiumDark},
+                                    {"Three": ColorsResources.premiumDark},
+                                    {"Four": ColorsResources.premiumDark},
+                                    {"Five": ColorsResources.premiumDark},
+                                    {"Six": ColorsResources.premiumDark}
                                   ],
                                   [
-                                    {"Two": Colors.transparent},
-                                    {"Five": Colors.transparent},
+                                    {"Two": ColorsResources.premiumDark},
+                                    {"Five": ColorsResources.premiumDark},
                                   ]
                               ),
 
@@ -157,18 +157,16 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               pickerOptionsWidget(StringsResources.colorsTagsTitle(),
                                   [
                                     {"Orange": ColorsResources.orangePastel},
-                                    {"Yellow": ColorsResources.yellowPastel},
                                     {"Green": ColorsResources.greenPastel},
                                     {"Blue": ColorsResources.bluePastel},
                                     {"Red": ColorsResources.redPastel},
+                                    {"Yellow": ColorsResources.yellowPastel},
                                     {"Purple": ColorsResources.purplePastel}
                                   ],
                                   [
                                     {"Orange": ColorsResources.orangePastel},
-                                    {"Yellow": ColorsResources.yellowPastel},
                                     {"Green": ColorsResources.greenPastel},
                                     {"Blue": ColorsResources.bluePastel},
-                                    {"Red": ColorsResources.redPastel},
                                     {"Purple": ColorsResources.purplePastel}
                                   ]
                               ),
@@ -267,7 +265,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
                           cursorWidth: 3,
-                          cursorHeight: 31,
+                          cursorHeight: 23,
                           cursorRadius: const Radius.circular(19),
                           style: const TextStyle(
                               color: ColorsResources.premiumLight,
