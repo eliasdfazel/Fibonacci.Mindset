@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 7:56 AM
+ * Last modified 1/21/24, 8:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,10 +30,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   Widget tasksPlaceholder = Container();
 
   TextEditingController titleController = TextEditingController();
-  String titleWarning = "";
+  Color titleWarning = ColorsResources.premiumLight;
 
   TextEditingController descriptionController = TextEditingController();
-  String descriptionWarning = "";
+  Color descriptionWarning = ColorsResources.premiumLight;
 
   @override
   void initState() {
@@ -99,8 +99,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
                               optionsWidget(StringsResources.titleTitle(),
                                   StringsResources.titleHint(),
-                                  titleWarning,
-                                  titleController),
+                                  titleController,
+                                  warningColor: titleWarning),
 
                               const Divider(
                                 height: 13,
@@ -109,8 +109,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
                               optionsWidget(StringsResources.descriptionTitle(),
                                   StringsResources.descriptionHint(),
-                                  descriptionWarning,
-                                  descriptionController),
+                                  descriptionController,
+                                  warningColor: descriptionWarning),
 
                             ]
                         ),
@@ -139,8 +139,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
         )
     );
   }
-
-  Widget optionsWidget(String title, String hint, String warning, TextEditingController titleController) {
+  void test_param(n1,{s1 = 12}) {
+    print(n1);
+    print(s1);
+  }
+  Widget optionsWidget(String title, String hint,
+      TextEditingController titleController, {Color warningColor = ColorsResources.premiumLight}) {
 
     return Container(
         height: 103,
@@ -169,8 +173,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               child: Text(
                                   title,
                                   maxLines: 1,
-                                  style: const TextStyle(
-                                      color: ColorsResources.premiumLight,
+                                  style: TextStyle(
+                                      color: warningColor,
                                       fontSize: 13,
                                       letterSpacing: 1.7
                                   )
@@ -184,6 +188,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                   alignment: Alignment.centerLeft,
                   child: Container(
                       height: 73,
+                      padding: const EdgeInsets.only(left: 13, right: 13),
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(19),
@@ -193,43 +198,33 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           )
                       ),
                       child: TextField(
-                        controller: titleController,
-                        maxLines: 2,
-                        textAlign: TextAlign.left,
-                        textDirection: TextDirection.ltr,
-                        textAlignVertical: TextAlignVertical.center,
-                        cursorColor: ColorsResources.primaryColor,
-                        autofocus: false,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        cursorWidth: 3,
-                        cursorHeight: 31,
-                        cursorRadius: const Radius.circular(19),
-                        style: const TextStyle(
-                          color: ColorsResources.premiumLight,
-                          fontSize: 21,
-                          letterSpacing: 1.7
-                        ),
-                        decoration: InputDecoration(
-                            hintText: hint,
-                            errorText: warning,
-                            contentPadding: const EdgeInsets.fromLTRB(13, 7, 13, 7),
-                            hintStyle: const TextStyle(
+                          controller: titleController,
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          textDirection: TextDirection.ltr,
+                          textAlignVertical: TextAlignVertical.center,
+                          cursorColor: ColorsResources.primaryColor,
+                          autofocus: false,
+                          enableSuggestions: true,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          cursorWidth: 3,
+                          cursorHeight: 31,
+                          cursorRadius: const Radius.circular(19),
+                          style: const TextStyle(
                               color: ColorsResources.premiumLight,
-                              fontSize: 21
+                              fontSize: 19,
+                              letterSpacing: 1.7,
+                              height: 1
+                          ),
+                          decoration: InputDecoration.collapsed(
+                            hintText: hint,
+                            hintStyle: const TextStyle(
+                                color: ColorsResources.premiumLight,
+                                fontSize: 21
                             ),
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: ColorsResources.blueGrayLight, width: 0.0),
-                                gapPadding: 5
-                            ),
-                            errorBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.transparent, width: 0.0),
-                                gapPadding: 5
-                            ),
-
-                        )
+                            border: InputBorder.none
+                          )
                       )
                   )
               )
