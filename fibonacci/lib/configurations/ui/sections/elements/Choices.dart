@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 9:58 AM
+ * Last modified 1/21/24, 10:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import 'package:widget_mask/widget_mask.dart';
 
 class Choices extends StatefulWidget {
 
-  String choiceInformation;
+  Map<String, Color> choiceInformation;
 
   bool choiceSelected = false;
 
@@ -59,9 +59,9 @@ class _ChoicesState extends State<Choices> {
                 height: 39,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(19),
-                    border: const GradientBoxBorder(
-                        gradient: LinearGradient(colors: [ColorsResources.premiumDark, ColorsResources.blackTransparent, ColorsResources.premiumDark]),
-                        width: 4
+                    border: GradientBoxBorder(
+                        gradient: LinearGradient(colors: [widget.choiceInformation.values.first, ColorsResources.blackTransparent, widget.choiceInformation.values.first]),
+                        width: 5
                     )
                 ),
                 child: Align(
@@ -69,7 +69,7 @@ class _ChoicesState extends State<Choices> {
                   child: Padding(
                       padding: const EdgeInsets.only(left: 19, right: 19),
                       child: Text(
-                        widget.choiceInformation,
+                        widget.choiceInformation.keys.first.toUpperCase(),
                         maxLines: 1,
                         style: const TextStyle(
                             color: ColorsResources.premiumLight,
@@ -93,7 +93,7 @@ class _ChoicesState extends State<Choices> {
                   child: Padding(
                       padding: const EdgeInsets.only(left: 19, right: 19),
                       child: Text(
-                        widget.choiceInformation,
+                        widget.choiceInformation.keys.first.toUpperCase(),
                         maxLines: 1,
                         style: const TextStyle(
                             color: ColorsResources.premiumLight,

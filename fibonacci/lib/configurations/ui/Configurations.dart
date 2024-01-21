@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 9:57 AM
+ * Last modified 1/21/24, 10:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -134,14 +134,44 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   color: Colors.transparent
                               ),
 
-                              pickerOptionsWidget(StringsResources.categoriesTitle(), ["one", "two", "three", "four", "five"], ["one", "two", "four"]),
+                              pickerOptionsWidget(StringsResources.colorsTagsTitle(),
+                                  [
+                                    {"One": Colors.transparent},
+                                    {"Two": Colors.transparent},
+                                    {"Three": Colors.transparent},
+                                    {"Four": Colors.transparent},
+                                    {"Five": Colors.transparent},
+                                    {"Six": Colors.transparent}
+                                  ],
+                                  [
+                                    {"Two": Colors.transparent},
+                                    {"Five": Colors.transparent},
+                                  ]
+                              ),
 
                               const Divider(
                                   height: 13,
                                   color: Colors.transparent
                               ),
 
-                              pickerOptionsWidget(StringsResources.colorsTagsTitle(), ["one", "two", "three", "four", "five"], ["one", "two", "four"]),
+                              pickerOptionsWidget(StringsResources.colorsTagsTitle(),
+                                  [
+                                    {"Orange": ColorsResources.orangePastel},
+                                    {"Yellow": ColorsResources.yellowPastel},
+                                    {"Green": ColorsResources.greenPastel},
+                                    {"Blue": ColorsResources.bluePastel},
+                                    {"Red": ColorsResources.redPastel},
+                                    {"Purple": ColorsResources.purplePastel}
+                                  ],
+                                  [
+                                    {"Orange": ColorsResources.orangePastel},
+                                    {"Yellow": ColorsResources.yellowPastel},
+                                    {"Green": ColorsResources.greenPastel},
+                                    {"Blue": ColorsResources.bluePastel},
+                                    {"Red": ColorsResources.redPastel},
+                                    {"Purple": ColorsResources.purplePastel}
+                                  ]
+                              ),
 
                             ]
                         ),
@@ -265,7 +295,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   }
 
   /// selectedChoice: CSV
-  Widget pickerOptionsWidget(String title, List<String> inputChoices, List<String> selectedChoices,
+  Widget pickerOptionsWidget(String title, List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
       {Color warningColor = ColorsResources.premiumLight}) {
 
     List<Widget> allChoices = [];
