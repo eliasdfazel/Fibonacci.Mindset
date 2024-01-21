@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 10:33 AM
+ * Last modified 1/21/24, 10:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,6 +28,7 @@ class _ChoicesState extends State<Choices> {
 
   Color backgroundColor = Colors.transparent;
 
+  Color borderColor = ColorsResources.premiumDark;
   Color textColor = ColorsResources.premiumLight;
 
   @override
@@ -44,12 +45,14 @@ class _ChoicesState extends State<Choices> {
 
     }
 
-    if (widget.choiceInformation.values.first != ColorsResources.premiumLight) {
+    if (widget.choiceInformation.values.first != ColorsResources.premiumDark) {
 
+      borderColor = widget.choiceInformation.values.first;
       textColor = widget.choiceInformation.values.first;
 
     } else {
 
+      borderColor = ColorsResources.premiumDark;
       textColor = ColorsResources.premiumLight;
 
     }
@@ -74,9 +77,9 @@ class _ChoicesState extends State<Choices> {
                     border: GradientBoxBorder(
                         gradient: LinearGradient(
                             colors: [
-                              widget.choiceInformation.values.first,
+                              borderColor,
                               ColorsResources.black,
-                              widget.choiceInformation.values.first
+                              borderColor
                             ]
                         ),
                         width: 5
@@ -101,9 +104,9 @@ class _ChoicesState extends State<Choices> {
                 height: 39,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  border: const Border.symmetric(
-                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                  border: Border.symmetric(
+                    horizontal: BorderSide(color: borderColor, width: 1),
+                    vertical: BorderSide(color: borderColor, width: 5),
                   ),
                 ),
                 child: Align(
