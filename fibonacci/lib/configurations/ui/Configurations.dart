@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 9:06 AM
+ * Last modified 1/21/24, 9:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -117,8 +117,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   color: Colors.transparent
                               ),
 
-                              optionsWidget(StringsResources.descriptionTitle(),
-                                  StringsResources.descriptionHint(),
+                              optionsWidget(StringsResources.locationTitle(),
+                                  StringsResources.locationHint(),
                                   descriptionController,
                                   warningColor: descriptionWarning),
 
@@ -226,14 +226,16 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           style: const TextStyle(
                               color: ColorsResources.premiumLight,
                               fontSize: 19,
-                              letterSpacing: 1.7
+                              letterSpacing: 1.7,
+                              height: 1.1
                           ),
                           decoration: InputDecoration.collapsed(
                             hintText: hint,
                             hintStyle: TextStyle(
                                 color: ColorsResources.premiumLight.withOpacity(0.51),
                                 fontSize: 19,
-                                letterSpacing: 1.7
+                                letterSpacing: 1.7,
+                                height: 1.1
                             ),
                             border: InputBorder.none
                           )
