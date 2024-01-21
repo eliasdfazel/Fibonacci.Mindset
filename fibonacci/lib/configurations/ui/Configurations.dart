@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 9:09 AM
+ * Last modified 1/21/24, 9:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 import 'package:blur/blur.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
+import 'package:fibonacci/configurations/ui/sections/elements/Choices.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
@@ -34,6 +35,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
   TextEditingController descriptionController = TextEditingController();
   Color descriptionWarning = ColorsResources.premiumLight;
+
+  TextEditingController locationController = TextEditingController();
+  Color locationWarning = ColorsResources.premiumLight;
+
+  String tagsSelected = "";
+  Color tagsWarning = ColorsResources.premiumLight;
 
   @override
   void initState() {
@@ -97,7 +104,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                             scrollDirection: Axis.vertical,
                             children: [
 
-                              optionsWidget(StringsResources.titleTitle(),
+                              textOptionsWidget(StringsResources.titleTitle(),
                                   StringsResources.titleHint(),
                                   titleController,
                                   warningColor: titleWarning),
@@ -107,7 +114,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                 color: Colors.transparent
                               ),
 
-                              optionsWidget(StringsResources.descriptionTitle(),
+                              textOptionsWidget(StringsResources.descriptionTitle(),
                                   StringsResources.descriptionHint(),
                                   descriptionController,
                                   warningColor: descriptionWarning),
@@ -117,15 +124,24 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                                   color: Colors.transparent
                               ),
 
-                              optionsWidget(StringsResources.locationTitle(),
+                              textOptionsWidget(StringsResources.locationTitle(),
                                   StringsResources.locationHint(),
-                                  descriptionController,
-                                  warningColor: descriptionWarning),
+                                  locationController,
+                                  warningColor: locationWarning),
 
                               const Divider(
                                   height: 37,
                                   color: Colors.transparent
                               ),
+
+                              pickerOptionsWidget(StringsResources.categoriesTitle(), ["one", "two", "three", "four", "five"], ["one", "two", "four"]),
+
+                              const Divider(
+                                  height: 13,
+                                  color: Colors.transparent
+                              ),
+
+                              pickerOptionsWidget(StringsResources.colorsTagsTitle(), ["one", "two", "three", "four", "five"], ["one", "two", "four"]),
 
                             ]
                         ),
@@ -155,7 +171,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
     );
   }
 
-  Widget optionsWidget(String title, String hint,
+  Widget textOptionsWidget(String title, String hint,
       TextEditingController titleController, {Color warningColor = ColorsResources.premiumLight}) {
 
     return Container(
@@ -239,6 +255,84 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                             ),
                             border: InputBorder.none
                           )
+                      )
+                  )
+              )
+
+            ]
+        )
+    );
+  }
+
+  /// selectedChoice: CSV
+  Widget pickerOptionsWidget(String title, List<String> inputChoices, List<String> selectedChoices,
+      {Color warningColor = ColorsResources.premiumLight}) {
+
+    List<Widget> allChoices = [];
+
+    for (var element in inputChoices) {
+
+      allChoices.add(Choices(choiceInformation: element, choiceSelected: selectedChoices.contains(element)));
+
+    }
+
+    return Container(
+        height: 103,
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: calculatePercentage(37, displayLogicalWidth(context)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  title,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: warningColor,
+                                      fontSize: 13,
+                                      letterSpacing: 1.7
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
+
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 73,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: const Border.symmetric(
+                            horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                            vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                          )
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(19),
+                        child: ListView(
+                          padding: const EdgeInsets.only(left: 19, right: 19),
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          children: allChoices
+                        )
                       )
                   )
               )

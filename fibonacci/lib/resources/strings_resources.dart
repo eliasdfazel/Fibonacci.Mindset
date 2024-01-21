@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 9:09 AM
+ * Last modified 1/21/24, 9:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,16 @@ class StringsResources {
   static String locationHint() {
 
     return  "Location Of Task";
+  }
+
+  static String categoriesTitle() {
+
+    return "Categories";
+  }
+
+  static String colorsTagsTitle() {
+
+    return "Colors Tags";
   }
   /*
    * End - Titles
