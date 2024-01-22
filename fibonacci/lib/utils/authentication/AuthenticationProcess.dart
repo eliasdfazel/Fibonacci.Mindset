@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 10:01 AM
+ * Last modified 1/22/24, 10:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,12 +15,12 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class AuthenticationsCallback {
-  void authenticationWithGoogleCompleted();
+  void authenticatedByGoogle();
 }
 
 class AuthenticationsProcess {
 
-  Future<UserCredential> startGoogleAuthentication() async {
+  Future<UserCredential> startGoogleAuthentication(AuthenticationsCallback authenticationsCallback) async {
     debugPrint("Start Google Authentication Process");
 
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -32,7 +32,11 @@ class AuthenticationsProcess {
       idToken: googleAuthentication?.idToken,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    var userCredentials =  await FirebaseAuth.instance.signInWithCredential(credential);
+
+    authenticationsCallback.authenticatedByGoogle();
+
+    return userCredentials;
   }
 
   void createProfiles(String emailAddress) {

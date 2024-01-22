@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 9:27 AM
+ * Last modified 1/22/24, 10:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,7 +40,7 @@ class _EntryConfigurationState extends State<EntryConfigurations> implements Aut
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
-    authenticationsProcess.startGoogleAuthentication();
+    authenticationsProcess.startGoogleAuthentication(this);
 
     requestNotificationPermission();
 
@@ -98,7 +98,7 @@ class _EntryConfigurationState extends State<EntryConfigurations> implements Aut
   }
 
   @override
-  void authenticationWithGoogleCompleted() {
+  void authenticatedByGoogle() {
 
     authenticationsProcess.createProfiles(FirebaseAuth.instance.currentUser!.email!);
 
