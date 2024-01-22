@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:01 PM
+ * Last modified 1/22/24, 12:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ class _ChoicesState extends State<Choices> {
 
     if (widget.choiceSelected) {
 
-      backgroundColor = widget.choiceInformation.values.first.withOpacity(0.37);
+      backgroundColor = widget.choiceInformation.values.first.withOpacity(0.73);
 
     }
 
