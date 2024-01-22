@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:43 PM
+ * Last modified 1/22/24, 12:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -245,6 +245,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
    */
   void retrieveAssets() async {
 
+    DocumentSnapshot rhythmDocumentSnapshot = await FirebaseFirestore.instance
+        .doc("/Fibonacci/Mindset/Profiles/${FirebaseAuth.instance.currentUser!.email!.toUpperCase()}/Rhythms/${widget.rhythmDataStructure!.documentId()}").get();
+
     /*
      * Start - Colors Tags
      */
@@ -265,12 +268,15 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       List<Map<String, Color>> selectedTagsColors = [];
 
-      DocumentSnapshot rhythmDocumentSnapshot = await FirebaseFirestore.instance
-          .doc("/Fibonacci/Mindset/Profiles/${FirebaseAuth.instance.currentUser!.email!.toUpperCase()}/Rhythms/${widget.rhythmDataStructure!.documentId()}").get();
-
       if (rhythmDocumentSnapshot.exists) {
 
+        List colorsTags = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskColorsTagsName].toString().split(",");
 
+        for (var element in colorsTags) {
+
+          selectedTagsColors.add(element as Map<String, Color>);
+
+        }
 
       }
 
@@ -289,7 +295,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
      * Start - Categories
      */
     FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
-        .get().then((DocumentSnapshot documentSnapshot) {
+        .get().then((DocumentSnapshot documentSnapshot) async {
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
 
@@ -304,6 +310,18 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       }
 
       List<Map<String, Color>> selectedCategories = [];
+
+      if (rhythmDocumentSnapshot.exists) {
+
+        List colorsTags = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskCategoriesName].toString().split(",");
+
+        for (var element in colorsTags) {
+
+          selectedCategories.add(element as Map<String, Color>);
+
+        }
+
+      }
 
       setState(() {
 
