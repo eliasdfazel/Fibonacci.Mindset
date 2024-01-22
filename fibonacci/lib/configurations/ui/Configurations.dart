@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 8:03 AM
+ * Last modified 1/22/24, 8:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -493,56 +493,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       ),
                       child: ListView(
                         controller: alarmsScrollController,
-                        padding: const EdgeInsets.only(left: 13, right: 13, top: 13, bottom: 13),
+                        padding: const EdgeInsets.only(left: 13, right: 13, top: 19, bottom: 19),
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         children: [
 
-                          Container(
-                            height: 37,
-                            color: Colors.deepPurple
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.green
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.deepPurple
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.greenAccent
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.deepPurple
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.cyan
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.deepPurple
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.black
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.orange
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.deepPurple
-                          ),
-                          Container(
-                              height: 37,
-                              color: Colors.yellowAccent
-                          ),
+                          inputAlarm(),
 
                           const Divider(
                             height: 13,
@@ -558,6 +515,304 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
             ]
         )
+    );
+  }
+
+  Widget inputAlarm() {
+
+    return SizedBox(
+      height: 39,
+      width: double.infinity,
+      child: Row(
+        children: [
+
+          Flexible(
+              fit: FlexFit.tight,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: Colors.transparent
+                  ),
+                  child: Stack(
+                    children: [
+
+                      WidgetMask(
+                          blendMode: BlendMode.srcIn,
+                          childSaveLayer: true,
+                          mask: Container(
+                              height: 39,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(19),
+                                  border: const GradientBoxBorder(
+                                      gradient: LinearGradient(
+                                          colors: [
+                                            ColorsResources.premiumDark,
+                                            ColorsResources.black,
+                                            ColorsResources.premiumDark
+                                          ]
+                                      ),
+                                      width: 5
+                                  )
+                              ),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(left: 19, right: 19),
+                                      child: Container()
+                                  )
+                              )
+                          ),
+                          child: Container(
+                              height: 39,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(19),
+                                border: const Border.symmetric(
+                                  horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                  vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                ),
+                              ),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(left: 19, right: 19),
+                                      child: Container()
+                                  )
+                              )
+                          )
+                      ),
+
+                      Align(
+                        alignment: Alignment.center,
+                        child: TextField(
+                            controller: titleController,
+                            maxLines: 1,
+                            textAlign: TextAlign.center,
+                            textDirection: TextDirection.ltr,
+                            textAlignVertical: TextAlignVertical.center,
+                            cursorColor: ColorsResources.primaryColor,
+                            autofocus: false,
+                            enableSuggestions: true,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            cursorWidth: 3,
+                            cursorHeight: 17,
+                            cursorRadius: const Radius.circular(19),
+                            style: const TextStyle(
+                                color: ColorsResources.premiumLight,
+                                fontSize: 13,
+                                letterSpacing: 1.7,
+                                height: 1.1
+                            ),
+                            decoration: InputDecoration.collapsed(
+                                hintText: StringsResources.duration(),
+                                hintStyle: TextStyle(
+                                    color: ColorsResources.premiumLight.withOpacity(0.51),
+                                    fontSize: 13,
+                                    letterSpacing: 1.7,
+                                    height: 1.1
+                                ),
+                                border: InputBorder.none
+                            )
+                        )
+                      )
+
+                    ]
+                  )
+              )
+          ),
+
+          Flexible(
+              fit: FlexFit.tight,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: Colors.transparent
+                  ),
+                  child: Stack(
+                      children: [
+
+                        WidgetMask(
+                            blendMode: BlendMode.srcIn,
+                            childSaveLayer: true,
+                            mask: Container(
+                                height: 39,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(19),
+                                    border: const GradientBoxBorder(
+                                        gradient: LinearGradient(
+                                            colors: [
+                                              ColorsResources.premiumDark,
+                                              ColorsResources.black,
+                                              ColorsResources.premiumDark
+                                            ]
+                                        ),
+                                        width: 5
+                                    )
+                                ),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(left: 19, right: 19),
+                                        child: Container()
+                                    )
+                                )
+                            ),
+                            child: Container(
+                                height: 39,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(19),
+                                  border: const Border.symmetric(
+                                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                  ),
+                                ),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(left: 19, right: 19),
+                                        child: Container()
+                                    )
+                                )
+                            )
+                        ),
+
+                        Align(
+                            alignment: Alignment.center,
+                            child: TextField(
+                                controller: titleController,
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                                textDirection: TextDirection.ltr,
+                                textAlignVertical: TextAlignVertical.center,
+                                cursorColor: ColorsResources.primaryColor,
+                                autofocus: false,
+                                enableSuggestions: true,
+                                keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
+                                cursorWidth: 3,
+                                cursorHeight: 17,
+                                cursorRadius: const Radius.circular(19),
+                                style: const TextStyle(
+                                    color: ColorsResources.premiumLight,
+                                    fontSize: 13,
+                                    letterSpacing: 1.7,
+                                    height: 1.1
+                                ),
+                                decoration: InputDecoration.collapsed(
+                                    hintText: StringsResources.repeat(),
+                                    hintStyle: TextStyle(
+                                        color: ColorsResources.premiumLight.withOpacity(0.51),
+                                        fontSize: 13,
+                                        letterSpacing: 1.7,
+                                        height: 1.1
+                                    ),
+                                    border: InputBorder.none
+                                )
+                            )
+                        )
+
+                      ]
+                  )
+              )
+          ),
+
+          Flexible(
+              fit: FlexFit.tight,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: Colors.transparent
+                  ),
+                  child: Stack(
+                      children: [
+
+                        WidgetMask(
+                            blendMode: BlendMode.srcIn,
+                            childSaveLayer: true,
+                            mask: Container(
+                                height: 39,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(19),
+                                    border: const GradientBoxBorder(
+                                        gradient: LinearGradient(
+                                            colors: [
+                                              ColorsResources.premiumDark,
+                                              ColorsResources.black,
+                                              ColorsResources.premiumDark
+                                            ]
+                                        ),
+                                        width: 5
+                                    )
+                                ),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(left: 19, right: 19),
+                                        child: Container()
+                                    )
+                                )
+                            ),
+                            child: Container(
+                                height: 39,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(19),
+                                  border: const Border.symmetric(
+                                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                  ),
+                                ),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(left: 19, right: 19),
+                                        child: Container()
+                                    )
+                                )
+                            )
+                        ),
+
+                        Align(
+                            alignment: Alignment.center,
+                            child: TextField(
+                                controller: titleController,
+                                maxLines: 1,
+                                textAlign: TextAlign.center,
+                                textDirection: TextDirection.ltr,
+                                textAlignVertical: TextAlignVertical.center,
+                                cursorColor: ColorsResources.primaryColor,
+                                autofocus: false,
+                                enableSuggestions: true,
+                                keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
+                                cursorWidth: 3,
+                                cursorHeight: 17,
+                                cursorRadius: const Radius.circular(19),
+                                style: const TextStyle(
+                                    color: ColorsResources.premiumLight,
+                                    fontSize: 13,
+                                    letterSpacing: 1.7,
+                                    height: 1.1
+                                ),
+                                decoration: InputDecoration.collapsed(
+                                    hintText: StringsResources.rest(),
+                                    hintStyle: TextStyle(
+                                        color: ColorsResources.premiumLight.withOpacity(0.51),
+                                        fontSize: 13,
+                                        letterSpacing: 1.7,
+                                        height: 1.1
+                                    ),
+                                    border: InputBorder.none
+                                )
+                            )
+                        )
+
+                      ]
+                  )
+              )
+          )
+
+        ]
+      )
     );
   }
 

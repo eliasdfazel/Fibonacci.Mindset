@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 12:45 PM
+ * Last modified 1/22/24, 8:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -73,6 +73,19 @@ class StringsResources {
   static String alarmsTitle() {
 
     return "Alarms";
+  }
+
+  static String duration() {
+
+    return "Duration";
+  }
+  static String repeat() {
+
+    return "Repeat";
+  }
+  static String rest() {
+
+    return "Rest";
   }
   /*
    * End - Titles
