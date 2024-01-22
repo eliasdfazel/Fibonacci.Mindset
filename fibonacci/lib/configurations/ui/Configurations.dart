@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:49 AM
+ * Last modified 1/22/24, 12:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -262,7 +262,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     });
 
-    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
+    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Priorities")
         .get().then((DocumentSnapshot documentSnapshot) {
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
@@ -280,7 +280,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       setState(() {
 
-        categoriesPlaceholder = pickerOptionsWidget(StringsResources.categoriesTitle(), allCategories, selectedCategories, tagsWarning);
+        categoriesPlaceholder = pickerOptionsWidget(StringsResources.prioritiesTitle(), allCategories, selectedCategories, tagsWarning);
 
       });
 
