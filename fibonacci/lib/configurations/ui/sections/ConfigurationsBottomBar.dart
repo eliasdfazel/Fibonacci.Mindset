@@ -2,53 +2,29 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 9:49 AM
+ * Last modified 1/22/24, 10:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:blur/blur.dart';
 import 'package:fibonacci/preferences/ui/Preferences.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
+import 'package:fibonacci/utils/actions/BottomBarActions.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:flutter/material.dart';
 
 class ConfigurationsBottomBarInterface extends StatefulWidget {
 
-  ConfigurationsBottomBarInterface({Key? key}) : super(key: key);
+  BottomBarActions bottomBarActions;
+
+  ConfigurationsBottomBarInterface({Key? key, required this.bottomBarActions}) : super(key: key);
 
   @override
   State<ConfigurationsBottomBarInterface> createState() => _ConfigurationsBottomBarInterfaceState();
 }
 class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomBarInterface> {
-
-  bool rhythmUpdated = false;
-
-  bool aInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-
-    navigatePopWithResult(context, rhythmUpdated);
-
-
-    return true;
-  }
-
-  @override
-  void dispose() {
-
-    BackButtonInterceptor.remove(aInterceptor);
-
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    BackButtonInterceptor.add(aInterceptor);
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +84,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                         child: InkWell(
                             onTap: () async {
 
-                              navigatePopWithResult(context, rhythmUpdated);
+                              widget.bottomBarActions.leftAction();
 
                             },
                             child: const Image(
@@ -143,7 +119,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                             child: InkWell(
                                 onTap: () async {
 
-
+                                  widget.bottomBarActions.centerAction();
 
                                 },
                                 child: const Image(

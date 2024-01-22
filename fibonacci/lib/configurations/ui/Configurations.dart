@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 9:48 AM
+ * Last modified 1/22/24, 10:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 import 'dart:convert';
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
@@ -18,7 +19,9 @@ import 'package:fibonacci/configurations/utils/query_helper.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
+import 'package:fibonacci/utils/actions/BottomBarActions.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
+import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -31,7 +34,7 @@ class ConfigurationsInterface extends StatefulWidget {
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BottomBarActions {
 
   Widget categoriesPlaceholder = Container();
   Widget colorsTagsPlaceholder = Container();
@@ -65,6 +68,15 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   /// Each Index Represent Alarm Data
   List<TextEditingController> alarmsRestInput = [];
 
+  bool rhythmUpdated = false;
+
+  bool aInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+
+    navigatePopWithResult(context, rhythmUpdated);
+
+    return true;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -75,6 +87,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
     alarmsPlaceholder = alarmsSetup(StringsResources.alarmsTitle(), alarmsWarning);
 
+  }
+
+  @override
+  void dispose() {
+
+    BackButtonInterceptor.remove(aInterceptor);
+
+    super.dispose();
   }
 
   @override
@@ -191,7 +211,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           alignment: Alignment.bottomCenter,
                           child: Padding(
                               padding: const EdgeInsets.only(bottom: 37),
-                              child: ConfigurationsBottomBarInterface()
+                              child: ConfigurationsBottomBarInterface(bottomBarActions: this)
                           )
                       )
                       /*
@@ -203,6 +223,23 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
             )
         )
     );
+  }
+
+  @override
+  void centerAction() {
+
+  }
+
+  @override
+  void leftAction() {
+
+    navigatePopWithResult(context, rhythmUpdated);
+
+  }
+
+  @override
+  void rightAction() {
+
   }
 
   /*
