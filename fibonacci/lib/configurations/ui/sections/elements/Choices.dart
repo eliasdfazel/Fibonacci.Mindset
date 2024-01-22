@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:52 AM
+ * Last modified 1/22/24, 12:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ class _ChoicesState extends State<Choices> {
 
     if (widget.choiceSelected) {
 
-      backgroundColor = ColorsResources.black.withOpacity(0.37);
+      backgroundColor = widget.choiceInformation.values.first.withOpacity(0.37);
 
     }
 
@@ -76,6 +76,23 @@ class _ChoicesState extends State<Choices> {
                     splashColor: ColorsResources.primaryColorDarker.withOpacity(0.37),
                     splashFactory: InkRipple.splashFactory,
                     onTap: () async {
+
+                      setState(() {
+
+                        if (widget.choiceSelected) {
+
+                          backgroundColor = Colors.transparent;
+                          widget.choiceSelected = false;
+
+                        } else {
+
+                          backgroundColor = widget.choiceInformation.values.first.withOpacity(0.37);
+                          widget.choiceSelected = true;
+
+                        }
+
+
+                      });
 
                     },
                     child: WidgetMask(
