@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 8:25 AM
+ * Last modified 1/22/24, 8:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,7 +54,16 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
   Widget alarmsPlaceholder = Container();
   Color alarmsWarning = ColorsResources.premiumLight;
 
-  ScrollController alarmsScrollController = ScrollController();
+  List<Widget> alarmsInputItems = [];
+
+  /// Each Index Represent Alarm Data
+  List<TextEditingController> alarmsDurationInput = [];
+
+  /// Each Index Represent Alarm Data
+  List<TextEditingController> alarmsRepeatInput = [];
+
+  /// Each Index Represent Alarm Data
+  List<TextEditingController> alarmsRestInput = [];
 
   @override
   void initState() {
@@ -64,7 +73,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
     retrieveAssets();
 
-    alarmsPlaceholder = alarmsInitial(StringsResources.alarmsTitle(), alarmsWarning);
+    alarmsPlaceholder = alarmsSetup(StringsResources.alarmsTitle(), alarmsWarning);
 
   }
 
@@ -426,7 +435,11 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
    * End - Assets
    */
 
-  Widget alarmsInitial(String title, Color warningColor) {
+  Widget alarmsSetup(String title, Color warningColor) {
+
+    alarmsInputItems.add(inputAlarm());
+    alarmsInputItems.add(const Divider(height: 13, color: Colors.transparent));
+    alarmsInputItems.add(addAlarm());
 
     return Container(
         padding: const EdgeInsets.only(left: 37, right: 37),
@@ -492,23 +505,11 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           )
                       ),
                       child: ListView(
-                        controller: alarmsScrollController,
                         padding: const EdgeInsets.only(left: 13, right: 13, top: 19, bottom: 19),
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        children: [
-
-                          inputAlarm(),
-
-                          const Divider(
-                            height: 13,
-                            color: Colors.transparent,
-                          ),
-
-                          addAlarm()
-
-                        ]
+                        children: alarmsInputItems
                       )
                   )
               )
@@ -833,7 +834,11 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                     splashFactory: InkRipple.splashFactory,
                     onTap: () async {
 
+                      setState(() {
 
+                        alarmsInputItems.add(inputAlarm());
+
+                      });
 
                     },
                     child: Container(
