@@ -2,7 +2,7 @@
   ~ Copyright © 2024 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 1/14/24, 8:20 AM
+  ~ Last modified 1/22/24, 11:45 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -24,8 +24,8 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:hardwareAccelerated="true">
 
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"

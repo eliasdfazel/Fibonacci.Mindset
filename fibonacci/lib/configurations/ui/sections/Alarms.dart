@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:39 AM
+ * Last modified 1/22/24, 11:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -112,10 +112,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
                             ),
                           )
                       ),
-                      child: ListView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
+                      child: Column(
                           children: alarmsInputItems
                       )
                   )
@@ -523,15 +520,13 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
   void insertAlarm() async {
 
-    alarmsDurationInput.add(TextEditingController());
-    alarmsRepeatInput.add(TextEditingController());
-    alarmsRestInput.add(TextEditingController());
-
-    alarmsInputItems.add(inputAlarm(alarmsDurationInput.first, alarmsRepeatInput.first, alarmsRestInput.first));
-
     setState(() {
 
-      alarmsInputItems;
+      alarmsDurationInput.add(TextEditingController());
+      alarmsRepeatInput.add(TextEditingController());
+      alarmsRestInput.add(TextEditingController());
+
+      alarmsInputItems.add(inputAlarm(alarmsDurationInput.last, alarmsRepeatInput.last, alarmsRestInput.last));
 
     });
 
