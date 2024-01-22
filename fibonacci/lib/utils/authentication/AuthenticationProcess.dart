@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 10:54 AM
+ * Last modified 1/22/24, 11:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@ class AuthenticationsProcess {
 
     FirebaseFirestore.instance.doc(profilesDocumentPath(emailAddress))
         .set({
-          emailAddress: emailAddress.toString()
+          'emailAddress': emailAddress.toString()
         });
 
   }
