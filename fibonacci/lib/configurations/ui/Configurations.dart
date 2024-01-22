@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:16 PM
+ * Last modified 1/22/24, 12:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -248,7 +248,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
 
       List<Map<String, Color>> allTagsColors = [];
-      List<Map<String, Color>> selectedTagsColors = [];
 
       for (var element in colorsTagsList) {
 
@@ -257,6 +256,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         allTagsColors.add({colorTag.keys.first: convertToColor(colorTag.values.first)});
 
       }
+
+      List<Map<String, Color>> selectedTagsColors = [];
 
       setState(() {
 
@@ -272,7 +273,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
 
       List<Map<String, Color>> allCategories = [];
-      List<Map<String, Color>> selectedCategories = [];
 
       for (var element in colorsTagsList) {
 
@@ -281,6 +281,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         allCategories.add({category.keys.first: ColorsResources.premiumDark});
 
       }
+
+      List<Map<String, Color>> selectedCategories = [];
 
       setState(() {
 
