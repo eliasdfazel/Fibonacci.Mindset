@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 8:34 AM
+ * Last modified 1/22/24, 9:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -437,8 +437,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
   Widget alarmsSetup(String title, Color warningColor) {
 
-    alarmsInputItems.add(inputAlarm());
+    alarmsDurationInput.add(TextEditingController());
+    alarmsRepeatInput.add(TextEditingController());
+    alarmsRestInput.add(TextEditingController());
+
+    alarmsInputItems.add(inputAlarm(alarmsDurationInput.first, alarmsRepeatInput.first, alarmsRestInput.first));
+
     alarmsInputItems.add(const Divider(height: 13, color: Colors.transparent));
+
     alarmsInputItems.add(addAlarm());
 
     return Container(
@@ -519,7 +525,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
     );
   }
 
-  Widget inputAlarm() {
+  Widget inputAlarm(TextEditingController alarmDurationInput, TextEditingController alarmRepeatInput, TextEditingController alarmRestInput) {
 
     return SizedBox(
       height: 39,
@@ -585,7 +591,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       Align(
                         alignment: Alignment.center,
                         child: TextField(
-                            controller: titleController,
+                            controller: alarmDurationInput,
                             maxLines: 1,
                             textAlign: TextAlign.center,
                             textDirection: TextDirection.ltr,
@@ -600,7 +606,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                             cursorRadius: const Radius.circular(19),
                             style: const TextStyle(
                                 color: ColorsResources.premiumLight,
-                                fontSize: 13,
+                                fontSize: 12,
                                 letterSpacing: 1.7,
                                 height: 1.1
                             ),
@@ -680,7 +686,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                         Align(
                             alignment: Alignment.center,
                             child: TextField(
-                                controller: titleController,
+                                controller: alarmRepeatInput,
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
@@ -775,7 +781,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                         Align(
                             alignment: Alignment.center,
                             child: TextField(
-                                controller: titleController,
+                                controller: alarmRestInput,
                                 maxLines: 1,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
@@ -817,6 +823,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
     );
   }
 
+  /// Add + Button
   Widget addAlarm() {
 
     return SizedBox(
@@ -834,9 +841,23 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                     splashFactory: InkRipple.splashFactory,
                     onTap: () async {
 
+                      alarmsDurationInput.add(TextEditingController());
+                      alarmsRepeatInput.add(TextEditingController());
+                      alarmsRestInput.add(TextEditingController());
+
                       setState(() {
 
-                        alarmsInputItems.add(inputAlarm());
+                        print("Length Controller: ${alarmsDurationInput.length}");
+
+                        //alarmsInputItems.removeAt((alarmsInputItems.length - 1));
+
+                        alarmsInputItems.add(inputAlarm(alarmsDurationInput.last, alarmsRepeatInput.last, alarmsRestInput.last));
+
+                        alarmsInputItems.add(const Divider(height: 13, color: Colors.transparent));
+
+                        print("Length Items: ${alarmsInputItems.length}");
+
+                  //      alarmsInputItems.add(addAlarm());
 
                       });
 

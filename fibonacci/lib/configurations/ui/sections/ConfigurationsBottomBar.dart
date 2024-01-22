@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 9:16 AM
+ * Last modified 1/22/24, 9:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,6 @@
 
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:blur/blur.dart';
-import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/preferences/ui/Preferences.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
@@ -99,7 +98,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                 */
 
                 /*
-                * Start - Profile
+                * Start - Back
                 */
                 Align(
                     alignment: Alignment.centerLeft,
@@ -119,7 +118,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                     )
                 ),
                 /*
-                * End - Profile
+                * End - Back
                 */
 
                 /*
@@ -144,7 +143,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                             child: InkWell(
                                 onTap: () async {
 
-                                  navigateTo(context, ConfigurationsInterface());
+
 
                                 },
                                 child: const Image(
