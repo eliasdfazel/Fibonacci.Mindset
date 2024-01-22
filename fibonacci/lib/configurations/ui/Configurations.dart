@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:34 AM
+ * Last modified 1/22/24, 11:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,6 +52,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   String colorsSelected = "";
   Color colorsWarning = ColorsResources.premiumLight;
+
+  AlarmsInterface alarmsInterface = AlarmsInterface();
 
   bool rhythmUpdated = false;
 
@@ -224,7 +226,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
               color: Colors.transparent
           ),
 
-          AlarmsInterface(),
+          alarmsInterface
 
         ]
     );

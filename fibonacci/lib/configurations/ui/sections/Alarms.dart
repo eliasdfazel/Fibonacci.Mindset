@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:45 AM
+ * Last modified 1/22/24, 11:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,15 +18,6 @@ class AlarmsInterface extends StatefulWidget {
 
   AlarmsInterface({Key? key}) : super(key: key);
 
-  @override
-  State<AlarmsInterface> createState() => _AlarmInterfaceState();
-}
-class _AlarmInterfaceState extends State<AlarmsInterface> {
-
-  Color alarmsWarning = ColorsResources.premiumLight;
-
-  Widget alarmsListPlaceholder = Container();
-
   List<Widget> alarmsInputItems = [];
 
   /// Each Index Represent Alarm Data
@@ -37,6 +28,15 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
   /// Each Index Represent Alarm Data
   List<TextEditingController> alarmsRestInput = [];
+
+  @override
+  State<AlarmsInterface> createState() => _AlarmInterfaceState();
+}
+class _AlarmInterfaceState extends State<AlarmsInterface> {
+
+  Color alarmsWarning = ColorsResources.premiumLight;
+
+  Widget alarmsListPlaceholder = Container();
 
   @override
   void initState() {
@@ -113,7 +113,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
                           )
                       ),
                       child: Column(
-                          children: alarmsInputItems
+                          children: widget.alarmsInputItems
                       )
                   )
               ),
@@ -522,11 +522,11 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     setState(() {
 
-      alarmsDurationInput.add(TextEditingController());
-      alarmsRepeatInput.add(TextEditingController());
-      alarmsRestInput.add(TextEditingController());
+      widget.alarmsDurationInput.add(TextEditingController());
+      widget.alarmsRepeatInput.add(TextEditingController());
+      widget.alarmsRestInput.add(TextEditingController());
 
-      alarmsInputItems.add(inputAlarm(alarmsDurationInput.last, alarmsRepeatInput.last, alarmsRestInput.last));
+      widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
 
     });
 

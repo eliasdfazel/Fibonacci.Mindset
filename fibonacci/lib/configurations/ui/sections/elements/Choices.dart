@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 8:13 AM
+ * Last modified 1/22/24, 11:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -67,62 +67,76 @@ class _ChoicesState extends State<Choices> {
                 borderRadius: BorderRadius.circular(19),
                 color: backgroundColor
           ),
-          child: WidgetMask(
-            blendMode: BlendMode.srcIn,
-            childSaveLayer: true,
-            mask: Container(
-                height: 39,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(19),
-                    border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                            colors: [
-                              borderColor,
-                              ColorsResources.black,
-                              borderColor
-                            ]
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(19),
+            child: Material(
+                shadowColor: Colors.transparent,
+                color: Colors.transparent,
+                child: InkWell(
+                    splashColor: ColorsResources.primaryColorDarker.withOpacity(0.37),
+                    splashFactory: InkRipple.splashFactory,
+                    onTap: () async {
+
+                    },
+                    child: WidgetMask(
+                        blendMode: BlendMode.srcIn,
+                        childSaveLayer: true,
+                        mask: Container(
+                            height: 39,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(19),
+                                border: GradientBoxBorder(
+                                    gradient: LinearGradient(
+                                        colors: [
+                                          borderColor,
+                                          ColorsResources.black,
+                                          borderColor
+                                        ]
+                                    ),
+                                    width: 5
+                                )
+                            ),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(left: 19, right: 19),
+                                  child: Text(
+                                    widget.choiceInformation.keys.first.toUpperCase(),
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 15
+                                    ),
+                                  )
+                              ),
+                            )
                         ),
-                        width: 5
-                    )
-                ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 19, right: 19),
-                      child: Text(
-                        widget.choiceInformation.keys.first.toUpperCase(),
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: textColor,
-                            fontSize: 15
-                        ),
-                      )
-                  ),
-                )
-            ),
-            child: Container(
-                height: 39,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(19),
-                  border: Border.symmetric(
-                    horizontal: BorderSide(color: borderColor, width: 1),
-                    vertical: BorderSide(color: borderColor, width: 5),
-                  ),
-                ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 19, right: 19),
-                      child: Text(
-                        widget.choiceInformation.keys.first.toUpperCase(),
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: textColor,
-                            fontSize: 15
+                        child: Container(
+                            height: 39,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(19),
+                              border: Border.symmetric(
+                                horizontal: BorderSide(color: borderColor, width: 1),
+                                vertical: BorderSide(color: borderColor, width: 5),
+                              ),
+                            ),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                    padding: const EdgeInsets.only(left: 19, right: 19),
+                                    child: Text(
+                                        widget.choiceInformation.keys.first.toUpperCase(),
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                            color: textColor,
+                                            fontSize: 15
+                                        )
+                                    )
+                                )
+                            )
                         )
-                      )
-                  )
-                )
+                    )
+              )
             )
           )
         )
