@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:10 PM
+ * Last modified 1/22/24, 12:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,6 +52,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   String colorsSelected = "";
   Color colorsWarning = ColorsResources.premiumLight;
+
+  List<Choices> allColorsTagsChoices = [];
+
+  List<Choices> allPrioritiesChoices = [];
 
   AlarmsInterface alarmsInterface = AlarmsInterface();
 
@@ -256,7 +260,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       setState(() {
 
-        colorsTagsPlaceholder = pickerOptionsWidget(StringsResources.colorsTagsTitle(), allTagsColors, selectedTagsColors, colorsWarning);
+        colorsTagsPlaceholder = colorsTagsOptionsWidget(StringsResources.colorsTagsTitle(), allTagsColors, selectedTagsColors, colorsWarning);
 
       });
 
@@ -280,7 +284,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       setState(() {
 
-        categoriesPlaceholder = pickerOptionsWidget(StringsResources.prioritiesTitle(), allCategories, selectedCategories, tagsWarning);
+        categoriesPlaceholder = prioritiesOptionsWidget(StringsResources.prioritiesTitle(), allCategories, selectedCategories, tagsWarning);
 
       });
 
@@ -382,15 +386,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   }
 
   /// selectedChoice: CSV
-  Widget pickerOptionsWidget(String title,
+  Widget prioritiesOptionsWidget(String title,
       List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
       Color warningColor) {
 
-    List<Widget> allChoices = [];
-
     for (var element in inputChoices) {
 
-      allChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+      allPrioritiesChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 
     }
 
@@ -449,8 +451,84 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                           padding: const EdgeInsets.only(left: 19, right: 19),
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          children: allChoices
+                          children: allPrioritiesChoices
                         )
+                      )
+                  )
+              )
+
+            ]
+        )
+    );
+  }
+
+  Widget colorsTagsOptionsWidget(String title,
+      List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
+      Color warningColor) {
+
+    for (var element in inputChoices) {
+
+      allColorsTagsChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+
+    }
+
+    return Container(
+        height: 103,
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: 173,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  title,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: warningColor,
+                                      fontSize: 13,
+                                      letterSpacing: 1.7
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
+
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 73,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: const Border.symmetric(
+                            horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                            vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                          )
+                      ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(19),
+                          child: ListView(
+                              padding: const EdgeInsets.only(left: 19, right: 19),
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              children: allColorsTagsChoices
+                          )
                       )
                   )
               )
