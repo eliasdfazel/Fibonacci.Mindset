@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:26 PM
+ * Last modified 1/22/24, 12:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,7 +50,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     switch (widget.categorizedBy) {
       case CategorizedBy.categories: {
 
-        categoryName = widget.rhythmsDataStructures.first.taskPriorities();
+        categoryName = widget.rhythmsDataStructures.first.taskCategories();
 
         break;
       }

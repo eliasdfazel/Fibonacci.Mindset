@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:40 PM
+ * Last modified 1/22/24, 12:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   List<Choices> allColorsTagsChoices = [];
 
-  List<Choices> allPrioritiesChoices = [];
+  List<Choices> allCategoriesChoices = [];
 
   AlarmsInterface alarmsInterface = AlarmsInterface();
 
@@ -245,6 +245,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
    */
   void retrieveAssets() async {
 
+    /*
+     * Start - Colors Tags
+     */
     FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Colors")
         .get().then((DocumentSnapshot documentSnapshot) async {
 
@@ -278,8 +281,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       });
 
     });
+    /*
+     * End - Colors Tags
+     */
 
-    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Priorities")
+    /*
+     * Start - Categories
+     */
+    FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
         .get().then((DocumentSnapshot documentSnapshot) {
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
@@ -298,12 +307,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       setState(() {
 
-        categoriesPlaceholder = prioritiesOptionsWidget(StringsResources.prioritiesTitle(), allCategories, selectedCategories, tagsWarning);
+        categoriesPlaceholder = categoriesOptionsWidget(StringsResources.categoriesTitle(), allCategories, selectedCategories, tagsWarning);
 
       });
 
     });
-
+    /*
+     * End - Categories
+     */
   }
 
   Widget textOptionsWidget(String title, String hint,
@@ -400,13 +411,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   }
 
   /// selectedChoice: CSV
-  Widget prioritiesOptionsWidget(String title,
+  Widget categoriesOptionsWidget(String title,
       List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
       Color warningColor) {
 
     for (var element in inputChoices) {
 
-      allPrioritiesChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+      allCategoriesChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 
     }
 
@@ -465,7 +476,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                           padding: const EdgeInsets.only(left: 19, right: 19),
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          children: allPrioritiesChoices
+                          children: allCategoriesChoices
                         )
                       )
                   )

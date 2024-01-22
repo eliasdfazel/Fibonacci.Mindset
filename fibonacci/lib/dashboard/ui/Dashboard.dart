@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:35 PM
+ * Last modified 1/22/24, 12:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -146,12 +146,12 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
     int categoryPreferences = await preferencesIO.retrieveCategorizedBy();
 
-    String categorizedBy = RhythmDataStructure.taskPrioritiesName;
+    String categorizedBy = RhythmDataStructure.taskCategoriesName;
 
     switch (categoryPreferences) {
       case CategorizedBy.categories: {
 
-        categorizedBy = RhythmDataStructure.taskPrioritiesName;
+        categorizedBy = RhythmDataStructure.taskCategoriesName;
 
         break;
       }
@@ -197,7 +197,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
       switch (categorizedBy) {
         case CategorizedBy.categories: {
 
-          (allRhythmsWidget[rhythmDataStructure.taskPriorities()] ??= []).add(rhythmDataStructure);
+          (allRhythmsWidget[rhythmDataStructure.taskCategories()] ??= []).add(rhythmDataStructure);
 
           break;
         }

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:33 PM
+ * Last modified 1/22/24, 12:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ class RhythmDataStructure {
 
   static const String taskLocationName = "taskLocation";
 
-  static const String taskPrioritiesName = "taskPriorities";
+  static const String taskCategoriesName = "taskCategories";
   static const String taskColorsTagsName = "taskColorsTags";
 
   /// JSON Format
@@ -53,9 +53,9 @@ class RhythmDataStructure {
     return rhythmDocumentData[RhythmDataStructure.taskLocationName];
   }
 
-  String taskPriorities() {
+  String taskCategories() {
 
-    return rhythmDocumentData[RhythmDataStructure.taskPrioritiesName];
+    return rhythmDocumentData[RhythmDataStructure.taskCategoriesName];
   }
 
   String taskColorsTags() {
@@ -71,13 +71,13 @@ class RhythmDataStructure {
 
 }
 
-Map<String, dynamic> rhythmDocument(String taskTitle, String taskDescription, String taskLocation, String taskPriorities, String taskColorsTags, String taskAlarmsConfigurations) {
+Map<String, dynamic> rhythmDocument(String taskTitle, String taskDescription, String taskLocation, String taskCategories, String taskColorsTags, String taskAlarmsConfigurations) {
 
   return {
     "taskTitle": taskTitle,
     "taskDescription": taskDescription,
     "taskLocation": taskLocation,
-    "taskPriorities": taskPriorities,
+    "taskCategories": taskCategories,
     "taskColorsTags": taskColorsTags,
     "taskAlarmsConfigurations": taskAlarmsConfigurations,
   };
