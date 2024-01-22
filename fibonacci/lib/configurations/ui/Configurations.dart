@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 7:43 AM
+ * Last modified 1/22/24, 8:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,8 @@ import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:widget_mask/widget_mask.dart';
 
 class ConfigurationsInterface extends StatefulWidget {
 
@@ -425,6 +427,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
    */
 
   Widget alarmsInitial(String title, Color warningColor) {
+
     return Container(
         padding: const EdgeInsets.only(left: 37, right: 37),
         child: Column(
@@ -490,7 +493,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                       ),
                       child: ListView(
                         controller: alarmsScrollController,
-                        padding: const EdgeInsets.only(left: 19, right: 19),
+                        padding: const EdgeInsets.only(left: 13, right: 13, top: 13, bottom: 13),
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
@@ -526,7 +529,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                           ),
                           Container(
                               height: 37,
-                              color: Colors.deepPurple
+                              color: Colors.black
                           ),
                           Container(
                               height: 37,
@@ -541,6 +544,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                               color: Colors.yellowAccent
                           ),
 
+                          const Divider(
+                            height: 13,
+                            color: Colors.transparent,
+                          ),
+
+                          addAlarm()
+
                         ]
                       )
                   )
@@ -550,4 +560,96 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
         )
     );
   }
+
+  Widget addAlarm() {
+
+    return SizedBox(
+      height: 39,
+      width: double.infinity,
+      child: Align(
+          alignment: Alignment.centerLeft,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(19),
+            child: Material(
+                shadowColor: Colors.transparent,
+                color: Colors.transparent,
+                child: InkWell(
+                    splashColor: ColorsResources.premiumLight.withOpacity(0.73),
+                    splashFactory: InkRipple.splashFactory,
+                    onTap: () async {
+
+
+
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            color: Colors.transparent
+                        ),
+                        child: WidgetMask(
+                            blendMode: BlendMode.srcIn,
+                            childSaveLayer: true,
+                            mask: Container(
+                                height: 39,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(19),
+                                    border: const GradientBoxBorder(
+                                        gradient: LinearGradient(
+                                            colors: [
+                                              ColorsResources.premiumDark,
+                                              ColorsResources.black,
+                                              ColorsResources.premiumDark
+                                            ]
+                                        ),
+                                        width: 5
+                                    )
+                                ),
+                                child: const Align(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                      padding: EdgeInsets.only(left: 19, right: 19),
+                                      child: Text(
+                                        "+",
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                            color: ColorsResources.premiumLight,
+                                            fontSize: 19
+                                        ),
+                                      )
+                                  ),
+                                )
+                            ),
+                            child: Container(
+                                height: 39,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(19),
+                                  border: const Border.symmetric(
+                                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                  ),
+                                ),
+                                child: const Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                        padding: EdgeInsets.only(left: 19, right: 19),
+                                        child: Text(
+                                            "+",
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                                color: ColorsResources.premiumLight,
+                                                fontSize: 19
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+              )
+            )
+          )
+      ),
+    );
+  }
+
 }
