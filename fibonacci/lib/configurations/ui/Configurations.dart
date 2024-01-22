@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 12:52 PM
+ * Last modified 1/22/24, 7:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,7 +51,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
 
   Widget alarmsPlaceholder = Container();
   Color alarmsWarning = ColorsResources.premiumLight;
-  
+
+  ScrollController alarmsScrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -423,7 +425,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
    */
 
   Widget alarmsInitial(String title, Color warningColor) {
-
     return Container(
         padding: const EdgeInsets.only(left: 37, right: 37),
         child: Column(
@@ -464,7 +465,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
               Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      height: 173,
                       padding: const EdgeInsets.only(left: 13, right: 13),
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
@@ -488,7 +488,61 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> {
                             ),
                           )
                       ),
-                      child: Container()
+                      child: ListView(
+                        controller: alarmsScrollController,
+                        padding: const EdgeInsets.only(left: 19, right: 19),
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        children: [
+
+                          Container(
+                            height: 37,
+                            color: Colors.deepPurple
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.green
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.deepPurple
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.greenAccent
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.deepPurple
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.cyan
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.deepPurple
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.deepPurple
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.orange
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.deepPurple
+                          ),
+                          Container(
+                              height: 37,
+                              color: Colors.yellowAccent
+                          ),
+
+                        ]
+                      )
                   )
               )
 
