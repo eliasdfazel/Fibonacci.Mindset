@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 10:03 AM
+ * Last modified 1/22/24, 10:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,8 +54,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   String colorsSelected = "";
   Color colorsWarning = ColorsResources.premiumLight;
 
-  Widget alarmsPlaceholder = Container();
   Color alarmsWarning = ColorsResources.premiumLight;
+
+  Widget alarmsItemsPlaceholder = Container();
 
   List<Widget> alarmsInputItems = [];
 
@@ -84,8 +85,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
     retrieveAssets();
-
-    alarmsPlaceholder = alarmsSetup(StringsResources.alarmsTitle(), alarmsWarning);
 
   }
 
@@ -145,60 +144,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                        */
                       Padding(
                         padding: const EdgeInsets.only(bottom: 73),
-                        child: ListView(
-                            padding: const EdgeInsets.only(top: 73, bottom: 103),
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            children: [
-
-                              textOptionsWidget(StringsResources.titleTitle(),
-                                  StringsResources.titleHint(),
-                                  titleController,
-                                  titleWarning),
-
-                              const Divider(
-                                height: 13,
-                                color: Colors.transparent
-                              ),
-
-                              textOptionsWidget(StringsResources.descriptionTitle(),
-                                  StringsResources.descriptionHint(),
-                                  descriptionController,
-                                  descriptionWarning),
-
-                              const Divider(
-                                  height: 13,
-                                  color: Colors.transparent
-                              ),
-
-                              textOptionsWidget(StringsResources.locationTitle(),
-                                  StringsResources.locationHint(),
-                                  locationController,
-                                  locationWarning),
-
-                              const Divider(
-                                  height: 37,
-                                  color: Colors.transparent
-                              ),
-
-                              categoriesPlaceholder,
-
-                              const Divider(
-                                  height: 13,
-                                  color: Colors.transparent
-                              ),
-
-                              colorsTagsPlaceholder,
-
-                              const Divider(
-                                  height: 37,
-                                  color: Colors.transparent
-                              ),
-
-                              alarmsPlaceholder
-
-                            ]
-                        ),
+                        child: setupContentWrapper()
                       ),
                       /*
                        * End - Options
@@ -239,6 +185,67 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   @override
   void rightAction() {
+
+  }
+
+  Widget setupContentWrapper() {
+
+    return ListView(
+        padding: const EdgeInsets.only(top: 73, bottom: 103),
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        children: [
+
+          textOptionsWidget(StringsResources.titleTitle(),
+              StringsResources.titleHint(),
+              titleController,
+              titleWarning),
+
+          const Divider(
+              height: 13,
+              color: Colors.transparent
+          ),
+
+          textOptionsWidget(StringsResources.descriptionTitle(),
+              StringsResources.descriptionHint(),
+              descriptionController,
+              descriptionWarning),
+
+          const Divider(
+              height: 13,
+              color: Colors.transparent
+          ),
+
+          textOptionsWidget(StringsResources.locationTitle(),
+              StringsResources.locationHint(),
+              locationController,
+              locationWarning),
+
+          const Divider(
+              height: 37,
+              color: Colors.transparent
+          ),
+
+          categoriesPlaceholder,
+
+          const Divider(
+              height: 13,
+              color: Colors.transparent
+          ),
+
+          colorsTagsPlaceholder,
+
+          const Divider(
+              height: 37,
+              color: Colors.transparent
+          ),
+
+          alarmsSetup(StringsResources.alarmsTitle(), alarmsWarning),
+
+          addAlarm()
+
+        ]
+    );
 
   }
 
@@ -480,10 +487,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     alarmsInputItems.add(inputAlarm(alarmsDurationInput.first, alarmsRepeatInput.first, alarmsRestInput.first));
 
-    alarmsInputItems.add(const Divider(height: 13, color: Colors.transparent));
-
-    alarmsInputItems.add(addAlarm());
-
     return Container(
         padding: const EdgeInsets.only(left: 37, right: 37),
         child: Column(
@@ -524,7 +527,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
               Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      padding: const EdgeInsets.only(left: 13, right: 13),
+                      padding: const EdgeInsets.only(top: 13, left: 13, right: 13),
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(19),
@@ -548,11 +551,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                           )
                       ),
                       child: ListView(
-                        padding: const EdgeInsets.only(left: 13, right: 13, top: 19, bottom: 19),
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        children: alarmsInputItems
+                          physics: const NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          children: alarmsInputItems
                       )
                   )
               )
@@ -564,298 +566,301 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   Widget inputAlarm(TextEditingController alarmDurationInput, TextEditingController alarmRepeatInput, TextEditingController alarmRestInput) {
 
-    return SizedBox(
-      height: 39,
-      width: double.infinity,
-      child: Row(
-        children: [
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 13),
+      child: SizedBox(
+          height: 39,
+          width: double.infinity,
+          child: Row(
+              children: [
 
-          Flexible(
-              fit: FlexFit.tight,
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.transparent
-                  ),
-                  child: Stack(
-                    children: [
+                Flexible(
+                    fit: FlexFit.tight,
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            color: Colors.transparent
+                        ),
+                        child: Stack(
+                            children: [
 
-                      WidgetMask(
-                          blendMode: BlendMode.srcIn,
-                          childSaveLayer: true,
-                          mask: Container(
-                              height: 39,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(19),
-                                  border: const GradientBoxBorder(
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            ColorsResources.premiumDark,
-                                            ColorsResources.black,
-                                            ColorsResources.premiumDark
-                                          ]
+                              WidgetMask(
+                                  blendMode: BlendMode.srcIn,
+                                  childSaveLayer: true,
+                                  mask: Container(
+                                      height: 39,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(19),
+                                          border: const GradientBoxBorder(
+                                              gradient: LinearGradient(
+                                                  colors: [
+                                                    ColorsResources.premiumDark,
+                                                    ColorsResources.black,
+                                                    ColorsResources.premiumDark
+                                                  ]
+                                              ),
+                                              width: 5
+                                          )
                                       ),
-                                      width: 5
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(left: 19, right: 19),
+                                              child: Container()
+                                          )
+                                      )
+                                  ),
+                                  child: Container(
+                                      height: 39,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        border: const Border.symmetric(
+                                          horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                          vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                        ),
+                                      ),
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(left: 19, right: 19),
+                                              child: Container()
+                                          )
+                                      )
                                   )
                               ),
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                      padding: const EdgeInsets.only(left: 19, right: 19),
-                                      child: Container()
+
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: TextField(
+                                      controller: alarmDurationInput,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.ltr,
+                                      textAlignVertical: TextAlignVertical.center,
+                                      cursorColor: ColorsResources.primaryColor,
+                                      autofocus: false,
+                                      enableSuggestions: true,
+                                      keyboardType: TextInputType.number,
+                                      textInputAction: TextInputAction.next,
+                                      cursorWidth: 3,
+                                      cursorHeight: 17,
+                                      cursorRadius: const Radius.circular(19),
+                                      style: const TextStyle(
+                                          color: ColorsResources.premiumLight,
+                                          fontSize: 13,
+                                          letterSpacing: 1.7,
+                                          height: 1.1
+                                      ),
+                                      decoration: InputDecoration.collapsed(
+                                          hintText: StringsResources.duration(),
+                                          hintStyle: TextStyle(
+                                              color: ColorsResources.premiumLight.withOpacity(0.51),
+                                              fontSize: 13,
+                                              letterSpacing: 1.7,
+                                              height: 1.1
+                                          ),
+                                          border: InputBorder.none
+                                      )
                                   )
                               )
-                          ),
-                          child: Container(
-                              height: 39,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(19),
-                                border: const Border.symmetric(
-                                  horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                                  vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
-                                ),
+
+                            ]
+                        )
+                    )
+                ),
+
+                Flexible(
+                    fit: FlexFit.tight,
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            color: Colors.transparent
+                        ),
+                        child: Stack(
+                            children: [
+
+                              WidgetMask(
+                                  blendMode: BlendMode.srcIn,
+                                  childSaveLayer: true,
+                                  mask: Container(
+                                      height: 39,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(19),
+                                          border: const GradientBoxBorder(
+                                              gradient: LinearGradient(
+                                                  colors: [
+                                                    ColorsResources.premiumDark,
+                                                    ColorsResources.black,
+                                                    ColorsResources.premiumDark
+                                                  ]
+                                              ),
+                                              width: 5
+                                          )
+                                      ),
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(left: 19, right: 19),
+                                              child: Container()
+                                          )
+                                      )
+                                  ),
+                                  child: Container(
+                                      height: 39,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        border: const Border.symmetric(
+                                          horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                          vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                        ),
+                                      ),
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(left: 19, right: 19),
+                                              child: Container()
+                                          )
+                                      )
+                                  )
                               ),
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                      padding: const EdgeInsets.only(left: 19, right: 19),
-                                      child: Container()
+
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: TextField(
+                                      controller: alarmRepeatInput,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.ltr,
+                                      textAlignVertical: TextAlignVertical.center,
+                                      cursorColor: ColorsResources.primaryColor,
+                                      autofocus: false,
+                                      enableSuggestions: true,
+                                      keyboardType: TextInputType.number,
+                                      textInputAction: TextInputAction.next,
+                                      cursorWidth: 3,
+                                      cursorHeight: 17,
+                                      cursorRadius: const Radius.circular(19),
+                                      style: const TextStyle(
+                                          color: ColorsResources.premiumLight,
+                                          fontSize: 13,
+                                          letterSpacing: 1.7,
+                                          height: 1.1
+                                      ),
+                                      decoration: InputDecoration.collapsed(
+                                          hintText: StringsResources.repeat(),
+                                          hintStyle: TextStyle(
+                                              color: ColorsResources.premiumLight.withOpacity(0.51),
+                                              fontSize: 13,
+                                              letterSpacing: 1.7,
+                                              height: 1.1
+                                          ),
+                                          border: InputBorder.none
+                                      )
                                   )
                               )
-                          )
-                      ),
 
-                      Align(
-                        alignment: Alignment.center,
-                        child: TextField(
-                            controller: alarmDurationInput,
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                            textDirection: TextDirection.ltr,
-                            textAlignVertical: TextAlignVertical.center,
-                            cursorColor: ColorsResources.primaryColor,
-                            autofocus: false,
-                            enableSuggestions: true,
-                            keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
-                            cursorWidth: 3,
-                            cursorHeight: 17,
-                            cursorRadius: const Radius.circular(19),
-                            style: const TextStyle(
-                                color: ColorsResources.premiumLight,
-                                fontSize: 12,
-                                letterSpacing: 1.7,
-                                height: 1.1
-                            ),
-                            decoration: InputDecoration.collapsed(
-                                hintText: StringsResources.duration(),
-                                hintStyle: TextStyle(
-                                    color: ColorsResources.premiumLight.withOpacity(0.51),
-                                    fontSize: 13,
-                                    letterSpacing: 1.7,
-                                    height: 1.1
-                                ),
-                                border: InputBorder.none
-                            )
+                            ]
                         )
-                      )
+                    )
+                ),
 
-                    ]
-                  )
-              )
-          ),
-
-          Flexible(
-              fit: FlexFit.tight,
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.transparent
-                  ),
-                  child: Stack(
-                      children: [
-
-                        WidgetMask(
-                            blendMode: BlendMode.srcIn,
-                            childSaveLayer: true,
-                            mask: Container(
-                                height: 39,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(19),
-                                    border: const GradientBoxBorder(
-                                        gradient: LinearGradient(
-                                            colors: [
-                                              ColorsResources.premiumDark,
-                                              ColorsResources.black,
-                                              ColorsResources.premiumDark
-                                            ]
-                                        ),
-                                        width: 5
-                                    )
-                                ),
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                        padding: const EdgeInsets.only(left: 19, right: 19),
-                                        child: Container()
-                                    )
-                                )
-                            ),
-                            child: Container(
-                                height: 39,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(19),
-                                  border: const Border.symmetric(
-                                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
-                                  ),
-                                ),
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                        padding: const EdgeInsets.only(left: 19, right: 19),
-                                        child: Container()
-                                    )
-                                )
-                            )
+                Flexible(
+                    fit: FlexFit.tight,
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            color: Colors.transparent
                         ),
+                        child: Stack(
+                            children: [
 
-                        Align(
-                            alignment: Alignment.center,
-                            child: TextField(
-                                controller: alarmRepeatInput,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                textDirection: TextDirection.ltr,
-                                textAlignVertical: TextAlignVertical.center,
-                                cursorColor: ColorsResources.primaryColor,
-                                autofocus: false,
-                                enableSuggestions: true,
-                                keyboardType: TextInputType.number,
-                                textInputAction: TextInputAction.next,
-                                cursorWidth: 3,
-                                cursorHeight: 17,
-                                cursorRadius: const Radius.circular(19),
-                                style: const TextStyle(
-                                    color: ColorsResources.premiumLight,
-                                    fontSize: 13,
-                                    letterSpacing: 1.7,
-                                    height: 1.1
-                                ),
-                                decoration: InputDecoration.collapsed(
-                                    hintText: StringsResources.repeat(),
-                                    hintStyle: TextStyle(
-                                        color: ColorsResources.premiumLight.withOpacity(0.51),
-                                        fontSize: 13,
-                                        letterSpacing: 1.7,
-                                        height: 1.1
-                                    ),
-                                    border: InputBorder.none
-                                )
-                            )
-                        )
-
-                      ]
-                  )
-              )
-          ),
-
-          Flexible(
-              fit: FlexFit.tight,
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.transparent
-                  ),
-                  child: Stack(
-                      children: [
-
-                        WidgetMask(
-                            blendMode: BlendMode.srcIn,
-                            childSaveLayer: true,
-                            mask: Container(
-                                height: 39,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(19),
-                                    border: const GradientBoxBorder(
-                                        gradient: LinearGradient(
-                                            colors: [
-                                              ColorsResources.premiumDark,
-                                              ColorsResources.black,
-                                              ColorsResources.premiumDark
-                                            ]
-                                        ),
-                                        width: 5
-                                    )
-                                ),
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                        padding: const EdgeInsets.only(left: 19, right: 19),
-                                        child: Container()
-                                    )
-                                )
-                            ),
-                            child: Container(
-                                height: 39,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(19),
-                                  border: const Border.symmetric(
-                                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              WidgetMask(
+                                  blendMode: BlendMode.srcIn,
+                                  childSaveLayer: true,
+                                  mask: Container(
+                                      height: 39,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(19),
+                                          border: const GradientBoxBorder(
+                                              gradient: LinearGradient(
+                                                  colors: [
+                                                    ColorsResources.premiumDark,
+                                                    ColorsResources.black,
+                                                    ColorsResources.premiumDark
+                                                  ]
+                                              ),
+                                              width: 5
+                                          )
+                                      ),
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(left: 19, right: 19),
+                                              child: Container()
+                                          )
+                                      )
                                   ),
-                                ),
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                        padding: const EdgeInsets.only(left: 19, right: 19),
-                                        child: Container()
-                                    )
-                                )
-                            )
-                        ),
+                                  child: Container(
+                                      height: 39,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        border: const Border.symmetric(
+                                          horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                          vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                        ),
+                                      ),
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(left: 19, right: 19),
+                                              child: Container()
+                                          )
+                                      )
+                                  )
+                              ),
 
-                        Align(
-                            alignment: Alignment.center,
-                            child: TextField(
-                                controller: alarmRestInput,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                textDirection: TextDirection.ltr,
-                                textAlignVertical: TextAlignVertical.center,
-                                cursorColor: ColorsResources.primaryColor,
-                                autofocus: false,
-                                enableSuggestions: true,
-                                keyboardType: TextInputType.number,
-                                textInputAction: TextInputAction.next,
-                                cursorWidth: 3,
-                                cursorHeight: 17,
-                                cursorRadius: const Radius.circular(19),
-                                style: const TextStyle(
-                                    color: ColorsResources.premiumLight,
-                                    fontSize: 13,
-                                    letterSpacing: 1.7,
-                                    height: 1.1
-                                ),
-                                decoration: InputDecoration.collapsed(
-                                    hintText: StringsResources.rest(),
-                                    hintStyle: TextStyle(
-                                        color: ColorsResources.premiumLight.withOpacity(0.51),
-                                        fontSize: 13,
-                                        letterSpacing: 1.7,
-                                        height: 1.1
-                                    ),
-                                    border: InputBorder.none
-                                )
-                            )
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: TextField(
+                                      controller: alarmRestInput,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.ltr,
+                                      textAlignVertical: TextAlignVertical.center,
+                                      cursorColor: ColorsResources.primaryColor,
+                                      autofocus: false,
+                                      enableSuggestions: true,
+                                      keyboardType: TextInputType.number,
+                                      textInputAction: TextInputAction.next,
+                                      cursorWidth: 3,
+                                      cursorHeight: 17,
+                                      cursorRadius: const Radius.circular(19),
+                                      style: const TextStyle(
+                                          color: ColorsResources.premiumLight,
+                                          fontSize: 13,
+                                          letterSpacing: 1.7,
+                                          height: 1.1
+                                      ),
+                                      decoration: InputDecoration.collapsed(
+                                          hintText: StringsResources.rest(),
+                                          hintStyle: TextStyle(
+                                              color: ColorsResources.premiumLight.withOpacity(0.51),
+                                              fontSize: 13,
+                                              letterSpacing: 1.7,
+                                              height: 1.1
+                                          ),
+                                          border: InputBorder.none
+                                      )
+                                  )
+                              )
+
+                            ]
                         )
+                    )
+                )
 
-                      ]
-                  )
-              )
+              ]
           )
-
-        ]
       )
     );
   }
@@ -863,99 +868,92 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   /// Add + Button
   Widget addAlarm() {
 
-    return SizedBox(
-      height: 39,
-      width: double.infinity,
-      child: Align(
-          alignment: Alignment.centerLeft,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(19),
-            child: Material(
-                shadowColor: Colors.transparent,
-                color: Colors.transparent,
-                child: InkWell(
-                    splashColor: ColorsResources.premiumLight.withOpacity(0.73),
-                    splashFactory: InkRipple.splashFactory,
-                    onTap: () async {
+    return Padding(
+      padding: const EdgeInsets.only(left: 37, right: 37),
+      child: SizedBox(
+        height: 39,
+        width: double.infinity,
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(19),
+                child: Material(
+                    shadowColor: Colors.transparent,
+                    color: Colors.transparent,
+                    child: InkWell(
+                        splashColor: ColorsResources.primaryColorDarker.withOpacity(0.31),
+                        splashFactory: InkRipple.splashFactory,
+                        onTap: () async {
 
-                      alarmsDurationInput.add(TextEditingController());
-                      alarmsRepeatInput.add(TextEditingController());
-                      alarmsRestInput.add(TextEditingController());
+                          alarmsDurationInput.add(TextEditingController());
+                          alarmsRepeatInput.add(TextEditingController());
+                          alarmsRestInput.add(TextEditingController());
 
-                      setState(() {
+                          setState(() {
 
-                        print("Length Controller: ${alarmsDurationInput.length}");
+                            alarmsInputItems.add(inputAlarm(alarmsDurationInput.last, alarmsRepeatInput.last, alarmsRestInput.last));
 
-                        //alarmsInputItems.removeAt((alarmsInputItems.length - 1));
+                          });
 
-                        alarmsInputItems.add(inputAlarm(alarmsDurationInput.last, alarmsRepeatInput.last, alarmsRestInput.last));
-
-                        alarmsInputItems.add(const Divider(height: 13, color: Colors.transparent));
-
-                        print("Length Items: ${alarmsInputItems.length}");
-
-                  //      alarmsInputItems.add(addAlarm());
-
-                      });
-
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(19),
-                            color: Colors.transparent
-                        ),
-                        child: WidgetMask(
-                            blendMode: BlendMode.srcIn,
-                            childSaveLayer: true,
-                            mask: Container(
-                                height: 39,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(19),
-                                    border: const GradientBoxBorder(
-                                        gradient: LinearGradient(
-                                            colors: [
-                                              ColorsResources.premiumDark,
-                                              ColorsResources.black,
-                                              ColorsResources.premiumDark
-                                            ]
-                                        ),
-                                        width: 5
-                                    )
-                                ),
-                                child: const Align(
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                      padding: EdgeInsets.only(left: 19, right: 19),
-                                      child: Text(
-                                        "+",
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            color: ColorsResources.premiumLight,
-                                            fontSize: 19
-                                        ),
-                                      )
-                                  ),
-                                )
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(19),
+                                color: Colors.transparent
                             ),
-                            child: Container(
-                                height: 39,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(19),
-                                  border: const Border.symmetric(
-                                    horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                                    vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
-                                  ),
-                                ),
-                                child: const Align(
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                        padding: EdgeInsets.only(left: 19, right: 19),
-                                        child: Text(
+                            child: WidgetMask(
+                                blendMode: BlendMode.srcIn,
+                                childSaveLayer: true,
+                                mask: Container(
+                                    height: 39,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        border: const GradientBoxBorder(
+                                            gradient: LinearGradient(
+                                                colors: [
+                                                  ColorsResources.premiumDark,
+                                                  ColorsResources.black,
+                                                  ColorsResources.premiumDark
+                                                ]
+                                            ),
+                                            width: 5
+                                        )
+                                    ),
+                                    child: const Align(
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                          padding: EdgeInsets.only(left: 19, right: 19),
+                                          child: Text(
                                             "+",
                                             maxLines: 1,
                                             style: TextStyle(
                                                 color: ColorsResources.premiumLight,
                                                 fontSize: 19
+                                            ),
+                                          )
+                                      ),
+                                    )
+                                ),
+                                child: Container(
+                                    height: 39,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(19),
+                                      border: const Border.symmetric(
+                                        horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                        vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                                      ),
+                                    ),
+                                    child: const Align(
+                                        alignment: Alignment.center,
+                                        child: Padding(
+                                            padding: EdgeInsets.only(left: 19, right: 19),
+                                            child: Text(
+                                                "+",
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                    color: ColorsResources.premiumLight,
+                                                    fontSize: 19
+                                                )
                                             )
                                         )
                                     )
@@ -963,10 +961,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                             )
                         )
                     )
-              )
+                )
             )
-          )
-      ),
+        ),
+      )
     );
   }
 
