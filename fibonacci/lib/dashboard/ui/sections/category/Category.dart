@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 7:34 AM
+ * Last modified 1/22/24, 12:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,7 +50,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     switch (widget.categorizedBy) {
       case CategorizedBy.categories: {
 
-        categoryName = widget.rhythmsDataStructures.first.taskCategory();
+        categoryName = widget.rhythmsDataStructures.first.taskPriorities();
 
         break;
       }
@@ -63,7 +63,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
       case CategorizedBy.colorsTags: {
 
         categoryName = "";
-        colorTag = convertToColor(widget.rhythmsDataStructures.first.taskColorTag());
+        colorTag = convertToColor(widget.rhythmsDataStructures.first.taskColorsTags());
 
         break;
       }

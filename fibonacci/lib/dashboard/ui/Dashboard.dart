@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:37 AM
+ * Last modified 1/22/24, 12:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -197,7 +197,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
       switch (categorizedBy) {
         case CategorizedBy.categories: {
 
-          (allRhythmsWidget[rhythmDataStructure.taskCategory()] ??= []).add(rhythmDataStructure);
+          (allRhythmsWidget[rhythmDataStructure.taskPriorities()] ??= []).add(rhythmDataStructure);
 
           break;
         }
@@ -209,7 +209,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
         }
         case CategorizedBy.colorsTags: {
 
-          (allRhythmsWidget[rhythmDataStructure.taskColorTag()] ??= []).add(rhythmDataStructure);
+          (allRhythmsWidget[rhythmDataStructure.taskColorsTags()] ??= []).add(rhythmDataStructure);
 
           break;
         }

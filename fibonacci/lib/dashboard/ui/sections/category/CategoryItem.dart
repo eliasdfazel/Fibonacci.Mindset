@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 8:55 AM
+ * Last modified 1/22/24, 12:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,7 +54,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                               blendMode: BlendMode.srcATop,
                               childSaveLayer: true,
                               mask: ColoredBox(
-                                color: convertToColor(widget.rhythmDataStructure.taskColorTag()),
+                                color: convertToColor(widget.rhythmDataStructure.taskColorsTags()),
                               ),
                               child: const Image(
                                 image: AssetImage("assets/squircle_shape.png"),
@@ -145,7 +145,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                               shadowColor: Colors.transparent,
                               color: Colors.transparent,
                               child: InkWell(
-                                  splashColor: convertToColor(widget.rhythmDataStructure.taskColorTag()).withOpacity(0.73),
+                                  splashColor: convertToColor(widget.rhythmDataStructure.taskColorsTags()).withOpacity(0.73),
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () {
 

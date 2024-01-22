@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:51 AM
+ * Last modified 1/22/24, 12:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,8 @@ class RhythmDataStructure {
 
   static const String taskLocationName = "taskLocation";
 
-  static const String taskCategoryName = "taskCategory";
-  static const String taskColorTagName = "taskColorTag";
+  static const String taskPrioritiesName = "taskPriorities";
+  static const String taskColorsTagsName = "taskColorsTags";
 
   /// JSON Format
   static const String taskAlarmsConfigurationsName = "taskAlarmsConfigurations";
@@ -46,14 +46,14 @@ class RhythmDataStructure {
     return rhythmDocumentData[RhythmDataStructure.taskLocationName];
   }
 
-  String taskCategory() {
+  String taskPriorities() {
 
-    return rhythmDocumentData[RhythmDataStructure.taskCategoryName];
+    return rhythmDocumentData[RhythmDataStructure.taskPrioritiesName];
   }
 
-  String taskColorTag() {
+  String taskColorsTags() {
 
-    return rhythmDocumentData[RhythmDataStructure.taskColorTagName];
+    return rhythmDocumentData[RhythmDataStructure.taskColorsTagsName];
   }
 
   /// JSON Array
@@ -64,14 +64,14 @@ class RhythmDataStructure {
 
 }
 
-Map<String, dynamic> rhythmDocument(String taskTitle, String taskDescription, String taskLocation, String taskCategory, String taskColorTag, String taskAlarmsConfigurations) {
+Map<String, dynamic> rhythmDocument(String taskTitle, String taskDescription, String taskLocation, String taskPriorities, String taskColorsTags, String taskAlarmsConfigurations) {
 
   return {
     "taskTitle": taskTitle,
     "taskDescription": taskDescription,
     "taskLocation": taskLocation,
-    "taskCategory": taskCategory,
-    "taskColorTag": taskColorTag,
+    "taskPriorities": taskPriorities,
+    "taskColorsTags": taskColorsTags,
     "taskAlarmsConfigurations": taskAlarmsConfigurations,
   };
 }
