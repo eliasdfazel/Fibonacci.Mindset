@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:34 AM
+ * Last modified 1/22/24, 11:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,7 +51,80 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     return Container(
         padding: const EdgeInsets.only(left: 37, right: 37),
-        child: alarmsListPlaceholder
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: 173,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  StringsResources.alarmsTitle(),
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: alarmsWarning,
+                                      fontSize: 13,
+                                      letterSpacing: 1.7
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
+
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      padding: const EdgeInsets.only(top: 13, left: 13, right: 13),
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: const Border(
+                            bottom: BorderSide(
+                              color: ColorsResources.premiumDark,
+                              width: 1,
+                            ),
+                            top: BorderSide(
+                                color: ColorsResources.premiumDark,
+                                width: 1
+                            ),
+                            left: BorderSide(
+                                color: ColorsResources.premiumDark,
+                                width: 5
+                            ),
+                            right: BorderSide(
+                                color: ColorsResources.premiumDark,
+                                width: 5
+                            ),
+                          )
+                      ),
+                      child: ListView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          children: alarmsInputItems
+                      )
+                  )
+              ),
+
+              addAlarm()
+
+            ]
+        )
     );
   }
 
@@ -458,80 +531,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     setState(() {
 
-      alarmsListPlaceholder = Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-            Padding(
-                padding: const EdgeInsets.only(left: 17),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                        height: 29,
-                        width: 173,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            border: const Border.symmetric(
-                              horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                              vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
-                            )
-                        ),
-                        child: Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.only(left: 13),
-                            child: Text(
-                                StringsResources.alarmsTitle(),
-                                maxLines: 1,
-                                style: TextStyle(
-                                    color: alarmsWarning,
-                                    fontSize: 13,
-                                    letterSpacing: 1.7
-                                )
-                            )
-                        )
-                    )
-                )
-            ),
-
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    padding: const EdgeInsets.only(top: 13, left: 13, right: 13),
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19),
-                        border: const Border(
-                          bottom: BorderSide(
-                            color: ColorsResources.premiumDark,
-                            width: 1,
-                          ),
-                          top: BorderSide(
-                              color: ColorsResources.premiumDark,
-                              width: 1
-                          ),
-                          left: BorderSide(
-                              color: ColorsResources.premiumDark,
-                              width: 5
-                          ),
-                          right: BorderSide(
-                              color: ColorsResources.premiumDark,
-                              width: 5
-                          ),
-                        )
-                    ),
-                    child: ListView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        children: alarmsInputItems
-                    )
-                )
-            ),
-
-            addAlarm()
-
-          ]
-      );
+      alarmsInputItems;
 
     });
 

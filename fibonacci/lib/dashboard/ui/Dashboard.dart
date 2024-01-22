@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/17/24, 9:26 AM
+ * Last modified 1/22/24, 11:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,7 +52,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
     } else {
 
-      tasksPlaceholder = waiting(StringsResources.noInternetConnection());
+      tasksPlaceholder = waiting(waitingNotice: StringsResources.noInternetConnection());
 
     }
 
@@ -238,7 +238,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
 
   }
 
-  Widget waiting([String waitingNotice = "Click On ADD \nTo Configure A Task"]) {
+  Widget waiting({String waitingNotice = "Click On ADD \nTo Configure A Task"}) {
 
     return Container(
         alignment: Alignment.center,
@@ -248,7 +248,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
             children: [
 
               LoadingAnimationWidget.threeRotatingDots(
-                color: ColorsResources.premiumLight,
+                color: ColorsResources.premiumLightTransparent,
                 size: 73,
               ),
 
