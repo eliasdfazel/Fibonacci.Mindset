@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:26 PM
+ * Last modified 1/22/24, 12:33 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,12 +23,19 @@ class RhythmDataStructure {
   /// JSON Format
   static const String taskAlarmsConfigurationsName = "taskAlarmsConfigurations";
 
+  DocumentSnapshot? documentSnapshot;
   Map<String, dynamic> rhythmDocumentData = <String, dynamic>{};
 
-  RhythmDataStructure(DocumentSnapshot documentSnapshot) {
+  RhythmDataStructure(DocumentSnapshot inputDocumentSnapshot) {
 
-    rhythmDocumentData = documentSnapshot.data() as Map<String, dynamic>;
+    documentSnapshot = inputDocumentSnapshot;
+    rhythmDocumentData = inputDocumentSnapshot.data() as Map<String, dynamic>;
 
+  }
+
+  String? documentId() {
+
+    return documentSnapshot?.id;
   }
 
   String taskTitle() {

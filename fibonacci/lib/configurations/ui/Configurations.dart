@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:23 PM
+ * Last modified 1/22/24, 12:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,11 +24,14 @@ import 'package:fibonacci/utils/actions/BottomBarActions.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ConfigurationsInterface extends StatefulWidget {
 
-  ConfigurationsInterface({Key? key, RhythmDataStructure? rhythmDataStructure}) : super(key: key);
+  RhythmDataStructure? rhythmDataStructure;
+
+  ConfigurationsInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
@@ -240,10 +243,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   /*
    * Start - Assets
    */
-  void retrieveAssets() {
+  void retrieveAssets() async {
 
     FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Colors")
-        .get().then((DocumentSnapshot documentSnapshot) {
+        .get().then((DocumentSnapshot documentSnapshot) async {
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
 
@@ -258,6 +261,15 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       }
 
       List<Map<String, Color>> selectedTagsColors = [];
+
+      DocumentSnapshot rhythmDocumentSnapshot = await FirebaseFirestore.instance
+          .doc("/Fibonacci/Mindset/Profiles/${FirebaseAuth.instance.currentUser!.email!.toUpperCase()}/Rhythms/${widget.rhythmDataStructure!.documentId()}").get();
+
+      if (rhythmDocumentSnapshot.exists) {
+
+
+
+      }
 
       setState(() {
 
