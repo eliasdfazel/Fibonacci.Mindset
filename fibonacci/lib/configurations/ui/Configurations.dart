@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 10:26 AM
+ * Last modified 1/24/24, 10:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/sections/Alarms.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/configurations/ui/sections/elements/Choices.dart';
-import 'package:fibonacci/configurations/utils/query_helper.dart';
+import 'package:fibonacci/configurations/utils/validations.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
@@ -39,9 +39,6 @@ class ConfigurationsInterface extends StatefulWidget {
 class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BottomBarActions, AlarmsActions {
 
   ScrollController contentScroll = ScrollController();
-
-  Widget categoriesPlaceholder = Container();
-  Widget colorsTagsPlaceholder = Container();
 
   TextEditingController titleController = TextEditingController();
   Color titleWarning = ColorsResources.premiumLight;
@@ -171,6 +168,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   @override
   void centerAction() {
 
+    insertProcess();
+
   }
 
   @override
@@ -235,14 +234,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
               color: Colors.transparent
           ),
 
-          categoriesPlaceholder,
+          categoriesSelector(StringsResources.categoriesTitle()),
 
           const Divider(
               height: 13,
               color: Colors.transparent
           ),
 
-          colorsTagsPlaceholder,
+          colorsTagsSelector(StringsResources.colorsTagsTitle()),
 
           const Divider(
               height: 37,
@@ -296,11 +295,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       }
 
-      setState(() {
-
-        colorsTagsPlaceholder = colorsTagsOptionsWidget(StringsResources.colorsTagsTitle(), allTagsColors, selectedTagsColors, colorsWarning);
-
-      });
+      colorsTagsOptions(allTagsColors, selectedTagsColors);
 
     });
     /*
@@ -339,11 +334,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       }
 
-      setState(() {
-
-        categoriesPlaceholder = categoriesOptionsWidget(StringsResources.categoriesTitle(), allCategories, selectedCategories, tagsWarning);
-
-      });
+      categoriesOptions(allCategories, selectedCategories);
 
     });
     /*
@@ -445,15 +436,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   }
 
   /// selectedChoice: CSV
-  Widget categoriesOptionsWidget(String title,
-      List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
-      Color warningColor) {
-
-    for (var element in inputChoices) {
-
-      allCategoriesChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
-
-    }
+  Widget categoriesSelector(String title) {
 
     return Container(
         height: 103,
@@ -483,7 +466,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                                   title,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: warningColor,
+                                      color: tagsWarning,
                                       fontSize: 13,
                                       letterSpacing: 1.7
                                   )
@@ -505,13 +488,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                           )
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(19),
-                        child: ListView(
-                          padding: const EdgeInsets.only(left: 19, right: 19),
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          children: allCategoriesChoices
-                        )
+                          borderRadius: BorderRadius.circular(19),
+                          child: ListView(
+                              padding: const EdgeInsets.only(left: 19, right: 19),
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              children: allCategoriesChoices
+                          )
                       )
                   )
               )
@@ -520,16 +503,24 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         )
     );
   }
-
-  Widget colorsTagsOptionsWidget(String title,
-      List<Map<String, Color>> inputChoices, List<Map<String, Color>> selectedChoices,
-      Color warningColor) {
+  void categoriesOptions(List<Map<String, Color>> inputChoices,
+      List<Map<String, Color>> selectedChoices) {
 
     for (var element in inputChoices) {
 
-      allColorsTagsChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+      allCategoriesChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 
     }
+
+    setState(() {
+
+      allCategoriesChoices;
+
+    });
+
+  }
+
+  Widget colorsTagsSelector(String title) {
 
     return Container(
         height: 103,
@@ -559,7 +550,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                                   title,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: warningColor,
+                                      color: colorsWarning,
                                       fontSize: 13,
                                       letterSpacing: 1.7
                                   )
@@ -596,20 +587,115 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         )
     );
   }
+  void colorsTagsOptions(List<Map<String, Color>> inputChoices,
+      List<Map<String, Color>> selectedChoices) {
+
+    for (var element in inputChoices) {
+
+      allColorsTagsChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+
+    }
+
+    setState(() {
+
+      allColorsTagsChoices;
+
+    });
+
+  }
   /*
    * End - Assets
    */
 
-  void insertProcess() {
+  void insertProcess() async {
 
     String taskTitle = titleController.value.text;
     String taskDescription = descriptionController.value.text;
     String taskLocation = locationController.value.text;
 
+    String selectedCategories = "";
+    String selectedColorsTags = "";
 
+    bool validationResult = true;
+
+    if (taskTitle.isEmpty){
+
+      validationResult = false;
+
+      setState(() {
+
+        titleWarning = ColorsResources.red;
+
+      });
+
+    }
+
+    if (taskDescription.isEmpty){
+
+      validationResult = false;
+
+      setState(() {
+
+        descriptionWarning = ColorsResources.red;
+
+      });
+
+    }
+
+    if (taskLocation.isEmpty){
+
+      validationResult = false;
+
+      setState(() {
+
+        locationWarning = ColorsResources.red;
+
+      });
+
+    }
+
+    for (var element in allCategoriesChoices) {
+
+      element.choiceSelected;
+
+    }
+
+    for (var element in allColorsTagsChoices) {
+
+      element.choiceSelected;
+
+    }
+
+    if (selectedCategories.isEmpty){
+
+      validationResult = false;
+
+      setState(() {
+
+        tagsWarning = ColorsResources.red;
+
+      });
+
+    }
+
+    if (selectedColorsTags.isEmpty){
+
+      validationResult = false;
+
+      setState(() {
+
+        colorsWarning = ColorsResources.red;
+
+      });
+
+    }
+
+    if (validationResult) {
+
+
+
+    }
 
   }
-
-
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 9:51 AM
+ * Last modified 1/24/24, 10:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,7 +31,7 @@ class ColorsResources {
   static const Color lightGreen = Color.fromARGB(255, 14, 246, 190);
   static const Color lightestGreen = Color.fromARGB(255, 215, 255, 229);
 
-  static const Color red = Color.fromARGB(255, 255, 0, 72);
+  static const Color red = Color.fromARGB(255, 255, 0, 106);
   static const Color lightRed = Color.fromARGB(255, 255, 128, 164);
   static const Color lightestRed = Color.fromARGB(255, 255, 212, 224);
 
