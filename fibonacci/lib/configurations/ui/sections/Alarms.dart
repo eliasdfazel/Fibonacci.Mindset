@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 10:21 AM
+ * Last modified 1/24/24, 11:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,8 +42,6 @@ class AlarmsInterface extends StatefulWidget {
 }
 class _AlarmInterfaceState extends State<AlarmsInterface> {
 
-  Color alarmsWarning = ColorsResources.premiumLight;
-
   Widget alarmsListPlaceholder = Container();
 
   @override
@@ -62,37 +60,6 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
-              Padding(
-                  padding: const EdgeInsets.only(left: 17),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                          height: 29,
-                          width: 173,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
-                              border: const Border.symmetric(
-                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
-                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
-                              )
-                          ),
-                          child: Container(
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(left: 13),
-                              child: Text(
-                                  StringsResources.alarmsTitle(),
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      color: alarmsWarning,
-                                      fontSize: 13,
-                                      letterSpacing: 1.7
-                                  )
-                              )
-                          )
-                      )
-                  )
-              ),
 
               Align(
                   alignment: Alignment.centerLeft,

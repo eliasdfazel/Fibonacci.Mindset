@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 10:58 AM
+ * Last modified 1/24/24, 11:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,6 +62,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   List<Choices> allCategoriesChoices = [];
 
   late AlarmsInterface alarmsInterface;
+  Color alarmsWarning = ColorsResources.premiumLight;
 
   bool rhythmUpdated = false;
 
@@ -250,7 +251,44 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
               color: Colors.transparent
           ),
 
+          /*
+           * Start - Alarm
+           */
+          Padding(
+              padding: const EdgeInsets.only(left: 54, right: 37),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 29,
+                      width: 173,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          border: const Border.symmetric(
+                            horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                            vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                          )
+                      ),
+                      child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 13),
+                          child: Text(
+                              StringsResources.alarmsTitle(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                  color: alarmsWarning,
+                                  fontSize: 13,
+                                  letterSpacing: 1.7
+                              )
+                          )
+                      )
+                  )
+              )
+          ),
+
           alarmsInterface
+          /*
+           * End - Alarm
+           */
 
         ]
     );
@@ -619,6 +657,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     String selectedCategories = "";
     String selectedColorsTags = "";
 
+    String selectedAlarms = "";
+
     bool validationResult = true;
 
     if (taskTitle.isEmpty){
@@ -688,6 +728,18 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       setState(() {
 
         colorsWarning = ColorsResources.red;
+
+      });
+
+    }
+
+    if (selectedAlarms.isEmpty){
+
+      validationResult = false;
+
+      setState(() {
+
+        alarmsWarning = ColorsResources.red;
 
       });
 
