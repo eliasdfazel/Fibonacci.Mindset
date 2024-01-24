@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:52 PM
+ * Last modified 1/24/24, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,7 +36,9 @@ class ConfigurationsInterface extends StatefulWidget {
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BottomBarActions {
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BottomBarActions, AlarmsActions {
+
+  ScrollController contentScroll = ScrollController();
 
   Widget categoriesPlaceholder = Container();
   Widget colorsTagsPlaceholder = Container();
@@ -60,7 +62,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   List<Choices> allCategoriesChoices = [];
 
-  AlarmsInterface alarmsInterface = AlarmsInterface();
+  late AlarmsInterface alarmsInterface;
 
   bool rhythmUpdated = false;
 
@@ -76,6 +78,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
+
+    alarmsInterface = AlarmsInterface(alarmsActions: this);
 
     retrieveAssets();
 
@@ -181,12 +185,24 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
   }
 
+  @override
+  void alarmAdded() {
+
+    Future.delayed(const Duration(milliseconds: 555), () async {
+
+      contentScroll.animateTo(contentScroll.position.maxScrollExtent, duration: const Duration(milliseconds: 333), curve: Curves.easeIn);
+
+    });
+
+  }
+
   Widget setupContentWrapper() {
 
     return ListView(
         padding: const EdgeInsets.only(top: 73, bottom: 103),
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
+        controller: contentScroll,
         children: [
 
           textOptionsWidget(StringsResources.titleTitle(),
@@ -246,7 +262,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   void retrieveAssets() async {
 
     DocumentSnapshot rhythmDocumentSnapshot = await FirebaseFirestore.instance
-        .doc("/Fibonacci/Mindset/Profiles/${FirebaseAuth.instance.currentUser!.email!.toUpperCase()}/Rhythms/${widget.rhythmDataStructure!.documentId()}").get();
+        .doc("/Fibonacci/Mindset/Profiles/${FirebaseAuth.instance.currentUser!.email!.toUpperCase()}/Rhythms/${widget.rhythmDataStructure?.documentId()}").get();
 
     /*
      * Start - Colors Tags
@@ -583,5 +599,17 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   /*
    * End - Assets
    */
+
+  void insertProcess() {
+
+    String taskTitle = titleController.value.text;
+    String taskDescription = descriptionController.value.text;
+    String taskLocation = locationController.value.text;
+
+
+
+  }
+
+
 
 }

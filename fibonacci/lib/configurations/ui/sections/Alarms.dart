@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 11:49 AM
+ * Last modified 1/24/24, 10:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,9 +14,17 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:widget_mask/widget_mask.dart';
 
+abstract class AlarmsActions {
+  void alarmAdded() async {
+
+  }
+}
+
 class AlarmsInterface extends StatefulWidget {
 
-  AlarmsInterface({Key? key}) : super(key: key);
+  AlarmsActions alarmsActions;
+
+  AlarmsInterface({Key? key, required this.alarmsActions}) : super(key: key);
 
   List<Widget> alarmsInputItems = [];
 
@@ -428,6 +436,8 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
   /// Add + Button
   Widget addAlarm() {
+
+    widget.alarmsActions.alarmAdded();
 
     return SizedBox(
       height: 39,
