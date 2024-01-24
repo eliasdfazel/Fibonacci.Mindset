@@ -2,17 +2,17 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:40 PM
+ * Last modified 1/24/24, 10:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:blur/blur.dart';
-import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/preferences/ui/Preferences.dart';
 import 'package:fibonacci/profile/ui/Profile.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
+import 'package:fibonacci/utils/actions/BottomBarActions.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,9 @@ import 'package:widget_mask/widget_mask.dart';
 
 class DashboardBottomBarInterface extends StatefulWidget {
 
-  DashboardBottomBarInterface({Key? key}) : super(key: key);
+  BottomBarActions bottomBarActions;
+
+  DashboardBottomBarInterface({Key? key, required this.bottomBarActions}) : super(key: key);
 
   @override
   State<DashboardBottomBarInterface> createState() => _DashboardBottomBarInterfaceState();
@@ -99,7 +101,7 @@ class _DashboardBottomBarInterfaceState extends State<DashboardBottomBarInterfac
                                 child: InkWell(
                                     onTap: () async {
 
-                                      navigateTo(context, ProfileInterface());
+                                      navigateToWithFadeAnimation(context, ProfileInterface());
 
                                     },
                                     child: WidgetMask(
@@ -144,7 +146,7 @@ class _DashboardBottomBarInterfaceState extends State<DashboardBottomBarInterfac
                             child: InkWell(
                                 onTap: () {
 
-                                  navigateTo(context, ConfigurationsInterface(rhythmDataStructure: null));
+                                  widget.bottomBarActions.centerAction();
 
                                 },
                                 child: const Image(
@@ -169,7 +171,7 @@ class _DashboardBottomBarInterfaceState extends State<DashboardBottomBarInterfac
                         child: InkWell(
                             onTap: () async {
 
-                              navigateTo(context, PreferencesInterface());
+                              navigateToWithFadeAnimation(context, PreferencesInterface());
 
                             },
                             child: const Image(

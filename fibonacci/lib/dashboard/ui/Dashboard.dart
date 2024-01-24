@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:42 PM
+ * Last modified 1/24/24, 10:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/dashboard/ui/sections/DashboardBottomBar.dart';
 import 'package:fibonacci/dashboard/ui/sections/category/Category.dart';
 import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
@@ -18,6 +19,8 @@ import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDirectory.dart';
+import 'package:fibonacci/utils/actions/BottomBarActions.dart';
+import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +35,7 @@ class DashboardInterface extends StatefulWidget {
   @override
   State<DashboardInterface> createState() => _DashboardInterfaceState();
 }
-class _DashboardInterfaceState extends State<DashboardInterface> {
+class _DashboardInterfaceState extends State<DashboardInterface> implements BottomBarActions {
 
   PreferencesIO preferencesIO = PreferencesIO();
 
@@ -128,7 +131,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
                           alignment: Alignment.bottomCenter,
                           child: Padding(
                               padding: const EdgeInsets.only(bottom: 37),
-                              child: DashboardBottomBarInterface()
+                              child: DashboardBottomBarInterface(bottomBarActions: this)
                           )
                       )
                       /*
@@ -140,6 +143,23 @@ class _DashboardInterfaceState extends State<DashboardInterface> {
             )
         )
     );
+  }
+
+  @override
+  void centerAction() {
+
+    navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: null));
+
+  }
+
+  @override
+  void leftAction() {
+
+  }
+
+  @override
+  void rightAction() {
+
   }
 
   void retrieveTasks() async {

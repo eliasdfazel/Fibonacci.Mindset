@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/21/24, 10:15 AM
+ * Last modified 1/24/24, 9:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,12 +82,9 @@ void main() async {
                   color: ColorsResources.primaryColor,
                   theme: ThemeData(
                     fontFamily: 'Ubuntu',
-                    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsResources.primaryColor),
-                    pageTransitionsTheme: const PageTransitionsTheme(builders: {
-                      TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-                      TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
-                    }),
+                    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsResources.primaryColor)
                   ),
+
                   home: entryPlaceholder
               )
           )
