@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 10:54 AM
+ * Last modified 1/24/24, 10:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,9 +49,11 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   TextEditingController locationController = TextEditingController();
   Color locationWarning = ColorsResources.premiumLight;
 
+  Widget colorsTagsList = Container();
   String tagsSelected = "";
   Color tagsWarning = ColorsResources.premiumLight;
 
+  Widget categoriesList = Container();
   String colorsSelected = "";
   Color colorsWarning = ColorsResources.premiumLight;
 
@@ -489,12 +491,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(19),
-                          child: ListView(
-                              padding: const EdgeInsets.only(left: 19, right: 19),
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              children: allCategoriesChoices
-                          )
+                          child: categoriesList
                       )
                   )
               )
@@ -514,12 +511,18 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     setState(() {
 
-      allCategoriesChoices;
+      categoriesList = ListView(
+          padding: const EdgeInsets.only(left: 19, right: 19),
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          children: allCategoriesChoices
+      );
 
     });
 
   }
 
+  /// selectedChoice: CSV
   Widget colorsTagsSelector(String title) {
 
     return Container(
@@ -573,12 +576,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(19),
-                          child: ListView(
-                              padding: const EdgeInsets.only(left: 19, right: 19),
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              children: allColorsTagsChoices
-                          )
+                          child: colorsTagsList
                       )
                   )
               )
@@ -598,7 +596,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     setState(() {
 
-      allColorsTagsChoices;
+      colorsTagsList = ListView(
+          padding: const EdgeInsets.only(left: 19, right: 19),
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          children: allColorsTagsChoices
+      );
 
     });
 
