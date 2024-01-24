@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 11:06 AM
+ * Last modified 1/24/24, 11:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -657,11 +657,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     String selectedCategories = "";
     String selectedColorsTags = "";
 
-    String selectedAlarms = "";
-
     bool validationResult = true;
 
-    if (taskTitle.isEmpty){
+    if (taskTitle.isEmpty) {
 
       validationResult = false;
 
@@ -671,9 +669,17 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       });
 
+    } else {
+
+      setState(() {
+
+        titleWarning = ColorsResources.premiumLight;
+
+      });
+
     }
 
-    if (taskDescription.isEmpty){
+    if (taskDescription.isEmpty) {
 
       validationResult = false;
 
@@ -683,15 +689,31 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       });
 
+    } else {
+
+      setState(() {
+
+        descriptionWarning = ColorsResources.premiumLight;
+
+      });
+
     }
 
-    if (taskLocation.isEmpty){
+    if (taskLocation.isEmpty) {
 
       validationResult = false;
 
       setState(() {
 
         locationWarning = ColorsResources.red;
+
+      });
+
+    } else {
+
+      setState(() {
+
+        locationWarning = ColorsResources.premiumLight;
 
       });
 
@@ -709,7 +731,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (selectedCategories.isEmpty){
+    if (selectedCategories.isEmpty) {
 
       validationResult = false;
 
@@ -719,9 +741,17 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       });
 
+    } else {
+
+      setState(() {
+
+        tagsWarning = ColorsResources.premiumLight;
+
+      });
+
     }
 
-    if (selectedColorsTags.isEmpty){
+    if (selectedColorsTags.isEmpty) {
 
       validationResult = false;
 
@@ -731,15 +761,33 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       });
 
+    } else {
+
+      setState(() {
+
+        colorsWarning = ColorsResources.premiumLight;
+
+      });
+
     }
 
-    if (selectedAlarms.isEmpty){
+    if (alarmsInterface.alarmsDurationInput.first.value.text.isEmpty
+      || alarmsInterface.alarmsRepeatInput.first.value.text.isEmpty
+      || alarmsInterface.alarmsRestInput.first.value.text.isEmpty) {
 
       validationResult = false;
 
       setState(() {
 
         alarmsWarning = ColorsResources.red;
+
+      });
+
+    } else {
+
+      setState(() {
+
+        alarmsWarning = ColorsResources.premiumLight;
 
       });
 
