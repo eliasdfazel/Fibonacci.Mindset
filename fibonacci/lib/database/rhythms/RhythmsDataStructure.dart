@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:44 PM
+ * Last modified 1/27/24, 1:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RhythmDataStructure {
+
+  static const String taskDuration = "taskDuration";
+  static const String taskRepeat = "taskRepeat";
+  static const String taskRest = "taskRest";
 
   static const String taskTitleName = "taskTitle";
   static const String taskDescriptionName = "taskDescription";

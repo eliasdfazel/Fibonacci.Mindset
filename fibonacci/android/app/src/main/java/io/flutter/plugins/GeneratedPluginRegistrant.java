@@ -1,18 +1,9 @@
-/*
- * Copyright © 2024 By Geeks Empire.
- *
- * Created by Elias Fazel
- * Last modified 1/27/24, 12:38 PM
- *
- * Licensed Under MIT License.
- * https://opensource.org/licenses/MIT
- */
-
 package io.flutter.plugins;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import io.flutter.Log;
+
 import io.flutter.embedding.engine.FlutterEngine;
 
 /**

@@ -659,6 +659,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     String alarmsJson = await processAlarmsToJson(alarmsInterface);
 
+    print(alarmsJson);
+
     bool validationResult = true;
 
     for (var element in allCategoriesChoices) {
