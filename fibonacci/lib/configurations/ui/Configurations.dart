@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/27/24, 12:37 PM
+ * Last modified 1/27/24, 1:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,8 @@ import 'package:fibonacci/configurations/ui/sections/Alarms.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
 import 'package:fibonacci/configurations/ui/sections/elements/CategoriesChoices.dart';
 import 'package:fibonacci/configurations/ui/sections/elements/ColorsChoices.dart';
-import 'package:fibonacci/configurations/utils/validations.dart';
+import 'package:fibonacci/configurations/utils/AlarmsProcess.dart';
+import 'package:fibonacci/configurations/utils/Validations.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
@@ -656,6 +657,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     String categoriesSelected = "";
     String colorsTagsSelected = "";
 
+    String alarmsJson = await processAlarmsToJson(alarmsInterface);
+
     bool validationResult = true;
 
     for (var element in allCategoriesChoices) {
@@ -790,9 +793,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (alarmsInterface.alarmsDurationInput.first.value.text.isEmpty
-      || alarmsInterface.alarmsRepeatInput.first.value.text.isEmpty
-      || alarmsInterface.alarmsRestInput.first.value.text.isEmpty) {
+    if (alarmsJson.isEmpty) {
 
       validationResult = false;
 
@@ -816,6 +817,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
 
 
+    } else {
+      debugPrint("Validation Process Failed");
     }
 
   }
