@@ -9,13 +9,14 @@
  */
 
 import 'package:fibonacci/resources/colors_resources.dart';
+import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:widget_mask/widget_mask.dart';
 
 class ColorsChoices extends StatefulWidget {
 
-  Map<String, Color> choiceInformation;
+  Map<String, String> choiceInformation;
 
   bool choiceSelected = false;
 
@@ -41,12 +42,12 @@ class _ColorsChoicesState extends State<ColorsChoices> {
 
     if (widget.choiceSelected) {
 
-      backgroundColor = widget.choiceInformation.values.first.withOpacity(0.73);
+      backgroundColor = convertToColor(widget.choiceInformation.values.first).withOpacity(0.73);
 
     }
 
-    borderColor = widget.choiceInformation.values.first;
-    textColor = widget.choiceInformation.values.first;
+    borderColor = convertToColor(widget.choiceInformation.values.first);
+    textColor = convertToColor(widget.choiceInformation.values.first);
 
     return Container(
       height: 73,
@@ -77,7 +78,7 @@ class _ColorsChoicesState extends State<ColorsChoices> {
 
                         } else {
 
-                          backgroundColor = widget.choiceInformation.values.first.withOpacity(0.37);
+                          backgroundColor = convertToColor(widget.choiceInformation.values.first).withOpacity(0.37);
                           widget.choiceSelected = true;
 
                         }

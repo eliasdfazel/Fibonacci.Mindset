@@ -24,7 +24,6 @@ import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BottomBarActions.dart';
-import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -314,17 +313,17 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
 
-      List<Map<String, Color>> allTagsColors = [];
+      List<Map<String, String>> allTagsColors = [];
 
       for (var element in colorsTagsList) {
 
         var colorTag = element as Map<String, dynamic>;
 
-        allTagsColors.add({colorTag.keys.first: convertToColor(colorTag.values.first)});
+        allTagsColors.add({colorTag.keys.first: colorTag.values.first});
 
       }
 
-      List<Map<String, Color>> selectedTagsColors = [];
+      List<Map<String, String>> selectedTagsColors = [];
 
       if (rhythmDocumentSnapshot.exists) {
 
@@ -332,7 +331,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
         for (var element in colorsTags) {
 
-          selectedTagsColors.add(element as Map<String, Color>);
+          selectedTagsColors.add(element as Map<String, String>);
 
         }
 
@@ -626,8 +625,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         )
     );
   }
-  void colorsTagsOptions(List<Map<String, Color>> inputChoices,
-      List<Map<String, Color>> selectedChoices) {
+  void colorsTagsOptions(List<Map<String, String>> inputChoices,
+      List<Map<String, String>> selectedChoices) {
 
     for (var element in inputChoices) {
 
@@ -756,7 +755,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (taskColorsTags.isEmpty) {
+    if (taskCategories.isEmpty) {
 
       validationResult = false;
 
@@ -820,13 +819,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       FirebaseFirestore.instance
           .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
-          .update(
+          .set(
             rhythmDocument(taskTitle, taskDescription, taskLocation,
                 taskCategories, taskColorsTags,
                 taskAlarmsConfigurations)
           ).then((value) {
 
-
+            rhythmUpdated = true;
 
           });
 

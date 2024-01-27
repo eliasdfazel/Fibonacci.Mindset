@@ -35,6 +35,10 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
   @override
   Widget build(BuildContext context) {
 
+    print(">>> " + (widget.rhythmDataStructure.taskColorsTags().split(",").first));
+    print(">>> " + (widget.rhythmDataStructure.taskColorsTags().split(",").first as Map<String, String>).values.first);
+    print(convertToColor((widget.rhythmDataStructure.taskColorsTags().split(",").first as Map<String, String>).values.first));
+
     return Padding(
         padding: const EdgeInsets.only(right: 19),
         child: SizedBox(
@@ -54,7 +58,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                               blendMode: BlendMode.srcATop,
                               childSaveLayer: true,
                               mask: ColoredBox(
-                                color: convertToColor(widget.rhythmDataStructure.taskColorsTags()),
+                                color: convertToColor((widget.rhythmDataStructure.taskColorsTags().split(",").first as Map<String, String>).values.first),
                               ),
                               child: const Image(
                                 image: AssetImage("assets/squircle_shape.png"),

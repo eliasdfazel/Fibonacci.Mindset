@@ -59,9 +59,9 @@ void navigateToWithSlideAnimation(BuildContext context, StatefulWidget statefulW
   ));
 }
 
-void navigateToWithFadeAnimation(BuildContext context, StatefulWidget statefulWidget) {
+Future navigateToWithFadeAnimation(BuildContext context, StatefulWidget statefulWidget) {
 
-  Navigator.of(context).push(PageRouteBuilder(
+  return Navigator.of(context).push(PageRouteBuilder(
     transitionDuration: const Duration(milliseconds: 555),
     pageBuilder: (context, animation, secondaryAnimation) => statefulWidget,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {

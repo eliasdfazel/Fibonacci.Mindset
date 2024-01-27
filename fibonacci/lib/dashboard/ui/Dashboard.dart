@@ -146,9 +146,15 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements Bott
   }
 
   @override
-  void centerAction() {
+  void centerAction() async {
 
-    navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: null));
+    bool rhythmUpdated = await navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: null));
+
+    if (rhythmUpdated) {
+
+      retrieveTasks();
+
+    }
 
   }
 
