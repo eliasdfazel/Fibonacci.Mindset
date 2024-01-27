@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/27/24, 11:57 AM
+ * Last modified 1/27/24, 12:37 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,17 +50,15 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   TextEditingController locationController = TextEditingController();
   Color locationWarning = ColorsResources.premiumLight;
 
-  Widget colorsTagsList = Container();
-  String tagsSelected = "";
-  Color tagsWarning = ColorsResources.premiumLight;
-
-  Widget categoriesList = Container();
-  String colorsSelected = "";
-  Color colorsWarning = ColorsResources.premiumLight;
-
   List<ColorsChoices> allColorsTagsChoices = [];
 
+  Widget colorsTagsList = Container();
+  Color categoriesWarning = ColorsResources.premiumLight;
+
   List<CategoriesChoices> allCategoriesChoices = [];
+
+  Widget categoriesList = Container();
+  Color colorsWarning = ColorsResources.premiumLight;
 
   late AlarmsInterface alarmsInterface;
   Color alarmsWarning = ColorsResources.premiumLight;
@@ -351,25 +349,25 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
 
-      List<Map<String, Color>> allCategories = [];
+      List<Map<String, String>> allCategories = [];
 
       for (var element in colorsTagsList) {
 
         var category = element as Map<String, dynamic>;
 
-        allCategories.add({category.keys.first: ColorsResources.premiumDark});
+        allCategories.add({category.keys.first: category.values.first});
 
       }
 
-      List<Map<String, Color>> selectedCategories = [];
+      List<Map<String, String>> selectedCategories = [];
 
       if (rhythmDocumentSnapshot.exists) {
 
-        List colorsTags = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskCategoriesName].toString().split(",");
+        List categories = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskCategoriesName].toString().split(",");
 
-        for (var element in colorsTags) {
+        for (var element in categories) {
 
-          selectedCategories.add(element as Map<String, Color>);
+          selectedCategories.add(element as Map<String, String>);
 
         }
 
@@ -507,7 +505,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                                   title,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: tagsWarning,
+                                      color: categoriesWarning,
                                       fontSize: 13,
                                       letterSpacing: 1.7
                                   )
@@ -539,8 +537,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         )
     );
   }
-  void categoriesOptions(List<Map<String, Color>> inputChoices,
-      List<Map<String, Color>> selectedChoices) {
+  void categoriesOptions(List<Map<String, String>> inputChoices,
+      List<Map<String, String>> selectedChoices) {
 
     for (var element in inputChoices) {
 
@@ -655,10 +653,30 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     String taskDescription = descriptionController.value.text;
     String taskLocation = locationController.value.text;
 
-    String selectedCategories = "";
-    String selectedColorsTags = "";
+    String categoriesSelected = "";
+    String colorsTagsSelected = "";
 
     bool validationResult = true;
+
+    for (var element in allCategoriesChoices) {
+
+      if (element.choiceSelected) {
+
+        categoriesSelected += "${element.choiceInformation},";
+
+      }
+
+    }
+
+    for (var element in allColorsTagsChoices) {
+
+      if (element.choiceSelected) {
+
+        colorsTagsSelected += "${element.choiceInformation},";
+
+      }
+
+    }
 
     if (taskTitle.isEmpty) {
 
@@ -732,13 +750,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (selectedCategories.isEmpty) {
+    if (categoriesSelected.isEmpty) {
 
       validationResult = false;
 
       setState(() {
 
-        tagsWarning = ColorsResources.red;
+        categoriesWarning = ColorsResources.red;
 
       });
 
@@ -746,13 +764,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       setState(() {
 
-        tagsWarning = ColorsResources.premiumLight;
+        categoriesWarning = ColorsResources.premiumLight;
 
       });
 
     }
 
-    if (selectedColorsTags.isEmpty) {
+    if (colorsTagsSelected.isEmpty) {
 
       validationResult = false;
 

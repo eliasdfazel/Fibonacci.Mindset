@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/27/24, 12:03 PM
+ * Last modified 1/27/24, 12:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import 'package:widget_mask/widget_mask.dart';
 
 class CategoriesChoices extends StatefulWidget {
 
-  Map<String, Color> choiceInformation;
+  Map<String, String> choiceInformation;
 
   bool choiceSelected = false;
 
@@ -38,7 +38,7 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
     if (widget.choiceSelected) {
 
-      backgroundColor = widget.choiceInformation.values.first.withOpacity(0.73);
+      backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
 
     }
 
@@ -71,7 +71,7 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
                         } else {
 
-                          backgroundColor = widget.choiceInformation.values.first.withOpacity(0.37);
+                          backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
                           widget.choiceSelected = true;
 
                         }
