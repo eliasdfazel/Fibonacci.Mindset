@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 11:05 AM
+ * Last modified 1/27/24, 12:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -404,8 +404,6 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
   /// Add + Button
   Widget addAlarm() {
 
-    widget.alarmsActions.alarmAdded();
-
     return SizedBox(
       height: 39,
       width: double.infinity,
@@ -496,6 +494,12 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
   }
 
   void insertAlarm() async {
+
+    if (widget.alarmsInputItems.isNotEmpty) {
+
+      widget.alarmsActions.alarmAdded();
+
+    }
 
     setState(() {
 
