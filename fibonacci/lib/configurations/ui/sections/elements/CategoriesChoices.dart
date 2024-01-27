@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:04 PM
+ * Last modified 1/27/24, 12:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,23 +13,20 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:widget_mask/widget_mask.dart';
 
-class Choices extends StatefulWidget {
+class CategoriesChoices extends StatefulWidget {
 
   Map<String, Color> choiceInformation;
 
   bool choiceSelected = false;
 
-  Choices({Key? key, required this.choiceInformation, required this.choiceSelected}) : super(key: key);
+  CategoriesChoices({Key? key, required this.choiceInformation, required this.choiceSelected}) : super(key: key);
 
   @override
-  State<Choices> createState() => _ChoicesState();
+  State<CategoriesChoices> createState() => _CategoriesChoicesState();
 }
-class _ChoicesState extends State<Choices> {
+class _CategoriesChoicesState extends State<CategoriesChoices> {
 
   Color backgroundColor = Colors.transparent;
-
-  Color borderColor = ColorsResources.premiumDark;
-  Color textColor = ColorsResources.premiumLight;
 
   @override
   void initState() {
@@ -42,18 +39,6 @@ class _ChoicesState extends State<Choices> {
     if (widget.choiceSelected) {
 
       backgroundColor = widget.choiceInformation.values.first.withOpacity(0.73);
-
-    }
-
-    if (widget.choiceInformation.values.first != ColorsResources.premiumDark) {
-
-      borderColor = widget.choiceInformation.values.first;
-      textColor = widget.choiceInformation.values.first;
-
-    } else {
-
-      borderColor = ColorsResources.premiumDark;
-      textColor = ColorsResources.premiumLight;
 
     }
 
@@ -102,12 +87,12 @@ class _ChoicesState extends State<Choices> {
                             height: 39,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(19),
-                                border: GradientBoxBorder(
+                                border: const GradientBoxBorder(
                                     gradient: LinearGradient(
                                         colors: [
-                                          borderColor,
+                                          ColorsResources.premiumDark,
                                           ColorsResources.black,
-                                          borderColor
+                                          ColorsResources.premiumDark
                                         ]
                                     ),
                                     width: 5
@@ -120,8 +105,8 @@ class _ChoicesState extends State<Choices> {
                                   child: Text(
                                     widget.choiceInformation.keys.first.toUpperCase(),
                                     maxLines: 1,
-                                    style: TextStyle(
-                                        color: textColor,
+                                    style: const TextStyle(
+                                        color: ColorsResources.premiumLight,
                                         fontSize: 15
                                     ),
                                   )
@@ -132,9 +117,9 @@ class _ChoicesState extends State<Choices> {
                             height: 39,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(19),
-                              border: Border.symmetric(
-                                horizontal: BorderSide(color: borderColor, width: 1),
-                                vertical: BorderSide(color: borderColor, width: 5),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
                               ),
                             ),
                             child: Align(
@@ -144,8 +129,8 @@ class _ChoicesState extends State<Choices> {
                                     child: Text(
                                         widget.choiceInformation.keys.first.toUpperCase(),
                                         maxLines: 1,
-                                        style: TextStyle(
-                                            color: textColor,
+                                        style: const TextStyle(
+                                            color: ColorsResources.premiumLight,
                                             fontSize: 15
                                         )
                                     )

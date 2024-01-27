@@ -2,19 +2,19 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:21 PM
+ * Last modified 1/27/24, 11:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:fibonacci/configurations/ui/sections/elements/Choices.dart';
+import 'package:fibonacci/configurations/ui/sections/elements/ColorsChoices.dart';
 
-String csvProcess(List<Choices> listOfColorsTags) {
+String csvProcess(List<ColorsChoices> listOfColorsTags) {
 
   String csvResult = "";
 
-  for (Choices element in listOfColorsTags) {
+  for (ColorsChoices element in listOfColorsTags) {
 
     if (element.choiceSelected) {
 

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/24/24, 11:13 AM
+ * Last modified 1/27/24, 11:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,8 @@ import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/sections/Alarms.dart';
 import 'package:fibonacci/configurations/ui/sections/ConfigurationsBottomBar.dart';
-import 'package:fibonacci/configurations/ui/sections/elements/Choices.dart';
+import 'package:fibonacci/configurations/ui/sections/elements/CategoriesChoices.dart';
+import 'package:fibonacci/configurations/ui/sections/elements/ColorsChoices.dart';
 import 'package:fibonacci/configurations/utils/validations.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
@@ -57,9 +58,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   String colorsSelected = "";
   Color colorsWarning = ColorsResources.premiumLight;
 
-  List<Choices> allColorsTagsChoices = [];
+  List<ColorsChoices> allColorsTagsChoices = [];
 
-  List<Choices> allCategoriesChoices = [];
+  List<CategoriesChoices> allCategoriesChoices = [];
 
   late AlarmsInterface alarmsInterface;
   Color alarmsWarning = ColorsResources.premiumLight;
@@ -543,7 +544,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     for (var element in inputChoices) {
 
-      allCategoriesChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+      allCategoriesChoices.add(CategoriesChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 
     }
 
@@ -628,7 +629,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     for (var element in inputChoices) {
 
-      allColorsTagsChoices.add(Choices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+      allColorsTagsChoices.add(ColorsChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 
     }
 
