@@ -20,6 +20,7 @@ import 'package:fibonacci/configurations/ui/sections/elements/ColorsChoices.dart
 import 'package:fibonacci/configurations/utils/AlarmsProcess.dart';
 import 'package:fibonacci/configurations/utils/Validations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BottomBarActions.dart';
@@ -65,6 +66,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   Color alarmsWarning = ColorsResources.premiumLight;
 
   bool rhythmUpdated = false;
+
+  String documentId = DateTime.now().millisecondsSinceEpoch.toString();
 
   bool aInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
 
@@ -654,12 +657,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     String taskDescription = descriptionController.value.text;
     String taskLocation = locationController.value.text;
 
-    String categoriesSelected = "";
-    String colorsTagsSelected = "";
+    String taskCategories = "";
+    String taskColorsTags = "";
 
-    String alarmsJson = await processAlarmsToJson(alarmsInterface);
-
-    debugPrint(alarmsJson);
+    String taskAlarmsConfigurations = await processAlarmsToJson(alarmsInterface);
 
     bool validationResult = true;
 
@@ -667,7 +668,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       if (element.choiceSelected) {
 
-        categoriesSelected += "${element.choiceInformation},";
+        taskCategories += "${element.choiceInformation},";
 
       }
 
@@ -677,7 +678,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       if (element.choiceSelected) {
 
-        colorsTagsSelected += "${element.choiceInformation},";
+        taskColorsTags += "${element.choiceInformation},";
 
       }
 
@@ -755,7 +756,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (categoriesSelected.isEmpty) {
+    if (taskColorsTags.isEmpty) {
 
       validationResult = false;
 
@@ -775,7 +776,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (colorsTagsSelected.isEmpty) {
+    if (taskColorsTags.isEmpty) {
 
       validationResult = false;
 
@@ -795,7 +796,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     }
 
-    if (alarmsJson.isEmpty) {
+    if (taskAlarmsConfigurations.isEmpty) {
 
       validationResult = false;
 
@@ -817,7 +818,17 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     if (validationResult) {
 
+      FirebaseFirestore.instance
+          .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
+          .update(
+            rhythmDocument(taskTitle, taskDescription, taskLocation,
+                taskCategories, taskColorsTags,
+                taskAlarmsConfigurations)
+          ).then((value) {
 
+
+
+          });
 
     } else {
       debugPrint("Validation Process Failed");

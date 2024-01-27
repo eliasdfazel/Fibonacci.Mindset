@@ -14,3 +14,10 @@ String rhythmsCollectionsPath(String emailAddress) {
 
   return firestorePath;
 }
+
+String rhythmsDocumentsPath(String emailAddress, String documentId) {
+
+  String firestorePath = "Fibonacci/Mindset/Profiles/${emailAddress.toUpperCase()}/Rhythms/$documentId";
+
+  return firestorePath;
+}
