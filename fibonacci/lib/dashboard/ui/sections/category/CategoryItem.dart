@@ -2,15 +2,15 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/22/24, 12:26 PM
+ * Last modified 1/27/24, 1:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:fibonacci/configurations/ui/Configurations.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
-import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/27/24, 1:01 PM
+ * Last modified 1/27/24, 1:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,9 +19,9 @@ import 'package:fibonacci/configurations/ui/sections/elements/CategoriesChoices.
 import 'package:fibonacci/configurations/ui/sections/elements/ColorsChoices.dart';
 import 'package:fibonacci/configurations/utils/AlarmsProcess.dart';
 import 'package:fibonacci/configurations/utils/Validations.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
-import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/actions/BottomBarActions.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';

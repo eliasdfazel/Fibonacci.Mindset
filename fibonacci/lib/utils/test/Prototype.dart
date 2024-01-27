@@ -2,15 +2,15 @@
  * Copyright © 2024 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 1/16/24, 11:52 AM
+ * Last modified 1/27/24, 1:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fibonacci/rhythms/database/RhythmsDataStructure.dart';
-import 'package:fibonacci/rhythms/database/RhythmsDirectory.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 void generatePrototypes() {
