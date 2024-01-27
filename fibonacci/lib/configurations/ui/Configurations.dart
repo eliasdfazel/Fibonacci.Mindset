@@ -659,7 +659,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     String alarmsJson = await processAlarmsToJson(alarmsInterface);
 
-    print(alarmsJson);
+    debugPrint(alarmsJson);
 
     bool validationResult = true;
 

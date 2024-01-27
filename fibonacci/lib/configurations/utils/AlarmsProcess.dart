@@ -10,25 +10,44 @@
 
 import 'package:fibonacci/configurations/ui/sections/Alarms.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:flutter/cupertino.dart';
 
 Future<String> processAlarmsToJson(AlarmsInterface alarmsInterface) async {
+  debugPrint("Alarm Inserted: ${alarmsInterface.alarmsInputItems.length}");
 
-  String jsonifyAlarm = "[";
+  String jsonifyAlarm = "";
 
-  for (int i = 0; i < alarmsInterface.alarmsInputItems.length; i++) {
+  if (alarmsInterface.alarmsInputItems.isNotEmpty
+      && alarmsInterface.alarmsDurationInput.first.value.text.isNotEmpty
+      && alarmsInterface.alarmsRepeatInput.first.value.text.isNotEmpty
+      && alarmsInterface.alarmsRestInput.first.value.text.isNotEmpty) {
 
-    String eachAlarm = "{"
-        "\"index\":$i"
-        "\"${RhythmDataStructure.taskDuration}\":\"${alarmsInterface.alarmsDurationInput[i].value.text}\""
-        "\"${RhythmDataStructure.taskRepeat}\":\"${alarmsInterface.alarmsRepeatInput[i].value.text}\""
-        "\"${RhythmDataStructure.taskRest}\":\"${alarmsInterface.alarmsRestInput[i].value.text}\""
-        "}";
+    jsonifyAlarm = "[";
 
-    jsonifyAlarm += "$eachAlarm,";
+    for (int i = 0; i < alarmsInterface.alarmsInputItems.length; i++) {
+      debugPrint("Jsonify Alarm: ${i}");
+
+      String eachAlarm = "{"
+          "\"index\":$i,"
+          "\"${RhythmDataStructure.taskDuration}\":\"${alarmsInterface.alarmsDurationInput[i].value.text}\","
+          "\"${RhythmDataStructure.taskRepeat}\":\"${alarmsInterface.alarmsRepeatInput[i].value.text}\","
+          "\"${RhythmDataStructure.taskRest}\":\"${alarmsInterface.alarmsRestInput[i].value.text}\""
+          "}";
+
+      jsonifyAlarm += eachAlarm;
+
+      if (i < (alarmsInterface.alarmsInputItems.length - 1)) {
+
+        jsonifyAlarm += ",";
+
+      }
+
+    }
+
+    jsonifyAlarm += "]";
 
   }
 
-  jsonifyAlarm = "]";
 
   return jsonifyAlarm;
 }
