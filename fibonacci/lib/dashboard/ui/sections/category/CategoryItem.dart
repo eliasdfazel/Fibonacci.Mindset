@@ -159,14 +159,16 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                               child: InkWell(
                                   splashColor: itemColor.withOpacity(0.73),
                                   splashFactory: InkRipple.splashFactory,
-                                  onTap: () {
+                                  onTap: () async {
 
-                                    Future.delayed(const Duration(microseconds: 333), () async {
+                                    await Alarm.stop(1);
 
-                                      int alarmIndex = DateTime.now().millisecondsSinceEpoch;
+                                    Future.delayed(const Duration(microseconds: 777), () async {
+
+                                      var alarmIndex = 1;
 
                                       final alarmSettings = AlarmSettings(
-                                        id: alarmIndex,
+                                        id: 1,
                                         dateTime: DateTime.now().add(const Duration(seconds: 13)),
                                         assetAudioPath: 'assets/sparkle.ogg',
                                         loopAudio: true,
@@ -176,7 +178,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                         notificationTitle: 'Task Title',
                                         notificationBody: 'Task Description with Alarm Index',
                                         androidFullScreenIntent: true,
-                                        enableNotificationOnKill: true,
+                                        enableNotificationOnKill: false,
                                       );
 
                                       await Alarm.set(alarmSettings: alarmSettings);

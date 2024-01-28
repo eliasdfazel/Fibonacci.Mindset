@@ -31,7 +31,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
-    Alarm.stop(widget.alarmIndex);
+    stopCurrentAlarm();
 
   }
 
@@ -88,6 +88,13 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
             )
         )
     );
+  }
+
+  void stopCurrentAlarm() async {
+    debugPrint("Current Alarm Index: ${widget.alarmIndex}");
+
+    await Alarm.stop(widget.alarmIndex);
+
   }
 
 }
