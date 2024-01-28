@@ -163,16 +163,19 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
                                     Future.delayed(const Duration(microseconds: 333), () async {
 
+                                      int alarmIndex = DateTime.now().millisecondsSinceEpoch;
+
                                       final alarmSettings = AlarmSettings(
-                                        id: DateTime.now().millisecondsSinceEpoch,
-                                        dateTime: DateTime.now().add(const Duration(seconds: 5)),
+                                        id: alarmIndex,
+                                        dateTime: DateTime.now().add(const Duration(seconds: 13)),
                                         assetAudioPath: 'assets/sparkle.ogg',
                                         loopAudio: true,
                                         vibrate: true,
                                         volume: 0.73,
                                         fadeDuration: 3.0,
-                                        notificationTitle: 'This is the title',
-                                        notificationBody: 'This is the body',
+                                        notificationTitle: 'Task Title',
+                                        notificationBody: 'Task Description with Alarm Index',
+                                        androidFullScreenIntent: true,
                                         enableNotificationOnKill: true,
                                       );
 
@@ -180,7 +183,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
                                       Alarm.ringStream.stream.listen((alarmSetting) {
 
-                                        navigateTo(context, RecordingInterface());
+                                        navigateTo(context, RecordingInterface(alarmIndex: alarmIndex));
 
                                       });
 

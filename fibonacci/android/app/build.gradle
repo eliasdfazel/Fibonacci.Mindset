@@ -52,6 +52,8 @@ android {
 
         versionCode 1
         versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
+
+        multiDexEnabled true
     }
 
     signingConfigs {

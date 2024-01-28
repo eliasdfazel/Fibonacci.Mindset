@@ -8,6 +8,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:alarm/alarm.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -15,7 +16,9 @@ import 'package:flutter/material.dart';
 
 class RecordingInterface extends StatefulWidget {
 
-  RecordingInterface({Key? key}) : super(key: key);
+  int alarmIndex;
+
+  RecordingInterface({Key? key, required this.alarmIndex}) : super(key: key);
 
   @override
   State<RecordingInterface> createState() => _RecordingInterfaceState();
@@ -27,6 +30,8 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
+
+    Alarm.stop(widget.alarmIndex);
 
   }
 
