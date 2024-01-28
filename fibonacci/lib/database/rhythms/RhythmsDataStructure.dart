@@ -16,6 +16,8 @@ class RhythmDataStructure {
   static const String taskRepeat = "taskRepeat";
   static const String taskRest = "taskRest";
 
+  static const String taskIdName = "taskId";
+
   static const String taskTitleName = "taskTitle";
   static const String taskDescriptionName = "taskDescription";
 
@@ -40,6 +42,11 @@ class RhythmDataStructure {
   String? documentId() {
 
     return documentSnapshot?.id;
+  }
+
+  int taskId() {
+
+    return rhythmDocumentData[RhythmDataStructure.taskIdName];
   }
 
   String taskTitle() {
@@ -75,9 +82,10 @@ class RhythmDataStructure {
 
 }
 
-Map<String, dynamic> rhythmDocument(String taskTitle, String taskDescription, String taskLocation, String taskCategories, String taskColorsTags, String taskAlarmsConfigurations) {
+Map<String, dynamic> rhythmDocument(int taskId, String taskTitle, String taskDescription, String taskLocation, String taskCategories, String taskColorsTags, String taskAlarmsConfigurations) {
 
   return {
+    "taskId": taskId,
     "taskTitle": taskTitle,
     "taskDescription": taskDescription,
     "taskLocation": taskLocation,

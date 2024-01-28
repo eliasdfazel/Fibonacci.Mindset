@@ -8,6 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'dart:async';
+
 import 'package:alarm/alarm.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
@@ -30,9 +32,16 @@ class CategoryItemInterface extends StatefulWidget {
 }
 class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
+  StreamSubscription<AlarmSettings>? streamSubscription;
+
   @override
   void initState() {
     super.initState();
+
+    streamSubscription ??= Alarm.ringStream.stream.listen(
+          (alarmSettings) => navigateTo(context, RecordingInterface(alarmIndex: widget.rhythmDataStructure.taskId()))
+    );
+
   }
 
   @override
@@ -165,16 +174,14 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
                                     Future.delayed(const Duration(microseconds: 777), () async {
 
-                                      var alarmIndex = 1;
-
                                       final alarmSettings = AlarmSettings(
-                                        id: 1,
-                                        dateTime: DateTime.now().add(const Duration(seconds: 13)),
+                                        id: widget.rhythmDataStructure.taskId(),
+                                        dateTime: DateTime.now().add(const Duration(seconds: 19)),
                                         assetAudioPath: 'assets/sparkle.ogg',
                                         loopAudio: true,
                                         vibrate: true,
-                                        volume: 0.73,
-                                        fadeDuration: 3.0,
+                                        volume: 0.37,
+                                        fadeDuration: 3.7,
                                         notificationTitle: 'Task Title',
                                         notificationBody: 'Task Description with Alarm Index',
                                         androidFullScreenIntent: true,
@@ -183,11 +190,6 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
                                       await Alarm.set(alarmSettings: alarmSettings);
 
-                                      Alarm.ringStream.stream.listen((alarmSetting) {
-
-                                        navigateTo(context, RecordingInterface(alarmIndex: alarmIndex));
-
-                                      });
 
                                     });
 
