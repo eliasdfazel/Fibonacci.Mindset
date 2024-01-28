@@ -68,7 +68,7 @@ class RhythmDataStructure {
   }
 
   /// JSON Array
-  String taskAlarmsConfigurations() {
+  dynamic taskAlarmsConfigurations() {
 
     return rhythmDocumentData[RhythmDataStructure.taskAlarmsConfigurationsName];
   }

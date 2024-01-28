@@ -84,7 +84,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
-    alarmsInterface = AlarmsInterface(alarmsActions: this);
+    alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations());
 
     if (widget.rhythmDataStructure != null) {
       debugPrint("RhythmDataStructure: ${widget.rhythmDataStructure!.rhythmDocumentData}");

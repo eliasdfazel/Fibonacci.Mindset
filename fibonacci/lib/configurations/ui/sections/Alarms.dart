@@ -8,8 +8,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
+import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:widget_mask/widget_mask.dart';
@@ -24,7 +26,9 @@ class AlarmsInterface extends StatefulWidget {
 
   AlarmsActions alarmsActions;
 
-  AlarmsInterface({Key? key, required this.alarmsActions}) : super(key: key);
+  dynamic alarmsJson;
+
+  AlarmsInterface({Key? key, required this.alarmsActions, this.alarmsJson}) : super(key: key);
 
   List<Widget> alarmsInputItems = [];
 
@@ -48,7 +52,15 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
   void initState() {
     super.initState();
 
-    insertAlarm();
+    if (widget.alarmsJson != null) {
+
+      insertCurrentAlarms(widget.alarmsJson);
+
+    } else {
+
+      insertAlarm();
+
+    }
 
   }
 
@@ -501,13 +513,50 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     }
 
+    TextEditingController durationController = TextEditingController();
+    widget.alarmsDurationInput.add(durationController);
+
+    TextEditingController repeatController = TextEditingController();
+    widget.alarmsRepeatInput.add(repeatController);
+
+    TextEditingController restController = TextEditingController();
+    widget.alarmsRestInput.add(restController);
+
+    widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
+
     setState(() {
 
-      widget.alarmsDurationInput.add(TextEditingController());
-      widget.alarmsRepeatInput.add(TextEditingController());
-      widget.alarmsRestInput.add(TextEditingController());
+      widget.alarmsInputItems;;
+
+    });
+
+  }
+
+  Future insertCurrentAlarms(dynamic alarmsJson) async {
+
+    List listOfAlarm = List.from(convertToJsonDynamic(alarmsJson));
+
+    for (var element in listOfAlarm) {
+
+      TextEditingController durationController = TextEditingController();
+      durationController.text = element[RhythmDataStructure.taskDuration];
+      widget.alarmsDurationInput.add(durationController);
+
+      TextEditingController repeatController = TextEditingController();
+      repeatController.text = element[RhythmDataStructure.taskRepeat];
+      widget.alarmsRepeatInput.add(repeatController);
+
+      TextEditingController restController = TextEditingController();
+      restController.text = element[RhythmDataStructure.taskRest];
+      widget.alarmsRestInput.add(restController);
 
       widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
+
+    }
+
+    setState(() {
+
+      widget.alarmsInputItems;
 
     });
 
