@@ -8,6 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'dart:io';
+
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
@@ -23,6 +25,7 @@ import 'package:fibonacci/utils/actions/BottomBarActions.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -58,6 +61,10 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements Bott
       tasksPlaceholder = waiting(waitingNotice: StringsResources.noInternetConnection());
 
     }
+
+    requestNotificationPermission();
+
+    setupInteractedMessage();
 
   }
 
@@ -295,5 +302,60 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements Bott
         )
     );
   }
+
+  /*
+   * Start - Request Notification Permission for iOS
+   */
+  void requestNotificationPermission() async {
+
+    if (Platform.isIOS) {
+
+      FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+
+      NotificationSettings notificationSettings = await firebaseMessaging.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+
+      debugPrint("Notification Permission: ${notificationSettings.authorizationStatus}");
+
+    }
+
+  }
+  /*
+   * End - Request Notification Permission for iOS
+   */
+
+  /*
+   * Start - Firebase Message Interaction
+   */
+  Future<void> setupInteractedMessage() async {
+
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+
+      _handleMessage(initialMessage);
+
+    }
+
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+
+  }
+
+  void _handleMessage(RemoteMessage remoteMessage) {
+
+
+
+  }
+  /*
+   * End - Firebase Message Interaction
+   */
+
 
 }
