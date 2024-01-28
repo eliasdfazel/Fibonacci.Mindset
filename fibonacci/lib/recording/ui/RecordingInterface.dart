@@ -8,25 +8,27 @@
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:alarm/alarm.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
+import 'package:fibonacci/recording/ui/sections/RecordingBottomBar.dart';
+import 'package:fibonacci/recording/ui/sections/RecordingTopBar.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
+import 'package:fibonacci/utils/actions/BarActions.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 
 class RecordingInterface extends StatefulWidget {
 
-  RhythmDataStructure rhythmDataStructure;
+  RhythmDataStructure? rhythmDataStructure;
 
   RecordingInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
   @override
   State<RecordingInterface> createState() => _RecordingInterfaceState();
 }
-class _RecordingInterfaceState extends State<RecordingInterface> {
+class _RecordingInterfaceState extends State<RecordingInterface> implements BarActions {
 
   AlarmUtils alarmUtils = AlarmUtils();
 
@@ -90,6 +92,42 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
                          * End - Decoration
                          */
 
+                          /*
+                           * Start - Content
+                           */
+
+                          /*
+                           * End - Content
+                           */
+
+                          /*
+                           * Start - Bottom Bar
+                           */
+                          Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 37),
+                                  child: RecordingBottomBarInterface(bottomBarActions: this)
+                              )
+                          ),
+                          /*
+                           * End - Bottom Bar
+                           */
+
+                          /*
+                           * Start - Bottom Bar
+                           */
+                          Align(
+                              alignment: Alignment.topCenter,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(top: 37),
+                                  child: RecordingTopBarInterface(topBarActions: this)
+                              )
+                          )
+                          /*
+                           * End - Bottom Bar
+                           */
+
                         ]
                     )
                 )
@@ -98,21 +136,36 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
     );
   }
 
+  @override
+  void centerAction() {
+
+  }
+
+  @override
+  void leftAction() {
+
+  }
+
+  @override
+  void rightAction() {
+
+  }
+
   void manageCurrentAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
-
-    alarmIndex = await preferencesIO.retrieveAlarmIndex();
-
-    await Alarm.stop(widget.rhythmDataStructure.taskId());
+    // debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
+    //
+    // alarmIndex = await preferencesIO.retrieveAlarmIndex();
+    //
+    // await Alarm.stop(widget.rhythmDataStructure.taskId());
 
   }
 
   /// Click On Next Button
   void manageNextAlarm() async {
 
-    await preferencesIO.storeAlarmIndex(alarmIndex + 1);
-
-    alarmUtils.setupAlarm(widget.rhythmDataStructure, alarmIndex + 1);
+    // await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+    //
+    // alarmUtils.setupAlarm(widget.rhythmDataStructure, alarmIndex + 1);
 
   }
 

@@ -8,7 +8,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-abstract class BottomBarActions {
+abstract class BarActions {
   void centerAction() async {
 
   }

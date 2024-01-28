@@ -9,22 +9,20 @@
  */
 
 import 'package:blur/blur.dart';
-import 'package:fibonacci/preferences/ui/Preferences.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/actions/BarActions.dart';
-import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:flutter/material.dart';
 
-class ConfigurationsBottomBarInterface extends StatefulWidget {
+class RecordingTopBarInterface extends StatefulWidget {
 
-  BarActions bottomBarActions;
+  BarActions topBarActions;
 
-  ConfigurationsBottomBarInterface({Key? key, required this.bottomBarActions}) : super(key: key);
+  RecordingTopBarInterface({Key? key, required this.topBarActions}) : super(key: key);
 
   @override
-  State<ConfigurationsBottomBarInterface> createState() => _ConfigurationsBottomBarInterfaceState();
+  State<RecordingTopBarInterface> createState() => _RecordingTopBarInterfaceState();
 }
-class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomBarInterface> {
+class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +72,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                 */
 
                 /*
-                * Start - Back
+                * Start - Revert
                 */
                 Align(
                     alignment: Alignment.centerLeft,
@@ -84,21 +82,21 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                         child: InkWell(
                             onTap: () async {
 
-                              widget.bottomBarActions.leftAction();
+                              widget.topBarActions.leftAction();
 
                             },
                             child: const Image(
-                                image: AssetImage("assets/back.png")
+                                image: AssetImage("assets/reports.png")
                             )
                         )
                     )
                 ),
                 /*
-                * End - Back
+                * End - Revert
                 */
 
                 /*
-                * Start - Add
+                * Start - Next
                 */
                 Align(
                     alignment: Alignment.center,
@@ -119,22 +117,22 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                             child: InkWell(
                                 onTap: () async {
 
-                                  widget.bottomBarActions.centerAction();
+                                  widget.topBarActions.centerAction();
 
                                 },
                                 child: const Image(
-                                  image: AssetImage("assets/add.png"),
+                                  image: AssetImage("assets/end.png"),
                                 )
                             )
                         )
                     )
                 ),
                 /*
-                * End - Add
+                * End - Next
                 */
 
                 /*
-                * Start - Menu
+                * Start - Rest
                 */
                 Align(
                     alignment: Alignment.centerRight,
@@ -144,17 +142,17 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                         child: InkWell(
                             onTap: () async {
 
-                              navigateToWithFadeAnimation(context, PreferencesInterface());
+                              widget.topBarActions.rightAction();
 
                             },
                             child: const Image(
-                              image: AssetImage("assets/menu.png"),
+                              image: AssetImage("assets/open.png"),
                             )
                         )
                     )
                 ),
                 /*
-                * End - Menu
+                * End - Rest
                 */
 
               ]

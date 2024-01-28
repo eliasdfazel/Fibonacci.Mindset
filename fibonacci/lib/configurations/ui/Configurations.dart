@@ -23,7 +23,7 @@ import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
-import 'package:fibonacci/utils/actions/BottomBarActions.dart';
+import 'package:fibonacci/utils/actions/BarActions.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -39,7 +39,7 @@ class ConfigurationsInterface extends StatefulWidget {
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BottomBarActions, AlarmsActions {
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BarActions, AlarmsActions {
 
   ScrollController contentScroll = ScrollController();
 

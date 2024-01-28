@@ -9,22 +9,20 @@
  */
 
 import 'package:blur/blur.dart';
-import 'package:fibonacci/preferences/ui/Preferences.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/actions/BarActions.dart';
-import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:flutter/material.dart';
 
-class ConfigurationsBottomBarInterface extends StatefulWidget {
+class RecordingBottomBarInterface extends StatefulWidget {
 
   BarActions bottomBarActions;
 
-  ConfigurationsBottomBarInterface({Key? key, required this.bottomBarActions}) : super(key: key);
+  RecordingBottomBarInterface({Key? key, required this.bottomBarActions}) : super(key: key);
 
   @override
-  State<ConfigurationsBottomBarInterface> createState() => _ConfigurationsBottomBarInterfaceState();
+  State<RecordingBottomBarInterface> createState() => _RecordingBottomBarInterfaceState();
 }
-class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomBarInterface> {
+class _RecordingBottomBarInterfaceState extends State<RecordingBottomBarInterface> {
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +72,7 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                 */
 
                 /*
-                * Start - Back
+                * Start - Revert
                 */
                 Align(
                     alignment: Alignment.centerLeft,
@@ -88,17 +86,17 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
 
                             },
                             child: const Image(
-                                image: AssetImage("assets/back.png")
+                                image: AssetImage("assets/revert.png")
                             )
                         )
                     )
                 ),
                 /*
-                * End - Back
+                * End - Revert
                 */
 
                 /*
-                * Start - Add
+                * Start - Next
                 */
                 Align(
                     alignment: Alignment.center,
@@ -123,18 +121,18 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
 
                                 },
                                 child: const Image(
-                                  image: AssetImage("assets/add.png"),
+                                  image: AssetImage("assets/next.png"),
                                 )
                             )
                         )
                     )
                 ),
                 /*
-                * End - Add
+                * End - Next
                 */
 
                 /*
-                * Start - Menu
+                * Start - Rest
                 */
                 Align(
                     alignment: Alignment.centerRight,
@@ -144,17 +142,17 @@ class _ConfigurationsBottomBarInterfaceState extends State<ConfigurationsBottomB
                         child: InkWell(
                             onTap: () async {
 
-                              navigateToWithFadeAnimation(context, PreferencesInterface());
+                              widget.bottomBarActions.rightAction();
 
                             },
                             child: const Image(
-                              image: AssetImage("assets/menu.png"),
+                              image: AssetImage("assets/rest.png"),
                             )
                         )
                     )
                 ),
                 /*
-                * End - Menu
+                * End - Rest
                 */
 
               ]

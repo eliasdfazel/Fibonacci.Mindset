@@ -21,7 +21,7 @@ import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
-import 'package:fibonacci/utils/actions/BottomBarActions.dart';
+import 'package:fibonacci/utils/actions/BarActions.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +38,7 @@ class DashboardInterface extends StatefulWidget {
   @override
   State<DashboardInterface> createState() => _DashboardInterfaceState();
 }
-class _DashboardInterfaceState extends State<DashboardInterface> implements BottomBarActions {
+class _DashboardInterfaceState extends State<DashboardInterface> implements BarActions {
 
   PreferencesIO preferencesIO = PreferencesIO();
 
