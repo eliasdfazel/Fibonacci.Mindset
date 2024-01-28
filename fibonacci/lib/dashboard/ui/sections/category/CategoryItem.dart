@@ -166,10 +166,10 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                       final alarmSettings = AlarmSettings(
                                         id: DateTime.now().millisecondsSinceEpoch,
                                         dateTime: DateTime.now().add(const Duration(seconds: 5)),
-                                        assetAudioPath: 'assets/alarm.mp3',
+                                        assetAudioPath: 'assets/sparkle.ogg',
                                         loopAudio: true,
                                         vibrate: true,
-                                        volume: 0.8,
+                                        volume: 0.73,
                                         fadeDuration: 3.0,
                                         notificationTitle: 'This is the title',
                                         notificationBody: 'This is the body',
