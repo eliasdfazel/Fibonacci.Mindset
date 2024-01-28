@@ -12,6 +12,7 @@ import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
+import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
@@ -35,9 +36,9 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
   @override
   Widget build(BuildContext context) {
 
-    print(">>> " + (widget.rhythmDataStructure.taskColorsTags().split(",").first));
-    print(">>> " + (widget.rhythmDataStructure.taskColorsTags().split(",").first as Map<String, String>).values.first);
-    print(convertToColor((widget.rhythmDataStructure.taskColorsTags().split(",").first as Map<String, String>).values.first));
+    List colorsTags = widget.rhythmDataStructure.taskColorsTags().toString().split(",");
+
+    Color itemColor = convertToColor(convertToMap(convertToJson(colorsTags.first)).values.first);
 
     return Padding(
         padding: const EdgeInsets.only(right: 19),
@@ -58,7 +59,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                               blendMode: BlendMode.srcATop,
                               childSaveLayer: true,
                               mask: ColoredBox(
-                                color: convertToColor((widget.rhythmDataStructure.taskColorsTags().split(",").first as Map<String, String>).values.first),
+                                color: itemColor,
                               ),
                               child: const Image(
                                 image: AssetImage("assets/squircle_shape.png"),
@@ -149,7 +150,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                               shadowColor: Colors.transparent,
                               color: Colors.transparent,
                               child: InkWell(
-                                  splashColor: convertToColor(widget.rhythmDataStructure.taskColorsTags()).withOpacity(0.73),
+                                  splashColor: itemColor.withOpacity(0.73),
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () {
 

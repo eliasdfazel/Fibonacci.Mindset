@@ -79,6 +79,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   void initState() {
     super.initState();
 
+    BackButtonInterceptor.add(aInterceptor);
+
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
     alarmsInterface = AlarmsInterface(alarmsActions: this);
@@ -327,7 +329,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       if (rhythmDocumentSnapshot.exists) {
 
-        List colorsTags = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskColorsTagsName].toString().split(",");
+        List<dynamic> colorsTags = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskColorsTagsName].toString().split(",");
 
         for (var element in colorsTags) {
 
