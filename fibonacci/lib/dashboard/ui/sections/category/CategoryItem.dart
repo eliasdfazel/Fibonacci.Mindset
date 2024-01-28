@@ -11,6 +11,7 @@
 import 'dart:async';
 
 import 'package:alarm/alarm.dart';
+import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/recording/ui/RecordingInterface.dart';
@@ -40,7 +41,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
     // ??= If Left Null then Equal To
     streamSubscription ??= Alarm.ringStream.stream.listen(
-          (alarmSettings) => navigateTo(context, RecordingInterface(alarmIndex: widget.rhythmDataStructure.taskId()))
+          (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
     );
 
   }
@@ -171,35 +172,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () async {
 
-                                    if (await Alarm.isRinging(widget.rhythmDataStructure.taskId())) {
-
-                                      await Alarm.stop(widget.rhythmDataStructure.taskId());
-
-                                    } else {
-
-                                      Future.delayed(const Duration(microseconds: 777), () async {
-
-                                        final alarmSettings = AlarmSettings(
-                                          id: widget.rhythmDataStructure.taskId(),
-                                          dateTime: DateTime.now().add(const Duration(seconds: 19)),
-                                          assetAudioPath: 'assets/sparkle.ogg',
-                                          loopAudio: true,
-                                          vibrate: true,
-                                          volume: 0.37,
-                                          fadeDuration: 3.7,
-                                          notificationTitle: 'Task Title',
-                                          notificationBody: 'Task Description with Alarm Index from Json',
-                                          androidFullScreenIntent: true,
-                                          enableNotificationOnKill: true,
-                                        );
-
-                                        await Alarm.setNotificationOnAppKillContent('Task Title', 'Task Description with Alarm Index');
-
-                                        await Alarm.set(alarmSettings: alarmSettings);
-
-                                      });
-
-                                    }
+                                    setupAlarm();
 
                                   },
                                   child: const Image(
@@ -217,6 +190,29 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
             )
         )
     );
+  }
+
+  void setupAlarm() async {
+
+    if (await Alarm.isRinging(widget.rhythmDataStructure.taskId())) {
+
+      await Alarm.stop(widget.rhythmDataStructure.taskId());
+
+    } else {
+
+      Future.delayed(const Duration(microseconds: 777), () async {
+
+        AlarmSettings alarmSettings = setupAlarmSettings(widget.rhythmDataStructure.taskId(), 'Task Title', 'Task Description with Alarm Index',
+            DateTime.now().add(const Duration(seconds: 19)));
+
+        await Alarm.setNotificationOnAppKillContent('Task Title', 'Task Description with Alarm Index');
+
+        await Alarm.set(alarmSettings: alarmSettings);
+
+      });
+
+    }
+
   }
 
 }

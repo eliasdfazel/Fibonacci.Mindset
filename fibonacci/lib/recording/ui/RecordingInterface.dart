@@ -9,6 +9,7 @@
  */
 
 import 'package:alarm/alarm.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -16,9 +17,9 @@ import 'package:flutter/material.dart';
 
 class RecordingInterface extends StatefulWidget {
 
-  int alarmIndex;
+  RhythmDataStructure rhythmDataStructure;
 
-  RecordingInterface({Key? key, required this.alarmIndex}) : super(key: key);
+  RecordingInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
   @override
   State<RecordingInterface> createState() => _RecordingInterfaceState();
@@ -90,9 +91,9 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
   }
 
   void stopCurrentAlarm() async {
-    debugPrint("Current Alarm Index: ${widget.alarmIndex}");
+    debugPrint("Current Alarm Index: ${widget.rhythmDataStructure.taskId()}");
 
-    await Alarm.stop(widget.alarmIndex);
+    await Alarm.stop(widget.rhythmDataStructure.taskId());
 
   }
 
