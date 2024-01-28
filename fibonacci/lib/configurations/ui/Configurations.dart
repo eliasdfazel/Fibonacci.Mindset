@@ -338,7 +338,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
         for (var element in colorsTags) {
 
-          if (element != null) {
+          if (element != null && element.toString().isNotEmpty) {
 
             Map<String, dynamic> itemColor = convertToMapDynamic(convertToJsonDynamic(element));
 
@@ -379,11 +379,11 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       if (widget.rhythmDataStructure != null) {
 
-        List categories = widget.rhythmDataStructure!.taskColorsTags().toString().split(",");
+        List categories = widget.rhythmDataStructure!.taskCategories().toString().split(",");
 
         for (var element in categories) {
 
-          if (element != null) {
+          if (element != null && element.toString().isNotEmpty) {
 
             Map<String, dynamic> itemCategory = convertToMapDynamic(convertToJsonDynamic(element));
 
@@ -563,6 +563,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       List<Map<String, String>> selectedChoices) {
 
     for (var element in inputChoices) {
+
 
       allCategoriesChoices.add(CategoriesChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
 

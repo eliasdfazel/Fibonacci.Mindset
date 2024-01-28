@@ -20,7 +20,6 @@ bool mapContains(List<Map<dynamic, dynamic>> inputListMap, Map<dynamic, dynamic>
 
       itContains = true;
 
-      break;
     }
 
   }
