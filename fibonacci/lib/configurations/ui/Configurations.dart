@@ -339,9 +339,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
           if (element != null) {
 
-            Map<String, dynamic> itemColor = convertToMapDynamic(convertToJsonDynamic(element)) as Map<String, String>;
+            Map<String, dynamic> itemColor = convertToMapDynamic(convertToJsonDynamic(element));
 
-            selectedTagsColors.add(itemColor);
+            selectedTagsColors.add({itemColor.keys.first: itemColor.values.first});
 
           }
 
@@ -386,7 +386,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
             Map<String, dynamic> itemCategory = convertToMapDynamic(convertToJsonDynamic(element));
 
-            selectedCategories.add(itemCategory);
+            selectedCategories.add({itemCategory.keys.first: itemCategory.values.first});
 
           }
 

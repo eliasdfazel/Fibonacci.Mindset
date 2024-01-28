@@ -122,7 +122,12 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                 splashFactory: InkRipple.splashFactory,
                                 onTap: () async {
 
-                                  navigateTo(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
+                                  Future.delayed(const Duration(milliseconds: 333), () {
+
+                                    navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
+
+                                  });
+
                                 },
                                 child: Container()
                             )
