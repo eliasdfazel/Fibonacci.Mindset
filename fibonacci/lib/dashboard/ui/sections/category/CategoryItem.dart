@@ -38,6 +38,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
   void initState() {
     super.initState();
 
+    // ??= If Left Null then Equal To
     streamSubscription ??= Alarm.ringStream.stream.listen(
           (alarmSettings) => navigateTo(context, RecordingInterface(alarmIndex: widget.rhythmDataStructure.taskId()))
     );
@@ -170,28 +171,35 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () async {
 
-                                    await Alarm.stop(1);
+                                    if (await Alarm.isRinging(widget.rhythmDataStructure.taskId())) {
 
-                                    Future.delayed(const Duration(microseconds: 777), () async {
+                                      await Alarm.stop(widget.rhythmDataStructure.taskId());
 
-                                      final alarmSettings = AlarmSettings(
-                                        id: widget.rhythmDataStructure.taskId(),
-                                        dateTime: DateTime.now().add(const Duration(seconds: 19)),
-                                        assetAudioPath: 'assets/sparkle.ogg',
-                                        loopAudio: true,
-                                        vibrate: true,
-                                        volume: 0.37,
-                                        fadeDuration: 3.7,
-                                        notificationTitle: 'Task Title',
-                                        notificationBody: 'Task Description with Alarm Index',
-                                        androidFullScreenIntent: true,
-                                        enableNotificationOnKill: false,
-                                      );
+                                    } else {
 
-                                      await Alarm.set(alarmSettings: alarmSettings);
+                                      Future.delayed(const Duration(microseconds: 777), () async {
 
+                                        final alarmSettings = AlarmSettings(
+                                          id: widget.rhythmDataStructure.taskId(),
+                                          dateTime: DateTime.now().add(const Duration(seconds: 19)),
+                                          assetAudioPath: 'assets/sparkle.ogg',
+                                          loopAudio: true,
+                                          vibrate: true,
+                                          volume: 0.37,
+                                          fadeDuration: 3.7,
+                                          notificationTitle: 'Task Title',
+                                          notificationBody: 'Task Description with Alarm Index from Json',
+                                          androidFullScreenIntent: true,
+                                          enableNotificationOnKill: true,
+                                        );
 
-                                    });
+                                        await Alarm.setNotificationOnAppKillContent('Task Title', 'Task Description with Alarm Index');
+
+                                        await Alarm.set(alarmSettings: alarmSettings);
+
+                                      });
+
+                                    }
 
                                   },
                                   child: const Image(

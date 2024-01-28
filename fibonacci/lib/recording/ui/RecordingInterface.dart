@@ -46,7 +46,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
             fontFamily: 'Ubuntu',
             colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsResources.primaryColor)
         ),
-
         home: SafeArea(
             child: Scaffold(
                 resizeToAvoidBottomInset: false,

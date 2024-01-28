@@ -828,7 +828,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
       FirebaseFirestore.instance
           .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
           .set(
-            rhythmDocument(int.parse(documentId),
+            rhythmDocument(int.parse(documentId.substring(documentId.length - 7, documentId.length - 1)),
               taskTitle, taskDescription, taskLocation,
               taskCategories, taskColorsTags,
               taskAlarmsConfigurations)
