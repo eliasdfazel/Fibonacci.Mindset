@@ -87,6 +87,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     alarmsInterface = AlarmsInterface(alarmsActions: this);
 
     if (widget.rhythmDataStructure != null) {
+      debugPrint("RhythmDataStructure: ${widget.rhythmDataStructure!.rhythmDocumentData}");
 
       insertCurrentRhythm(widget.rhythmDataStructure!);
 

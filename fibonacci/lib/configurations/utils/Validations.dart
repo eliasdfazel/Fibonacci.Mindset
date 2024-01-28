@@ -16,7 +16,7 @@ bool mapContains(List<Map<dynamic, dynamic>> inputListMap, Map<dynamic, dynamic>
 
   for (Map<dynamic, dynamic> element in inputListMap) {
 
-    if (element.keys.first.contains(compareMap.keys.first)) {
+    if (element.keys.first == compareMap.keys.first) {
 
       itContains = true;
 
