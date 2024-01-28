@@ -14,6 +14,7 @@ import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
+import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:flutter/material.dart';
 
 class CategoryInterface extends StatefulWidget {
@@ -50,7 +51,8 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     switch (widget.categorizedBy) {
       case CategorizedBy.categories: {
 
-        categoryName = widget.rhythmsDataStructures.first.taskCategories();
+        List categoryNameMap = widget.rhythmsDataStructures.first.taskCategories().split(",");
+        categoryName = convertToMap(convertToJson(categoryNameMap.first)).keys.first;
 
         break;
       }
@@ -63,7 +65,9 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
       case CategorizedBy.colorsTags: {
 
         categoryName = "";
-        colorTag = convertToColor(widget.rhythmsDataStructures.first.taskColorsTags());
+
+        List colorsTags = widget.rhythmsDataStructures.first.taskColorsTags().toString().split(",");
+        colorTag = convertToColor(convertToMap(convertToJson(colorsTags.first)).values.first);
 
         break;
       }

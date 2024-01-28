@@ -27,3 +27,8 @@ bool mapContains(List<Map<dynamic, dynamic>> inputListMap, Map<dynamic, dynamic>
 
   return itContains;
 }
+
+String prepareMap(Map<String, dynamic> inputMap) {
+
+  return "{\"${inputMap.keys.first}\":\"${inputMap.values.first}\"}";
+}

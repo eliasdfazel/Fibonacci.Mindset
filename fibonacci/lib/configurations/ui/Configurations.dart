@@ -669,7 +669,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       if (element.choiceSelected) {
 
-        taskCategories += "${element.choiceInformation},";
+        taskCategories += "${prepareMap(element.choiceInformation)},";
 
       }
 
@@ -679,7 +679,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       if (element.choiceSelected) {
 
-        taskColorsTags += "${element.choiceInformation},";
+        taskColorsTags += "${prepareMap(element.choiceInformation)},";
 
       }
 
@@ -742,18 +742,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
         locationWarning = ColorsResources.premiumLight;
 
       });
-
-    }
-
-    for (var element in allCategoriesChoices) {
-
-      element.choiceSelected;
-
-    }
-
-    for (var element in allColorsTagsChoices) {
-
-      element.choiceSelected;
 
     }
 
