@@ -32,13 +32,15 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
 
   PreferencesIO preferencesIO = PreferencesIO();
 
+  int alarmIndex = 0;
+
   @override
   void initState() {
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
-    stopCurrentAlarm();
+    manageCurrentAlarm();
 
   }
 
@@ -96,10 +98,21 @@ class _RecordingInterfaceState extends State<RecordingInterface> {
     );
   }
 
-  void stopCurrentAlarm() async {
-    debugPrint("Current Alarm Index: ${widget.rhythmDataStructure.taskId()}");
+  void manageCurrentAlarm() async {
+    debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
+
+    alarmIndex = await preferencesIO.retrieveAlarmIndex();
 
     await Alarm.stop(widget.rhythmDataStructure.taskId());
+
+  }
+
+  /// Click On Next Button
+  void manageNextAlarm() async {
+
+    await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+
+    alarmUtils.setupAlarm(widget.rhythmDataStructure, alarmIndex + 1);
 
   }
 

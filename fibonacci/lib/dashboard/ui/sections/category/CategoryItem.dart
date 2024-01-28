@@ -174,7 +174,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () async {
 
-                                    alarmUtils.setupAlarm(widget.rhythmDataStructure);
+                                    alarmUtils.setupAlarm(widget.rhythmDataStructure, 0);
 
                                   },
                                   child: const Image(

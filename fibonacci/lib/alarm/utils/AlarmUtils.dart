@@ -14,7 +14,7 @@ import 'package:fibonacci/utils/modifications/Strings.dart';
 
 class AlarmUtils {
 
-  void setupAlarm(RhythmDataStructure rhythmDataStructure,
+  void setupAlarm(RhythmDataStructure rhythmDataStructure, int alarmIndex,
       {String alarmSoundAsset = 'assets/sparkle.ogg'}) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
@@ -25,28 +25,28 @@ class AlarmUtils {
 
       List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
 
-      int alarmDuration = int.parse(listOfAlarm.first[RhythmDataStructure.taskDuration]);
+      if (alarmIndex < listOfAlarm.length) {
 
-      listOfAlarm.first[RhythmDataStructure.taskRepeat];
+        int alarmDuration = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration]);
 
-      listOfAlarm.first[RhythmDataStructure.taskRest];
+        Future.delayed(const Duration(microseconds: 777), () async {
 
-      Future.delayed(const Duration(microseconds: 777), () async {
+          AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
+              DateTime.now().add(Duration(minutes: alarmDuration)));
 
-        AlarmSettings alarmSettings = setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
-            DateTime.now().add(Duration(minutes: alarmDuration)));
+          await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());
 
-        await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());
+          await Alarm.set(alarmSettings: alarmSettings);
 
-        await Alarm.set(alarmSettings: alarmSettings);
+        });
 
-      });
+      }
 
     }
 
   }
 
-  AlarmSettings setupAlarmSettings(int alarmId,
+  AlarmSettings _setupAlarmSettings(int alarmId,
       String alarmTitle, String alarmDescription,
       DateTime alarmDateTime,
       {String alarmSoundAsset = 'assets/sparkle.ogg'}) {
