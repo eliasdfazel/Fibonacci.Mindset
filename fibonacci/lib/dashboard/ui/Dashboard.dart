@@ -12,7 +12,7 @@ import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/dashboard/ui/sections/DashboardBottomBar.dart';
-import 'package:fibonacci/dashboard/ui/sections/category/Category.dart';
+import 'package:fibonacci/dashboard/ui/sections/category/CategoryInterface.dart';
 import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';

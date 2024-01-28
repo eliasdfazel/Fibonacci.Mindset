@@ -24,6 +24,7 @@ import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BottomBarActions.dart';
+import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -84,6 +85,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
     alarmsInterface = AlarmsInterface(alarmsActions: this);
+
+    if (widget.rhythmDataStructure != null) {
+
+      insertCurrentRhythm(widget.rhythmDataStructure!);
+
+    }
 
     retrieveAssets();
 
@@ -304,9 +311,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
    */
   void retrieveAssets() async {
 
-    DocumentSnapshot rhythmDocumentSnapshot = await FirebaseFirestore.instance
-        .doc("/Fibonacci/Mindset/Profiles/${FirebaseAuth.instance.currentUser!.email!.toUpperCase()}/Rhythms/${widget.rhythmDataStructure?.documentId()}").get();
-
     /*
      * Start - Colors Tags
      */
@@ -327,13 +331,19 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       List<Map<String, String>> selectedTagsColors = [];
 
-      if (rhythmDocumentSnapshot.exists) {
+      if (widget.rhythmDataStructure != null) {
 
-        List<dynamic> colorsTags = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskColorsTagsName].toString().split(",");
+        List colorsTags = widget.rhythmDataStructure!.taskColorsTags().toString().split(",");
 
         for (var element in colorsTags) {
 
-          selectedTagsColors.add(element as Map<String, String>);
+          if (element != null) {
+
+            Map<String, dynamic> itemColor = convertToMapDynamic(convertToJsonDynamic(element)) as Map<String, String>;
+
+            selectedTagsColors.add(itemColor);
+
+          }
 
         }
 
@@ -366,13 +376,19 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
 
       List<Map<String, String>> selectedCategories = [];
 
-      if (rhythmDocumentSnapshot.exists) {
+      if (widget.rhythmDataStructure != null) {
 
-        List categories = (documentSnapshot.data() as Map<String, dynamic>)[RhythmDataStructure.taskCategoriesName].toString().split(",");
+        List categories = widget.rhythmDataStructure!.taskColorsTags().toString().split(",");
 
         for (var element in categories) {
 
-          selectedCategories.add(element as Map<String, String>);
+          if (element != null) {
+
+            Map<String, dynamic> itemCategory = convertToMapDynamic(convertToJsonDynamic(element));
+
+            selectedCategories.add(itemCategory);
+
+          }
 
         }
 
@@ -822,6 +838,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     } else {
       debugPrint("Validation Process Failed");
     }
+
+  }
+
+  void insertCurrentRhythm(RhythmDataStructure rhythmDataStructure) {
+
+    titleController.text = rhythmDataStructure.taskTitle();
+    descriptionController.text = rhythmDataStructure.taskDescription();
+    locationController.text = rhythmDataStructure.taskLocation();
 
   }
 

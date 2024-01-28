@@ -38,7 +38,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
     List colorsTags = widget.rhythmDataStructure.taskColorsTags().toString().split(",");
 
-    Color itemColor = convertToColor(convertToMap(convertToJson(colorsTags.first)).values.first);
+    Color itemColor = convertToColor(convertToMapDynamic(convertToJsonDynamic(colorsTags.first)).values.first);
 
     return Padding(
         padding: const EdgeInsets.only(right: 19),

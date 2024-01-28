@@ -52,7 +52,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
       case CategorizedBy.categories: {
 
         List categoryNameMap = widget.rhythmsDataStructures.first.taskCategories().split(",");
-        categoryName = convertToMap(convertToJson(categoryNameMap.first)).keys.first;
+        categoryName = convertToMapDynamic(convertToJsonDynamic(categoryNameMap.first)).keys.first;
 
         break;
       }
@@ -67,7 +67,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
         categoryName = "";
 
         List colorsTags = widget.rhythmsDataStructures.first.taskColorsTags().toString().split(",");
-        colorTag = convertToColor(convertToMap(convertToJson(colorsTags.first)).values.first);
+        colorTag = convertToColor(convertToMapDynamic(convertToJsonDynamic(colorsTags.first)).values.first);
 
         break;
       }

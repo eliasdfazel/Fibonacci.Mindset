@@ -10,12 +10,12 @@
 
 import 'dart:convert';
 
-Map<String, dynamic> convertToMap(dynamic inputText) {
+Map<String, dynamic> convertToMapDynamic(dynamic inputText) {
 
   return inputText as Map<String, dynamic>;
 }
 
-dynamic convertToJson(String inputText) {
+dynamic convertToJsonDynamic(String inputText) {
 
   return jsonDecode(inputText);
 }
