@@ -15,6 +15,11 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
+      flutterEngine.getPlugins().add(new com.gdelataillade.alarm.alarm.AlarmPlugin());
+    } catch (Exception e) {
+      Log.e(TAG, "Error registering plugin alarm, com.gdelataillade.alarm.alarm.AlarmPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new com.example.appsettings.AppSettingsPlugin());
     } catch (Exception e) {
       Log.e(TAG, "Error registering plugin app_settings, com.example.appsettings.AppSettingsPlugin", e);
@@ -78,6 +83,11 @@ public final class GeneratedPluginRegistrant {
       flutterEngine.getPlugins().add(new io.flutter.plugins.firebase.firebaseremoteconfig.FirebaseRemoteConfigPlugin());
     } catch (Exception e) {
       Log.e(TAG, "Error registering plugin firebase_remote_config, io.flutter.plugins.firebase.firebaseremoteconfig.FirebaseRemoteConfigPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new com.ajinasokan.flutter_fgbg.FlutterFGBGPlugin());
+    } catch (Exception e) {
+      Log.e(TAG, "Error registering plugin flutter_fgbg, com.ajinasokan.flutter_fgbg.FlutterFGBGPlugin", e);
     }
     try {
       flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());

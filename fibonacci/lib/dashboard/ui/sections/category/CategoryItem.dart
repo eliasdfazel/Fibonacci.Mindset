@@ -8,8 +8,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:alarm/alarm.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/recording/ui/RecordingInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
@@ -161,7 +163,26 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
                                     Future.delayed(const Duration(microseconds: 333), () async {
 
+                                      final alarmSettings = AlarmSettings(
+                                        id: DateTime.now().millisecondsSinceEpoch,
+                                        dateTime: DateTime.now().add(const Duration(seconds: 5)),
+                                        assetAudioPath: 'assets/alarm.mp3',
+                                        loopAudio: true,
+                                        vibrate: true,
+                                        volume: 0.8,
+                                        fadeDuration: 3.0,
+                                        notificationTitle: 'This is the title',
+                                        notificationBody: 'This is the body',
+                                        enableNotificationOnKill: true,
+                                      );
 
+                                      await Alarm.set(alarmSettings: alarmSettings);
+
+                                      Alarm.ringStream.stream.listen((alarmSetting) {
+
+                                        navigateTo(context, RecordingInterface());
+
+                                      });
 
                                     });
 

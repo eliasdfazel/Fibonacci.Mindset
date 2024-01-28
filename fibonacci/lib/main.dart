@@ -10,6 +10,7 @@
 
 import 'dart:io';
 
+import 'package:alarm/alarm.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fibonacci/EntryConfigurations.dart';
 import 'package:fibonacci/dashboard/ui/Dashboard.dart';
@@ -59,6 +60,8 @@ void main() async {
       bool connectionResult = (internetLookup.isNotEmpty && internetLookup[0].rawAddress.isNotEmpty);
 
       FirebaseAuth.instance.currentUser?.reload();
+
+      await Alarm.init();
 
       Widget entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
 

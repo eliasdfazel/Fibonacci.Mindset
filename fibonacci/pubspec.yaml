@@ -17,6 +17,8 @@ dependencies:
 
 
   ####### ####### #######
+  alarm: ^3.0.6
+
   app_settings: 4.2.0
   ####### ####### #######
 
@@ -61,12 +63,10 @@ dependencies:
 
   firebase_dynamic_links: ^5.0.5
 
-  flutter_flip_card: ^0.0.4
   flutter_html:
     path: 'X:\Xlutter\Libraries\flutter_html'
 
   flutter_phoenix: ^1.0.0
-  flutter_slidable: ^2.0.0
   ####### ####### #######
 
 
@@ -87,7 +87,6 @@ dependencies:
 
 
   ####### ####### #######
-  liquid_swipe: ^3.0.0
   loading_animation_widget:
     path: 'X:\Xlutter\Libraries\loading_animation_widget'
   local_auth: ^2.1.0
