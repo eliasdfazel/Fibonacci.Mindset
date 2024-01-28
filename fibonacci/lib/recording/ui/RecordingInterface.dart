@@ -9,7 +9,9 @@
  */
 
 import 'package:alarm/alarm.dart';
+import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -25,6 +27,10 @@ class RecordingInterface extends StatefulWidget {
   State<RecordingInterface> createState() => _RecordingInterfaceState();
 }
 class _RecordingInterfaceState extends State<RecordingInterface> {
+
+  AlarmUtils alarmUtils = AlarmUtils();
+
+  PreferencesIO preferencesIO = PreferencesIO();
 
   @override
   void initState() {

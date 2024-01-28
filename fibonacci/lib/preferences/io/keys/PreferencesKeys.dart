@@ -11,5 +11,7 @@
 class PreferencesKeys {
 
   static const String categorizedBy = "categorizedBy";
+  static const String immersiveFocus = "immersiveFocus";
 
+  static const String alarmIndex = "alarmIndex";
 }

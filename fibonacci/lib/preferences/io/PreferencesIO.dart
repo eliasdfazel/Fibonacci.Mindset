@@ -22,4 +22,17 @@ class PreferencesIO {
     return categorizedBy;
   }
 
+  Future<int> retrieveAlarmIndex() async {
+
+    int categorizedBy = (await _sharedPreferences).getInt(PreferencesKeys.alarmIndex) ?? 0;
+
+    return categorizedBy;
+  }
+  Future<bool> storeAlarmIndex(int inputValue) async {
+
+    bool resultSuccess = await (await _sharedPreferences).setInt(PreferencesKeys.alarmIndex, inputValue);
+
+    return resultSuccess;
+  }
+
 }
