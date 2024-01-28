@@ -200,10 +200,18 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
     } else {
 
+      List listOfAlarm = List.from(convertToJsonDynamic(widget.rhythmDataStructure.taskAlarmsConfigurations()));
+
+      int alarmDuration = int.parse(listOfAlarm.first[RhythmDataStructure.taskDuration]);
+
+      listOfAlarm.first[RhythmDataStructure.taskRepeat];
+
+      listOfAlarm.first[RhythmDataStructure.taskRest];
+
       Future.delayed(const Duration(microseconds: 777), () async {
 
         AlarmSettings alarmSettings = setupAlarmSettings(widget.rhythmDataStructure.taskId(), 'Task Title', 'Task Description with Alarm Index',
-            DateTime.now().add(const Duration(seconds: 19)));
+            DateTime.now().add(Duration(minutes: alarmDuration)));
 
         await Alarm.setNotificationOnAppKillContent('Task Title', 'Task Description with Alarm Index');
 
