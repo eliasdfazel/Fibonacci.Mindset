@@ -11,15 +11,18 @@
 import 'dart:async';
 
 import 'package:alarm/alarm.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/recording/ui/RecordingInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_mask/widget_mask.dart';
 
@@ -132,9 +135,15 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                 splashFactory: InkRipple.splashFactory,
                                 onTap: () async {
 
-                                  Future.delayed(const Duration(milliseconds: 333), () {
+                                  Future.delayed(const Duration(milliseconds: 333), () async {
 
-                                    navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
+                                    bool rhythmUpdated = await navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
+
+                                    if (rhythmUpdated) {
+
+                                      updateTask();
+
+                                    }
 
                                   });
 
@@ -145,7 +154,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                         child: const Image(
                             image: AssetImage("assets/squircle_adjustment_gradient.png"),
                             fit: BoxFit.cover
-                        ),
+                        )
                       )
                   ),
                   /*
@@ -192,6 +201,23 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
             )
         )
     );
+  }
+
+  void updateTask() {
+    debugPrint("Task Updated: ${widget.rhythmDataStructure.documentId()}");
+
+    FirebaseFirestore.instance
+        .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, widget.rhythmDataStructure.documentId()!))
+        .get().then((documentSnapshot) {
+
+          setState(() {
+
+            widget.rhythmDataStructure = RhythmDataStructure(documentSnapshot);
+
+          });
+
+        });
+
   }
 
 }
