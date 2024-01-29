@@ -15,8 +15,7 @@ import 'package:fibonacci/utils/modifications/Strings.dart';
 
 class AlarmUtils {
 
-  void nextAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO,
-      {String alarmSoundAsset = 'assets/sparkle.ogg'}) async {
+  void nextAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
 
@@ -62,6 +61,26 @@ class AlarmUtils {
         await preferencesIO.storeAlarmRepeat(0);
 
       }
+
+    }
+
+  }
+
+  void revertAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO) async {
+
+    if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
+
+      await Alarm.stop(rhythmDataStructure.taskId());
+
+    } else {
+
+      List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
+
+      // check if previous current repeat is 0
+      // then revert back one index
+
+      // if repeat is more than 0
+      // then revert back on repeat
 
     }
 
