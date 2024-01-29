@@ -46,6 +46,73 @@ class AlarmUtils {
         //Reset Alarm Index
         await preferencesIO.storeAlarmIndex(0);
 
+      }
+
+    }
+
+  }
+
+  void setupExtraAlarm(RhythmDataStructure rhythmDataStructure, int alarmIndex, PreferencesIO preferencesIO,
+      {String alarmSoundAsset = 'assets/sparkle.ogg'}) async {
+
+    if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
+
+      await Alarm.stop(rhythmDataStructure.taskId());
+
+    } else {
+
+      List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
+
+      if (alarmIndex < listOfAlarm.length) {
+
+        int alarmDuration = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration]);
+
+        Future.delayed(const Duration(microseconds: 777), () async {
+
+          AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
+              DateTime.now().add(Duration(minutes: alarmDuration)));
+
+          await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());
+
+          await Alarm.set(alarmSettings: alarmSettings);
+
+        });
+
+      } else {
+
+      }
+
+    }
+
+  }
+
+  void setupRestAlarm(RhythmDataStructure rhythmDataStructure, int alarmIndex, PreferencesIO preferencesIO,
+      {String alarmSoundAsset = 'assets/sparkle.ogg'}) async {
+
+    if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
+
+      await Alarm.stop(rhythmDataStructure.taskId());
+
+    } else {
+
+      List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
+
+      if (alarmIndex < listOfAlarm.length) {
+
+        int alarmDuration = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration]);
+
+        Future.delayed(const Duration(microseconds: 777), () async {
+
+          AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
+              DateTime.now().add(Duration(minutes: alarmDuration)));
+
+          await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());
+
+          await Alarm.set(alarmSettings: alarmSettings);
+
+        });
+
+      } else {
 
       }
 

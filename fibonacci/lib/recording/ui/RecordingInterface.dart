@@ -172,7 +172,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
       }
       case BarActions.typeBottomBar: {
 
-
+        manageRevertAlarm();
 
         break;
       }
@@ -215,6 +215,13 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
     await preferencesIO.storeAlarmIndex(alarmIndex - 1);
 
     alarmUtils.setupAlarm(widget.rhythmDataStructure!, alarmIndex - 1, preferencesIO);
+
+  }
+
+  void manageRestAlarm() async {
+    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
+
+
 
   }
 
