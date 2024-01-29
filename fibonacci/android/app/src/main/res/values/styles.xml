@@ -26,6 +26,11 @@
     </style>
 
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowFullscreen">false</item>
+
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+
         <item name="android:windowBackground">#3C434D</item>
     </style>
 </resources>

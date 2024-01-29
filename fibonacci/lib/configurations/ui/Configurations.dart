@@ -265,7 +265,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   Widget setupContentWrapper() {
 
     return ListView(
-        padding: const EdgeInsets.only(top: 73, bottom: 103),
+        padding: const EdgeInsets.only(top: 73, bottom: 193),
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         controller: contentScroll,
