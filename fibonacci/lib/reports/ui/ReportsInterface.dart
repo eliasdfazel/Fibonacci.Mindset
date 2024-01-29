@@ -8,13 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:alarm/alarm.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
-import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
-import 'package:fibonacci/recording/ui/sections/RecordingBottomBar.dart';
-import 'package:fibonacci/recording/ui/sections/RecordingTopBar.dart';
-import 'package:fibonacci/reports/ui/ReportsInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BarActions.dart';
@@ -23,16 +18,14 @@ import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-class RecordingInterface extends StatefulWidget {
+class ReportsInterface extends StatefulWidget {
 
-  RhythmDataStructure? rhythmDataStructure;
-
-  RecordingInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
+  ReportsInterface({Key? key}) : super(key: key);
 
   @override
-  State<RecordingInterface> createState() => _RecordingInterfaceState();
+  State<ReportsInterface> createState() => _ReportsInterfaceState();
 }
-class _RecordingInterfaceState extends State<RecordingInterface> implements BarActions {
+class _ReportsInterfaceState extends State<ReportsInterface> implements BarActions {
 
   AlarmUtils alarmUtils = AlarmUtils();
 
@@ -104,34 +97,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                            * End - Content
                            */
 
-                          /*
-                           * Start - Bottom Bar
-                           */
-                          Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 37),
-                                  child: RecordingBottomBarInterface(bottomBarActions: this)
-                              )
-                          ),
-                          /*
-                           * End - Bottom Bar
-                           */
-
-                          /*
-                           * Start - Top Bar
-                           */
-                          Align(
-                              alignment: Alignment.topCenter,
-                              child: Padding(
-                                  padding: const EdgeInsets.only(top: 37),
-                                  child: RecordingTopBarInterface(topBarActions: this)
-                              )
-                          )
-                          /*
-                           * End - Top Bar
-                           */
-
                         ]
                     )
                 )
@@ -166,7 +131,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
     switch (barType) {
       case BarActions.typeTopBar: {
 
-        navigateToWithFadeAnimation(context, ReportsInterface());
+
 
         break;
       }
@@ -201,30 +166,20 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   }
 
   void manageCurrentAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
-
-    alarmIndex = await preferencesIO.retrieveAlarmIndex();
-
-    await Alarm.stop(widget.rhythmDataStructure!.taskId());
-
-  }
-
-  void manageRevertAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
-
-    await preferencesIO.storeAlarmIndex(alarmIndex - 1);
-
-    alarmUtils.setupAlarm(widget.rhythmDataStructure!, alarmIndex - 1, preferencesIO);
+    // debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
+    //
+    // alarmIndex = await preferencesIO.retrieveAlarmIndex();
+    //
+    // await Alarm.stop(widget.rhythmDataStructure.taskId());
 
   }
 
   /// Click On Next Button
   void manageNextAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-    await preferencesIO.storeAlarmIndex(alarmIndex + 1);
-
-    alarmUtils.setupAlarm(widget.rhythmDataStructure!, alarmIndex + 1, preferencesIO);
+    // await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+    //
+    // alarmUtils.setupAlarm(widget.rhythmDataStructure, alarmIndex + 1, preferencesIO);
 
   }
 

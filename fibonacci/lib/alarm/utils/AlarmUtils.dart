@@ -44,7 +44,7 @@ class AlarmUtils {
       } else {
 
         //Reset Alarm Index
-        await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+        await preferencesIO.storeAlarmIndex(0);
 
 
       }

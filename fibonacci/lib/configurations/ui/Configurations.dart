@@ -233,26 +233,26 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   }
 
   @override
-  void centerAction() {
+  void centerAction({int barType = BarActions.typeBottomBar}) {
 
     insertProcess();
 
   }
 
   @override
-  void leftAction() {
+  void leftAction({int barType = BarActions.typeBottomBar}) {
 
     navigatePopWithResult(context, rhythmUpdated);
 
   }
 
   @override
-  void rightAction() {
+  void rightAction({int barType = BarActions.typeBottomBar}) {
 
   }
 
   @override
-  void alarmAdded() {
+  void alarmAdded({int barType = BarActions.typeBottomBar}) {
 
     Future.delayed(const Duration(milliseconds: 555), () async {
 

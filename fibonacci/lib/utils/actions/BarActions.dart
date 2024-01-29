@@ -9,13 +9,17 @@
  */
 
 abstract class BarActions {
-  void centerAction() async {
+
+  static const int typeBottomBar = 0;
+  static const int typeTopBar = 1;
+
+  void centerAction({int barType = BarActions.typeBottomBar}) async {
 
   }
-  void leftAction() async {
+  void leftAction({int barType = BarActions.typeBottomBar}) async {
 
   }
-  void rightAction() async {
+  void rightAction({int barType = BarActions.typeBottomBar}) async {
 
   }
 }

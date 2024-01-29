@@ -153,7 +153,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
   }
 
   @override
-  void centerAction() async {
+  void centerAction({int barType = BarActions.typeBottomBar}) async {
 
     bool rhythmUpdated = await navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: null));
 
@@ -166,13 +166,13 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
   }
 
   @override
-  void leftAction() {
+  void leftAction({int barType = BarActions.typeBottomBar}) {
 
   }
 
   @override
-  void rightAction() {
-
+  void rightAction({int barType = BarActions.typeBottomBar}) {
+    // TODO: implement rightAction
   }
 
   void retrieveTasks() async {

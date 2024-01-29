@@ -82,7 +82,7 @@ class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
                         child: InkWell(
                             onTap: () async {
 
-                              widget.topBarActions.leftAction();
+                              widget.topBarActions.leftAction(barType: BarActions.typeTopBar);
 
                             },
                             child: const Image(
@@ -117,7 +117,7 @@ class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
                             child: InkWell(
                                 onTap: () async {
 
-                                  widget.topBarActions.centerAction();
+                                  widget.topBarActions.centerAction(barType: BarActions.typeTopBar);
 
                                 },
                                 child: const Image(
@@ -142,7 +142,7 @@ class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
                         child: InkWell(
                             onTap: () async {
 
-                              widget.topBarActions.rightAction();
+                              widget.topBarActions.rightAction(barType: BarActions.typeTopBar);
 
                             },
                             child: const Image(
