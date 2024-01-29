@@ -29,6 +29,7 @@ import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ConfigurationsInterface extends StatefulWidget {
 
@@ -39,7 +40,7 @@ class ConfigurationsInterface extends StatefulWidget {
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> implements BarActions, AlarmsActions {
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with TickerProviderStateMixin implements BarActions, AlarmsActions {
 
   ScrollController contentScroll = ScrollController();
 
@@ -62,12 +63,23 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   Widget categoriesList = Container();
   Color colorsWarning = ColorsResources.premiumLight;
 
+  Widget waitingPlaceholder = Container();
+
   late AlarmsInterface alarmsInterface;
   Color alarmsWarning = ColorsResources.premiumLight;
 
   bool rhythmUpdated = false;
 
   String documentId = DateTime.now().millisecondsSinceEpoch.toString();
+
+  late AnimationController waitingFadeController;
+  late Animation<double> waitingFadeAnimation;
+
+  late AnimationController contentFadeController;
+  late Animation<double> contentFadeAnimation;
+
+  late AnimationController contentScaleController;
+  late Animation<double> contentScaleAnimation;
 
   bool aInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
 
@@ -83,6 +95,33 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     BackButtonInterceptor.add(aInterceptor);
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
+
+    waitingFadeController = AnimationController(vsync: this,
+        duration: const Duration(milliseconds: 777),
+        reverseDuration: const Duration(milliseconds: 333),
+        animationBehavior: AnimationBehavior.preserve);
+    waitingFadeAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+        parent: waitingFadeController,
+        curve: Curves.easeOut
+    ));
+
+    contentFadeController = AnimationController(vsync: this,
+        duration: const Duration(milliseconds: 777),
+        reverseDuration: const Duration(milliseconds: 333),
+        animationBehavior: AnimationBehavior.preserve);
+    contentFadeAnimation = Tween<double>(begin: 1, end: 0.51).animate(CurvedAnimation(
+        parent: contentFadeController,
+        curve: Curves.easeOut
+    ));
+
+    contentScaleController = AnimationController(vsync: this,
+        duration: const Duration(milliseconds: 777),
+        reverseDuration: const Duration(milliseconds: 333),
+        animationBehavior: AnimationBehavior.preserve);
+    contentScaleAnimation = Tween<double>(begin: 1, end: 0.91).animate(CurvedAnimation(
+        parent: contentScaleController,
+        curve: Curves.easeOut
+    ));
 
     alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations());
 
@@ -152,8 +191,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                        * Start - Options
                        */
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 73),
-                        child: setupContentWrapper()
+                          padding: const EdgeInsets.only(bottom: 73),
+                          child: ScaleTransition(
+                              scale: contentScaleAnimation,
+                              child: FadeTransition(
+                                opacity: contentFadeAnimation,
+                                child: setupContentWrapper()
+                              )
+                          )
                       ),
                       /*
                        * End - Options
@@ -171,7 +216,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
                       )
                       /*
                        * End - Bottom Bar
-                       */
+                       */,
+
+                      FadeTransition(
+                          opacity: waitingFadeAnimation,
+                          child: waitingPlaceholder
+                      )
 
                     ]
                 )
@@ -183,7 +233,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
   @override
   void centerAction() {
 
-    insertProcess();
+    // insertProcess();
+
+    setState(() {
+
+      waitingPlaceholder = waiting();
+
+    });
 
   }
 
@@ -670,6 +726,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
    * End - Assets
    */
 
+  /*
+   * Start - Insert Process
+   */
   void insertProcess() async {
 
     String taskTitle = titleController.value.text;
@@ -850,6 +909,46 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface> imple
     descriptionController.text = rhythmDataStructure.taskDescription();
     locationController.text = rhythmDataStructure.taskLocation();
 
+  }
+  /*
+   * Start - Insert Process
+   */
+
+  Widget waiting({String waitingNotice = "Setting Up Task"}) {
+
+    contentScaleController.forward();
+    contentFadeController.forward();
+
+    waitingFadeController.forward();
+
+    return Container(
+        alignment: Alignment.center,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              LoadingAnimationWidget.threeRotatingDots(
+                color: ColorsResources.premiumLightTransparent,
+                size: 73,
+              ),
+
+              Center(
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 19, right: 19, top: 19),
+                      child: Text(
+                        waitingNotice,
+                        style: const TextStyle(
+                            fontSize: 19,
+                            color: ColorsResources.premiumLightTransparent
+                        ),
+                      )
+                  )
+              )
+
+            ]
+        )
+    );
   }
 
 }

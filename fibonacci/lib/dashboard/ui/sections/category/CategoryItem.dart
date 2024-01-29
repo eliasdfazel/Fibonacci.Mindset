@@ -14,6 +14,7 @@ import 'package:alarm/alarm.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/recording/ui/RecordingInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
@@ -174,7 +175,7 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () async {
 
-                                    alarmUtils.setupAlarm(widget.rhythmDataStructure, 0);
+                                    alarmUtils.setupAlarm(widget.rhythmDataStructure, 0, PreferencesIO());
 
                                   },
                                   child: const Image(

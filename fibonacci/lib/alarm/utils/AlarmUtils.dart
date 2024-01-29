@@ -10,11 +10,12 @@
 
 import 'package:alarm/alarm.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 
 class AlarmUtils {
 
-  void setupAlarm(RhythmDataStructure rhythmDataStructure, int alarmIndex,
+  void setupAlarm(RhythmDataStructure rhythmDataStructure, int alarmIndex, PreferencesIO preferencesIO,
       {String alarmSoundAsset = 'assets/sparkle.ogg'}) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
@@ -39,6 +40,12 @@ class AlarmUtils {
           await Alarm.set(alarmSettings: alarmSettings);
 
         });
+
+      } else {
+
+        //Reset Alarm Index
+        await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+
 
       }
 
