@@ -81,6 +81,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   late AnimationController contentScaleController;
   late Animation<double> contentScaleAnimation;
 
+  bool insertingAnimation = false;
+
   bool aInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
 
     navigatePopWithResult(context, rhythmUpdated);
@@ -233,13 +235,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   @override
   void centerAction() {
 
-    // insertProcess();
-
-    setState(() {
-
-      waitingPlaceholder = waiting();
-
-    });
+    insertProcess();
 
   }
 
@@ -884,6 +880,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
     if (validationResult) {
 
+      setState(() {
+
+        waitingPlaceholder = waiting();
+
+      });
+
       FirebaseFirestore.instance
           .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
           .set(
@@ -895,10 +897,31 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
             rhythmUpdated = true;
 
+            setState(() {
+
+              waitingPlaceholder = waiting(waitingNotice: "Task Set Successfully");
+
+            });
+
+            Future.delayed(const Duration(milliseconds: 1357), () {
+
+              contentScaleController.reverse();
+              contentFadeController.reverse();
+
+              waitingFadeController.reverse();
+
+            });
+
           });
 
     } else {
       debugPrint("Validation Process Failed");
+
+      contentScaleController.reverse();
+      contentFadeController.reverse();
+
+      waitingFadeController.reverse();
+
     }
 
   }
