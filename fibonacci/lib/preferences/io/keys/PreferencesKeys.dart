@@ -14,4 +14,5 @@ class PreferencesKeys {
   static const String immersiveFocus = "immersiveFocus";
 
   static const String alarmIndex = "alarmIndex";
+  static const String alarmRepeatIndex = "alarmRepeatIndex";
 }
