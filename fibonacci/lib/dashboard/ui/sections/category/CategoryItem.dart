@@ -35,15 +35,28 @@ class CategoryItemInterface extends StatefulWidget {
   @override
   State<CategoryItemInterface> createState() => _CategoryItemInterfaceState();
 }
-class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
+class _CategoryItemInterfaceState extends State<CategoryItemInterface> with TickerProviderStateMixin {
 
   AlarmUtils alarmUtils = AlarmUtils();
 
   StreamSubscription<AlarmSettings>? streamSubscription;
 
+  late AnimationController fadeAnimationController;
+  late Animation<double> fadeAnimation;
+
   @override
   void initState() {
     super.initState();
+
+    fadeAnimationController = AnimationController(vsync: this,
+        duration: const Duration(milliseconds: 777),
+        reverseDuration: const Duration(milliseconds: 333),
+        animationBehavior: AnimationBehavior.preserve);
+    fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: fadeAnimationController,
+        curve: Curves.easeOut
+    ));
+
   }
 
   @override
@@ -53,151 +66,160 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
 
     Color itemColor = convertToColor(convertToMapDynamic(convertToJsonDynamic(colorsTags.first)).values.first);
 
+    Future.delayed(const Duration(milliseconds: 555), () {
+
+      fadeAnimationController.forward();
+
+    });
+
     return Padding(
         padding: const EdgeInsets.only(right: 19),
         child: SizedBox(
             height: 137,
             width: 137,
-            child: Stack(
-                children: [
+            child: FadeTransition(
+              opacity: fadeAnimation,
+              child: Stack(
+                  children: [
 
-                  /*
+                    /*
                    * Start - Background
                    */
-                  Center(
-                      child: SizedBox(
-                          height: 136,
-                          width: 136,
-                          child: WidgetMask(
-                              blendMode: BlendMode.srcATop,
-                              childSaveLayer: true,
-                              mask: ColoredBox(
-                                color: itemColor,
-                              ),
-                              child: const Image(
-                                image: AssetImage("assets/squircle_shape.png"),
-                                fit: BoxFit.cover,
-                              )
-                          )
-                      )
-                  ),
-
-                  const SizedBox(
-                    height: 137,
-                    width: 137,
-                    child: Image(
-                      image: AssetImage("assets/squircle_adjustment_gradient.png"),
-                      fit: BoxFit.cover,
+                    Center(
+                        child: SizedBox(
+                            height: 136,
+                            width: 136,
+                            child: WidgetMask(
+                                blendMode: BlendMode.srcATop,
+                                childSaveLayer: true,
+                                mask: ColoredBox(
+                                  color: itemColor,
+                                ),
+                                child: const Image(
+                                  image: AssetImage("assets/squircle_shape.png"),
+                                  fit: BoxFit.cover,
+                                )
+                            )
+                        )
                     ),
-                  ),
-                  /*
+
+                    const SizedBox(
+                      height: 137,
+                      width: 137,
+                      child: Image(
+                        image: AssetImage("assets/squircle_adjustment_gradient.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    /*
                    * End - Background
                    */
 
-                  /*
+                    /*
                    * Start - Title
                    */
-                  Positioned(
-                      left: 19,
-                      right: 19,
-                      top: 19,
-                      child: SizedBox(
-                        height: 73,
-                        child: Text(
-                          widget.rhythmDataStructure.taskTitle(),
-                          maxLines: 3,
-                          style: const TextStyle(
-                              color: ColorsResources.premiumLight,
-                              fontSize: 15,
-                              letterSpacing: 1.7
+                    Positioned(
+                        left: 19,
+                        right: 19,
+                        top: 19,
+                        child: SizedBox(
+                          height: 73,
+                          child: Text(
+                            widget.rhythmDataStructure.taskTitle(),
+                            maxLines: 3,
+                            style: const TextStyle(
+                                color: ColorsResources.premiumLight,
+                                fontSize: 15,
+                                letterSpacing: 1.7
+                            ),
                           ),
-                        ),
-                      )
-                  ),
-                  /*
+                        )
+                    ),
+                    /*
                    * End - Title
                    */
 
-                  /*
+                    /*
                    * Start - Ripple Adjustment
                    */
-                  SizedBox(
-                      height: 137,
-                      width: 137,
-                      child: WidgetMask(
-                        blendMode: BlendMode.srcIn,
-                        childSaveLayer: true,
-                        mask: Material(
-                            shadowColor: Colors.transparent,
-                            color: Colors.transparent,
-                            child: InkWell(
-                                splashColor: ColorsResources.premiumDark,
-                                splashFactory: InkRipple.splashFactory,
-                                onTap: () async {
+                    SizedBox(
+                        height: 137,
+                        width: 137,
+                        child: WidgetMask(
+                            blendMode: BlendMode.srcIn,
+                            childSaveLayer: true,
+                            mask: Material(
+                                shadowColor: Colors.transparent,
+                                color: Colors.transparent,
+                                child: InkWell(
+                                    splashColor: ColorsResources.premiumDark,
+                                    splashFactory: InkRipple.splashFactory,
+                                    onTap: () async {
 
-                                  Future.delayed(const Duration(milliseconds: 333), () async {
+                                      Future.delayed(const Duration(milliseconds: 333), () async {
 
-                                    bool rhythmUpdated = await navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
+                                        bool rhythmUpdated = await navigateToWithFadeAnimation(context, ConfigurationsInterface(rhythmDataStructure: widget.rhythmDataStructure));
 
-                                    if (rhythmUpdated) {
+                                        if (rhythmUpdated) {
 
-                                      updateTask();
+                                          updateTask();
 
-                                    }
+                                        }
 
-                                  });
+                                      });
 
-                                },
-                                child: Container()
+                                    },
+                                    child: Container()
+                                )
+                            ),
+                            child: const Image(
+                                image: AssetImage("assets/squircle_adjustment_gradient.png"),
+                                fit: BoxFit.cover
                             )
-                        ),
-                        child: const Image(
-                            image: AssetImage("assets/squircle_adjustment_gradient.png"),
-                            fit: BoxFit.cover
                         )
-                      )
-                  ),
-                  /*
+                    ),
+                    /*
                    * End - Ripple Adjustment
                    */
 
-                  /*
+                    /*
                    * Start - Run
                    */
-                  Positioned(
-                      left: 19,
-                      right: 19,
-                      bottom: 19,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(7),
-                          child: Material(
-                              shadowColor: Colors.transparent,
-                              color: Colors.transparent,
-                              child: InkWell(
-                                  splashColor: itemColor.withOpacity(0.73),
-                                  splashFactory: InkRipple.splashFactory,
-                                  onTap: () async {
+                    Positioned(
+                        left: 19,
+                        right: 19,
+                        bottom: 19,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(7),
+                            child: Material(
+                                shadowColor: Colors.transparent,
+                                color: Colors.transparent,
+                                child: InkWell(
+                                    splashColor: itemColor.withOpacity(0.73),
+                                    splashFactory: InkRipple.splashFactory,
+                                    onTap: () async {
 
-                                    // ??= If Left Null then Equal To
-                                    streamSubscription ??= Alarm.ringStream.stream.listen(
-                                            (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
-                                    );
+                                      // ??= If Left Null then Equal To
+                                      streamSubscription ??= Alarm.ringStream.stream.listen(
+                                              (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
+                                      );
 
-                                    alarmUtils.setupAlarm(widget.rhythmDataStructure, 0, PreferencesIO());
+                                      alarmUtils.setupAlarm(widget.rhythmDataStructure, 0, PreferencesIO());
 
-                                  },
-                                  child: const Image(
-                                    image: AssetImage("assets/run_item.png"),
-                                  )
-                              )
-                          )
-                      )
-                  )
-                  /*
+                                    },
+                                    child: const Image(
+                                      image: AssetImage("assets/run_item.png"),
+                                    )
+                                )
+                            )
+                        )
+                    )
+                    /*
                    * End - Run
                    */
 
-                ]
+                  ]
+              )
             )
         )
     );

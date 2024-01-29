@@ -111,7 +111,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
         duration: const Duration(milliseconds: 777),
         reverseDuration: const Duration(milliseconds: 333),
         animationBehavior: AnimationBehavior.preserve);
-    contentFadeAnimation = Tween<double>(begin: 1, end: 0.51).animate(CurvedAnimation(
+    contentFadeAnimation = Tween<double>(begin: 1, end: 0.37).animate(CurvedAnimation(
         parent: contentFadeController,
         curve: Curves.easeOut
     ));
@@ -265,7 +265,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   Widget setupContentWrapper() {
 
     return ListView(
-        padding: const EdgeInsets.only(top: 73, bottom: 193),
+        padding: const EdgeInsets.only(top: 73, bottom: 199),
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         controller: contentScroll,
