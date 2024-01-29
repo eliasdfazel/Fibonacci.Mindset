@@ -903,7 +903,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
             });
 
-            Future.delayed(const Duration(milliseconds: 1357), () {
+            Future.delayed(const Duration(milliseconds: 777), () {
 
               contentScaleController.reverse();
               contentFadeController.reverse();
@@ -927,6 +927,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   }
 
   void insertCurrentRhythm(RhythmDataStructure rhythmDataStructure) {
+
+    documentId = rhythmDataStructure.documentId()!;
 
     titleController.text = rhythmDataStructure.taskTitle();
     descriptionController.text = rhythmDataStructure.taskDescription();

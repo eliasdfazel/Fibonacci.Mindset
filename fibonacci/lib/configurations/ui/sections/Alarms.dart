@@ -195,7 +195,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
                                         cursorRadius: const Radius.circular(19),
                                         style: const TextStyle(
                                             color: ColorsResources.premiumLight,
-                                            fontSize: 13,
+                                            fontSize: 15,
                                             letterSpacing: 1.7,
                                             height: 1.1
                                         ),
@@ -290,7 +290,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
                                         cursorRadius: const Radius.circular(19),
                                         style: const TextStyle(
                                             color: ColorsResources.premiumLight,
-                                            fontSize: 13,
+                                            fontSize: 15,
                                             letterSpacing: 1.7,
                                             height: 1.1
                                         ),
@@ -385,7 +385,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
                                         cursorRadius: const Radius.circular(19),
                                         style: const TextStyle(
                                             color: ColorsResources.premiumLight,
-                                            fontSize: 13,
+                                            fontSize: 15,
                                             letterSpacing: 1.7,
                                             height: 1.1
                                         ),
