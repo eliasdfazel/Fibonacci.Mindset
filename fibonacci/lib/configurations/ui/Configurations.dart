@@ -895,9 +895,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
               taskAlarmsConfigurations)
           ).then((value) {
 
-            rhythmUpdated = true;
-
             setState(() {
+
+              rhythmUpdated = true;
 
               waitingPlaceholder = waiting(waitingNotice: "Task Set Successfully");
 
