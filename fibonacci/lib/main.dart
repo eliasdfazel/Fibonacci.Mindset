@@ -15,6 +15,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fibonacci/EntryConfigurations.dart';
 import 'package:fibonacci/dashboard/ui/Dashboard.dart';
 import 'package:fibonacci/firebase_options.dart';
+import 'package:fibonacci/recording/ui/RecordingInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,7 +75,7 @@ void main() async {
         debugPrint("Dashboard");
 
         entryPlaceholder = DashboardInterface(internetConnection: connectionResult);
-        // entryPlaceholder = RecordingInterface(rhythmDataStructure: null);
+        entryPlaceholder = RecordingInterface(rhythmDataStructure: null);
 
       }
 
