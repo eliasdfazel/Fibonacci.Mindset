@@ -38,8 +38,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   PreferencesIO preferencesIO = PreferencesIO();
 
-  int alarmIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -203,9 +201,14 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   void manageAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-    alarmIndex = await preferencesIO.retrieveAlarmIndex();
-
     await Alarm.stop(widget.rhythmDataStructure!.taskId());
+
+  }
+
+  void manageNextAlarm() async {
+    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
+
+    alarmUtils.nextAlarmProcess(widget.rhythmDataStructure!, preferencesIO);
 
   }
 
@@ -223,11 +226,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   }
 
-  void manageNextAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-
-
-  }
 
 }

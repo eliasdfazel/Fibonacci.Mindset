@@ -15,7 +15,7 @@ import 'package:fibonacci/utils/modifications/Strings.dart';
 
 class AlarmUtils {
 
-  void setupAlarm(RhythmDataStructure rhythmDataStructure, int alarmIndex, PreferencesIO preferencesIO,
+  void nextAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO,
       {String alarmSoundAsset = 'assets/sparkle.ogg'}) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
@@ -26,29 +26,61 @@ class AlarmUtils {
 
       List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
 
+      int alarmIndex = await preferencesIO.retrieveAlarmIndex();
+
       if (alarmIndex < listOfAlarm.length) {
 
-        int alarmDuration = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration]);
+        int repeatIndex = await preferencesIO.retrieveAlarmRepeat();
 
-        Future.delayed(const Duration(microseconds: 777), () async {
+        int alarmRepeat = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskRepeat]);
 
-          AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
-              DateTime.now().add(Duration(minutes: alarmDuration)));
+        if (repeatIndex < alarmRepeat) {
 
-          await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());
+          await preferencesIO.storeAlarmRepeat(repeatIndex + 1);
 
-          await Alarm.set(alarmSettings: alarmSettings);
+          setupAlarm(rhythmDataStructure, listOfAlarm, alarmIndex);
 
-        });
+        } else {
+
+          await preferencesIO.storeAlarmRepeat(0);
+
+          if (alarmIndex < listOfAlarm.length) {
+
+            await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+
+            setupAlarm(rhythmDataStructure, listOfAlarm, alarmIndex + 1);
+
+          }
+
+        }
 
       } else {
 
         //Reset Alarm Index
         await preferencesIO.storeAlarmIndex(0);
 
+        await preferencesIO.storeAlarmRepeat(0);
+
       }
 
     }
+
+  }
+
+  void setupAlarm(RhythmDataStructure rhythmDataStructure, List listOfAlarm, int alarmIndex) {
+
+    int alarmDuration = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration]);
+
+    Future.delayed(const Duration(microseconds: 777), () async {
+
+      AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
+          DateTime.now().add(Duration(minutes: alarmDuration)));
+
+      await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());
+
+      await Alarm.set(alarmSettings: alarmSettings);
+
+    });
 
   }
 

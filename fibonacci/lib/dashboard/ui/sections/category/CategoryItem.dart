@@ -199,12 +199,16 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> with Tick
                                     splashFactory: InkRipple.splashFactory,
                                     onTap: () async {
 
-                                      // ??= If Left Null then Equal To
-                                      streamSubscription ??= Alarm.ringStream.stream.listen(
-                                              (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
-                                      );
+                                      if (Alarm.getAlarms().isEmpty) {
 
-                                      alarmUtils.setupAlarm(widget.rhythmDataStructure, 0, PreferencesIO());
+                                        // ??= If Left Null then Equal To
+                                        streamSubscription ??= Alarm.ringStream.stream.listen(
+                                                (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
+                                        );
+
+                                        alarmUtils.nextAlarmProcess(widget.rhythmDataStructure, PreferencesIO());
+
+                                      }
 
                                     },
                                     child: const Image(
