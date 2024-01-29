@@ -46,7 +46,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
-    manageCurrentAlarm();
+    manageAlarm();
 
   }
 
@@ -192,7 +192,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
       }
       case BarActions.typeBottomBar: {
 
-
+        manageRestAlarm();
 
         break;
       }
@@ -200,7 +200,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   }
 
-  void manageCurrentAlarm() async {
+  void manageAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
     alarmIndex = await preferencesIO.retrieveAlarmIndex();
@@ -212,9 +212,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   void manageRevertAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-    await preferencesIO.storeAlarmIndex(alarmIndex - 1);
 
-    alarmUtils.setupAlarm(widget.rhythmDataStructure!, alarmIndex - 1, preferencesIO);
 
   }
 
@@ -229,9 +227,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   void manageNextAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-    await preferencesIO.storeAlarmIndex(alarmIndex + 1);
 
-    alarmUtils.setupAlarm(widget.rhythmDataStructure!, alarmIndex + 1, preferencesIO);
 
   }
 
