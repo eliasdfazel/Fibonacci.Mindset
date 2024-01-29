@@ -25,7 +25,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class RecordingInterface extends StatefulWidget {
 
-  RhythmDataStructure? rhythmDataStructure;
+  RhythmDataStructure rhythmDataStructure;
 
   RecordingInterface({Key? key, required this.rhythmDataStructure}) : super(key: key);
 
@@ -199,30 +199,30 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   }
 
   void manageAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
+    debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    await Alarm.stop(widget.rhythmDataStructure!.taskId());
+    await Alarm.stop(widget.rhythmDataStructure.taskId());
 
   }
 
   void manageNextAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
+    debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    alarmUtils.nextAlarmProcess(widget.rhythmDataStructure!, preferencesIO);
+    alarmUtils.nextAlarmProcess(widget.rhythmDataStructure, preferencesIO);
 
   }
 
   void manageRevertAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
+    debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    alarmUtils.revertAlarmProcess(widget.rhythmDataStructure!, preferencesIO);
+    alarmUtils.revertAlarmProcess(widget.rhythmDataStructure, preferencesIO);
 
   }
 
   void manageRestAlarm() async {
-    debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
+    debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    alarmUtils.restAlarmProcess(widget.rhythmDataStructure!, preferencesIO);
+    alarmUtils.restAlarmProcess(widget.rhythmDataStructure, preferencesIO);
 
   }
 
