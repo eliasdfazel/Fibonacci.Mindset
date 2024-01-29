@@ -223,7 +223,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   }
 
-  /// Click On Next Button
   void manageNextAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
