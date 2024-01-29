@@ -41,12 +41,6 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
   @override
   void initState() {
     super.initState();
-
-    // ??= If Left Null then Equal To
-    streamSubscription ??= Alarm.ringStream.stream.listen(
-          (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
-    );
-
   }
 
   @override
@@ -174,6 +168,11 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> {
                                   splashColor: itemColor.withOpacity(0.73),
                                   splashFactory: InkRipple.splashFactory,
                                   onTap: () async {
+
+                                    // ??= If Left Null then Equal To
+                                    streamSubscription ??= Alarm.ringStream.stream.listen(
+                                            (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
+                                    );
 
                                     alarmUtils.setupAlarm(widget.rhythmDataStructure, 0, PreferencesIO());
 
