@@ -37,7 +37,7 @@ class AlarmUtils {
 
           await preferencesIO.storeAlarmRepeat(repeatIndex + 1);
 
-          setupAlarm(rhythmDataStructure, listOfAlarm, alarmIndex);
+          setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex + 1][RhythmDataStructure.taskDuration]);
 
         } else {
 
@@ -47,7 +47,7 @@ class AlarmUtils {
 
             await preferencesIO.storeAlarmIndex(alarmIndex + 1);
 
-            setupAlarm(rhythmDataStructure, listOfAlarm, alarmIndex + 1);
+            setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex + 1][RhythmDataStructure.taskDuration]);
 
           }
 
@@ -76,23 +76,65 @@ class AlarmUtils {
 
       List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
 
-      // check if previous current repeat is 0
-      // then revert back one index
+      int repeatIndex = await preferencesIO.retrieveAlarmRepeat();
 
-      // if repeat is more than 0
-      // then revert back on repeat
+      if (repeatIndex > 0) {
+
+        int alarmIndex = await preferencesIO.retrieveAlarmRepeat();
+
+        await preferencesIO.storeAlarmRepeat(repeatIndex - 1);
+
+        setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration], prefix: "Revert One Step");
+
+      } else {
+
+        await preferencesIO.storeAlarmRepeat(0);
+
+        int alarmIndex = await preferencesIO.retrieveAlarmRepeat();
+
+        if (alarmIndex < listOfAlarm.length) {
+
+          if ((alarmIndex - 1) > 0) {
+
+            setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex - 1][RhythmDataStructure.taskDuration], prefix: "Revert One Step");
+
+          } else {
+
+            setupAlarm(rhythmDataStructure, listOfAlarm[0][RhythmDataStructure.taskDuration], prefix: "Revert One Step");
+
+          }
+
+        }
+
+      }
 
     }
 
   }
 
-  void setupAlarm(RhythmDataStructure rhythmDataStructure, List listOfAlarm, int alarmIndex) {
+  void restAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO) async {
 
-    int alarmDuration = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration]);
+    if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
+
+      await Alarm.stop(rhythmDataStructure.taskId());
+
+    } else {
+
+      List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
+
+      int alarmIndex = await preferencesIO.retrieveAlarmIndex();
+
+      setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex][RhythmDataStructure.taskRest], prefix: "Resting");
+
+    }
+
+  }
+
+  void setupAlarm(RhythmDataStructure rhythmDataStructure, int alarmDuration, {String prefix = ""}) {
 
     Future.delayed(const Duration(microseconds: 777), () async {
 
-      AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription(),
+      AlarmSettings alarmSettings = _setupAlarmSettings(rhythmDataStructure.taskId(), "${rhythmDataStructure.taskTitle()} - $prefix", rhythmDataStructure.taskDescription(),
           DateTime.now().add(Duration(minutes: alarmDuration)));
 
       await Alarm.setNotificationOnAppKillContent(rhythmDataStructure.taskTitle(), rhythmDataStructure.taskDescription());

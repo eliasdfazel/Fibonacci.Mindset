@@ -215,14 +215,14 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   void manageRevertAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-
+    alarmUtils.revertAlarmProcess(widget.rhythmDataStructure!, preferencesIO);
 
   }
 
   void manageRestAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure!.taskId()}");
 
-
+    alarmUtils.restAlarmProcess(widget.rhythmDataStructure!, preferencesIO);
 
   }
 
