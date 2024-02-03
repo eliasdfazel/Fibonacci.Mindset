@@ -9,9 +9,9 @@
  */
 
 import 'package:alarm/alarm.dart';
+import 'package:fibonacci/alarm/data/AlarmsIO.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
-import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/recording/ui/sections/RecordingBottomBar.dart';
 import 'package:fibonacci/recording/ui/sections/RecordingTopBar.dart';
 import 'package:fibonacci/reports/ui/ReportsInterface.dart';
@@ -36,7 +36,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   AlarmUtils alarmUtils = AlarmUtils();
 
-  PreferencesIO preferencesIO = PreferencesIO();
+  AlarmsIO alarmsIO = AlarmsIO();
 
   @override
   void initState() {
@@ -208,21 +208,21 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   void manageNextAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    alarmUtils.nextAlarmProcess(widget.rhythmDataStructure, preferencesIO);
+    alarmUtils.nextAlarmProcess(widget.rhythmDataStructure, alarmsIO);
 
   }
 
   void manageRevertAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    alarmUtils.revertAlarmProcess(widget.rhythmDataStructure, preferencesIO);
+    alarmUtils.revertAlarmProcess(widget.rhythmDataStructure, alarmsIO);
 
   }
 
   void manageRestAlarm() async {
     debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
-    alarmUtils.restAlarmProcess(widget.rhythmDataStructure, preferencesIO);
+    alarmUtils.restAlarmProcess(widget.rhythmDataStructure, alarmsIO);
 
   }
 
