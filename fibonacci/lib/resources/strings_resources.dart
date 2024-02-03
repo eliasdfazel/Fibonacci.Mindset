@@ -158,16 +158,6 @@ class StringsResources {
   /*
    * Start - Social Media
    */
-  static String geeksEmpireAndroid() {
-
-    return "https://play.google.com/store/apps/dev?id=8263190182709725073&hl=en_US&gl=US";
-  }
-
-  static String xLink() {
-
-    return "https://twitter.com/GeeksEmpire";
-  }
-
   static String privacyPolicyLink() {
 
     return "https://geeksempire.co/privacypolicy/";
@@ -176,6 +166,16 @@ class StringsResources {
   static String tosLink() {
 
     return "https://geeksempire.co/sachiel-ai-trading-signals/term-of-services/";
+  }
+
+  static String instagramLink() {
+
+    return "https://www.instagram.com/geeksempire.co";
+  }
+
+  static String youtubeLink() {
+
+    return "https://www.youtube.com/@GeeksEmpireCo/";
   }
 
   static String threadsLink() {
