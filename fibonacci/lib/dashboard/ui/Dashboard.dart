@@ -28,6 +28,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardInterface extends StatefulWidget {
@@ -400,7 +401,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                     child: InkWell(
                         onTap: () {
 
-
+                          Share.share('Fibonacci Mindset: Fibonacci AI Will Help You To Focus For Your Work, Studying, Playing ${StringsResources.applicationLink()}',
+                              subject: StringsResources.applicationName());
 
                         },
                         child: const Image(
