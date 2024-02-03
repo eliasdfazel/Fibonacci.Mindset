@@ -418,7 +418,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     );
   }
 
-  Widget waiting({String waitingNotice = "Click On ADD \nTo Configure A Task"}) {
+  Widget waiting({String waitingNotice = "Click On ADD\nTo Configure A Task"}) {
 
     return Container(
         alignment: Alignment.center,
