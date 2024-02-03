@@ -12,11 +12,11 @@ import 'dart:async';
 
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fibonacci/alarm/data/AlarmsIO.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
-import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/recording/ui/RecordingInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/utils/modifications/Colors.dart';
@@ -36,6 +36,8 @@ class CategoryItemInterface extends StatefulWidget {
   State<CategoryItemInterface> createState() => _CategoryItemInterfaceState();
 }
 class _CategoryItemInterfaceState extends State<CategoryItemInterface> with TickerProviderStateMixin {
+
+  AlarmsIO alarmsIO = AlarmsIO();
 
   AlarmUtils alarmUtils = AlarmUtils();
 
@@ -199,14 +201,18 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> with Tick
                                     splashFactory: InkRipple.splashFactory,
                                     onTap: () async {
 
+                                      await Alarm.stopAll();
+
                                       if (Alarm.getAlarms().isEmpty) {
+
+                                        await alarmsIO.resetIndexes();
 
                                         // ??= If Left Null then Equal To
                                         streamSubscription ??= Alarm.ringStream.stream.listen(
                                                 (alarmSettings) => navigateTo(context, RecordingInterface(rhythmDataStructure: widget.rhythmDataStructure))
                                         );
 
-                                        alarmUtils.nextAlarmProcess(widget.rhythmDataStructure, PreferencesIO());
+                                        alarmUtils.nextAlarmProcess(widget.rhythmDataStructure, alarmsIO);
 
                                       }
 

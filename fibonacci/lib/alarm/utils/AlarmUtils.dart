@@ -9,13 +9,13 @@
  */
 
 import 'package:alarm/alarm.dart';
+import 'package:fibonacci/alarm/data/AlarmsIO.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
-import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 
 class AlarmUtils {
 
-  void nextAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO) async {
+  void nextAlarmProcess(RhythmDataStructure rhythmDataStructure, AlarmsIO alarmsIO) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
 
@@ -25,27 +25,27 @@ class AlarmUtils {
 
       List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
 
-      int alarmIndex = await preferencesIO.retrieveAlarmIndex();
+      int alarmIndex = await alarmsIO.retrieveAlarmIndex();
 
       if (alarmIndex < listOfAlarm.length) {
 
-        int repeatIndex = await preferencesIO.retrieveAlarmRepeat();
+        int repeatIndex = await alarmsIO.retrieveAlarmRepeat();
 
         int alarmRepeat = int.parse(listOfAlarm[alarmIndex][RhythmDataStructure.taskRepeat]);
 
         if (repeatIndex < alarmRepeat) {
 
-          await preferencesIO.storeAlarmRepeat(repeatIndex + 1);
+          await alarmsIO.storeAlarmRepeat(repeatIndex + 1);
 
           setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex + 1][RhythmDataStructure.taskDuration]);
 
         } else {
 
-          await preferencesIO.storeAlarmRepeat(0);
+          await alarmsIO.storeAlarmRepeat(0);
 
           if (alarmIndex < listOfAlarm.length) {
 
-            await preferencesIO.storeAlarmIndex(alarmIndex + 1);
+            await alarmsIO.storeAlarmIndex(alarmIndex + 1);
 
             setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex + 1][RhythmDataStructure.taskDuration]);
 
@@ -56,9 +56,9 @@ class AlarmUtils {
       } else {
 
         //Reset Alarm Index
-        await preferencesIO.storeAlarmIndex(0);
+        await alarmsIO.storeAlarmIndex(0);
 
-        await preferencesIO.storeAlarmRepeat(0);
+        await alarmsIO.storeAlarmRepeat(0);
 
       }
 
@@ -66,7 +66,7 @@ class AlarmUtils {
 
   }
 
-  void revertAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO) async {
+  void revertAlarmProcess(RhythmDataStructure rhythmDataStructure, AlarmsIO alarmsIO) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
 
@@ -76,21 +76,21 @@ class AlarmUtils {
 
       List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
 
-      int repeatIndex = await preferencesIO.retrieveAlarmRepeat();
+      int repeatIndex = await alarmsIO.retrieveAlarmRepeat();
 
       if (repeatIndex > 0) {
 
-        int alarmIndex = await preferencesIO.retrieveAlarmRepeat();
+        int alarmIndex = await alarmsIO.retrieveAlarmRepeat();
 
-        await preferencesIO.storeAlarmRepeat(repeatIndex - 1);
+        await alarmsIO.storeAlarmRepeat(repeatIndex - 1);
 
         setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex][RhythmDataStructure.taskDuration], prefix: "Revert One Step");
 
       } else {
 
-        await preferencesIO.storeAlarmRepeat(0);
+        await alarmsIO.storeAlarmRepeat(0);
 
-        int alarmIndex = await preferencesIO.retrieveAlarmRepeat();
+        int alarmIndex = await alarmsIO.retrieveAlarmRepeat();
 
         if (alarmIndex < listOfAlarm.length) {
 
@@ -112,7 +112,7 @@ class AlarmUtils {
 
   }
 
-  void restAlarmProcess(RhythmDataStructure rhythmDataStructure, PreferencesIO preferencesIO) async {
+  void restAlarmProcess(RhythmDataStructure rhythmDataStructure, AlarmsIO alarmsIO) async {
 
     if (await Alarm.isRinging(rhythmDataStructure.taskId())) {
 
@@ -122,7 +122,7 @@ class AlarmUtils {
 
       List listOfAlarm = List.from(convertToJsonDynamic(rhythmDataStructure.taskAlarmsConfigurations()));
 
-      int alarmIndex = await preferencesIO.retrieveAlarmIndex();
+      int alarmIndex = await alarmsIO.retrieveAlarmIndex();
 
       setupAlarm(rhythmDataStructure, listOfAlarm[alarmIndex][RhythmDataStructure.taskRest], prefix: "Resting");
 
