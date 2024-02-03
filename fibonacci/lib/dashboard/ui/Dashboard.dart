@@ -112,8 +112,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                          */
 
                       /*
-                         * Start - Task
-                         */
+                       * Start - Task
+                       */
                       Align(
                           alignment: Alignment.center,
                           child: Padding(
@@ -128,8 +128,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                           )
                       ),
                       /*
-                         * End - Task
-                         */
+                       * End - Task
+                       */
 
                       /*
                          * Start - Bottom Bar
@@ -172,7 +172,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
   @override
   void rightAction({int barType = BarActions.typeBottomBar}) {
-    // TODO: implement rightAction
+
   }
 
   void retrieveTasks() async {
@@ -251,6 +251,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
     List<Widget> categorizedRhythms = [];
 
+    categorizedRhythms.add(branding());
+
     for (var element in allRhythmsWidget.keys) {
       debugPrint(element);
 
@@ -269,6 +271,23 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
     });
 
+  }
+
+  Widget branding() {
+
+    return SizedBox(
+      height: 137,
+      child: InkWell(
+        onTap: () {
+
+
+
+        },
+        child: Text(
+          StringsResources.applicationName(),
+        )
+      )
+    );
   }
 
   Widget waiting({String waitingNotice = "Click On ADD \nTo Configure A Task"}) {
