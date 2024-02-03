@@ -76,7 +76,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 51),
       child: SizedBox(
-          height: 199,
+          height: 215,
           width: double.infinity,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +118,7 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
                 ),
 
                 SizedBox(
-                    height: 137,
+                    height: 153,
                     child: rhythmsPlaceholder
                 ),
 

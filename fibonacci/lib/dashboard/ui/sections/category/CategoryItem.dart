@@ -77,8 +77,8 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> with Tick
     return Padding(
         padding: const EdgeInsets.only(right: 19),
         child: SizedBox(
-            height: 137,
-            width: 137,
+            height: 153,
+            width: 153,
             child: FadeTransition(
               opacity: fadeAnimation,
               child: Stack(
@@ -89,8 +89,8 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> with Tick
                    */
                     Center(
                         child: SizedBox(
-                            height: 136,
-                            width: 136,
+                            height: 152,
+                            width: 152,
                             child: WidgetMask(
                                 blendMode: BlendMode.srcATop,
                                 childSaveLayer: true,
@@ -106,8 +106,8 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> with Tick
                     ),
 
                     const SizedBox(
-                      height: 137,
-                      width: 137,
+                      height: 153,
+                      width: 153,
                       child: Image(
                         image: AssetImage("assets/squircle_adjustment_gradient.png"),
                         fit: BoxFit.cover,
@@ -145,8 +145,8 @@ class _CategoryItemInterfaceState extends State<CategoryItemInterface> with Tick
                    * Start - Ripple Adjustment
                    */
                     SizedBox(
-                        height: 137,
-                        width: 137,
+                        height: 153,
+                        width: 153,
                         child: WidgetMask(
                             blendMode: BlendMode.srcIn,
                             childSaveLayer: true,
