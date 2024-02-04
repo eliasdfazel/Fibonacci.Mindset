@@ -20,9 +20,12 @@ import 'package:flutter/material.dart';
 class CategoryInterface extends StatefulWidget {
 
   List<RhythmDataStructure> rhythmsDataStructures = [];
+
+  String? searchQuery;
+
   int categorizedBy = 0;
 
-  CategoryInterface({Key? key, required this.rhythmsDataStructures, required this.categorizedBy}) : super(key: key);
+  CategoryInterface({Key? key, required this.rhythmsDataStructures, required this.searchQuery, required this.categorizedBy}) : super(key: key);
 
   @override
   State<CategoryInterface> createState() => _CategoryInterfaceState();
@@ -47,6 +50,14 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (widget.searchQuery != null) {
+
+      widget.searchQuery == null;
+
+      processTasks(widget.rhythmsDataStructures);
+
+    }
 
     switch (widget.categorizedBy) {
       case CategorizedBy.categories: {
@@ -134,7 +145,22 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
 
     for (RhythmDataStructure rhythmDataStructure in rhythmDataStructures) {
 
-      allRhythms.add(CategoryItemInterface(rhythmDataStructure: rhythmDataStructure));
+      if (widget.searchQuery !=  null) {
+
+        if (rhythmDataStructure.taskTitle().toLowerCase().contains(widget.searchQuery!.toLowerCase())
+            || rhythmDataStructure.taskDescription().toLowerCase().contains(widget.searchQuery!.toLowerCase())
+            || rhythmDataStructure.taskLocation().toLowerCase().contains(widget.searchQuery!.toLowerCase())) {
+          debugPrint("Item Search Query: ${widget.searchQuery} - Query Found: ${rhythmDataStructure.rhythmDocumentData}");
+
+          allRhythms.add(CategoryItemInterface(rhythmDataStructure: rhythmDataStructure));
+
+        }
+
+      } else {
+
+        allRhythms.add(CategoryItemInterface(rhythmDataStructure: rhythmDataStructure));
+
+      }
 
     }
 

@@ -255,13 +255,12 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     List<Widget> categorizedRhythms = [];
 
     categorizedRhythms.add(searchWidget(querySnapshot, categorizedBy));
-
     categorizedRhythms.add(const Divider(height: 73, color: Colors.transparent));
 
     for (var element in allRhythmsWidget.keys) {
       debugPrint(element);
 
-      categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, categorizedBy: categorizedBy));
+      categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, searchQuery: null, categorizedBy: categorizedBy));
 
     }
 
@@ -422,10 +421,24 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     List<Widget> categorizedRhythms = [];
 
     categorizedRhythms.add(searchWidget(querySnapshot, categorizedBy));
-
     categorizedRhythms.add(const Divider(height: 73, color: Colors.transparent));
 
+    for (var element in allRhythmsWidget.keys) {
 
+      for (var itemElement in allRhythmsWidget[element]!) {
+
+        if (itemElement.taskTitle().toLowerCase().contains(searchQuery.toLowerCase())
+            || itemElement.taskDescription().toLowerCase().contains(searchQuery.toLowerCase())
+            || itemElement.taskLocation().toLowerCase().contains(searchQuery.toLowerCase())) {
+          debugPrint("Search Query: $searchQuery - Query Found: ${itemElement.rhythmDocumentData}");
+
+          categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: [itemElement], searchQuery: searchQuery, categorizedBy: categorizedBy));
+
+        }
+
+      }
+
+    }
 
     setState(() {
 
