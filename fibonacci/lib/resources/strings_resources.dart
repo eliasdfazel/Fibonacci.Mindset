@@ -33,6 +33,15 @@ class StringsResources {
     return "Previews";
   }
 
+  static String searchTitle() {
+
+    return "Title";
+  }
+  static String searchHint() {
+
+    return "Title Of Task";
+  }
+
   static String titleTitle() {
 
     return "Title";

@@ -42,6 +42,9 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
   PreferencesIO preferencesIO = PreferencesIO();
 
+  TextEditingController searchQueryController = TextEditingController();
+  Color searchQueryWarning = ColorsResources.premiumLight;
+
   Widget tasksPlaceholder = Container();
 
   @override
@@ -175,7 +178,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
   }
 
-  void retrieveTasks() async {
+  void retrieveTasks({Source getOptionSource = Source.server}) async {
 
     int categoryPreferences = await preferencesIO.retrieveCategorizedBy();
 
@@ -205,7 +208,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     FirebaseFirestore.instance
       .collection(rhythmsCollectionsPath(FirebaseAuth.instance.currentUser!.email!))
       .orderBy(categorizedBy)
-      .get().then((QuerySnapshot querySnapshot) => {
+      .get(GetOptions(source: getOptionSource)).then((QuerySnapshot querySnapshot) => {
 
         if (querySnapshot.size > 0) {
 
@@ -251,6 +254,10 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
     List<Widget> categorizedRhythms = [];
 
+    categorizedRhythms.add(searchWidget(querySnapshot, categorizedBy));
+
+    categorizedRhythms.add(const Divider(height: 73, color: Colors.transparent));
+
     for (var element in allRhythmsWidget.keys) {
       debugPrint(element);
 
@@ -270,6 +277,184 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     });
 
   }
+
+  /*
+   * Start - Search
+   */
+  Widget searchWidget(QuerySnapshot querySnapshot, int categorizedBy) {
+
+    return Container(
+        height: 103,
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: 173,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  StringsResources.searchTitle(),
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: searchQueryWarning,
+                                      fontSize: 13,
+                                      letterSpacing: 1.7
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
+
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 73,
+                      padding: const EdgeInsets.only(left: 13, right: 13),
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: const Border.symmetric(
+                            horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                            vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                          )
+                      ),
+                      child: TextField(
+                          controller: searchQueryController,
+                          maxLines: 1,
+                          textAlign: TextAlign.left,
+                          textDirection: TextDirection.ltr,
+                          textAlignVertical: TextAlignVertical.center,
+                          cursorColor: ColorsResources.primaryColor,
+                          autofocus: false,
+                          enableSuggestions: true,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.search,
+                          cursorWidth: 3,
+                          cursorHeight: 23,
+                          onSubmitted: (searchQuery) async {
+
+                            startSearchQuery(querySnapshot, searchQuery, categorizedBy);
+
+                          },
+                          onChanged: (searchQuery) {
+
+                            if (searchQuery.isEmpty) {
+
+                              retrieveTasks(getOptionSource: Source.cache);
+
+                            }
+
+                          },
+                          cursorRadius: const Radius.circular(19),
+                          style: const TextStyle(
+                              color: ColorsResources.premiumLight,
+                              fontSize: 19,
+                              letterSpacing: 1.7,
+                              height: 1.1
+                          ),
+                          decoration: InputDecoration.collapsed(
+                              hintText: StringsResources.searchHint(),
+                              hintStyle: TextStyle(
+                                  color: ColorsResources.premiumLight.withOpacity(0.51),
+                                  fontSize: 19,
+                                  letterSpacing: 1.7,
+                                  height: 1.1
+                              ),
+                              border: InputBorder.none
+                          )
+                      )
+                  )
+              )
+
+            ]
+        )
+    );
+  }
+
+  Future startSearchQuery(QuerySnapshot querySnapshot, String searchQuery, int categorizedBy) async {
+
+    Map<String, List<RhythmDataStructure>> allRhythmsWidget = <String, List<RhythmDataStructure>>{};
+
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+
+      RhythmDataStructure rhythmDataStructure = RhythmDataStructure(querySnapshot.docs[i]);
+      debugPrint("$i ${rhythmDataStructure.rhythmDocumentData}");
+
+
+      switch (categorizedBy) {
+        case CategorizedBy.categories: {
+
+          (allRhythmsWidget[rhythmDataStructure.taskCategories()] ??= []).add(rhythmDataStructure);
+
+          break;
+        }
+        case CategorizedBy.locations: {
+
+          (allRhythmsWidget[rhythmDataStructure.taskLocation()] ??= []).add(rhythmDataStructure);
+
+          break;
+        }
+        case CategorizedBy.colorsTags: {
+
+          (allRhythmsWidget[rhythmDataStructure.taskColorsTags()] ??= []).add(rhythmDataStructure);
+
+          break;
+        }
+      }
+    }
+
+    List<Widget> categorizedRhythms = [];
+
+    categorizedRhythms.add(searchWidget(querySnapshot, categorizedBy));
+
+    categorizedRhythms.add(const Divider(height: 73, color: Colors.transparent));
+
+    for (var element in allRhythmsWidget.keys) {
+      debugPrint(element);
+
+      RhythmDataStructure rhythmDataStructure = allRhythmsWidget[element]!.first;
+
+      if (rhythmDataStructure.taskTitle().contains(searchQuery)
+        || rhythmDataStructure.taskDescription().contains(searchQuery)
+        || rhythmDataStructure.taskLocation().contains(searchQuery)) {
+
+        categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, categorizedBy: categorizedBy));
+
+      }
+
+    }
+
+    setState(() {
+
+      tasksPlaceholder = ListView(
+          padding: const EdgeInsets.only(top: 53, bottom: 73),
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          children: categorizedRhythms
+      );
+
+    });
+
+  }
+  /*
+   * End - Search
+   */
 
   Widget waiting({String waitingNotice = "Click On ADD\nTo Configure A Task"}) {
 
