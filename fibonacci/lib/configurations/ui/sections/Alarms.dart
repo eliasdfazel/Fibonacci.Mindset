@@ -413,7 +413,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
     );
   }
 
-  /// Add + Button
+  /// Add (+) Button
   Widget addAlarm() {
 
     return SizedBox(
@@ -526,7 +526,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     setState(() {
 
-      widget.alarmsInputItems;;
+      widget.alarmsInputItems;
 
     });
 
