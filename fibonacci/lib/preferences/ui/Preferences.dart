@@ -8,6 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/preferences/io/keys/PreferencesKeys.dart';
+import 'package:fibonacci/preferences/ui/elements/Switch.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -23,6 +25,8 @@ class PreferencesInterface extends StatefulWidget {
   State<PreferencesInterface> createState() => _PreferencesInterfaceState();
 }
 class _PreferencesInterfaceState extends State<PreferencesInterface> {
+
+  SwitchInterface fibonacciAI = SwitchInterface(preferencesTitle: StringsResources.fibonacciAiTitle(), preferencesDescription: StringsResources.fibonacciAiDescription(), preferencesKey: PreferencesKeys.fibonacciAI);
 
   @override
   void initState() {
@@ -70,7 +74,22 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
                          * End - Decoration
                          */
 
-                      branding()
+                      ListView(
+                        padding: const EdgeInsets.fromLTRB(37, 73, 37, 73),
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        children: [
+
+                          branding(),
+
+                          const Divider(height: 37, color: Colors.transparent),
+
+                          fibonacciAI,
+
+                          const Divider(height: 37, color: Colors.transparent),
+
+                        ]
+                      )
 
                     ]
                 )
@@ -90,6 +109,7 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
             children: [
 
               Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
@@ -101,9 +121,9 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
                               launchUrl(Uri.parse(StringsResources.applicationLink()), mode: LaunchMode.externalApplication);
 
                             },
-                            child: const Padding(
-                                padding: EdgeInsets.only(left: 25),
-                                child: Image(
+                            child: Transform.translate(
+                                offset: const Offset(-11, 0),
+                                child: const Image(
                                     image: AssetImage("assets/application_name.png")
                                 )
                             )
@@ -112,7 +132,7 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
 
                     Container(
                         height: 37,
-                        padding: const EdgeInsets.only(left: 33),
+                        padding: const EdgeInsets.only(left: 0),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,7 +216,7 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
               Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                      padding: const EdgeInsets.only(right: 37),
+                      padding: const EdgeInsets.only(right: 0),
                       child: SizedBox(
                           height: 81,
                           width: 81,
@@ -219,5 +239,7 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
         )
     );
   }
+
+
 
 }

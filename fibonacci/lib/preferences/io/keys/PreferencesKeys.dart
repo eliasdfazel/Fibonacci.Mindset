@@ -11,6 +11,9 @@
 class PreferencesKeys {
 
   static const String categorizedBy = "categorizedBy";
+
+  static const String fibonacciAI = "fibonacciAI";
+
   static const String immersiveFocus = "immersiveFocus";
 
 }
