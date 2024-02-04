@@ -51,14 +51,6 @@ class _CategoryInterfaceState extends State<CategoryInterface> {
   @override
   Widget build(BuildContext context) {
 
-    if (widget.searchQuery != null) {
-
-      widget.searchQuery == null;
-
-      processTasks(widget.rhythmsDataStructures);
-
-    }
-
     switch (widget.categorizedBy) {
       case CategorizedBy.categories: {
 
