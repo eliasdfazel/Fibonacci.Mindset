@@ -9,6 +9,7 @@
  */
 
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
@@ -46,6 +47,8 @@ class AlarmsInterface extends StatefulWidget {
 }
 class _AlarmInterfaceState extends State<AlarmsInterface> {
 
+  PreferencesIO preferencesIO = PreferencesIO();
+
   Widget alarmsListPlaceholder = Container();
 
   @override
@@ -58,7 +61,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     } else {
 
-      insertAlarm();
+      initializeAlarmInput();
 
     }
 
@@ -431,7 +434,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
                       splashFactory: InkRipple.splashFactory,
                       onTap: () async {
 
-                        insertAlarm();
+                        initializeAlarmInput();
 
                       },
                       child: Container(
@@ -505,6 +508,24 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
     );
   }
 
+  void initializeAlarmInput() async {
+
+    preferencesIO.retrieveFibonacciAI().then((value) {
+
+      if (value) {
+
+        insertFibonacciAlarm();
+
+      } else {
+
+        insertAlarm();
+
+      }
+
+    });
+
+  }
+
   void insertAlarm() async {
 
     if (widget.alarmsInputItems.isNotEmpty) {
@@ -520,6 +541,38 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
     widget.alarmsRepeatInput.add(repeatController);
 
     TextEditingController restController = TextEditingController();
+    widget.alarmsRestInput.add(restController);
+
+    widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
+
+    setState(() {
+
+      widget.alarmsInputItems;
+
+    });
+
+  }
+
+  void insertFibonacciAlarm() async {
+
+    if (widget.alarmsInputItems.isNotEmpty) {
+
+      widget.alarmsActions.alarmAdded();
+
+    }
+
+    // Get Json Fibonacci Configurations from Server
+
+    TextEditingController durationController = TextEditingController();
+    durationController.text = "7";
+    widget.alarmsDurationInput.add(durationController);
+
+    TextEditingController repeatController = TextEditingController();
+    repeatController.text = "11";
+    widget.alarmsRepeatInput.add(repeatController);
+
+    TextEditingController restController = TextEditingController();
+    restController.text = "5";
     widget.alarmsRestInput.add(restController);
 
     widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
