@@ -91,7 +91,7 @@ class StringsResources {
 
   static String fibonacciAiDescription() {
 
-    return "It will suggest alarms suitable to your tasks, requirements.";
+    return "It will suggest alarms suitable to your tasks requirements.";
   }
 
   static String duration() {

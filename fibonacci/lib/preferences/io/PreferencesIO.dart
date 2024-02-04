@@ -22,4 +22,17 @@ class PreferencesIO {
     return categorizedBy;
   }
 
+  void storeFibonacciAI(bool inputValue) async {
+
+    (await _sharedPreferences).setBool(PreferencesKeys.fibonacciAI, inputValue);
+
+  }
+
+  Future<bool> retrieveFibonacciAI() async {
+
+    bool fibonacciAI = (await _sharedPreferences).getBool(PreferencesKeys.fibonacciAI) ?? false;
+
+    return fibonacciAI;
+  }
+
 }

@@ -240,6 +240,4 @@ class _PreferencesInterfaceState extends State<PreferencesInterface> {
     );
   }
 
-
-
 }

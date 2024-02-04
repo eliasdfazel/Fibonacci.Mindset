@@ -19,6 +19,8 @@
  */
 
 import 'package:blur/blur.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
+import 'package:fibonacci/preferences/io/keys/PreferencesKeys.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,8 @@ class SwitchInterface extends StatefulWidget {
 }
 class _SwitchInterfaceState extends State<SwitchInterface> {
 
+  PreferencesIO preferencesIO = PreferencesIO();
+
   bool switchStatus = false;
 
   double offOpacity = 1;
@@ -44,6 +48,9 @@ class _SwitchInterfaceState extends State<SwitchInterface> {
   @override
   void initState() {
     super.initState();
+
+    setSwitchState();
+
   }
 
   @override
@@ -71,26 +78,54 @@ class _SwitchInterfaceState extends State<SwitchInterface> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(13),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
+                        Text(
+                            widget.preferencesTitle,
+                            style: const TextStyle(
+                                color: ColorsResources.premiumLight,
+                                fontSize: 19,
+                              letterSpacing: 1.73
+                            )
+                        ),
 
+                        Expanded(
+                          child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                  widget.preferencesDescription,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      color: ColorsResources.premiumLight.withOpacity(0.73),
+                                      fontSize: 12,
+                                      letterSpacing: 1
+                                  )
+                              )
+                          )
+                        )
 
-
-                ]
+                      ]
+                  )
+                )
               ),
 
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
-                  onTap: () {
+                  onTap: () async {
                     debugPrint("Switching... $switchStatus");
 
-                    setState(() {
+                    switchStatus = !switchStatus;
 
-                      switchStatus = !switchStatus;
+                    storeSwitchState(switchStatus);
+
+                    setState(() {
 
                       if (switchStatus) {
 
@@ -139,6 +174,52 @@ class _SwitchInterfaceState extends State<SwitchInterface> {
       ),
       child: const SizedBox(height: 101)
     );
+  }
+
+  void setSwitchState() {
+
+    switch (widget.preferencesKey) {
+      case PreferencesKeys.fibonacciAI: {
+
+        preferencesIO.retrieveFibonacciAI().then((value) {
+
+          switchStatus = value;
+
+          setState(() {
+
+            if (switchStatus) {
+
+              onOpacity = 1;
+              offOpacity = 0;
+
+            } else {
+
+              onOpacity = 0;
+              offOpacity = 1;
+
+            }
+
+          });
+
+        });
+
+        break;
+      }
+    }
+
+  }
+
+  void storeSwitchState(bool switchStatus) {
+
+    switch (widget.preferencesKey) {
+      case PreferencesKeys.fibonacciAI: {
+
+        preferencesIO.storeFibonacciAI(switchStatus);
+
+        break;
+      }
+    }
+
   }
 
 }
