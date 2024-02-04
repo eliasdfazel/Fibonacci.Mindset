@@ -426,15 +426,24 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     categorizedRhythms.add(const Divider(height: 73, color: Colors.transparent));
 
     for (var element in allRhythmsWidget.keys) {
-      debugPrint(element);
 
-      RhythmDataStructure rhythmDataStructure = allRhythmsWidget[element]!.first;
+      if (allRhythmsWidget[element] != null) {
 
-      if (rhythmDataStructure.taskTitle().contains(searchQuery)
-        || rhythmDataStructure.taskDescription().contains(searchQuery)
-        || rhythmDataStructure.taskLocation().contains(searchQuery)) {
+        List<RhythmDataStructure> rhythmDataStructure = allRhythmsWidget[element]!;
 
-        categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, categorizedBy: categorizedBy));
+        for (var searchData in rhythmDataStructure) {
+          debugPrint("Search Data: $searchData - Search Query: $searchQuery");
+
+          if (searchData.taskTitle().toLowerCase().contains(searchQuery.toLowerCase())
+              || searchData.taskDescription().toLowerCase().contains(searchQuery.toLowerCase())
+              || searchData.taskLocation().toLowerCase().contains(searchQuery.toLowerCase())) {
+            debugPrint("Query Found. Search Data: $element - Search Query: $searchQuery");
+
+            categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, categorizedBy: categorizedBy));
+
+          }
+
+        }
 
       }
 
