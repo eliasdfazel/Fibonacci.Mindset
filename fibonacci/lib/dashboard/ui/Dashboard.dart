@@ -254,9 +254,6 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
     List<Widget> categorizedRhythms = [];
 
-    categorizedRhythms.add(searchWidget(querySnapshot, categorizedBy));
-    categorizedRhythms.add(const Divider(height: 73, color: Colors.transparent));
-
     for (var element in allRhythmsWidget.keys) {
       debugPrint(element);
 
