@@ -30,7 +30,7 @@ class PreferencesIO {
 
   Future<bool> retrieveFibonacciAI() async {
 
-    bool fibonacciAI = (await _sharedPreferences).getBool(PreferencesKeys.fibonacciAI) ?? false;
+    bool fibonacciAI = (await _sharedPreferences).getBool(PreferencesKeys.fibonacciAI) ?? true;
 
     return fibonacciAI;
   }
