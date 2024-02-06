@@ -8,7 +8,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
@@ -562,9 +561,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     }
 
-    FirebaseFunctions.instance
-        .httpsCallable("fibonacciAI")
-        .call("categoryName");
+
 
     TextEditingController durationController = TextEditingController();
     durationController.text = "7";
