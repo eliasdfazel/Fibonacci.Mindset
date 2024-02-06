@@ -563,8 +563,6 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
     }
 
-
-
     FibonacciDataStructure fibonacciDataStructure = await FibonacciAI().generate(widget.alarmsInputItems.length, 8);
 
     TextEditingController durationController = TextEditingController();
