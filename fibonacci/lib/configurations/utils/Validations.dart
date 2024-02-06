@@ -8,12 +8,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-class CategoriesType {
-  static const String typeOne = "Urgent Important";
-  static const String typeTwo = "Non-Urgent Important";
-  static const String typeThree = "Urgent Non-Important";
-  static const String typeFour = "Non-Urgent Non-Important";
-}
+
 
 bool mapContains(List<Map<dynamic, dynamic>> inputListMap, Map<dynamic, dynamic> compareMap) {
 

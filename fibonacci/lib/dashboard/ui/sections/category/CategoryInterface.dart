@@ -8,8 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/configurations/utils/CategorizedBy.dart';
 import 'package:fibonacci/dashboard/ui/sections/category/CategoryItem.dart';
-import 'package:fibonacci/dashboard/utils/CategorizedBy.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';

@@ -9,7 +9,7 @@
  */
 
 import 'package:fibonacci/ai/data/FibonacciDataStructure.dart';
-import 'package:fibonacci/configurations/utils/Validations.dart';
+import 'package:fibonacci/configurations/utils/CategorizedBy.dart';
 import 'package:flutter/cupertino.dart';
 
 class FibonacciAI {
