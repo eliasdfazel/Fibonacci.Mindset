@@ -826,7 +826,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   Widget fibonacciNoticeWidget() {
 
     return Container(
-      padding: const EdgeInsets.only(left: 53, right: 53, top: 7),
+      padding: const EdgeInsets.only(left: 59, right: 59, top: 7),
       child: Text(
         StringsResources.fibonacciNotice(),
         style: TextStyle(
