@@ -9,17 +9,20 @@
  */
 
 import 'package:fibonacci/resources/colors_resources.dart';
+import 'package:fibonacci/utils/actions/ChoicesActions.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:widget_mask/widget_mask.dart';
 
 class CategoriesChoices extends StatefulWidget {
 
+  ChoicesActions choicesActions;
+
   Map<String, String> choiceInformation;
 
   bool choiceSelected = false;
 
-  CategoriesChoices({Key? key, required this.choiceInformation, required this.choiceSelected}) : super(key: key);
+  CategoriesChoices({Key? key, required this.choiceInformation, required this.choiceSelected, required this.choicesActions}) : super(key: key);
 
   @override
   State<CategoriesChoices> createState() => _CategoriesChoicesState();
@@ -69,13 +72,16 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
                           backgroundColor = Colors.transparent;
                           widget.choiceSelected = false;
 
+                          widget.choicesActions.choicesUnselected(widget.choiceInformation, ChoicesActionsKeys.choiceCategory);
+
                         } else {
 
                           backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
                           widget.choiceSelected = true;
 
-                        }
+                          widget.choicesActions.choicesSelected(widget.choiceInformation, ChoicesActionsKeys.choiceCategory);
 
+                        }
 
                       });
 

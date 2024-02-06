@@ -9,11 +9,42 @@
  */
 
 import 'package:fibonacci/ai/data/FibonacciDataStructure.dart';
+import 'package:fibonacci/configurations/utils/Validations.dart';
 import 'package:flutter/cupertino.dart';
 
 class FibonacciAI {
 
-  Future<FibonacciDataStructure> generate(int index, int factor) async {
+  Future<FibonacciDataStructure> generate(int index, String taskCategory) async {
+
+    int factor = 8;
+
+    switch (taskCategory) {
+      case CategoriesType.typeOne: {
+
+        factor = 8;
+
+        break;
+      }
+      case CategoriesType.typeTwo: {
+
+        factor = 8;
+
+        break;
+      }
+      case CategoriesType.typeThree: {
+
+        factor = 5;
+
+        break;
+      }
+      case CategoriesType.typeFour: {
+
+        factor = 3;
+
+        break;
+      }
+    }
+
 
     int fibonacciIndex = index + 2;
 

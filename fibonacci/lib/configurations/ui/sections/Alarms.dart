@@ -27,11 +27,17 @@ abstract class AlarmsActions {
 
 class AlarmsInterface extends StatefulWidget {
 
+  PreferencesIO preferencesIO;
+
   AlarmsActions alarmsActions;
 
   dynamic alarmsJson;
 
-  AlarmsInterface({Key? key, required this.alarmsActions, this.alarmsJson}) : super(key: key);
+  String? selectedCategory;
+
+  AlarmsInterface({Key? key, required this.alarmsActions, this.alarmsJson,
+    required this.preferencesIO,
+    required this.selectedCategory}) : super(key: key);
 
   List<Widget> alarmsInputItems = [];
 
@@ -48,8 +54,6 @@ class AlarmsInterface extends StatefulWidget {
   State<AlarmsInterface> createState() => _AlarmInterfaceState();
 }
 class _AlarmInterfaceState extends State<AlarmsInterface> {
-
-  PreferencesIO preferencesIO = PreferencesIO();
 
   Widget alarmsListPlaceholder = Container();
 
@@ -512,7 +516,7 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
   void initializeAlarmInput() async {
 
-    preferencesIO.retrieveFibonacciAI().then((value) {
+    widget.preferencesIO.retrieveFibonacciAI().then((value) {
 
       if (value) {
 
@@ -557,33 +561,37 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
   void insertFibonacciAlarm() async {
 
-    if (widget.alarmsInputItems.isNotEmpty) {
+    if (widget.selectedCategory != null) {
 
-      widget.alarmsActions.alarmAdded();
+      if (widget.alarmsInputItems.isNotEmpty) {
+
+        widget.alarmsActions.alarmAdded();
+
+      }
+
+      FibonacciDataStructure fibonacciDataStructure = await FibonacciAI().generate(widget.alarmsInputItems.length, widget.selectedCategory!);
+
+      TextEditingController durationController = TextEditingController();
+      durationController.text = fibonacciDataStructure.taskDuration.toString();
+      widget.alarmsDurationInput.add(durationController);
+
+      TextEditingController repeatController = TextEditingController();
+      repeatController.text = fibonacciDataStructure.taskRepeat.toString();
+      widget.alarmsRepeatInput.add(repeatController);
+
+      TextEditingController restController = TextEditingController();
+      restController.text = fibonacciDataStructure.taskRest.toString();
+      widget.alarmsRestInput.add(restController);
+
+      widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
+
+      setState(() {
+
+        widget.alarmsInputItems;
+
+      });
 
     }
-
-    FibonacciDataStructure fibonacciDataStructure = await FibonacciAI().generate(widget.alarmsInputItems.length, 8);
-
-    TextEditingController durationController = TextEditingController();
-    durationController.text = fibonacciDataStructure.taskDuration.toString();
-    widget.alarmsDurationInput.add(durationController);
-
-    TextEditingController repeatController = TextEditingController();
-    repeatController.text = fibonacciDataStructure.taskRepeat.toString();
-    widget.alarmsRepeatInput.add(repeatController);
-
-    TextEditingController restController = TextEditingController();
-    restController.text = fibonacciDataStructure.taskRest.toString();
-    widget.alarmsRestInput.add(restController);
-
-    widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
-
-    setState(() {
-
-      widget.alarmsInputItems;
-
-    });
 
   }
 

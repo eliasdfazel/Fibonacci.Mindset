@@ -21,9 +21,11 @@ import 'package:fibonacci/configurations/utils/AlarmsProcess.dart';
 import 'package:fibonacci/configurations/utils/Validations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
+import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BarActions.dart';
+import 'package:fibonacci/utils/actions/ChoicesActions.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
@@ -40,7 +42,9 @@ class ConfigurationsInterface extends StatefulWidget {
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with TickerProviderStateMixin implements BarActions, AlarmsActions {
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with TickerProviderStateMixin implements BarActions, AlarmsActions, ChoicesActions {
+
+  PreferencesIO preferencesIO = PreferencesIO();
 
   ScrollController contentScroll = ScrollController();
 
@@ -65,7 +69,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
   Widget waitingPlaceholder = Container();
 
-  late AlarmsInterface alarmsInterface;
+  Widget fibonacciNotice = Container();
+
+  Widget alarmsInterface = Container();
   Color alarmsWarning = ColorsResources.premiumLight;
 
   bool rhythmUpdated = false;
@@ -125,7 +131,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
         curve: Curves.easeOut
     ));
 
-    alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations());
+    initializeAlarmInterface();
 
     if (widget.rhythmDataStructure != null) {
       debugPrint("RhythmDataStructure: ${widget.rhythmDataStructure!.rhythmDocumentData}");
@@ -262,6 +268,76 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
   }
 
+  @override
+  void choicesSelected(Map<String, String> choiceInformation, int choiceType) async {
+    debugPrint("Selected Category: ${choiceInformation.keys.first}");
+
+    int selectedAmount = 0;
+
+    for (var element in allCategoriesChoices) {
+
+      if (element.choiceSelected) {
+
+        selectedAmount++;
+
+      }
+
+    }
+
+    if (selectedAmount == 1) {
+
+      if (await preferencesIO.retrieveFibonacciAI()) {
+        debugPrint("Fibonacci AI: ON");
+
+        setState(() {
+
+          alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(), preferencesIO: preferencesIO, selectedCategory: choiceInformation.keys.first);
+
+          fibonacciNotice = Container();
+
+        });
+
+      }
+
+    }
+
+  }
+
+  @override
+  void choicesUnselected(Map<String, String> choiceInformation, int choiceType) async {
+    debugPrint("Unselected Category: ${choiceInformation.keys.first}");
+
+    int selectedAmount = 0;
+
+    for (var element in allCategoriesChoices) {
+
+      if (element.choiceSelected) {
+
+        selectedAmount++;
+
+      }
+
+    }
+
+    if (selectedAmount == 0) {
+
+      if (await preferencesIO.retrieveFibonacciAI()) {
+        debugPrint("Fibonacci AI: ON");
+
+        setState(() {
+
+          alarmsInterface = Container();
+
+          fibonacciNotice = fibonacciNoticeWidget();
+
+        });
+
+      }
+
+    }
+
+  }
+
   Widget setupContentWrapper() {
 
     return ListView(
@@ -349,13 +425,38 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
               )
           ),
 
-          alarmsInterface
+          alarmsInterface,
+
+          fibonacciNotice,
           /*
            * End - Alarm
            */
 
         ]
     );
+
+  }
+
+  void initializeAlarmInterface() async {
+
+    if (await preferencesIO.retrieveFibonacciAI()) {
+
+      setState(() {
+
+        fibonacciNotice = fibonacciNoticeWidget();
+
+      });
+
+    } else {
+      debugPrint("Manual Alarm Input");
+
+      setState(() {
+
+        alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(), preferencesIO: preferencesIO, selectedCategory: null);
+
+      });
+
+    }
 
   }
 
@@ -617,7 +718,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
     for (var element in inputChoices) {
 
 
-      allCategoriesChoices.add(CategoriesChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element)));
+      allCategoriesChoices.add(CategoriesChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element), choicesActions: this));
 
     }
 
@@ -722,205 +823,223 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
    * End - Assets
    */
 
+  Widget fibonacciNoticeWidget() {
+
+    return Container(
+      padding: const EdgeInsets.only(left: 53, right: 53, top: 7),
+      child: Text(
+        StringsResources.fibonacciNotice(),
+        style: TextStyle(
+            color: ColorsResources.springColor.withOpacity(0.73),
+            fontSize: 13
+        ),
+      ),
+    );
+  }
+
   /*
    * Start - Insert Process
    */
   void insertProcess() async {
 
-    String taskTitle = titleController.value.text;
-    String taskDescription = descriptionController.value.text;
-    String taskLocation = locationController.value.text;
+    if (alarmsInterface is AlarmsInterface) {
 
-    String taskCategories = "";
-    String taskColorsTags = "";
+      String taskTitle = titleController.value.text;
+      String taskDescription = descriptionController.value.text;
+      String taskLocation = locationController.value.text;
 
-    String taskAlarmsConfigurations = await processAlarmsToJson(alarmsInterface);
+      String taskCategories = "";
+      String taskColorsTags = "";
 
-    bool validationResult = true;
+      String taskAlarmsConfigurations = await processAlarmsToJson(alarmsInterface as AlarmsInterface);
 
-    for (var element in allCategoriesChoices) {
+      bool validationResult = true;
 
-      if (element.choiceSelected) {
+      for (var element in allCategoriesChoices) {
 
-        taskCategories += "${prepareMap(element.choiceInformation)},";
+        if (element.choiceSelected) {
 
-      }
+          taskCategories += "${prepareMap(element.choiceInformation)},";
 
-    }
-
-    for (var element in allColorsTagsChoices) {
-
-      if (element.choiceSelected) {
-
-        taskColorsTags += "${prepareMap(element.choiceInformation)},";
+        }
 
       }
 
-    }
+      for (var element in allColorsTagsChoices) {
 
-    if (taskTitle.isEmpty) {
+        if (element.choiceSelected) {
 
-      validationResult = false;
+          taskColorsTags += "${prepareMap(element.choiceInformation)},";
 
-      setState(() {
+        }
 
-        titleWarning = ColorsResources.red;
+      }
 
-      });
+      if (taskTitle.isEmpty) {
 
-    } else {
+        validationResult = false;
 
-      setState(() {
+        setState(() {
 
-        titleWarning = ColorsResources.premiumLight;
+          titleWarning = ColorsResources.red;
 
-      });
+        });
 
-    }
+      } else {
 
-    if (taskDescription.isEmpty) {
+        setState(() {
 
-      validationResult = false;
+          titleWarning = ColorsResources.premiumLight;
 
-      setState(() {
+        });
 
-        descriptionWarning = ColorsResources.red;
+      }
 
-      });
+      if (taskDescription.isEmpty) {
 
-    } else {
+        validationResult = false;
 
-      setState(() {
+        setState(() {
 
-        descriptionWarning = ColorsResources.premiumLight;
+          descriptionWarning = ColorsResources.red;
 
-      });
+        });
 
-    }
+      } else {
 
-    if (taskLocation.isEmpty) {
+        setState(() {
 
-      validationResult = false;
+          descriptionWarning = ColorsResources.premiumLight;
 
-      setState(() {
+        });
 
-        locationWarning = ColorsResources.red;
+      }
 
-      });
+      if (taskLocation.isEmpty) {
 
-    } else {
+        validationResult = false;
 
-      setState(() {
+        setState(() {
 
-        locationWarning = ColorsResources.premiumLight;
+          locationWarning = ColorsResources.red;
 
-      });
+        });
 
-    }
+      } else {
 
-    if (taskCategories.isEmpty) {
+        setState(() {
 
-      validationResult = false;
+          locationWarning = ColorsResources.premiumLight;
 
-      setState(() {
+        });
 
-        categoriesWarning = ColorsResources.red;
+      }
 
-      });
+      if (taskCategories.isEmpty) {
 
-    } else {
+        validationResult = false;
 
-      setState(() {
+        setState(() {
 
-        categoriesWarning = ColorsResources.premiumLight;
+          categoriesWarning = ColorsResources.red;
 
-      });
+        });
 
-    }
+      } else {
 
-    if (taskColorsTags.isEmpty) {
+        setState(() {
 
-      validationResult = false;
+          categoriesWarning = ColorsResources.premiumLight;
 
-      setState(() {
+        });
 
-        colorsWarning = ColorsResources.red;
+      }
 
-      });
+      if (taskColorsTags.isEmpty) {
 
-    } else {
+        validationResult = false;
 
-      setState(() {
+        setState(() {
 
-        colorsWarning = ColorsResources.premiumLight;
+          colorsWarning = ColorsResources.red;
 
-      });
+        });
 
-    }
+      } else {
 
-    if (taskAlarmsConfigurations.isEmpty) {
+        setState(() {
 
-      validationResult = false;
+          colorsWarning = ColorsResources.premiumLight;
 
-      setState(() {
+        });
 
-        alarmsWarning = ColorsResources.red;
+      }
 
-      });
+      if (taskAlarmsConfigurations.isEmpty) {
 
-    } else {
+        validationResult = false;
 
-      setState(() {
+        setState(() {
 
-        alarmsWarning = ColorsResources.premiumLight;
+          alarmsWarning = ColorsResources.red;
 
-      });
+        });
 
-    }
+      } else {
 
-    if (validationResult) {
+        setState(() {
 
-      setState(() {
+          alarmsWarning = ColorsResources.premiumLight;
 
-        waitingPlaceholder = waiting();
+        });
 
-      });
+      }
 
-      FirebaseFirestore.instance
-          .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
-          .set(
+      if (validationResult) {
+
+        setState(() {
+
+          waitingPlaceholder = waiting();
+
+        });
+
+        FirebaseFirestore.instance
+            .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
+            .set(
             rhythmDocument(int.parse(documentId.substring(documentId.length - 7, documentId.length)),
-              taskTitle, taskDescription, taskLocation,
-              taskCategories, taskColorsTags,
-              taskAlarmsConfigurations)
-          ).then((value) {
+                taskTitle, taskDescription, taskLocation,
+                taskCategories, taskColorsTags,
+                taskAlarmsConfigurations)
+        ).then((value) {
 
-            setState(() {
+          setState(() {
 
-              rhythmUpdated = true;
+            rhythmUpdated = true;
 
-              waitingPlaceholder = waiting(waitingNotice: "Task Set Successfully");
-
-            });
-
-            Future.delayed(const Duration(milliseconds: 777), () {
-
-              contentScaleController.reverse();
-              contentFadeController.reverse();
-
-              waitingFadeController.reverse();
-
-            });
+            waitingPlaceholder = waiting(waitingNotice: "Task Set Successfully");
 
           });
 
-    } else {
-      debugPrint("Validation Process Failed");
+          Future.delayed(const Duration(milliseconds: 777), () {
 
-      contentScaleController.reverse();
-      contentFadeController.reverse();
+            contentScaleController.reverse();
+            contentFadeController.reverse();
 
-      waitingFadeController.reverse();
+            waitingFadeController.reverse();
+
+          });
+
+        });
+
+      } else {
+        debugPrint("Validation Process Failed");
+
+        contentScaleController.reverse();
+        contentFadeController.reverse();
+
+        waitingFadeController.reverse();
+
+      }
 
     }
 

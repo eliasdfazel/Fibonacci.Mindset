@@ -88,10 +88,14 @@ class StringsResources {
 
     return "Fibonacci AI";
   }
-
   static String fibonacciAiDescription() {
 
     return "It will suggest alarms suitable to your tasks requirements.";
+  }
+
+  static String fibonacciNotice() {
+
+    return "Fibonacci AI Needs You To Select A Category";
   }
 
   static String duration() {
