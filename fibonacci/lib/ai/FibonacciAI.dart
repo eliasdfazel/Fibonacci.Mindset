@@ -9,6 +9,7 @@
  */
 
 import 'package:fibonacci/ai/data/FibonacciDataStructure.dart';
+import 'package:flutter/cupertino.dart';
 
 class FibonacciAI {
 
@@ -27,11 +28,21 @@ class FibonacciAI {
 
   int _fibonacciSequence({int fibonacciIndex = 2}) {
 
-    if (fibonacciIndex < 2) {
-      throw "Fibonacci Index Should Start From Two";
+    int fibonacciValue = 0;
+
+    if (fibonacciIndex == 0 || fibonacciIndex == 1) {
+      debugPrint("Fibonacci AI Error");
+
+      fibonacciValue = fibonacciIndex;
+
+    } else {
+
+      fibonacciValue = _fibonacciSequence(fibonacciIndex: fibonacciIndex - 1) + _fibonacciSequence(fibonacciIndex: fibonacciIndex - 2);
+      debugPrint("Fibonacci Value At $fibonacciIndex: $fibonacciValue");
+
     }
 
-    return _fibonacciSequence(fibonacciIndex: fibonacciIndex - 1) + _fibonacciSequence(fibonacciIndex: fibonacciIndex - 2);
+    return fibonacciValue;
   }
 
   int _fibonacciTaskDuration(int fibonacciIndex, int factor) {
