@@ -16,22 +16,32 @@ class FibonacciAI {
 
     int fibonacciIndex = index + 2;
 
-    int taskDuration = fibonacciSequence(fibonacciIndex: fibonacciIndex) * factor;
+    int taskDuration = _fibonacciTaskDuration(fibonacciIndex, factor);
 
-    int taskRest = fibonacciSequence(fibonacciIndex: fibonacciIndex);
+    int taskRest = _fibonacciSequence(fibonacciIndex: fibonacciIndex);
 
-    int taskRepeat = (60  / (taskDuration + taskRest)).ceil();
+    int taskRepeat = _fibonacciTaskRepeat(taskDuration, taskRest);
 
     return FibonacciDataStructure(taskDuration, taskRepeat, taskRest);
   }
 
-  int fibonacciSequence({int fibonacciIndex = 2}) {
+  int _fibonacciSequence({int fibonacciIndex = 2}) {
 
     if (fibonacciIndex < 2) {
       throw "Fibonacci Index Should Start From Two";
     }
 
-    return fibonacciSequence(fibonacciIndex: fibonacciIndex - 1) + fibonacciSequence(fibonacciIndex: fibonacciIndex - 2);
+    return _fibonacciSequence(fibonacciIndex: fibonacciIndex - 1) + _fibonacciSequence(fibonacciIndex: fibonacciIndex - 2);
+  }
+
+  int _fibonacciTaskDuration(int fibonacciIndex, int factor) {
+
+    return _fibonacciSequence(fibonacciIndex: fibonacciIndex) * factor;
+  }
+
+  int _fibonacciTaskRepeat(int taskDuration, int taskRest) {
+
+    return (60  / (taskDuration + taskRest)).ceil();
   }
 
 }

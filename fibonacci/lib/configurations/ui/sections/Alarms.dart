@@ -8,6 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/ai/FibonacciAI.dart';
+import 'package:fibonacci/ai/data/FibonacciDataStructure.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
@@ -563,16 +565,18 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
 
 
+    FibonacciDataStructure fibonacciDataStructure = await FibonacciAI().generate(widget.alarmsInputItems.length, 8);
+
     TextEditingController durationController = TextEditingController();
-    durationController.text = "7";
+    durationController.text = fibonacciDataStructure.taskDuration.toString();
     widget.alarmsDurationInput.add(durationController);
 
     TextEditingController repeatController = TextEditingController();
-    repeatController.text = "11";
+    repeatController.text = fibonacciDataStructure.taskRepeat.toString();
     widget.alarmsRepeatInput.add(repeatController);
 
     TextEditingController restController = TextEditingController();
-    restController.text = "5";
+    restController.text = fibonacciDataStructure.taskRest.toString();
     widget.alarmsRestInput.add(restController);
 
     widget.alarmsInputItems.add(inputAlarm(widget.alarmsDurationInput.last, widget.alarmsRepeatInput.last, widget.alarmsRestInput.last));
