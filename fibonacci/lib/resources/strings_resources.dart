@@ -8,6 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'dart:io';
+
 class StringsResources {
 
   static String applicationName() {
@@ -119,7 +121,21 @@ class StringsResources {
    */
   static String applicationLink() {
 
-    return "https://play.google.com/store/apps/details?id=co.geeksempire.fibonacci.mindset";
+    String applicationLink = "https://play.google.com/store/apps/details?id=co.geeksempire.fibonacci.mindset";
+
+    if (Platform.isAndroid) {
+
+      applicationLink = "https://play.google.com/store/apps/details?id=co.geeksempire.fibonacci.mindset";
+
+    } else {
+
+      applicationLink = "";
+
+    }
+
+    applicationLink = "https://xdaforums.com/t/fibonacci-ai-fibonacci-mindset-public-alpha-stage.4654966";
+
+    return applicationLink;
   }
   /*
    * End - Links

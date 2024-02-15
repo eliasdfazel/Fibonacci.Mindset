@@ -135,8 +135,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                        */
 
                       /*
-                         * Start - Bottom Bar
-                         */
+                       * Start - Bottom Bar
+                       */
                       Align(
                           alignment: Alignment.bottomCenter,
                           child: Padding(
@@ -145,8 +145,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                           )
                       )
                       /*
-                         * End - Bottom Bar
-                         */
+                       * End - Bottom Bar
+                       */
 
                     ]
                 )
