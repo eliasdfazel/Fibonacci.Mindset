@@ -35,9 +35,11 @@ class AlarmsInterface extends StatefulWidget {
 
   String? selectedCategory;
 
+  bool categoryUpdated = false;
+
   AlarmsInterface({Key? key, required this.alarmsActions, this.alarmsJson,
     required this.preferencesIO,
-    required this.selectedCategory}) : super(key: key);
+    required this.selectedCategory, required this.categoryUpdated}) : super(key: key);
 
   List<Widget> alarmsInputItems = [];
 
@@ -61,6 +63,8 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
   void initState() {
     super.initState();
 
+    widget.categoryUpdated = false;
+
     if (widget.alarmsJson != null) {
 
       insertCurrentAlarms(widget.alarmsJson);
@@ -75,6 +79,15 @@ class _AlarmInterfaceState extends State<AlarmsInterface> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Alarms Selected Category: ${widget.selectedCategory}");
+
+    if (widget.categoryUpdated) {
+
+      widget.categoryUpdated = false;
+
+      initializeAlarmInput();
+
+    }
 
     return Container(
         padding: const EdgeInsets.only(left: 37, right: 37),

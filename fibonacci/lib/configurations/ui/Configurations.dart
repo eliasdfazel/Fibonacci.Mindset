@@ -276,11 +276,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
     switch (choiceType) {
       case ChoicesActionsKeys.choiceCategory: {
 
-        for (int i = 0; i < allCategoriesChoices.length; i++) {
+        allCategoriesChoices.where((element) => (element.choiceInformation != choiceInformation)).forEach((element) {
+          choicesUnselected(element.choiceInformation, choiceType);
 
-          allCategoriesChoices[i].choiceSelected = (allCategoriesChoices[i].choiceInformation == choiceInformation);
-
-        }
+        });
 
         setState(() {
 
@@ -293,7 +292,9 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
           setState(() {
 
-            alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(), preferencesIO: preferencesIO, selectedCategory: choiceInformation.keys.first);
+            alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(),
+                preferencesIO: preferencesIO,
+                selectedCategory: choiceInformation.keys.first, categoryUpdated: true);
 
             fibonacciNotice = Container();
 
@@ -313,6 +314,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
     switch (choiceType) {
       case ChoicesActionsKeys.choiceCategory: {
+
+        allCategoriesChoices.where((element) => element.choiceInformation == choiceInformation).first.choiceSelected = false;
 
         if (await preferencesIO.retrieveFibonacciAI()) {
           debugPrint("Fibonacci AI: ON");
@@ -447,7 +450,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
       setState(() {
 
-        alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(), preferencesIO: preferencesIO, selectedCategory: null);
+        alarmsInterface = AlarmsInterface(alarmsActions: this,
+            alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(),
+            preferencesIO: preferencesIO,
+            selectedCategory: null, categoryUpdated: false);
 
       });
 
