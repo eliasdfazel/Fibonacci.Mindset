@@ -1043,7 +1043,12 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
       }
 
-      FirebaseAnalytics.instance.logEvent(name: "Task Inserted. Alarm Type: $taskAlarmType");
+      FirebaseAnalytics.instance.logEvent(name: "Task Inserted.", parameters: {
+        "TaskTitle": taskTitle,
+        "TaskAlarmType": taskAlarmType,
+        "TaskLocation": taskLocation
+      });
+
     }
 
   }
