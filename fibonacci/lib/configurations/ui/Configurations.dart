@@ -203,8 +203,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
                           child: ScaleTransition(
                               scale: contentScaleAnimation,
                               child: FadeTransition(
-                                opacity: contentFadeAnimation,
-                                child: setupContentWrapper()
+                                  opacity: contentFadeAnimation,
+                                  child: setupContentWrapper()
                               )
                           )
                       ),
@@ -631,14 +631,14 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
                               height: 1.1
                           ),
                           decoration: InputDecoration.collapsed(
-                            hintText: hint,
-                            hintStyle: TextStyle(
-                                color: ColorsResources.premiumLight.withOpacity(0.51),
-                                fontSize: 19,
-                                letterSpacing: 1.7,
-                                height: 1.1
-                            ),
-                            border: InputBorder.none
+                              hintText: hint,
+                              hintStyle: TextStyle(
+                                  color: ColorsResources.premiumLight.withOpacity(0.51),
+                                  fontSize: 19,
+                                  letterSpacing: 1.7,
+                                  height: 1.1
+                              ),
+                              border: InputBorder.none
                           )
                       )
                   )
@@ -851,6 +851,8 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
       String taskCategories = "";
       String taskColorsTags = "";
 
+      String taskAlarmType = await preferencesIO.retrieveTaskAlarmType();
+
       String taskAlarmsConfigurations = await processAlarmsToJson(alarmsInterface as AlarmsInterface);
 
       bool validationResult = true;
@@ -1005,11 +1007,10 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
         FirebaseFirestore.instance
             .doc(rhythmsDocumentsPath(FirebaseAuth.instance.currentUser!.email!, documentId))
-            .set(
-            rhythmDocument(int.parse(documentId.substring(documentId.length - 7, documentId.length)),
+            .set(rhythmDocument(int.parse(documentId.substring(documentId.length - 7, documentId.length)),
                 taskTitle, taskDescription, taskLocation,
                 taskCategories, taskColorsTags,
-                taskAlarmsConfigurations)
+                taskAlarmsConfigurations, taskAlarmType)
         ).then((value) {
 
           setState(() {

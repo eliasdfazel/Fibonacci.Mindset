@@ -8,6 +8,7 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/preferences/io/keys/PreferencesKeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,6 +34,25 @@ class PreferencesIO {
     bool fibonacciAI = (await _sharedPreferences).getBool(PreferencesKeys.fibonacciAI) ?? true;
 
     return fibonacciAI;
+  }
+
+  Future<String> retrieveTaskAlarmType() async {
+
+    String taskAlarmType = RhythmDataStructure.taskAlarmTypeFibonacci;
+
+    bool fibonacciSwitch = await retrieveFibonacciAI();
+
+    if (fibonacciSwitch) {
+
+      taskAlarmType = RhythmDataStructure.taskAlarmTypeFibonacci;
+
+    } else {
+
+      taskAlarmType = RhythmDataStructure.taskAlarmTypeManual;
+
+    }
+
+    return taskAlarmType;
   }
 
 }

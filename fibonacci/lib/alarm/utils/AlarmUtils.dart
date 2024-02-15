@@ -9,7 +9,7 @@
  */
 
 import 'package:alarm/alarm.dart';
-import 'package:fibonacci/alarm/data/AlarmsIO.dart';
+import 'package:fibonacci/alarm/io/AlarmsIO.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 

@@ -12,7 +12,7 @@ import 'dart:async';
 
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fibonacci/alarm/data/AlarmsIO.dart';
+import 'package:fibonacci/alarm/io/AlarmsIO.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';

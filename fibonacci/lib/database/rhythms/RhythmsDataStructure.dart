@@ -26,6 +26,10 @@ class RhythmDataStructure {
   static const String taskCategoriesName = "taskCategories";
   static const String taskColorsTagsName = "taskColorsTags";
 
+  static const String taskAlarmTypeName = "taskAlarmType";
+  static const String taskAlarmTypeManual = "AlarmType_Manual";
+  static const String taskAlarmTypeFibonacci = "AlarmType_Fibonacci";
+
   /// JSON Format
   static const String taskAlarmsConfigurationsName = "taskAlarmsConfigurations";
 
@@ -74,6 +78,11 @@ class RhythmDataStructure {
     return rhythmDocumentData[RhythmDataStructure.taskColorsTagsName];
   }
 
+  String taskAlarmType() {
+
+    return rhythmDocumentData[RhythmDataStructure.taskAlarmTypeName];
+  }
+
   /// JSON Array
   dynamic taskAlarmsConfigurations() {
 
@@ -82,7 +91,7 @@ class RhythmDataStructure {
 
 }
 
-Map<String, dynamic> rhythmDocument(int taskId, String taskTitle, String taskDescription, String taskLocation, String taskCategories, String taskColorsTags, String taskAlarmsConfigurations) {
+Map<String, dynamic> rhythmDocument(int taskId, String taskTitle, String taskDescription, String taskLocation, String taskCategories, String taskColorsTags, String taskAlarmsConfigurations, String taskAlarmType) {
 
   return {
     "taskId": taskId,
@@ -92,5 +101,6 @@ Map<String, dynamic> rhythmDocument(int taskId, String taskTitle, String taskDes
     "taskCategories": taskCategories,
     "taskColorsTags": taskColorsTags,
     "taskAlarmsConfigurations": taskAlarmsConfigurations,
+    "taskAlarmType": taskAlarmType
   };
 }
