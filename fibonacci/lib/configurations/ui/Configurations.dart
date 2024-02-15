@@ -29,6 +29,7 @@ import 'package:fibonacci/utils/actions/ChoicesActions.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -1042,6 +1043,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
       }
 
+      FirebaseAnalytics.instance.logEvent(name: "Task Inserted. Alarm Type: $taskAlarmType");
     }
 
   }
