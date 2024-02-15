@@ -22,6 +22,7 @@ import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class RecordingInterface extends StatefulWidget {
 
@@ -97,6 +98,8 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                           /*
                            * Start - Content
                            */
+
+                          extraTimeSlider(),
 
                           /*
                            * End - Content
@@ -226,6 +229,35 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   }
 
+  Widget extraTimeSlider() {
 
+    return SleekCircularSlider(
+      min: 1,
+      max: 34,
+      initialValue: 5,
+      appearance: CircularSliderAppearance(
+          animDurationMultiplier: 1.37,
+          animationEnabled: true,
+
+          customColors: CustomSliderColors(
+            trackColor: ColorsResources.premiumDark,
+
+          )
+      ),
+      onChange: (double value) {
+
+      },
+      onChangeStart: (double startValue) {
+
+      },
+      onChangeEnd: (double endValue) {
+
+      },
+      innerWidget: (double value) {
+
+        return Container();
+      },
+    );
+  }
 
 }
