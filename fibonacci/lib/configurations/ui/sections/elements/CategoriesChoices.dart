@@ -43,6 +43,10 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
       backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
 
+    } else {
+
+      backgroundColor = Colors.transparent;
+
     }
 
     return Container(

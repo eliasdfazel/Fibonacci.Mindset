@@ -141,7 +141,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
     }
 
-    retrieveAssets();
+    retrieveAssets(Source.server);
 
   }
 
@@ -273,33 +273,36 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   void choicesSelected(Map<String, String> choiceInformation, int choiceType) async {
     debugPrint("Selected Category: ${choiceInformation.keys.first}");
 
-    int selectedAmount = 0;
+    switch (choiceType) {
+      case ChoicesActionsKeys.choiceCategory: {
 
-    for (var element in allCategoriesChoices) {
+        for (int i = 0; i < allCategoriesChoices.length; i++) {
 
-      if (element.choiceSelected) {
+          allCategoriesChoices[i].choiceSelected = (allCategoriesChoices[i].choiceInformation == choiceInformation);
 
-        selectedAmount++;
-
-      }
-
-    }
-
-    if (selectedAmount == 1) {
-
-      if (await preferencesIO.retrieveFibonacciAI()) {
-        debugPrint("Fibonacci AI: ON");
+        }
 
         setState(() {
 
-          alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(), preferencesIO: preferencesIO, selectedCategory: choiceInformation.keys.first);
-
-          fibonacciNotice = Container();
+          allCategoriesChoices;
 
         });
 
-      }
+        if (await preferencesIO.retrieveFibonacciAI()) {
+          debugPrint("Fibonacci AI: ON");
 
+          setState(() {
+
+            alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(), preferencesIO: preferencesIO, selectedCategory: choiceInformation.keys.first);
+
+            fibonacciNotice = Container();
+
+          });
+
+        }
+
+        break;
+      }
     }
 
   }
@@ -308,33 +311,24 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   void choicesUnselected(Map<String, String> choiceInformation, int choiceType) async {
     debugPrint("Unselected Category: ${choiceInformation.keys.first}");
 
-    int selectedAmount = 0;
+    switch (choiceType) {
+      case ChoicesActionsKeys.choiceCategory: {
 
-    for (var element in allCategoriesChoices) {
+        if (await preferencesIO.retrieveFibonacciAI()) {
+          debugPrint("Fibonacci AI: ON");
 
-      if (element.choiceSelected) {
+          setState(() {
 
-        selectedAmount++;
+            alarmsInterface = Container();
 
+            fibonacciNotice = fibonacciNoticeWidget();
+
+          });
+
+        }
+
+        break;
       }
-
-    }
-
-    if (selectedAmount == 0) {
-
-      if (await preferencesIO.retrieveFibonacciAI()) {
-        debugPrint("Fibonacci AI: ON");
-
-        setState(() {
-
-          alarmsInterface = Container();
-
-          fibonacciNotice = fibonacciNoticeWidget();
-
-        });
-
-      }
-
     }
 
   }
@@ -464,13 +458,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   /*
    * Start - Assets
    */
-  void retrieveAssets() async {
+  void retrieveAssets(Source sourceOption) async {
 
     /*
      * Start - Colors Tags
      */
     FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Colors")
-        .get().then((DocumentSnapshot documentSnapshot) async {
+        .get(GetOptions(source: sourceOption)).then((DocumentSnapshot documentSnapshot) async {
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["pastelColors"].toString());
 
@@ -515,7 +509,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
      * Start - Categories
      */
     FirebaseFirestore.instance.doc("/Fibonacci/Mindset/Assets/Categories")
-        .get().then((DocumentSnapshot documentSnapshot) async {
+        .get(GetOptions(source: sourceOption)).then((DocumentSnapshot documentSnapshot) async {
 
       List<dynamic> colorsTagsList = json.decode((documentSnapshot.data() as Map<String, dynamic>)["tags"].toString());
 
