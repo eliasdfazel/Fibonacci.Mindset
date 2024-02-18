@@ -36,7 +36,7 @@ class RecordingInterface extends StatefulWidget {
   @override
   State<RecordingInterface> createState() => _RecordingInterfaceState();
 }
-class _RecordingInterfaceState extends State<RecordingInterface> with SingleTickerProviderStateMixin implements BarActions {
+class _RecordingInterfaceState extends State<RecordingInterface> with TickerProviderStateMixin implements BarActions {
 
   Ticker? ticker;
 
