@@ -16,7 +16,7 @@ import 'package:widget_mask/widget_mask.dart';
 
 class CategoriesChoices extends StatefulWidget {
 
-  ChoicesActions choicesActions;
+  CategoryChoicesActions choicesActions;
 
   Map<String, String> choiceInformation;
 
@@ -73,17 +73,17 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
                         if (widget.choiceSelected) {
 
-                          backgroundColor = Colors.transparent;
+                          // backgroundColor = Colors.transparent;
                           widget.choiceSelected = false;
 
-                          widget.choicesActions.choicesUnselected(widget.choiceInformation, ChoicesActionsKeys.choiceCategory);
+                          widget.choicesActions.choicesUnselected(widget, ChoicesActionsKeys.choiceCategory);
 
                         } else {
 
-                          backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
+                          // backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
                           widget.choiceSelected = true;
 
-                          widget.choicesActions.choicesSelected(widget.choiceInformation, ChoicesActionsKeys.choiceCategory);
+                          widget.choicesActions.choicesSelected(widget, ChoicesActionsKeys.choiceCategory);
 
                         }
 

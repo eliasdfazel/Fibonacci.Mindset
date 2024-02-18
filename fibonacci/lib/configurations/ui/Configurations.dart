@@ -43,7 +43,7 @@ class ConfigurationsInterface extends StatefulWidget {
   @override
   State<ConfigurationsInterface> createState() => _ConfigurationsInterfaceState();
 }
-class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with TickerProviderStateMixin implements BarActions, AlarmsActions, ChoicesActions {
+class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with TickerProviderStateMixin implements BarActions, AlarmsActions, CategoryChoicesActions {
 
   PreferencesIO preferencesIO = PreferencesIO();
 
@@ -61,12 +61,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   List<ColorsChoices> allColorsTagsChoices = [];
 
   Widget colorsTagsList = Container();
-  Color categoriesWarning = ColorsResources.premiumLight;
+  Color colorsWarning = ColorsResources.premiumLight;
 
   List<CategoriesChoices> allCategoriesChoices = [];
+  ScrollController categoryScroll = ScrollController();
 
   Widget categoriesList = Container();
-  Color colorsWarning = ColorsResources.premiumLight;
+  Color categoriesWarning = ColorsResources.premiumLight;
 
   Widget waitingPlaceholder = Container();
 
@@ -270,14 +271,17 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   }
 
   @override
-  void choicesSelected(Map<String, String> choiceInformation, int choiceType) async {
-    debugPrint("Selected Category: ${choiceInformation.keys.first}");
+  void choicesSelected(CategoriesChoices choiceInformation, int choiceType) async {
+    debugPrint("Selected Category: ${choiceInformation.choiceInformation.keys.first}");
 
     switch (choiceType) {
       case ChoicesActionsKeys.choiceCategory: {
 
-        allCategoriesChoices.where((element) => (element.choiceInformation != choiceInformation)).forEach((element) {
-          choicesUnselected(element.choiceInformation, choiceType);
+        allCategoriesChoices.where((element) => element == choiceInformation).first.choiceSelected = true;
+
+        allCategoriesChoices.where((element) => (element != choiceInformation)).forEach((element) {
+
+          choicesUnselected(element, choiceType);
 
         });
 
@@ -294,7 +298,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
             alarmsInterface = AlarmsInterface(alarmsActions: this, alarmsJson: widget.rhythmDataStructure?.taskAlarmsConfigurations(),
                 preferencesIO: preferencesIO,
-                selectedCategory: choiceInformation.keys.first, categoryUpdated: true);
+                selectedCategory: choiceInformation.choiceInformation.keys.first, categoryUpdated: true);
 
             fibonacciNotice = Container();
 
@@ -309,13 +313,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   }
 
   @override
-  void choicesUnselected(Map<String, String> choiceInformation, int choiceType) async {
-    debugPrint("Unselected Category: ${choiceInformation.keys.first}");
+  void choicesUnselected(CategoriesChoices choiceInformation, int choiceType) async {
+    debugPrint("Unselected Category: ${choiceInformation.choiceInformation.keys.first}");
 
     switch (choiceType) {
       case ChoicesActionsKeys.choiceCategory: {
 
-        allCategoriesChoices.where((element) => element.choiceInformation == choiceInformation).first.choiceSelected = false;
+        allCategoriesChoices.where((element) => element == choiceInformation).first.choiceSelected = false;
 
         if (await preferencesIO.retrieveFibonacciAI()) {
           debugPrint("Fibonacci AI: ON");
@@ -718,7 +722,6 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
     for (var element in inputChoices) {
 
-
       allCategoriesChoices.add(CategoriesChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element), choicesActions: this));
 
     }
@@ -726,6 +729,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
     setState(() {
 
       categoriesList = ListView(
+          controller: categoryScroll,
           padding: const EdgeInsets.only(left: 19, right: 19),
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
