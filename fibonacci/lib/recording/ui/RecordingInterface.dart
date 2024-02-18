@@ -23,6 +23,7 @@ import 'package:fibonacci/utils/actions/BarActions.dart';
 import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -35,9 +36,9 @@ class RecordingInterface extends StatefulWidget {
   @override
   State<RecordingInterface> createState() => _RecordingInterfaceState();
 }
-class _RecordingInterfaceState extends State<RecordingInterface> implements BarActions {
+class _RecordingInterfaceState extends State<RecordingInterface> with SingleTickerProviderStateMixin implements BarActions {
 
-  StreamSubscription<AlarmSettings>? streamSubscription;
+  Ticker? ticker;
 
   AlarmUtils alarmUtils = AlarmUtils();
 
@@ -51,6 +52,13 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   double maximumExtraTime = 34;
 
   double extraTimeValue = 5;
+
+  Widget waitingPlaceholder = Container();
+
+  bool waitingVisibility = false;
+  double waitingOpacity = 0.0;
+
+  double waitingSeconds = 0;
 
   @override
   void initState() {
@@ -166,10 +174,20 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                                   padding: const EdgeInsets.only(top: 37),
                                   child: RecordingTopBarInterface(topBarActions: this)
                               )
-                          )
+                          ),
                           /*
                            * End - Top Bar
                            */
+
+                          Visibility(
+                            visible: waitingVisibility,
+                            child: AnimatedOpacity(
+                              opacity: waitingOpacity,
+                              duration: const Duration(milliseconds: 1357),
+                              curve: Curves.easeInOut,
+                              child: waitingPlaceholder
+                            )
+                          ),
 
                         ]
                     )
@@ -185,9 +203,63 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
     switch (barType) {
       case BarActions.typeTopBar: {
 
-        await Alarm.stopAll();
+        ticker = createTicker((Duration elapsed) {
 
-        alarmUtils.setupAlarm(widget.rhythmDataStructure, extraTimeValue.toInt());
+          setState(() {
+
+            waitingSeconds = elapsed.inSeconds.toDouble();
+
+          });
+
+          /*
+           * Start - Ticker Finished
+           */
+          if (elapsed.inSeconds == (extraTimeValue * 60)) {
+
+            ticker?.stop();
+
+            setState(() {
+
+              waitingOpacity = 0.0;
+
+            });
+
+            Future.delayed(const Duration(milliseconds: 1357), () {
+
+              setState(() {
+
+                waitingVisibility = false;
+
+                waitingPlaceholder = Container();
+
+              });
+
+            });
+
+          }
+          /*
+           * End - Ticker Finished
+           */
+
+        });
+        ticker?.start();
+
+        setState(() {
+
+          waitingPlaceholder = extraTimeWaiting(extraTimeValue * 60);
+          waitingVisibility = true;
+
+          Future.delayed(const Duration(milliseconds: 357), () {
+
+            setState(() {
+
+              waitingOpacity = 1.0;
+
+            });
+
+          });
+
+        });
 
         break;
       }
@@ -283,6 +355,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
             size: 301,
             animDurationMultiplier: 0.37,
             animationEnabled: true,
+            spinnerMode: false,
             customWidths: CustomSliderWidths(
                 handlerSize: 7,
                 progressBarWidth: 21,
@@ -502,6 +575,77 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
             ]
         )
+    );
+  }
+
+  Widget extraTimeWaiting(double maximumExtraSeconds) {
+
+    return Blur(
+      blur: 13,
+      blurColor: ColorsResources.black,
+      colorOpacity: 0.37,
+      overlay: Center(
+        child: SleekCircularSlider(
+          min: 0,
+          max: maximumExtraSeconds,
+          initialValue: waitingSeconds,
+          appearance: CircularSliderAppearance(
+            size: 301,
+            animDurationMultiplier: 0.37,
+            animationEnabled: false,
+            spinnerMode: true,
+            customWidths: CustomSliderWidths(
+                handlerSize: 7,
+                progressBarWidth: 21,
+                trackWidth: 21,
+                shadowWidth: 73
+            ),
+            customColors: CustomSliderColors(
+                dynamicGradient: true,
+                trackColor: ColorsResources.premiumDark.withOpacity(0.19),
+                dotColor: ColorsResources.premiumLight.withOpacity(0.19),
+                shadowColor: ColorsResources.blue,
+                shadowMaxOpacity: 0.01,
+                progressBarColors: [
+                  ColorsResources.blue,
+                  ColorsResources.blueGreen,
+                  ColorsResources.darkPurple,
+                ]
+            ),
+            infoProperties: InfoProperties(),
+          ),
+          onChangeEnd: (double endValue) {
+
+            setState(() {
+
+              extraTimeValue = endValue;
+
+            });
+
+          },
+          innerWidget: (double value) {
+
+            return Center(
+                child: Text(
+                    value.round().toString(),
+                    maxLines: 1,
+                    style: TextStyle(
+                        color: ColorsResources.premiumLight,
+                        fontSize: 37,
+                        shadows: [
+                          Shadow(
+                              color: ColorsResources.white.withOpacity(0.37),
+                              blurRadius: 19,
+                              offset: const Offset(0.0, 3.0)
+                          )
+                        ]
+                    )
+                )
+            );
+          },
+        )
+      ),
+      child: Container()
     );
   }
 
