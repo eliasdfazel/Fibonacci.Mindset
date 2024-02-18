@@ -208,11 +208,11 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     FirebaseFirestore.instance
       .collection(rhythmsCollectionsPath(FirebaseAuth.instance.currentUser!.email!))
       .orderBy(categorizedBy)
-      .get(GetOptions(source: getOptionSource)).then((QuerySnapshot querySnapshot) => {
+      .get(GetOptions(source: getOptionSource)).then((QuerySnapshot querySnapshot) {
 
         if (querySnapshot.size > 0) {
 
-          categorizeTasks(querySnapshot, categoryPreferences)
+          categorizeTasks(querySnapshot, categoryPreferences);
 
         }
 
