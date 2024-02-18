@@ -133,8 +133,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
                                   extraTimeSlider(),
 
-                                  extraTimeChanger(),
-
                                 ]
                             )
                           ),
@@ -269,70 +267,79 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   Widget extraTimeSlider() {
 
-    return SleekCircularSlider(
-      min: minimumExtraTime,
-      max: maximumExtraTime,
-      initialValue: extraTimeValue,
-      appearance: CircularSliderAppearance(
-          size: 253,
-          animDurationMultiplier: 0.37,
-          animationEnabled: true,
-          customWidths: CustomSliderWidths(
-              handlerSize: 7,
-              progressBarWidth: 21,
-              trackWidth: 21,
-              shadowWidth: 73
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+
+        SleekCircularSlider(
+          min: minimumExtraTime,
+          max: maximumExtraTime,
+          initialValue: extraTimeValue,
+          appearance: CircularSliderAppearance(
+            size: 301,
+            animDurationMultiplier: 0.37,
+            animationEnabled: true,
+            customWidths: CustomSliderWidths(
+                handlerSize: 7,
+                progressBarWidth: 21,
+                trackWidth: 21,
+                shadowWidth: 73
+            ),
+            customColors: CustomSliderColors(
+                dynamicGradient: true,
+                trackColor: ColorsResources.premiumDark.withOpacity(0.19),
+                dotColor: ColorsResources.premiumLight.withOpacity(0.19),
+                shadowColor: ColorsResources.blue,
+                shadowMaxOpacity: 0.01,
+                progressBarColors: [
+                  ColorsResources.blue,
+                  ColorsResources.blueGreen,
+                  ColorsResources.darkPurple,
+                ]
+            ),
+            infoProperties: InfoProperties(),
           ),
-          customColors: CustomSliderColors(
-              dynamicGradient: true,
-              trackColor: ColorsResources.premiumDark.withOpacity(0.19),
-              dotColor: ColorsResources.premiumLight.withOpacity(0.19),
-              shadowColor: ColorsResources.blue,
-              shadowMaxOpacity: 0.01,
-              progressBarColors: [
-                ColorsResources.blue,
-                ColorsResources.blueGreen,
-                ColorsResources.darkPurple,
-              ]
-          ),
-          infoProperties: InfoProperties()
-      ),
-      onChangeEnd: (double endValue) {
+          onChangeEnd: (double endValue) {
 
-        setState(() {
+            setState(() {
 
-          extraTimeValue = endValue;
+              extraTimeValue = endValue;
 
-        });
+            });
 
-      },
-      innerWidget: (double value) {
+          },
+          innerWidget: (double value) {
 
-        return Center(
-            child: Text(
-                value.round().toString(),
-                maxLines: 1,
-                style: TextStyle(
-                    color: ColorsResources.premiumLight,
-                    fontSize: 31,
-                    shadows: [
-                      Shadow(
-                          color: ColorsResources.white.withOpacity(0.37),
-                          blurRadius: 19,
-                          offset: const Offset(0.0, 3.0)
-                      )
-                    ]
+            return Center(
+                child: Text(
+                    value.round().toString(),
+                    maxLines: 1,
+                    style: TextStyle(
+                        color: ColorsResources.premiumLight,
+                        fontSize: 37,
+                        shadows: [
+                          Shadow(
+                              color: ColorsResources.white.withOpacity(0.37),
+                              blurRadius: 19,
+                              offset: const Offset(0.0, 3.0)
+                          )
+                        ]
+                    )
                 )
-            )
-        );
-      },
+            );
+          },
+        ),
+
+        extraTimeChanger()
+
+      ]
     );
   }
 
   Widget extraTimeChanger() {
 
     return Padding(
-        padding: const EdgeInsets.only(left: 37, right: 37),
+        padding: const EdgeInsets.only(left: 37, right: 37, top: 273),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
