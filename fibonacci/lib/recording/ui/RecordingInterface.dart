@@ -94,7 +94,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                           ),
 
                           Blur(
-                            blur: 3,
+                            blur: 7,
                             blurColor: ColorsResources.black,
                             colorOpacity: 0.37,
                             child: Container(),
@@ -286,11 +286,12 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
               maxLines: 1,
               style: TextStyle(
                 color: ColorsResources.premiumLight,
-                fontSize: 23,
+                fontSize: 31,
                 shadows: [
                   Shadow(
-                    color: ColorsResources.white.withOpacity(0.51),
-                    blurRadius: 13
+                    color: ColorsResources.white.withOpacity(0.37),
+                    blurRadius: 19,
+                    offset: const Offset(0.0, 3.0)
                   )
                 ]
               ),
