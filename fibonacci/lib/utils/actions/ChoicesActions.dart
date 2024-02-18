@@ -17,19 +17,19 @@ class ChoicesActionsKeys {
 }
 
 abstract class CategoryChoicesActions {
-  void choicesSelected(CategoriesChoices choiceInformation, int choiceType) {
+  void choicesCategorySelected(int index, CategoriesChoices choiceInformation, int choiceType) {
 
   }
-  void choicesUnselected(CategoriesChoices choiceInformation, int choiceType) {
+  void choicesCategoryUnselected(int index, CategoriesChoices choiceInformation, int choiceType) {
 
   }
 }
 
 abstract class ColorsChoicesActions {
-  void choicesSelected(ColorsChoices choiceInformation, int choiceType) {
+  void choicesCategorySelected(int index, ColorsChoices choiceInformation, int choiceType) {
 
   }
-  void choicesUnselected(ColorsChoices choiceInformation, int choiceType) {
+  void choicesCategoryUnselected(int index, ColorsChoices choiceInformation, int choiceType) {
 
   }
 }

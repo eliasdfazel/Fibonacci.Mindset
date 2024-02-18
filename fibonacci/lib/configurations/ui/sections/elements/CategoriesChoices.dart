@@ -16,13 +16,15 @@ import 'package:widget_mask/widget_mask.dart';
 
 class CategoriesChoices extends StatefulWidget {
 
+  int index = 0;
+
   CategoryChoicesActions choicesActions;
 
   Map<String, String> choiceInformation;
 
   bool choiceSelected = false;
 
-  CategoriesChoices({Key? key, required this.choiceInformation, required this.choiceSelected, required this.choicesActions}) : super(key: key);
+  CategoriesChoices({Key? key, required this.index, required this.choiceInformation, required this.choiceSelected, required this.choicesActions}) : super(key: key);
 
   @override
   State<CategoriesChoices> createState() => _CategoriesChoicesState();
@@ -73,20 +75,21 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
                         if (widget.choiceSelected) {
 
-                          // backgroundColor = Colors.transparent;
-                          widget.choiceSelected = false;
+                          // backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
+                          // widget.choiceSelected = false;
 
-                          widget.choicesActions.choicesUnselected(widget, ChoicesActionsKeys.choiceCategory);
+                          widget.choicesActions.choicesCategoryUnselected(widget.index, widget, ChoicesActionsKeys.choiceCategory);
 
                         } else {
 
-                          // backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
-                          widget.choiceSelected = true;
+                          // backgroundColor = Colors.transparent;
+                          // widget.choiceSelected = true;
 
-                          widget.choicesActions.choicesSelected(widget, ChoicesActionsKeys.choiceCategory);
+                          widget.choicesActions.choicesCategorySelected(widget.index, widget, ChoicesActionsKeys.choiceCategory);
 
                         }
 
+                        debugPrint("Switching ${widget.choiceInformation.keys.first} To ${!widget.choiceSelected}");
                       });
 
                     },

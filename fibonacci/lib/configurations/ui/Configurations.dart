@@ -271,7 +271,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   }
 
   @override
-  void choicesSelected(CategoriesChoices choiceInformation, int choiceType) async {
+  void choicesCategorySelected(int index, CategoriesChoices choiceInformation, int choiceType) async {
     debugPrint("Selected Category: ${choiceInformation.choiceInformation.keys.first}");
 
     switch (choiceType) {
@@ -279,11 +279,13 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
         allCategoriesChoices.where((element) => element == choiceInformation).first.choiceSelected = true;
 
-        allCategoriesChoices.where((element) => (element != choiceInformation)).forEach((element) {
+        List<CategoriesChoices> unselectedList = allCategoriesChoices.where((element) => (element != choiceInformation)).toList();
 
-          choicesUnselected(element, choiceType);
+        for (int i = 0; i < unselectedList.length; i++) {
 
-        });
+          choicesCategoryUnselected(i, unselectedList[i], choiceType);
+
+        }
 
         setState(() {
 
@@ -313,7 +315,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   }
 
   @override
-  void choicesUnselected(CategoriesChoices choiceInformation, int choiceType) async {
+  void choicesCategoryUnselected(int index, CategoriesChoices choiceInformation, int choiceType) async {
     debugPrint("Unselected Category: ${choiceInformation.choiceInformation.keys.first}");
 
     switch (choiceType) {
@@ -720,15 +722,19 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
   void categoriesOptions(List<Map<String, String>> inputChoices,
       List<Map<String, String>> selectedChoices) {
 
-    for (var element in inputChoices) {
+    for (int i = 0; i < inputChoices.length; i++) {
 
-      allCategoriesChoices.add(CategoriesChoices(choiceInformation: element, choiceSelected: mapContains(selectedChoices, element), choicesActions: this));
+      allCategoriesChoices.add(CategoriesChoices(index: i,
+          choiceInformation: inputChoices[i],
+          choiceSelected: mapContains(selectedChoices, inputChoices[i]),
+          choicesActions: this));
 
     }
 
     setState(() {
 
       categoriesList = ListView(
+          key: UniqueKey(),
           controller: categoryScroll,
           padding: const EdgeInsets.only(left: 19, right: 19),
           physics: const BouncingScrollPhysics(),
