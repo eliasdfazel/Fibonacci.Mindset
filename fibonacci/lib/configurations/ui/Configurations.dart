@@ -272,7 +272,7 @@ class _ConfigurationsInterfaceState extends State<ConfigurationsInterface>  with
 
   @override
   void choicesCategorySelected(int index, CategoriesChoices choiceInformation, int choiceType) async {
-    debugPrint("Selected Category: ${choiceInformation.choiceInformation.keys.first}");
+    debugPrint("$index. Selected Category: ${choiceInformation.choiceInformation.keys.first}");
 
     switch (choiceType) {
       case ChoicesActionsKeys.choiceCategory: {

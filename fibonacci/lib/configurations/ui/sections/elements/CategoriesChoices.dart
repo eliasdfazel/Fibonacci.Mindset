@@ -40,6 +40,7 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("${widget.index}. Switching ${widget.choiceInformation.keys.first} To ${widget.choiceSelected}");
 
     if (widget.choiceSelected) {
 
@@ -75,21 +76,14 @@ class _CategoriesChoicesState extends State<CategoriesChoices> {
 
                         if (widget.choiceSelected) {
 
-                          // backgroundColor = ColorsResources.premiumDark.withOpacity(0.73);
-                          // widget.choiceSelected = false;
-
                           widget.choicesActions.choicesCategoryUnselected(widget.index, widget, ChoicesActionsKeys.choiceCategory);
 
                         } else {
-
-                          // backgroundColor = Colors.transparent;
-                          // widget.choiceSelected = true;
 
                           widget.choicesActions.choicesCategorySelected(widget.index, widget, ChoicesActionsKeys.choiceCategory);
 
                         }
 
-                        debugPrint("Switching ${widget.choiceInformation.keys.first} To ${!widget.choiceSelected}");
                       });
 
                     },
