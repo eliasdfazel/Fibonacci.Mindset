@@ -111,19 +111,9 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                           /*
                            * Start - Content
                            */
-                          Center(
-                            child: ListView(
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                children: [
+                          extraTimeSlider(),
 
-                                  extraTimeSlider(),
-
-                                  extraTimeChanger()
-
-                                ]
-                            )
-                          ),
+                          extraTimeChanger(),
                           /*
                            * End - Content
                            */
@@ -255,15 +245,14 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   Widget extraTimeSlider() {
 
-    return Align(
-      alignment: Alignment.center,
+    return Center(
       child: SleekCircularSlider(
         min: minimumExtraTime,
         max: maximumExtraTime,
         initialValue: extraTimeValue,
         appearance: CircularSliderAppearance(
           size: 301,
-          animDurationMultiplier: 3.7,
+          animDurationMultiplier: 0.37,
           animationEnabled: true,
           customWidths: CustomSliderWidths(
             handlerSize: 11,
@@ -273,7 +262,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
           ),
           customColors: CustomSliderColors(
             dynamicGradient: true,
-            trackColor: ColorsResources.premiumDark.withOpacity(0.31),
+            trackColor: ColorsResources.premiumDark.withOpacity(0.19),
             dotColor: ColorsResources.premiumLight.withOpacity(0.19),
             shadowColor: ColorsResources.blue,
             shadowMaxOpacity: 0.01,
@@ -282,11 +271,16 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
               ColorsResources.blueGreen,
               ColorsResources.darkPurple,
             ]
-          )
+          ),
+          infoProperties: InfoProperties()
         ),
         onChangeEnd: (double endValue) {
 
+          setState(() {
 
+            extraTimeValue = endValue;
+
+          });
 
         },
         innerWidget: (double value) {
@@ -305,7 +299,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                     offset: const Offset(0.0, 3.0)
                   )
                 ]
-              ),
+              )
             )
           );
         },
@@ -315,72 +309,74 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   Widget extraTimeChanger() {
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 37, right: 37),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+    return Center(
+      child: Padding(
+          padding: const EdgeInsets.only(left: 37, right: 37, top: 273),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-            /*
-         * Start - Decrease
-         */
-            InkWell(
-                onTap: () {
+                /*
+             * Start - Decrease
+             */
+                InkWell(
+                    onTap: () {
 
-                  setState(() {
+                      setState(() {
 
-                    if (extraTimeValue > minimumExtraTime){
+                        if (extraTimeValue > minimumExtraTime){
 
-                      extraTimeValue -= 1;
+                          extraTimeValue -= 1;
 
-                    }
+                        }
 
-                  });
+                      });
 
-                },
-                child: const SizedBox(
-                    height: 51,
-                    width: 51,
-                    child: Image(
-                      image: AssetImage("assets/decrease.png"),
+                    },
+                    child: const SizedBox(
+                        height: 51,
+                        width: 51,
+                        child: Image(
+                          image: AssetImage("assets/decrease.png"),
+                        )
                     )
-                )
-            ),
-            /*
-         * End - Decrease
-         */
+                ),
+                /*
+             * End - Decrease
+             */
 
-            /*
-         * Start - Increase
-         */
-            InkWell(
-                onTap: () {
+                /*
+             * Start - Increase
+             */
+                InkWell(
+                    onTap: () {
 
-                  setState(() {
+                      setState(() {
 
-                    if (extraTimeValue < maximumExtraTime){
+                        if (extraTimeValue < maximumExtraTime){
 
-                      extraTimeValue += 1;
+                          extraTimeValue += 1;
 
-                    }
+                        }
 
-                  });
+                      });
 
-                },
-                child: const SizedBox(
-                    height: 51,
-                    width: 51,
-                    child: Image(
-                      image: AssetImage("assets/increase.png"),
+                    },
+                    child: const SizedBox(
+                        height: 51,
+                        width: 51,
+                        child: Image(
+                          image: AssetImage("assets/increase.png"),
+                        )
                     )
-                )
-            ),
-            /*
-         * End - Increase
-         */
+                ),
+                /*
+             * End - Increase
+             */
 
-          ]
+              ]
+          )
       )
     );
   }

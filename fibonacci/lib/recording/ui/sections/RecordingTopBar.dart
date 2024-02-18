@@ -86,7 +86,7 @@ class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
 
                             },
                             child: const Image(
-                                image: AssetImage("assets/reports.png")
+                                image: AssetImage("assets/open.png")
                             )
                         )
                     )
@@ -121,7 +121,7 @@ class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
 
                                 },
                                 child: const Image(
-                                  image: AssetImage("assets/end.png"),
+                                  image: AssetImage("assets/done.png"),
                                 )
                             )
                         )
@@ -146,7 +146,7 @@ class _RecordingTopBarInterfaceState extends State<RecordingTopBarInterface> {
 
                             },
                             child: const Image(
-                              image: AssetImage("assets/open.png"),
+                              image: AssetImage("assets/end.png"),
                             )
                         )
                     )
