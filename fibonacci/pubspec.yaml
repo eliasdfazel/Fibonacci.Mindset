@@ -103,8 +103,7 @@ dependencies:
 
   shared_preferences: ^2.0.15
 
-  sleek_circular_slider:
-    path: 'X:\Xlutter\Libraries\sleek_circular_slider'
+  sleek_circular_slider: ^2.0.1
   status_bar_control: ^3.2.1
   ####### ####### #######
 

@@ -8,6 +8,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import 'dart:async';
+
 import 'package:alarm/alarm.dart';
 import 'package:blur/blur.dart';
 import 'package:fibonacci/alarm/io/AlarmsIO.dart';
@@ -15,7 +17,6 @@ import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/recording/ui/sections/RecordingBottomBar.dart';
 import 'package:fibonacci/recording/ui/sections/RecordingTopBar.dart';
-import 'package:fibonacci/reports/ui/ReportsInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BarActions.dart';
@@ -35,6 +36,8 @@ class RecordingInterface extends StatefulWidget {
   State<RecordingInterface> createState() => _RecordingInterfaceState();
 }
 class _RecordingInterfaceState extends State<RecordingInterface> implements BarActions {
+
+  StreamSubscription<AlarmSettings>? streamSubscription;
 
   AlarmUtils alarmUtils = AlarmUtils();
 
@@ -177,12 +180,14 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   }
 
   @override
-  void centerAction({int barType = BarActions.typeBottomBar}) {
+  void centerAction({int barType = BarActions.typeBottomBar}) async {
 
     switch (barType) {
       case BarActions.typeTopBar: {
 
-        navigatePop(context);
+        await Alarm.stopAll();
+
+        alarmUtils.setupAlarm(widget.rhythmDataStructure, extraTimeValue.toInt());
 
         break;
       }
@@ -197,12 +202,12 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   }
 
   @override
-  void leftAction({int barType = BarActions.typeBottomBar}) {
+  void leftAction({int barType = BarActions.typeBottomBar}) async {
 
     switch (barType) {
       case BarActions.typeTopBar: {
 
-        navigateToWithFadeAnimation(context, ReportsInterface());
+        Phoenix.rebirth(context);
 
         break;
       }
@@ -217,12 +222,12 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
   }
 
   @override
-  void rightAction({int barType = BarActions.typeBottomBar}) {
+  void rightAction({int barType = BarActions.typeBottomBar}) async {
 
     switch (barType) {
       case BarActions.typeTopBar: {
 
-        Phoenix.rebirth(context);
+        navigatePop(context);
 
         break;
       }
@@ -263,7 +268,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
     alarmUtils.restAlarmProcess(widget.rhythmDataStructure, alarmsIO);
 
   }
-
 
   Widget extraTimeSlider() {
 
