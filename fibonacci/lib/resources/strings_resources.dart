@@ -71,6 +71,11 @@ class StringsResources {
     return  "Location Of Task";
   }
 
+  static String alarmHint() {
+
+    return "Note On Task";
+  }
+
   static String categoriesTitle() {
 
     return "Categories";

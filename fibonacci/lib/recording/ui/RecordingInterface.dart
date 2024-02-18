@@ -40,6 +40,10 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   AlarmsIO alarmsIO = AlarmsIO();
 
+  TextEditingController alarmNoteController = TextEditingController();
+
+  Color alarmNoteWarning = ColorsResources.premiumLight;
+
   double minimumExtraTime = 1;
   double maximumExtraTime = 34;
 
@@ -111,9 +115,29 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                           /*
                            * Start - Content
                            */
-                          extraTimeSlider(),
+                          Center(
+                            child: ListView(
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                children: [
 
-                          extraTimeChanger(),
+                                  textOptionsWidget(widget.rhythmDataStructure.taskTitle(),
+                                      StringsResources.alarmHint(),
+                                      alarmNoteController,
+                                      alarmNoteWarning),
+
+                                  const Divider(
+                                    height: 19,
+                                    color: Colors.transparent,
+                                  ),
+
+                                  extraTimeSlider(),
+
+                                  extraTimeChanger(),
+
+                                ]
+                            )
+                          ),
                           /*
                            * End - Content
                            */
@@ -245,139 +269,228 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   Widget extraTimeSlider() {
 
-    return Center(
-      child: SleekCircularSlider(
-        min: minimumExtraTime,
-        max: maximumExtraTime,
-        initialValue: extraTimeValue,
-        appearance: CircularSliderAppearance(
-          size: 301,
+    return SleekCircularSlider(
+      min: minimumExtraTime,
+      max: maximumExtraTime,
+      initialValue: extraTimeValue,
+      appearance: CircularSliderAppearance(
+          size: 253,
           animDurationMultiplier: 0.37,
           animationEnabled: true,
           customWidths: CustomSliderWidths(
-            handlerSize: 11,
-            progressBarWidth: 21,
-            trackWidth: 21,
-            shadowWidth: 73
+              handlerSize: 7,
+              progressBarWidth: 21,
+              trackWidth: 21,
+              shadowWidth: 73
           ),
           customColors: CustomSliderColors(
-            dynamicGradient: true,
-            trackColor: ColorsResources.premiumDark.withOpacity(0.19),
-            dotColor: ColorsResources.premiumLight.withOpacity(0.19),
-            shadowColor: ColorsResources.blue,
-            shadowMaxOpacity: 0.01,
-            progressBarColors: [
-              ColorsResources.blue,
-              ColorsResources.blueGreen,
-              ColorsResources.darkPurple,
-            ]
+              dynamicGradient: true,
+              trackColor: ColorsResources.premiumDark.withOpacity(0.19),
+              dotColor: ColorsResources.premiumLight.withOpacity(0.19),
+              shadowColor: ColorsResources.blue,
+              shadowMaxOpacity: 0.01,
+              progressBarColors: [
+                ColorsResources.blue,
+                ColorsResources.blueGreen,
+                ColorsResources.darkPurple,
+              ]
           ),
           infoProperties: InfoProperties()
-        ),
-        onChangeEnd: (double endValue) {
+      ),
+      onChangeEnd: (double endValue) {
 
-          setState(() {
+        setState(() {
 
-            extraTimeValue = endValue;
+          extraTimeValue = endValue;
 
-          });
+        });
 
-        },
-        innerWidget: (double value) {
+      },
+      innerWidget: (double value) {
 
-          return Center(
+        return Center(
             child: Text(
-              value.round().toString(),
-              maxLines: 1,
-              style: TextStyle(
-                color: ColorsResources.premiumLight,
-                fontSize: 31,
-                shadows: [
-                  Shadow(
-                    color: ColorsResources.white.withOpacity(0.37),
-                    blurRadius: 19,
-                    offset: const Offset(0.0, 3.0)
-                  )
-                ]
-              )
+                value.round().toString(),
+                maxLines: 1,
+                style: TextStyle(
+                    color: ColorsResources.premiumLight,
+                    fontSize: 31,
+                    shadows: [
+                      Shadow(
+                          color: ColorsResources.white.withOpacity(0.37),
+                          blurRadius: 19,
+                          offset: const Offset(0.0, 3.0)
+                      )
+                    ]
+                )
             )
-          );
-        },
-      )
+        );
+      },
     );
   }
 
   Widget extraTimeChanger() {
 
-    return Center(
-      child: Padding(
-          padding: const EdgeInsets.only(left: 37, right: 37, top: 273),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+    return Padding(
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 
-                /*
+              /*
              * Start - Decrease
              */
-                InkWell(
-                    onTap: () {
+              InkWell(
+                  onTap: () {
 
-                      setState(() {
+                    setState(() {
 
-                        if (extraTimeValue > minimumExtraTime){
+                      if (extraTimeValue > minimumExtraTime){
 
-                          extraTimeValue -= 1;
+                        extraTimeValue -= 1;
 
-                        }
+                      }
 
-                      });
+                    });
 
-                    },
-                    child: const SizedBox(
-                        height: 51,
-                        width: 51,
-                        child: Image(
-                          image: AssetImage("assets/decrease.png"),
-                        )
-                    )
-                ),
-                /*
+                  },
+                  child: const SizedBox(
+                      height: 51,
+                      width: 51,
+                      child: Image(
+                        image: AssetImage("assets/decrease.png"),
+                      )
+                  )
+              ),
+              /*
              * End - Decrease
              */
 
-                /*
+              /*
              * Start - Increase
              */
-                InkWell(
-                    onTap: () {
+              InkWell(
+                  onTap: () {
 
-                      setState(() {
+                    setState(() {
 
-                        if (extraTimeValue < maximumExtraTime){
+                      if (extraTimeValue < maximumExtraTime){
 
-                          extraTimeValue += 1;
+                        extraTimeValue += 1;
 
-                        }
+                      }
 
-                      });
+                    });
 
-                    },
-                    child: const SizedBox(
-                        height: 51,
-                        width: 51,
-                        child: Image(
-                          image: AssetImage("assets/increase.png"),
-                        )
-                    )
-                ),
-                /*
+                  },
+                  child: const SizedBox(
+                      height: 51,
+                      width: 51,
+                      child: Image(
+                        image: AssetImage("assets/increase.png"),
+                      )
+                  )
+              ),
+              /*
              * End - Increase
              */
 
-              ]
-          )
-      )
+            ]
+        )
+    );
+  }
+
+  Widget textOptionsWidget(String title, String hint,
+      TextEditingController titleController, Color warningColor) {
+
+    return Container(
+        height: 103,
+        padding: const EdgeInsets.only(left: 37, right: 37),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 17),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                          height: 29,
+                          width: 173,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              border: const Border.symmetric(
+                                horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                                vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                              )
+                          ),
+                          child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(
+                                  title,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: warningColor,
+                                      fontSize: 13,
+                                      letterSpacing: 1.7
+                                  )
+                              )
+                          )
+                      )
+                  )
+              ),
+
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      height: 73,
+                      padding: const EdgeInsets.only(left: 13, right: 13),
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          border: const Border.symmetric(
+                            horizontal: BorderSide(color: ColorsResources.premiumDark, width: 1),
+                            vertical: BorderSide(color: ColorsResources.premiumDark, width: 5),
+                          )
+                      ),
+                      child: TextField(
+                          controller: titleController,
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          textDirection: TextDirection.ltr,
+                          textAlignVertical: TextAlignVertical.center,
+                          cursorColor: ColorsResources.primaryColor,
+                          autofocus: false,
+                          enableSuggestions: true,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          cursorWidth: 3,
+                          cursorHeight: 23,
+                          cursorRadius: const Radius.circular(19),
+                          style: const TextStyle(
+                              color: ColorsResources.premiumLight,
+                              fontSize: 19,
+                              letterSpacing: 1.7,
+                              height: 1.1
+                          ),
+                          decoration: InputDecoration.collapsed(
+                              hintText: hint,
+                              hintStyle: TextStyle(
+                                  color: ColorsResources.premiumLight.withOpacity(0.51),
+                                  fontSize: 19,
+                                  letterSpacing: 1.7,
+                                  height: 1.1
+                              ),
+                              border: InputBorder.none
+                          )
+                      )
+                  )
+              )
+
+            ]
+        )
     );
   }
 
