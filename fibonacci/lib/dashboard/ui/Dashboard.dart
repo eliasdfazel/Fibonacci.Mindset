@@ -19,6 +19,7 @@ import 'package:fibonacci/dashboard/ui/sections/category/CategoryInterface.dart'
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDirectory.dart';
 import 'package:fibonacci/preferences/io/PreferencesIO.dart';
+import 'package:fibonacci/recording/ui/RecordingInterface.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
 import 'package:fibonacci/resources/strings_resources.dart';
 import 'package:fibonacci/utils/actions/BarActions.dart';
@@ -26,6 +27,7 @@ import 'package:fibonacci/utils/navigations/NavigationCommands.dart';
 import 'package:fibonacci/utils/ui/SystemBars.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -214,11 +216,11 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
           categorizeTasks(querySnapshot, categoryPreferences);
 
-          // if (kDebugMode) {
-          //
-          //   navigateTo(context, RecordingInterface(rhythmDataStructure: RhythmDataStructure(querySnapshot.docs.first)));
-          //
-          // }
+          if (kDebugMode) {
+
+            navigateTo(context, RecordingInterface(rhythmDataStructure: RhythmDataStructure(querySnapshot.docs.first)));
+
+          }
 
         }
 

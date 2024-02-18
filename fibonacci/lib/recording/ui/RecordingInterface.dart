@@ -9,6 +9,7 @@
  */
 
 import 'package:alarm/alarm.dart';
+import 'package:blur/blur.dart';
 import 'package:fibonacci/alarm/io/AlarmsIO.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
@@ -90,6 +91,13 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                                     fit: BoxFit.cover,
                                   )
                               )
+                          ),
+
+                          Blur(
+                            blur: 3,
+                            blurColor: ColorsResources.black,
+                            colorOpacity: 0.37,
+                            child: Container(),
                           ),
                           /*
                          * End - Decoration
@@ -231,32 +239,65 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   Widget extraTimeSlider() {
 
-    return SleekCircularSlider(
-      min: 1,
-      max: 34,
-      initialValue: 5,
-      appearance: CircularSliderAppearance(
-          animDurationMultiplier: 1.37,
+    return Align(
+      alignment: Alignment.center,
+      child: SleekCircularSlider(
+        min: 1,
+        max: 34,
+        initialValue: 5,
+        appearance: CircularSliderAppearance(
+          size: 301,
+          animDurationMultiplier: 3.7,
           animationEnabled: true,
+          customWidths: CustomSliderWidths(
+            handlerSize: 11,
+            progressBarWidth: 21,
+            trackWidth: 21,
+            shadowWidth: 73
+          ),
 
           customColors: CustomSliderColors(
-            trackColor: ColorsResources.premiumDark,
-
+            dynamicGradient: true,
+            trackColor: ColorsResources.premiumDark.withOpacity(0.31),
+            dotColor: ColorsResources.premiumLight.withOpacity(0.19),
+            shadowColor: ColorsResources.blue,
+            shadowMaxOpacity: 0.01,
+            progressBarColors: [
+              ColorsResources.blue,
+              ColorsResources.blueGreen,
+              ColorsResources.darkPurple,
+            ]
           )
-      ),
-      onChange: (double value) {
+        ),
+        onChange: (double value) {
 
-      },
-      onChangeStart: (double startValue) {
+        },
+        onChangeStart: (double startValue) {
 
-      },
-      onChangeEnd: (double endValue) {
+        },
+        onChangeEnd: (double endValue) {
 
-      },
-      innerWidget: (double value) {
+        },
+        innerWidget: (double value) {
 
-        return Container();
-      },
+          return Center(
+            child: Text(
+              value.round().toString(),
+              maxLines: 1,
+              style: TextStyle(
+                color: ColorsResources.premiumLight,
+                fontSize: 23,
+                shadows: [
+                  Shadow(
+                    color: ColorsResources.white.withOpacity(0.51),
+                    blurRadius: 13
+                  )
+                ]
+              ),
+            )
+          );
+        },
+      )
     );
   }
 
