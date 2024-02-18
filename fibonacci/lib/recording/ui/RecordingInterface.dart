@@ -616,33 +616,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> with SingleTick
           ),
           onChangeEnd: (double endValue) {
 
-            setState(() {
-
-              extraTimeValue = endValue;
-
-            });
-
-          },
-          innerWidget: (double value) {
-
-            return Center(
-                child: Text(
-                    value.round().toString(),
-                    maxLines: 1,
-                    style: TextStyle(
-                        color: ColorsResources.premiumLight,
-                        fontSize: 37,
-                        shadows: [
-                          Shadow(
-                              color: ColorsResources.white.withOpacity(0.37),
-                              blurRadius: 19,
-                              offset: const Offset(0.0, 3.0)
-                          )
-                        ]
-                    )
-                )
-            );
-          },
+          }
         )
       ),
       child: Container()
