@@ -40,6 +40,11 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   AlarmsIO alarmsIO = AlarmsIO();
 
+  double minimumExtraTime = 1;
+  double maximumExtraTime = 34;
+
+  double extraTimeValue = 5;
+
   @override
   void initState() {
     super.initState();
@@ -106,9 +111,19 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
                           /*
                            * Start - Content
                            */
+                          Center(
+                            child: ListView(
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                children: [
 
-                          extraTimeSlider(),
+                                  extraTimeSlider(),
 
+                                  extraTimeChanger()
+
+                                ]
+                            )
+                          ),
                           /*
                            * End - Content
                            */
@@ -237,14 +252,15 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
 
   }
 
+
   Widget extraTimeSlider() {
 
     return Align(
       alignment: Alignment.center,
       child: SleekCircularSlider(
-        min: 1,
-        max: 34,
-        initialValue: 5,
+        min: minimumExtraTime,
+        max: maximumExtraTime,
+        initialValue: extraTimeValue,
         appearance: CircularSliderAppearance(
           size: 301,
           animDurationMultiplier: 3.7,
@@ -255,7 +271,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
             trackWidth: 21,
             shadowWidth: 73
           ),
-
           customColors: CustomSliderColors(
             dynamicGradient: true,
             trackColor: ColorsResources.premiumDark.withOpacity(0.31),
@@ -269,13 +284,9 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
             ]
           )
         ),
-        onChange: (double value) {
-
-        },
-        onChangeStart: (double startValue) {
-
-        },
         onChangeEnd: (double endValue) {
+
+
 
         },
         innerWidget: (double value) {
@@ -298,6 +309,78 @@ class _RecordingInterfaceState extends State<RecordingInterface> implements BarA
             )
           );
         },
+      )
+    );
+  }
+
+  Widget extraTimeChanger() {
+
+    return Padding(
+      padding: const EdgeInsets.only(left: 37, right: 37),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+
+            /*
+         * Start - Decrease
+         */
+            InkWell(
+                onTap: () {
+
+                  setState(() {
+
+                    if (extraTimeValue > minimumExtraTime){
+
+                      extraTimeValue -= 1;
+
+                    }
+
+                  });
+
+                },
+                child: const SizedBox(
+                    height: 51,
+                    width: 51,
+                    child: Image(
+                      image: AssetImage("assets/decrease.png"),
+                    )
+                )
+            ),
+            /*
+         * End - Decrease
+         */
+
+            /*
+         * Start - Increase
+         */
+            InkWell(
+                onTap: () {
+
+                  setState(() {
+
+                    if (extraTimeValue < maximumExtraTime){
+
+                      extraTimeValue += 1;
+
+                    }
+
+                  });
+
+                },
+                child: const SizedBox(
+                    height: 51,
+                    width: 51,
+                    child: Image(
+                      image: AssetImage("assets/increase.png"),
+                    )
+                )
+            ),
+            /*
+         * End - Increase
+         */
+
+          ]
       )
     );
   }
