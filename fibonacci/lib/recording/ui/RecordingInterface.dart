@@ -203,63 +203,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
     switch (barType) {
       case BarActions.typeTopBar: {
 
-        ticker = createTicker((Duration elapsed) {
-
-          setState(() {
-
-            waitingSeconds = elapsed.inSeconds.toDouble();
-
-          });
-
-          /*
-           * Start - Ticker Finished
-           */
-          if (elapsed.inSeconds == (extraTimeValue * 60)) {
-
-            ticker?.stop();
-
-            setState(() {
-
-              waitingOpacity = 0.0;
-
-            });
-
-            Future.delayed(const Duration(milliseconds: 1357), () {
-
-              setState(() {
-
-                waitingVisibility = false;
-
-                waitingPlaceholder = Container();
-
-              });
-
-            });
-
-          }
-          /*
-           * End - Ticker Finished
-           */
-
-        });
-        ticker?.start();
-
-        setState(() {
-
-          waitingPlaceholder = extraTimeWaiting(extraTimeValue * 60);
-          waitingVisibility = true;
-
-          Future.delayed(const Duration(milliseconds: 357), () {
-
-            setState(() {
-
-              waitingOpacity = 1.0;
-
-            });
-
-          });
-
-        });
+        setupExtraTime();
 
         break;
       }
@@ -338,6 +282,68 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
     debugPrint("Task Id: ${widget.rhythmDataStructure.taskId()}");
 
     alarmUtils.restAlarmProcess(widget.rhythmDataStructure, alarmsIO);
+
+  }
+
+  void setupExtraTime() async {
+
+    ticker = createTicker((Duration elapsed) {
+
+      setState(() {
+
+        waitingSeconds = elapsed.inSeconds.toDouble();
+
+      });
+
+      /*
+           * Start - Ticker Finished
+           */
+      if (elapsed.inSeconds == (extraTimeValue * 60)) {
+
+        ticker?.stop();
+
+        setState(() {
+
+          waitingOpacity = 0.0;
+
+        });
+
+        Future.delayed(const Duration(milliseconds: 1357), () {
+
+          setState(() {
+
+            waitingVisibility = false;
+
+            waitingPlaceholder = Container();
+
+          });
+
+        });
+
+      }
+      /*
+           * End - Ticker Finished
+           */
+
+    });
+    ticker?.start();
+
+    setState(() {
+
+      waitingPlaceholder = extraTimeWaiting(extraTimeValue * 60);
+      waitingVisibility = true;
+
+      Future.delayed(const Duration(milliseconds: 357), () {
+
+        setState(() {
+
+          waitingOpacity = 1.0;
+
+        });
+
+      });
+
+    });
 
   }
 
