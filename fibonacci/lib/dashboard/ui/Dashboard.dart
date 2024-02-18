@@ -214,6 +214,12 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
           categorizeTasks(querySnapshot, categoryPreferences);
 
+          // if (kDebugMode) {
+          //
+          //   navigateTo(context, RecordingInterface(rhythmDataStructure: RhythmDataStructure(querySnapshot.docs.first)));
+          //
+          // }
+
         }
 
       });

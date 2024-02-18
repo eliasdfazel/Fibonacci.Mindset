@@ -33,16 +33,12 @@ dependencies:
 
 
   ####### ####### #######
-  cached_network_image: ^3.2.0
-
   connectivity_plus: ^3.0.3
 
   cloud_firestore: ^4.0.5
   cloud_functions: ^4.0.4
 
   cupertino_icons: ^1.0.5
-
-  currency_text_input_formatter: ^2.1.7
   ####### ####### #######
 
 
@@ -63,9 +59,6 @@ dependencies:
 
   firebase_dynamic_links: ^5.0.5
 
-  flutter_html:
-    path: 'X:\Xlutter\Libraries\flutter_html'
-
   flutter_phoenix: ^1.0.0
   ####### ####### #######
 
@@ -81,7 +74,6 @@ dependencies:
 
   ####### ####### #######
   in_app_purchase: ^3.1.10
-  intl: ^0.17.0
   ####### ####### #######
 
 
@@ -124,7 +116,6 @@ dependencies:
 
 
   ####### ####### #######
-  webview_flutter: ^3.0.4
   widget_mask: ^1.0.0+0
   ####### ####### #######
 
