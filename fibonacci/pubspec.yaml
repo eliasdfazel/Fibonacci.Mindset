@@ -18,8 +18,6 @@ dependencies:
 
   ####### ####### #######
   alarm: ^3.0.10
-
-  app_settings: 4.2.0
   ####### ####### #######
 
 
@@ -33,10 +31,10 @@ dependencies:
 
 
   ####### ####### #######
-  connectivity_plus: ^3.0.3
+  connectivity_plus: ^5.0.2
 
-  cloud_firestore: ^4.0.5
-  cloud_functions: ^4.0.4
+  cloud_firestore: ^4.15.5
+  cloud_functions: ^4.6.5
 
   cupertino_icons: ^1.0.5
   ####### ####### #######
@@ -53,13 +51,13 @@ dependencies:
 
   firebase_database: ^10.2.7
 
-  firebase_remote_config: ^3.0.5
-  firebase_messaging: ^14.1.0
-  firebase_in_app_messaging: ^0.7.0+5
+  firebase_remote_config: ^4.3.14
+  firebase_messaging: ^14.7.16
+  firebase_in_app_messaging: ^0.7.4+14
 
-  firebase_dynamic_links: ^5.0.5
+  firebase_dynamic_links: ^5.4.14
 
-  flutter_phoenix: ^1.0.0
+  flutter_phoenix: ^1.1.1
   ####### ####### #######
 
 
@@ -104,13 +102,14 @@ dependencies:
   shared_preferences: ^2.0.15
 
   sleek_circular_slider: ^2.0.1
-  status_bar_control: ^3.2.1
+  status_bar_control:
+    path: 'X:\Xlutter\Libraries\flutter_statusbar_control'
   ####### ####### #######
 
 
 
   ####### ####### #######
-  url_launcher: ^6.1.5
+  url_launcher: ^6.2.4
   ####### ####### #######
 
 
