@@ -289,17 +289,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
   void setupExtraTime() async {
 
-    Future.delayed(Duration(seconds: 3), () {
-
-      setState(() {
-
-        waitingSeconds = 3;
-        debugPrint("Waiting In Seconds: $waitingSeconds");
-
-      });
-
-    });
-
     ticker = createTicker((Duration elapsed) {
 
       setState(() {
