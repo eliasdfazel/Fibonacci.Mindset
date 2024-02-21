@@ -53,11 +53,10 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
   double extraTimeValue = 5;
 
-  Widget waitingPlaceholder = Container();
-
   bool waitingVisibility = false;
   double waitingOpacity = 0.0;
 
+  double maximumExtraSeconds = 60;
   double waitingSeconds = 0;
 
   @override
@@ -65,8 +64,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
     super.initState();
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
-
-    waitingPlaceholder = extraTimeWaiting(extraTimeValue * 60);
 
     manageAlarm();
 
@@ -187,7 +184,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
                               opacity: waitingOpacity,
                               duration: const Duration(milliseconds: 1357),
                               curve: Curves.easeInOut,
-                              child: waitingPlaceholder
+                              child: extraTimeWaiting()
                             )
                           ),
 
@@ -289,6 +286,23 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
   void setupExtraTime() async {
 
+    setState(() {
+
+      maximumExtraSeconds = extraTimeValue * 60;
+      waitingVisibility = true;
+
+      Future.delayed(const Duration(milliseconds: 357), () {
+
+        setState(() {
+
+          waitingOpacity = 1.0;
+
+        });
+
+      });
+
+    });
+
     ticker = createTicker((Duration elapsed) {
 
       setState(() {
@@ -317,8 +331,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
             waitingVisibility = false;
 
-            waitingPlaceholder = Container();
-
           });
 
         });
@@ -330,23 +342,6 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
     });
     ticker?.start();
-
-    setState(() {
-
-      waitingPlaceholder = extraTimeWaiting(extraTimeValue * 60);
-      waitingVisibility = true;
-
-      Future.delayed(const Duration(milliseconds: 357), () {
-
-        setState(() {
-
-          waitingOpacity = 1.0;
-
-        });
-
-      });
-
-    });
 
   }
 
@@ -587,7 +582,7 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
     );
   }
 
-  Widget extraTimeWaiting(double maximumExtraSeconds) {
+  Widget extraTimeWaiting() {
 
     return Blur(
       blur: 13,
