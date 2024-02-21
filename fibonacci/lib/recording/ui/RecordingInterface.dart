@@ -66,6 +66,8 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
     changeColor(ColorsResources.premiumDark, ColorsResources.premiumDark);
 
+    waitingPlaceholder = extraTimeWaiting(extraTimeValue * 60);
+
     manageAlarm();
 
   }
@@ -287,11 +289,23 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
 
   void setupExtraTime() async {
 
+    Future.delayed(Duration(seconds: 3), () {
+
+      setState(() {
+
+        waitingSeconds = 3;
+        debugPrint("Waiting In Seconds: $waitingSeconds");
+
+      });
+
+    });
+
     ticker = createTicker((Duration elapsed) {
 
       setState(() {
 
         waitingSeconds = elapsed.inSeconds.toDouble();
+        debugPrint("Waiting In Seconds: $waitingSeconds");
 
       });
 
@@ -599,7 +613,9 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
             size: 301,
             animDurationMultiplier: 0.37,
             animationEnabled: false,
-            spinnerMode: true,
+            spinnerMode: false,
+            startAngle: 270,
+            angleRange: 360,
             customWidths: CustomSliderWidths(
                 handlerSize: 7,
                 progressBarWidth: 21,
@@ -622,7 +638,27 @@ class _RecordingInterfaceState extends State<RecordingInterface> with TickerProv
           ),
           onChangeEnd: (double endValue) {
 
-          }
+          },
+          innerWidget: (double value) {
+
+            return Center(
+                child: Text(
+                    value.round().toString(),
+                    maxLines: 1,
+                    style: TextStyle(
+                        color: ColorsResources.premiumLight,
+                        fontSize: 37,
+                        shadows: [
+                          Shadow(
+                              color: ColorsResources.white.withOpacity(0.37),
+                              blurRadius: 19,
+                              offset: const Offset(0.0, 3.0)
+                          )
+                        ]
+                    )
+                )
+            );
+          },
         )
       ),
       child: Container()
