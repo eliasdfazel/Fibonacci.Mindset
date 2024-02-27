@@ -115,7 +115,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                          */
 
                       /*
-                       * Start - Task
+                       * Start - Content
                        */
                       Align(
                           alignment: Alignment.center,
@@ -131,7 +131,7 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
                           )
                       ),
                       /*
-                       * End - Task
+                       * End - Content
                        */
 
                       /*
@@ -222,55 +222,62 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
 
   void categorizeTasks(QuerySnapshot querySnapshot, int categorizedBy) async {
 
-    Map<String, List<RhythmDataStructure>> allRhythmsWidget = <String, List<RhythmDataStructure>>{};
+    if (querySnapshot.docs.isNotEmpty) {
 
-    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      Map<String, List<RhythmDataStructure>> allRhythmsWidget = <String, List<RhythmDataStructure>>{};
 
-      RhythmDataStructure rhythmDataStructure = RhythmDataStructure(querySnapshot.docs[i]);
-      debugPrint("$i ${rhythmDataStructure.rhythmDocumentData}");
+      for (int i = 0; i < querySnapshot.docs.length; i++) {
 
-      switch (categorizedBy) {
-        case CategorizedBy.categories: {
+        RhythmDataStructure rhythmDataStructure = RhythmDataStructure(querySnapshot.docs[i]);
+        debugPrint("$i ${rhythmDataStructure.rhythmDocumentData}");
 
-          (allRhythmsWidget[rhythmDataStructure.taskCategories()] ??= []).add(rhythmDataStructure);
+        switch (categorizedBy) {
+          case CategorizedBy.categories: {
 
-          break;
+            (allRhythmsWidget[rhythmDataStructure.taskCategories()] ??= []).add(rhythmDataStructure);
+
+            break;
+          }
+          case CategorizedBy.locations: {
+
+            (allRhythmsWidget[rhythmDataStructure.taskLocation()] ??= []).add(rhythmDataStructure);
+
+            break;
+          }
+          case CategorizedBy.colorsTags: {
+
+            (allRhythmsWidget[rhythmDataStructure.taskColorsTags()] ??= []).add(rhythmDataStructure);
+
+            break;
+          }
         }
-        case CategorizedBy.locations: {
 
-          (allRhythmsWidget[rhythmDataStructure.taskLocation()] ??= []).add(rhythmDataStructure);
-
-          break;
-        }
-        case CategorizedBy.colorsTags: {
-
-          (allRhythmsWidget[rhythmDataStructure.taskColorsTags()] ??= []).add(rhythmDataStructure);
-
-          break;
-        }
       }
 
+      List<Widget> categorizedRhythms = [];
+
+      categorizedRhythms.add(searchWidget(querySnapshot, categorizedBy));
+      categorizedRhythms.add(const Divider(height: 37, color: Colors.transparent));
+
+      for (var element in allRhythmsWidget.keys) {
+        debugPrint(element);
+
+        categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, searchQuery: null, categorizedBy: categorizedBy));
+
+      }
+
+      setState(() {
+
+        tasksPlaceholder = ListView(
+            padding: const EdgeInsets.only(top: 53, bottom: 73),
+            scrollDirection: Axis.vertical,
+            physics: const BouncingScrollPhysics(),
+            children: categorizedRhythms
+        );
+
+      });
+
     }
-
-    List<Widget> categorizedRhythms = [];
-
-    for (var element in allRhythmsWidget.keys) {
-      debugPrint(element);
-
-      categorizedRhythms.add(CategoryInterface(rhythmsDataStructures: allRhythmsWidget[element]!, searchQuery: null, categorizedBy: categorizedBy));
-
-    }
-
-    setState(() {
-
-      tasksPlaceholder = ListView(
-          padding: const EdgeInsets.only(top: 53, bottom: 73),
-          scrollDirection: Axis.vertical,
-          physics: const BouncingScrollPhysics(),
-          children: categorizedRhythms
-      );
-
-    });
 
   }
 
