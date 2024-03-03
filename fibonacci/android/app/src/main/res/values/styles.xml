@@ -21,8 +21,6 @@
         <item name="android:forceDarkAllowed">false</item>
 
         <item name="android:windowSplashScreenBackground">#3C434D</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash</item>
-
     </style>
 
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
