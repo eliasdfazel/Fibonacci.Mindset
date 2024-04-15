@@ -12,6 +12,12 @@ import 'package:fibonacci/configurations/ui/sections/Alarms.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:flutter/cupertino.dart';
 
+class AlarmProcess {
+
+  static const String alarmTriggered = "alarmTriggered";
+
+}
+
 Future<String> processAlarmsToJson(AlarmsInterface alarmsInterface) async {
   debugPrint("Alarm Inserted: ${alarmsInterface.alarmsInputItems.length}");
 

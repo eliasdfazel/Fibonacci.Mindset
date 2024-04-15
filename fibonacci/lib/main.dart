@@ -13,6 +13,7 @@ import 'dart:io';
 import 'package:alarm/alarm.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fibonacci/EntryConfigurations.dart';
+import 'package:fibonacci/alarm/utils/AlarmsProcess.dart';
 import 'package:fibonacci/dashboard/ui/Dashboard.dart';
 import 'package:fibonacci/firebase_options.dart';
 import 'package:fibonacci/resources/colors_resources.dart';
@@ -22,12 +23,33 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:workmanager/workmanager.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) async {
   debugPrint("Sachiels Signal Received: ${remoteMessage.data}");
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+}
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+
+  Workmanager().executeTask((task, inputData) async {
+    switch (task) {
+      case AlarmProcess.alarmTriggered:
+
+
+
+        break;
+      case Workmanager.iOSBackgroundTask:
+
+        break;
+    }
+
+    return Future.value(true);
+  });
 
 }
 
