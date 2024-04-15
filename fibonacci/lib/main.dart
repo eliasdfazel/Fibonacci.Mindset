@@ -85,6 +85,8 @@ void main() async {
 
       await Alarm.init();
 
+      await Workmanager().initialize(callbackDispatcher, isInDebugMode: true,);
+
       Widget entryPlaceholder = EntryConfigurations(internetConnection: connectionResult);
 
       if (FirebaseAuth.instance.currentUser == null) {

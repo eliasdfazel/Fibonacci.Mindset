@@ -169,7 +169,12 @@ class AlarmUtils {
 
   void setupAlarmWork() {
 
+    // Convert RhythmDataStructure to Map
+    Map<String, dynamic> rhythmDataMap = <String, dynamic>{};
 
+    Workmanager().registerOneOffTask('uniqueName', 'taskName',
+
+      inputData: rhythmDataMap);
 
   }
 
