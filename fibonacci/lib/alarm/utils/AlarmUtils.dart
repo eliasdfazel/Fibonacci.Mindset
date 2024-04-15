@@ -11,6 +11,7 @@
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
 import 'package:fibonacci/alarm/io/AlarmsIO.dart';
+import 'package:fibonacci/alarm/utils/AlarmsProcess.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
 import 'package:workmanager/workmanager.dart';
@@ -167,14 +168,11 @@ class AlarmUtils {
     );
   }
 
-  void setupAlarmWork() {
+  void setupAlarmWork(RhythmDataStructure rhythmDataStructure, int alarmDuration) {
 
-    // Convert RhythmDataStructure to Map
-    Map<String, dynamic> rhythmDataMap = <String, dynamic>{};
-
-    Workmanager().registerOneOffTask('uniqueName', 'taskName',
-
-      inputData: rhythmDataMap);
+    Workmanager().registerPeriodicTask(AlarmProcess.alarmTriggered, rhythmDataStructure.taskId().toString(), tag: rhythmDataStructure.taskId().toString(),
+      inputData: rhythmDataStructure.rhythmDocumentData,
+      frequency: Duration(minutes: alarmDuration));
 
   }
 
