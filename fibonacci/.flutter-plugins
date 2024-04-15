@@ -1,5 +1,6 @@
 # This is a generated file; do not edit or check into version control.
 alarm=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\alarm-3.1.0\\
+app_settings=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\app_settings-5.1.1\\
 cloud_firestore=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore-4.15.5\\
 cloud_firestore_web=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore_web-3.10.5\\
 cloud_functions=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_functions-4.6.5\\
@@ -38,6 +39,11 @@ path_provider_android=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.
 path_provider_foundation=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_foundation-2.3.1\\
 path_provider_linux=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_linux-2.2.1\\
 path_provider_windows=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_windows-2.2.1\\
+permission_handler=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler-11.3.1\\
+permission_handler_android=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_android-12.0.5\\
+permission_handler_apple=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_apple-9.4.4\\
+permission_handler_html=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_html-0.1.1\\
+permission_handler_windows=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_windows-0.2.1\\
 quick_actions=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\quick_actions-1.0.7\\
 quick_actions_android=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\quick_actions_android-1.0.10\\
 quick_actions_ios=C:\\Users\\elias\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\quick_actions_ios-1.0.9\\

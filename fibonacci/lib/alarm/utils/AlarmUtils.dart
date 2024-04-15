@@ -13,6 +13,7 @@ import 'package:alarm/model/alarm_settings.dart';
 import 'package:fibonacci/alarm/io/AlarmsIO.dart';
 import 'package:fibonacci/database/rhythms/RhythmsDataStructure.dart';
 import 'package:fibonacci/utils/modifications/Strings.dart';
+import 'package:workmanager/workmanager.dart';
 
 class AlarmUtils {
 
@@ -146,12 +147,6 @@ class AlarmUtils {
 
   }
 
-  void setupAlarmWork() {
-
-
-
-  }
-
   AlarmSettings _setupAlarmSettings(int alarmId,
       String alarmTitle, String alarmDescription,
       DateTime alarmDateTime,
@@ -170,6 +165,18 @@ class AlarmUtils {
       androidFullScreenIntent: true,
       enableNotificationOnKill: true,
     );
+  }
+
+  void setupAlarmWork() {
+
+
+
+  }
+
+  void cancelAllAlarms() {
+
+    Workmanager().cancelAll();
+
   }
 
 }

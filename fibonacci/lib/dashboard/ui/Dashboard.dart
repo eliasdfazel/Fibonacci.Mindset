@@ -10,6 +10,7 @@
 
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:blur/blur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/configurations/ui/Configurations.dart';
@@ -28,6 +29,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DashboardInterface extends StatefulWidget {
 
@@ -68,6 +70,8 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
     requestNotificationPermission();
 
     setupInteractedMessage();
+
+    checkSchedulePermission();
 
   }
 
@@ -546,5 +550,29 @@ class _DashboardInterfaceState extends State<DashboardInterface> implements BarA
    * End - Firebase Message Interaction
    */
 
+  /*
+   * Start - Request Permission
+   */
+  Future<void> checkSchedulePermission() async {
 
+    final permissionStatus = await Permission.scheduleExactAlarm.status;
+    debugPrint("Schedule Permission: ${permissionStatus.isGranted}");
+
+    if (permissionStatus.isDenied) {
+
+      final requestResult = await Permission.scheduleExactAlarm.request();
+      debugPrint("Schedule Permission: ${requestResult.isGranted}");
+
+      if (requestResult.isDenied) {
+
+        AppSettings.openAppSettings(type: AppSettingsType.settings);
+
+      }
+
+    }
+
+  }
+  /*
+   * End - Request Permission
+   */
 }
