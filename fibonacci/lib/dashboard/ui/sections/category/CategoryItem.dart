@@ -11,6 +11,7 @@
 import 'dart:async';
 
 import 'package:alarm/alarm.dart';
+import 'package:alarm/model/alarm_settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fibonacci/alarm/io/AlarmsIO.dart';
 import 'package:fibonacci/alarm/utils/AlarmUtils.dart';
